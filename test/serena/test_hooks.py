@@ -11,6 +11,7 @@ from click.testing import CliRunner
 from serena.hooks import (
     HookClient,
     PreToolUseAutoApproveSerenaHook,
+    PreToolUseHook,
     PreToolUseRemindAboutSymbolicToolsHook,
     SessionEndCleanupHook,
     hook_commands,
@@ -32,6 +33,22 @@ def _base_input(
         "session_id": session_id,
         "tool_name": tool_name,
         "tool_input": tool_input if tool_input is not None else {"query": "foo"},
+    }
+
+
+def _grok_input(
+    tool_name: str,
+    tool_input: dict | None = None,
+    session_id: str = "grok-session-123",
+) -> dict:
+    """Build a Grok PreToolUse payload using its real camelCase envelope."""
+    return {
+        "hookEventName": "pre_tool_use",
+        "sessionId": session_id,
+        "toolName": tool_name,
+        "toolInput": tool_input if tool_input is not None else {},
+        "toolInputTruncated": False,
+        "permissionMode": "bypassPermissions",
     }
 
 
@@ -58,6 +75,12 @@ class TestHookClientDetection:
         with patch("sys.stdin", _make_stdin(stdin_data)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
             hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.VSCODE)
         assert hook._client == HookClient.VSCODE
+
+    def test_grok_client(self, tmp_path: Path):
+        stdin_data = _grok_input("grep", {"pattern": "foo", "path": "."})
+        with patch("sys.stdin", _make_stdin(stdin_data)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+        assert hook._client == HookClient.GROK
 
 
 class TestPreToolUseRemindAboutSerenaHook:
@@ -103,6 +126,37 @@ class TestPreToolUseRemindAboutSerenaHook:
             ):
                 hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.CODEX)
             assert hook.is_grep_call() == expected, f"is_grep_tool() wrong for {tool_name} / {tool_input}"
+
+    def test_grep_tool_detection_grok(self, tmp_path: Path):
+        """Grok uses ``grep`` for its search tool and ``run_terminal_command`` for shell commands."""
+        cases = [
+            ("grep", {"pattern": "foo", "path": "."}, True),
+            ("grep_search", {"pattern": "foo", "path": "."}, False),
+            ("run_terminal_command", {"command": "rg -n foo README.md"}, True),
+            ("run_terminal_command", {"command": "cat README.md"}, False),
+        ]
+        for tool_name, tool_input, expected in cases:
+            with (
+                patch("sys.stdin", _make_stdin(_grok_input(tool_name=tool_name, tool_input=tool_input))),
+                patch("serena.hooks.serena_home_dir", str(tmp_path)),
+            ):
+                hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+            assert hook.is_grep_call() == expected, f"is_grep_tool() wrong for {tool_name} / {tool_input}"
+
+    def test_grok_camel_case_payload_detection(self, tmp_path: Path):
+        """Grok emits camelCase ``toolName`` / ``toolInput`` payload keys."""
+        grep_payload = _grok_input("grep", {"pattern": "foo", "path": "."})
+        with patch("sys.stdin", _make_stdin(grep_payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            grep_hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+        assert grep_hook.is_grep_call() is True
+        assert grep_hook.is_read_file_call() is False
+
+        read_payload = _grok_input("read_file", {"target_file": "src/foo.py"})
+        with patch("sys.stdin", _make_stdin(read_payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            read_hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+        assert read_hook.is_read_file_call() is True
+        assert read_hook.is_read_code_file_call() is True
+        assert read_hook.is_grep_call() is False
 
     def test_read_file_tool_detection_claude_code(self, tmp_path: Path):
         """Claude Code uses the exact tool name ``Read`` (lowercased to ``read``)."""
@@ -177,11 +231,58 @@ class TestPreToolUseRemindAboutSerenaHook:
                 hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.CODEX)
             assert hook.is_read_file_call() == expected, f"is_read_file_tool() wrong for {tool_name} / {tool_input}"
 
+    def test_read_file_tool_detection_grok(self, tmp_path: Path):
+        """Grok uses ``target_file`` for direct file reads and ``command`` for shell reads."""
+        cases = [
+            ("read_file", {"target_file": "src/foo.py"}, True, True),
+            ("read_file", {"target_file": "README.md"}, True, False),
+            ("run_terminal_command", {"command": "cat src/foo.py"}, True, True),
+            ("run_terminal_command", {"command": "cat README.md"}, True, False),
+            ("run_terminal_command", {"command": "rg -n foo README.md"}, False, False),
+        ]
+        for tool_name, tool_input, expected_read, expected_code_read in cases:
+            with (
+                patch("sys.stdin", _make_stdin(_grok_input(tool_name=tool_name, tool_input=tool_input))),
+                patch("serena.hooks.serena_home_dir", str(tmp_path)),
+            ):
+                hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+            assert hook.is_read_file_call() == expected_read, f"is_read_file_tool() wrong for {tool_name} / {tool_input}"
+            assert hook.is_read_code_file_call() == expected_code_read, f"is_read_code_file_call() wrong for {tool_name} / {tool_input}"
+
+    def test_grok_edit_and_list_payloads_do_not_count_as_search_or_read(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]):
+        """Grok edit/list tools carry path fields but must not trigger the search/read reminder."""
+        payloads = [
+            _grok_input(
+                "search_replace",
+                {"file_path": "src/foo.py", "old_string": "old", "new_string": "new"},
+                session_id="grok-edit-list",
+            ),
+            _grok_input("list_dir", {"target_directory": "."}, session_id="grok-edit-list"),
+        ]
+        for payload in payloads:
+            with patch("sys.stdin", _make_stdin(payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+                hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+            assert hook.is_grep_call() is False
+            assert hook.is_read_call() is False
+            assert hook.is_read_code_file_call() is False
+
+        for _ in range(ToolUseCounter._NON_SYMBOLIC_USES_THRESHOLD):
+            for payload in payloads:
+                with patch("sys.stdin", _make_stdin(payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+                    PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK).execute()
+        assert capsys.readouterr().out == ""
+
     def test_serena_tool_detection(self, tmp_path: Path):
         for name, expected in [("mcp_serena_find_symbol", True), ("serena_overview", True), ("grep_search", False)]:
             with patch("sys.stdin", _make_stdin(_base_input(tool_name=name))), patch("serena.hooks.serena_home_dir", str(tmp_path)):
                 hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.CLAUDE_CODE)
             assert hook.is_serena_symbolic_tool() == expected, f"is_serena_tool() wrong for {name}"
+
+    def test_serena_tool_detection_grok_namespace(self, tmp_path: Path):
+        payload = _grok_input("serena__find_symbol")
+        with patch("sys.stdin", _make_stdin(payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            hook = PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK)
+        assert hook.is_serena_symbolic_tool() is True
 
     def test_no_output_below_threshold(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]):
         """Below the threshold, the hook should produce no output (tool is allowed)."""
@@ -227,6 +328,49 @@ class TestPreToolUseRemindAboutSerenaHook:
         assert hook_output["permissionDecision"] == "deny"
         assert "additionalContext" not in hook_output
         assert "grep" in hook_output["permissionDecisionReason"].lower()
+
+    def test_deny_output_after_threshold_greps_grok(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]):
+        """Grok expects native ``decision`` / ``reason`` JSON, not Claude-style hookSpecificOutput."""
+        payload = _grok_input("grep", {"pattern": "foo", "path": "."})
+        for _ in range(ToolUseCounter._GREP_USES_THRESHOLD):
+            with patch("sys.stdin", _make_stdin(payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+                PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK).execute()
+
+        output = capsys.readouterr().out.strip()
+        result = json.loads(output)
+        assert result["decision"] == "deny"
+        assert "grep" in result["reason"].lower()
+        assert "hookSpecificOutput" not in result
+
+    def test_grok_native_allow_and_deny_output_json(self):
+        allow_output = PreToolUseHook.OutputData(permission_decision="allow", permission_decision_reason="allowed").to_json_string(
+            HookClient.GROK
+        )
+        assert json.loads(allow_output) == {"decision": "allow"}
+
+        deny_output = PreToolUseHook.OutputData(permission_decision="deny", permission_decision_reason="blocked").to_json_string(
+            HookClient.GROK
+        )
+        assert json.loads(deny_output) == {"decision": "deny", "reason": "blocked"}
+        assert "hookSpecificOutput" not in json.loads(deny_output)
+
+    def test_grok_serena_tool_resets_counters(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]):
+        """Grok MCP tool names use ``serena__`` and must reset non-symbolic counters."""
+        session_id = "grok-reset"
+        grep_payload = _grok_input("grep", {"pattern": "foo", "path": "."}, session_id=session_id)
+        serena_payload = _grok_input("serena__find_symbol", {"name_path": "Foo"}, session_id=session_id)
+
+        for _ in range(ToolUseCounter._GREP_USES_THRESHOLD - 1):
+            with patch("sys.stdin", _make_stdin(grep_payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+                PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK).execute()
+
+        with patch("sys.stdin", _make_stdin(serena_payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK).execute()
+
+        with patch("sys.stdin", _make_stdin(grep_payload)), patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            PreToolUseRemindAboutSymbolicToolsHook(HookClient.GROK).execute()
+
+        assert capsys.readouterr().out == ""
 
     def test_deny_output_after_threshold_reads(self, tmp_path: Path, capsys: pytest.CaptureFixture[str]):
         """After reaching the read file threshold, the hook should output a deny.
@@ -754,6 +898,23 @@ class TestHookCli:
             result = runner.invoke(hook_commands, ["auto-approve", "--client", "claude-code"], input=stdin_json)
         assert result.exit_code == 0
         assert result.output == ""
+
+    def test_auto_approve_command_grok_uses_native_output(self, tmp_path: Path):
+        """The ``auto-approve`` CLI command accepts ``--client=grok`` and emits Grok-native JSON."""
+        stdin_json = json.dumps(
+            {
+                "session_id": "cli-auto-approve-grok",
+                "toolName": "serena__find_symbol",
+                "toolInput": {},
+                "permissionMode": "auto",
+            }
+        )
+        runner = CliRunner()
+        with patch("serena.hooks.serena_home_dir", str(tmp_path)):
+            result = runner.invoke(hook_commands, ["auto-approve", "--client", "grok"], input=stdin_json)
+        assert result.exit_code == 0
+        output = json.loads(result.output)
+        assert output == {"decision": "allow"}
 
     def test_client_default_is_claude_code(self, tmp_path: Path):
         """When --client is omitted, it defaults to claude-code."""
