@@ -3,6 +3,9 @@
 Status of the `main` branch. Changes prior to the next official version change will appear here.
 
 * General:
+  - Add a `sync-fork` GitHub Actions workflow for the `xormania/serena` fork, with a daily backstop,
+    hourly upstream polling, and manual/external dispatch support to keep fork `main` fast-forwarded to
+    `oraios/serena`.
   - Fix: `FileUtils.read_file`'s `charset_normalizer` fallback (used when a file cannot be decoded with
     the project's configured `encoding`) decoded the raw bytes directly and therefore skipped the
     universal-newline translation that the primary read path applies. CR characters from disk thus

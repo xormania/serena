@@ -1,0 +1,47 @@
+name: Sync Fork
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+    - cron: "17 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - upstream-main-updated
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-fork-main
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout fork main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Fast-forward fork main to upstream
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git remote add upstream https://github.com/oraios/serena.git
+          git fetch upstream main
+
+          git checkout -B main origin/main
+
+          if [ "$(git rev-parse main)" = "$(git rev-parse upstream/main)" ]; then
+            echo "Fork is already up to date."
+            exit 0
+          fi
+
+          git merge --ff-only upstream/main
+          git push origin main
