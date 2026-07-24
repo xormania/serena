@@ -1,0 +1,15 @@
+{
+  "operations": [
+    {
+      "op": "set",
+      "path": ["backends", "hlsl", "platforms"],
+      "value": {
+        "supported": ["linux", "macos"],
+        "excluded": [{"os": "windows", "reason": "Synthetic exclusion despite an extracted Windows dependency."}],
+        "provisioningOverrides": {
+          "macos": {"strategy": "source-build", "pin": "1.3.1", "lockDiscipline": {"tool": "cargo", "flag": "--locked"}}
+        }
+      }
+    }
+  ]
+}

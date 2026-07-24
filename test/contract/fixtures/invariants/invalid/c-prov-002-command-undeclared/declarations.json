@@ -1,0 +1,9 @@
+{
+  "operations": [
+    {
+      "op": "set",
+      "path": ["backends", "hlsl", "platforms"],
+      "value": {"supported": ["linux", "macos", "windows"], "excluded": []}
+    }
+  ]
+}

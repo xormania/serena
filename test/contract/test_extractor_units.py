@@ -65,8 +65,20 @@ def test_extracts_filesystem_server_and_documentation_facts() -> None:
 
     assert filesystem == {"repoDirs": ["python"], "testDirs": ["python"], "bootstrapConftests": ["python"]}
     assert servers["server"]["uvxPins"] == [{"package": "example-ls", "version": "1.2.3"}]
-    assert servers["server"]["cargoCommands"] == [["cargo", "install", "example-ls", "--locked"]]
+    assert servers["server"]["cargoCommands"] == [["cargo", "install", "example-ls", "--version", "version", "--locked"]]
     assert servers["server"]["pathProbes"] == ["example-ls"]
+    assert servers["server"]["runtimeDeps"][0]["platformIdOpaque"] is False
+    assert servers["mixed_server"]["runtimeDeps"][0]["platformIdOpaque"] is True
+    assert servers["opaque_sha_server"]["runtimeDeps"][0]["sha256Opaque"] is True
+    assert servers["server"]["opaqueProvisioningCalls"] == []
+    assert servers["opaque_server"]["opaqueProvisioningCalls"] == ["FileUtils.download_and_extract_archive_verified"]
+    assert servers["forwarding_server"]["opaqueProvisioningCalls"] == []
+    assert servers["mixed_server"]["opaqueProvisioningCalls"] == ["FileUtils.download_and_extract_archive_verified"]
+    assert servers["raw_download_server"]["opaqueProvisioningCalls"] == [
+        "urllib.request.urlopen",
+        "urllib.request.urlretrieve",
+    ]
+    assert servers["unverified_file_server"]["opaqueProvisioningCalls"] == ["FileUtils.download_file_verified"]
     assert docs["readmeLabels"] == ["CUE", "Python", "QML"]
     assert docs["docsLabels"] == ["CUE", "Python", "QML"]
     assert docs["templateIds"] == ["python", "qml", "cue"]

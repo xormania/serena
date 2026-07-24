@@ -1,0 +1,9 @@
+{
+  "operations": [
+    {
+      "op": "set",
+      "path": ["extracted", "servers", "hlsl_language_server", "cargoCommands"],
+      "value": []
+    }
+  ]
+}

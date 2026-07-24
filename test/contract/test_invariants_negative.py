@@ -6,6 +6,7 @@ import json
 
 import pytest
 
+from scripts.lsp_contract.diagnostics import render_cue_diagnostics
 from test.contract.invariant_support import FIXTURES, validate_fixture
 
 INVALID_CASES = [
@@ -23,12 +24,29 @@ INVALID_CASES = [
     "c-test-004-orphan-marker",
     "c-test-005-dup-alias",
     "c-test-006-untested-unwaived",
+    "c-prov-001-shape",
+    "c-prov-002-cargo-unlocked",
+    "c-prov-002-command-missing",
+    "c-prov-002-command-undeclared",
+    "c-prov-003-sha-missing",
+    "c-prov-003-sha-opaque",
+    "c-prov-003-omnisharp-integrity-missing",
+    "c-prov-003-no-evidence",
+    "c-prov-004-unpinned",
+    "c-prov-005-platform-no-path",
+    "c-prov-005-path-outside-support",
+    "c-prov-006-owner-ambiguous",
+    "c-plat-001-unexcluded",
+    "c-plat-001-overlap",
+    "c-plat-001-reason-missing",
     "c-waive-001-stale",
 ]
 
 CATEGORIES = {
     "C_REG": "registration",
     "C_TEST": "testing",
+    "C_PROV": "provisioning",
+    "C_PLAT": "platform",
     "C_WAIVE": "waiver hygiene",
 }
 
@@ -43,8 +61,15 @@ def test_invalid_fixture_is_rejected_with_stable_diagnostic(case_name: str) -> N
     prefix = diagnostic.rsplit("_", 1)[0]
     assert expected["category"] == CATEGORIES[prefix]
     assert returncode == 1, f"expected rejection {diagnostic}, got exit {returncode}:\n{stderr}"
-    assert diagnostic in stderr
-    assert expected["subject"] in stderr
+
+    raw_path = expected.get("raw_path")
+    if raw_path is not None:
+        assert raw_path in stderr
+        diagnostic_output = render_cue_diagnostics(stderr)
+    else:
+        diagnostic_output = stderr
+    assert diagnostic in diagnostic_output
+    assert expected["subject"] in diagnostic_output
 
 
 def test_all_named_rejection_fixture_files_exist() -> None:

@@ -7,7 +7,16 @@ backends: zig: #DeclaredBackend & {
 	class: {module: "zls", name: "ZigLanguageServer"}
 	status: "stable"
 	matcher: extensions: [".zig", ".zon"]
-	provisioning: {strategy: "download", owner: {runtime: "serena", ci: "workflow-step"}, cacheInputs: [".github/workflows/pytest.yml#ZLS version"], pin: "0.14.0", checksums: "default-version-only", hosts: ["github.com"]}
+	provisioning: {
+		strategy: "path"
+		owner: {runtime: "user", ci: "workflow-step"}
+		cacheInputs: [".github/workflows/pytest.yml#Install ZLS (Zig Language Server)"]
+		executables: ["zig", "zls"]
+	}
+	platforms: {
+		supported: ["linux", "macos"]
+		excluded: [{os: "windows", reason: "ZigLanguageServer rejects Windows because cross-file references are unreliable."}]
+	}
 	testing: {tested: true, marker: "zig", fixtureRepo: "zig", testDir: "zig"}
-	ci: _CIExpected & _BatchNative & _CIAllOS & _SkipEverywhere
+	ci: _CIExpected & _BatchNative & _CINonWindows & _SkipEverywhere
 }

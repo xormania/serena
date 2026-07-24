@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["extracted","servers","hlsl_language_server","runtimeDeps"],"value":[{"id":"shader-language-server","platformId":"linux-x64","url":"https://example.invalid/server.zip","sha256":"fixture-sha256","opaque":false}]}]}

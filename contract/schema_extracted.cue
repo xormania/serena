@@ -83,10 +83,12 @@ package contract
 }
 
 #ExtractedRuntimeDependency: {
-	id?:         string
-	platformId?: string | null
-	url?:        string | null
-	sha256?:     string | null
+	id?:              string
+	platformId?:      string | null
+	platformIdOpaque: *false | bool
+	url?:             string | null
+	sha256?:          string | null
+	sha256Opaque:     *false | bool
 	allowedHosts?: [...string] | string | null
 	archiveType?: string | null
 	binaryName?:  string | null
@@ -131,6 +133,7 @@ package contract
 
 #ExtractedServerModule: {
 	runtimeDeps: [...#ExtractedRuntimeDependency]
+	opaqueProvisioningCalls: *[] | [...string]
 	uvxPins: [...#ExtractedUvxPin]
 	cargoCommands: [...[...string]]
 	pathProbes: [...string]

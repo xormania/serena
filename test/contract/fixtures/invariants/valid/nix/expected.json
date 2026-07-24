@@ -1,0 +1,13 @@
+{
+  "backend": "nix",
+  "must_equal": {
+    "backends.nix.provisioning.strategy": "package-manager",
+    "backends.nix.provisioning.pin": "UNPINNED",
+    "backends.nix.provisioning.waiver": "W-PROV-NIXD-UNPINNED",
+    "backends.nix.platforms.supported": [
+      "linux",
+      "macos"
+    ],
+    "backends.nix.platforms.excluded.0.os": "windows"
+  }
+}

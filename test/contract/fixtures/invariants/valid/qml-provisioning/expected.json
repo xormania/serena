@@ -1,0 +1,15 @@
+{
+  "backend": "qml",
+  "must_equal": {
+    "backends.qml.provisioning.strategy": "path",
+    "backends.qml.provisioning.owner.ci": "workflow-step",
+    "backends.qml.provisioning.executables": [
+      "qmlls6",
+      "qmlls"
+    ],
+    "extracted.servers.qml_language_server.pathProbes": [
+      "qmlls",
+      "qmlls6"
+    ]
+  }
+}

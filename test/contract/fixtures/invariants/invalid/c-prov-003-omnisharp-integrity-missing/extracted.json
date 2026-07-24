@@ -1,0 +1,8 @@
+{
+  "operations": [
+    {
+      "op": "delete",
+      "path": ["extracted", "servers", "omnisharp", "runtimeDependencyJson", "runtimeDependencies", 3, "integrity"]
+    }
+  ]
+}

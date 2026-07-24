@@ -8,6 +8,7 @@ import pytest
 
 from scripts.lsp_contract.diagnostics import ExtractionError
 from scripts.lsp_contract.extract.ls_config_ast import extract_ls_config
+from scripts.lsp_contract.extract.server_modules_ast import extract_server_modules
 from scripts.lsp_contract.extract.workflow_yaml import extract_workflow
 
 FIXTURES = Path(__file__).parent / "fixtures" / "extractor"
@@ -32,6 +33,16 @@ def test_missing_workflow_marker_group_is_drift() -> None:
 
     assert "MARKERS_JVM" in str(error.value)
     assert f"{path}:" in str(error.value)
+
+
+def test_unknown_download_helper_is_drift() -> None:
+    root = FIXTURES / "unknown-download"
+
+    with pytest.raises(ExtractionError) as error:
+        extract_server_modules(root)
+
+    assert "server.py:2" in str(error.value)
+    assert "unsupported provisioning download call" in str(error.value)
 
 
 def test_driver_uses_exit_two_for_extractor_drift() -> None:

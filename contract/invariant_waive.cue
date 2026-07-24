@@ -9,6 +9,11 @@ _preWaiverViolations: {
 	"C-REG-005":  _cReg005Pre
 	"C-REG-006":  _cReg006Pre
 	"C-REG-007":  _cReg007Pre
+	"C-PROV-002": _cProv002Pre
+	"C-PROV-003": _cProv003Pre
+	"C-PROV-004": _cProv004Pre
+	"C-PROV-005": _cProv005Pre
+	"C-PLAT-001": _cPlat001Pre
 	"C-TEST-001": _cTest001Pre
 	"C-TEST-002": _cTest002Pre
 	"C-TEST-003": _cTest003Pre

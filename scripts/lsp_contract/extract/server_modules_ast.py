@@ -20,6 +20,15 @@ _FIELD_NAMES = {
 }
 
 
+_VERIFIED_DOWNLOAD_CALLS = frozenset(
+    {
+        "FileUtils.download_and_extract_archive_verified",
+        "FileUtils.download_file_verified",
+    }
+)
+_RAW_DOWNLOAD_CALLS = frozenset({"urllib.request.urlopen", "urllib.request.urlretrieve"})
+
+
 def _call_name(node: ast.expr) -> str:
     if isinstance(node, ast.Name):
         return node.id
@@ -86,14 +95,22 @@ def _module_constants(tree: ast.Module) -> dict[str, object]:
 def _runtime_dependency(node: ast.Call, constants: dict[str, object]) -> dict[str, object]:
     entry: dict[str, object] = {}
     opaque = bool(node.args)
+    platform_id_opaque = False
+    sha256_opaque = False
     for keyword in node.keywords:
         if keyword.arg is None:
             opaque = True
             continue
         value, value_opaque = _literal(keyword.value, constants)
         entry[_FIELD_NAMES.get(keyword.arg, keyword.arg)] = value
+        if keyword.arg == "platform_id":
+            platform_id_opaque = value_opaque
+        if keyword.arg == "sha256":
+            sha256_opaque = value_opaque
         opaque = opaque or value_opaque
     entry["opaque"] = opaque
+    entry["platformIdOpaque"] = platform_id_opaque
+    entry["sha256Opaque"] = sha256_opaque
     return entry
 
 
@@ -126,6 +143,30 @@ def _deduplicate(values: list[object]) -> list[object]:
     return result
 
 
+def _forwarded_dependency_download(node: ast.Call) -> bool:
+    keywords = {keyword.arg: keyword.value for keyword in node.keywords if keyword.arg is not None}
+    checksum = keywords.get("expected_sha256")
+    hosts = keywords.get("allowed_hosts")
+    if not isinstance(checksum, ast.Attribute) or checksum.attr != "sha256":
+        return False
+    if not isinstance(hosts, ast.Attribute) or hosts.attr != "allowed_hosts":
+        return False
+    return ast.dump(checksum.value, include_attributes=False) == ast.dump(hosts.value, include_attributes=False)
+
+
+def _opaque_provisioning_calls(tree: ast.Module, path: Path) -> list[str]:
+    calls: set[str] = set()
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.Call):
+            continue
+        call_name = _call_name(node.func)
+        if call_name.startswith("FileUtils.download") and call_name not in _VERIFIED_DOWNLOAD_CALLS:
+            raise ExtractionError(path, node.lineno, f"unsupported provisioning download call {call_name}")
+        if call_name in _RAW_DOWNLOAD_CALLS or (call_name in _VERIFIED_DOWNLOAD_CALLS and not _forwarded_dependency_download(node)):
+            calls.add(call_name)
+    return sorted(calls)
+
+
 def extract_server_modules(root: Path) -> dict[str, object]:
     """Extract dependency, pin, command, and executable-probe facts."""
     modules: dict[str, object] = {}
@@ -155,14 +196,21 @@ def extract_server_modules(root: Path) -> dict[str, object]:
                     if isinstance(value, str) and not opaque:
                         path_probes.append(value)
             elif isinstance(node, ast.List | ast.Tuple):
-                value, opaque = _literal(node, constants)
-                if not opaque and isinstance(value, list) and len(value) >= 2 and value[0] == "cargo" and value[1] == "install":
+                value, _ = _literal(node, constants)
+                command_head = [_literal(element, constants) for element in node.elts[:2]]
+                if (
+                    isinstance(value, list)
+                    and len(command_head) == 2
+                    and command_head[0] == ("cargo", False)
+                    and command_head[1] == ("install", False)
+                ):
                     cargo_commands.append(value)
 
         relative = path.relative_to(root).with_suffix("")
         module_name = ".".join(relative.parts)
         modules[module_name] = {
             "runtimeDeps": _deduplicate(runtime_dependencies),
+            "opaqueProvisioningCalls": _opaque_provisioning_calls(tree, path),
             "uvxPins": _deduplicate(uvx_pins),
             "cargoCommands": _deduplicate(cargo_commands),
             "pathProbes": sorted(set(str(value) for value in path_probes)),
@@ -177,10 +225,18 @@ def extract_server_modules(root: Path) -> dict[str, object]:
         module_name = ".".join(json_path.parent.relative_to(root).parts) or json_path.parent.name
         record = modules.setdefault(
             module_name,
-            {"runtimeDeps": [], "uvxPins": [], "cargoCommands": [], "pathProbes": [], "pins": {}},
+            {
+                "runtimeDeps": [],
+                "opaqueProvisioningCalls": [],
+                "uvxPins": [],
+                "cargoCommands": [],
+                "pathProbes": [],
+                "pins": {},
+            },
         )
         if not isinstance(record, dict):
             raise ExtractionError(json_path, 1, "module extraction record must be a mapping")
-        cast(dict[str, object], record)["runtimeDependencyJson"] = payload
+        typed_record = cast(dict[str, object], record)
+        typed_record["runtimeDependencyJson"] = payload
 
     return dict(sorted(modules.items()))

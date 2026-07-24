@@ -12,5 +12,12 @@ dependency = RuntimeDependency(  # type: ignore[unresolved-reference]
 provider = LanguageServerDependencyProviderUvx(  # type: ignore[unresolved-reference]
     package_name="example-ls", package_version="1.2.3", entrypoint="example-ls"
 )
-command = ["cargo", "install", "example-ls", "--locked"]
+
+
+def resolve_version() -> str:
+    return "1.2.3"
+
+
+version = resolve_version()
+command = ["cargo", "install", "example-ls", "--version", version, "--locked"]
 probe = shutil.which("example-ls")

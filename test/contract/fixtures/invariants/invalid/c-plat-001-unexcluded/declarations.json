@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["backends","python","platforms"],"value":{"supported":["linux","windows"],"excluded":[]}}]}

@@ -96,9 +96,29 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Provisioning declarations must satisfy their strategy-specific schema.",
         "Add the fields required by the selected provisioning strategy.",
     ),
+    "C-PROV-002": ContractDiagnostic(
+        "Source-build declarations and Cargo install commands must agree and use lock discipline.",
+        "Declare the source-build leaf and retain --locked in every extracted cargo install command.",
+    ),
+    "C-PROV-003": ContractDiagnostic(
+        "Default-version downloads require checksum evidence and an aligned download declaration.",
+        "Add the missing sha256 or integrity, or align the provisioning strategy with the source.",
+    ),
+    "C-PROV-004": ContractDiagnostic(
+        "Package-manager provisioning must be pinned or use a current matching waiver.",
+        "Pin the package-manager install or register the declaration's exact waiver id and subject.",
+    ),
+    "C-PROV-005": ContractDiagnostic(
+        "Declared platform support must agree with provable or explicitly opaque provisioning paths.",
+        "Add structured platform evidence, correct support intent, or register the reviewed opacity waiver.",
+    ),
     "C-PROV-006": ContractDiagnostic(
         "Provisioning ownership must name one runtime owner and one CI owner.",
         "Declare both provisioning.owner.runtime and provisioning.owner.ci.",
+    ),
+    "C-PLAT-001": ContractDiagnostic(
+        "Supported and excluded platforms must form an exact three-OS partition with reasons.",
+        "Place each OS exactly once and provide a non-empty reason for every exclusion.",
     ),
     "C-FIX-003": ContractDiagnostic(
         "Required bootstrap declarations must name at least one produced artifact.",
@@ -110,6 +130,7 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
 _SCHEMA_PATH_DIAGNOSTICS: tuple[tuple[re.Pattern[str], str], ...] = (
     (re.compile(r"[.]ci[.]batch(?=[:.]|$)"), "C-CI-002"),
     (re.compile(r"[.]ci[.]skipPolicy(?:[.]|:)"), "C-SKIP-001"),
+    (re.compile(r"[.]platforms[.]excluded[.]\d+[.]reason(?=[:.]|$)"), "C-PLAT-001"),
     (re.compile(r"[.]provisioning[.]owner(?:[.]|:)"), "C-PROV-006"),
     (re.compile(r"[.]testing[.]bootstrap[.]produces(?=[:.]|$)"), "C-FIX-003"),
     (
