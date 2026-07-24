@@ -48,6 +48,8 @@ def test_invariant_reference_has_exact_complete_structured_coverage() -> None:
     cue_text = "\n".join(path.read_text(encoding="utf-8") for path in sorted((ROOT / "contract").glob("invariant_*.cue")))
     cue_ids = {match.replace("_", "-") for match in re.findall(r"^(C_[A-Z]+_\d{3}):", cue_text, flags=re.MULTILINE)}
     assert cue_ids <= set(DIAGNOSTICS)
+    assert "instantiable at the class level" not in text
+    assert "concrete and has no abstract methods" in text
 
 
 def test_contract_readme_covers_operation_authority_and_known_issues() -> None:
@@ -64,6 +66,10 @@ def test_contract_readme_covers_operation_authority_and_known_issues() -> None:
         "python -m scripts.lsp_contract install-cue",
         "python -m scripts.lsp_contract validate",
         "poe check-contract",
+        "uv run pytest test/contract -q",
+        "Managed CUE resolution failures are exit 1",
+        "fixing the source is worse than waiving",
+        "verible_version",
         "python -m scripts.lsp_contract explain",
         "render-registration",
         "render-template-list",
@@ -83,6 +89,7 @@ def test_contract_readme_covers_operation_authority_and_known_issues() -> None:
     }
     assert required <= set(token for token in required if token in text)
     assert "proj/cue" not in text
+    assert "version or URL override" not in text
 
 
 def test_language_addition_guide_covers_all_surfaces_and_current_paths() -> None:
@@ -109,6 +116,7 @@ def test_language_addition_guide_covers_all_surfaces_and_current_paths() -> None
         "contract/REGISTRATION.md",
         "contract/INVARIANTS.md",
         "uv run poe check-contract",
+        "uv run pytest test/contract -q",
         "solidlsp.util.subprocess_util",
     }
     assert required <= set(token for token in required if token in text)
