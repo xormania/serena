@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["extracted","filesystem","testDirs"],"value":["python","cpp","erlang"]}]}

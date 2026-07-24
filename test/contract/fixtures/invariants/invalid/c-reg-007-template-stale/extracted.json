@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["extracted","docs","templateIds"],"value":["python_ty","cpp","cpp_ccls","gdscript","msl","erlang"]}]}

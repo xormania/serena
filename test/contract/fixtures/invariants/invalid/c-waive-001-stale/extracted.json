@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["extracted","lsConfig","dispatch","erlang","class"],"value":"ErlangLanguageServer"}]}

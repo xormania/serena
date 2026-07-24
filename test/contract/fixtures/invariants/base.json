@@ -1,0 +1,283 @@
+{
+  "languages": {
+    "python": {"displayName": "Python", "defaultBackend": "python", "docLabel": "Python"},
+    "cpp": {"displayName": "C/C++", "defaultBackend": "cpp", "docLabel": "C/C++"},
+    "gdscript": {"displayName": "GDScript", "defaultBackend": "gdscript", "docLabel": "GDScript"},
+    "msl": {"displayName": "MSL", "defaultBackend": "msl", "docLabel": "MSL"},
+    "erlang": {"displayName": "Erlang", "defaultBackend": "erlang", "docLabel": "Erlang"}
+  },
+  "backends": {
+    "python": {
+      "id": "python",
+      "language": "python",
+      "role": "default",
+      "class": {"module": "pyright_server", "name": "PyrightServer"},
+      "status": "stable",
+      "matcher": {"extensions": [".py", ".pyi"], "caseSensitive": true},
+      "provisioning": {
+        "strategy": "uvx",
+        "owner": {"runtime": "serena", "ci": "runtime"},
+        "cacheInputs": ["src/solidlsp/language_servers/pyright_server.py#PYRIGHT_VERSION"],
+        "package": "basedpyright",
+        "pin": "1.31.4"
+      },
+      "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+      "testing": {"tested": true, "marker": "python", "fixtureRepo": "python", "testDir": "python"},
+      "ci": {
+        "expected": true,
+        "batch": "catch-all",
+        "os": ["linux", "macos", "windows"],
+        "skipPolicy": {"category": 4}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "python_ty": {
+      "id": "python_ty",
+      "language": "python",
+      "role": "alternate",
+      "class": {"module": "ty_server", "name": "TyLanguageServer"},
+      "status": "experimental",
+      "matcher": {"sharedArmWith": "python", "caseSensitive": true},
+      "provisioning": {
+        "strategy": "uvx",
+        "owner": {"runtime": "serena", "ci": "runtime"},
+        "cacheInputs": ["src/solidlsp/language_servers/ty_server.py#TY_VERSION"],
+        "package": "ty",
+        "pin": "0.0.25"
+      },
+      "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+      "testing": {
+        "tested": true,
+        "marker": "python",
+        "fixtureRepo": "python",
+        "aliasOf": "python",
+        "testDir": "python"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "catch-all",
+        "os": ["linux", "macos", "windows"],
+        "skipPolicy": {"category": 4}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "cpp": {
+      "id": "cpp",
+      "language": "cpp",
+      "role": "default",
+      "class": {"module": "clangd_language_server", "name": "ClangdLanguageServer"},
+      "status": "stable",
+      "matcher": {"extensions": [".c", ".h", ".cpp"], "caseSensitive": false},
+      "provisioning": {
+        "strategy": "path",
+        "owner": {"runtime": "user", "ci": "image"},
+        "cacheInputs": [],
+        "executables": ["clangd"]
+      },
+      "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+      "testing": {"tested": true, "marker": "cpp", "fixtureRepo": "cpp", "testDir": "cpp"},
+      "ci": {
+        "expected": true,
+        "batch": "native",
+        "os": ["linux", "macos", "windows"],
+        "skipPolicy": {"category": 3, "toolProbe": "clangd"}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "cpp_ccls": {
+      "id": "cpp_ccls",
+      "language": "cpp",
+      "role": "alternate",
+      "class": {"module": "ccls_language_server", "name": "CCLS"},
+      "status": "experimental",
+      "matcher": {"sharedArmWith": "cpp", "caseSensitive": false},
+      "provisioning": {
+        "strategy": "path",
+        "owner": {"runtime": "user", "ci": "workflow-step"},
+        "cacheInputs": [".github/workflows/pytest.yml#Install ccls"],
+        "executables": ["ccls"]
+      },
+      "platforms": {
+        "supported": ["linux", "macos"],
+        "excluded": [{"os": "windows", "reason": "No current Windows ccls binary is available."}]
+      },
+      "testing": {
+        "tested": true,
+        "marker": "cpp",
+        "fixtureRepo": "cpp",
+        "aliasOf": "cpp",
+        "testDir": "cpp"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "native",
+        "os": ["linux", "macos"],
+        "skipPolicy": {"category": 3, "toolProbe": "ccls"}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "gdscript": {
+      "id": "gdscript",
+      "language": "gdscript",
+      "role": "sole",
+      "class": {"module": "godot_language_server", "name": "GodotLanguageServer"},
+      "status": "stable",
+      "matcher": {"extensions": [".gd", ".gdscript"], "caseSensitive": true},
+      "provisioning": {
+        "strategy": "tcp",
+        "owner": {"runtime": "user", "ci": "none"},
+        "cacheInputs": [],
+        "host": "127.0.0.1",
+        "port": 6005
+      },
+      "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+      "testing": {"tested": false, "waiver": "W-TEST-GDSCRIPT"},
+      "ci": {"expected": false, "waiver": "W-TEST-GDSCRIPT", "skipPolicy": {"category": 4}},
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "msl": {
+      "id": "msl",
+      "language": "msl",
+      "role": "sole",
+      "class": {"module": "msl_language_server", "name": "MslLanguageServer"},
+      "status": "stable",
+      "matcher": {"extensions": [".mrc"], "caseSensitive": true},
+      "provisioning": {
+        "strategy": "bundled",
+        "owner": {"runtime": "serena", "ci": "runtime"},
+        "cacheInputs": ["pyproject.toml#pygls", "uv.lock"],
+        "enginePin": "pyproject.toml#pygls==2.1.1"
+      },
+      "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+      "testing": {"tested": true, "marker": "msl", "fixtureRepo": "msl", "testDir": "msl"},
+      "ci": {
+        "expected": true,
+        "batch": "other-langs",
+        "os": ["linux", "macos", "windows"],
+        "skipPolicy": {"category": 4}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    },
+    "erlang": {
+      "id": "erlang",
+      "language": "erlang",
+      "role": "sole",
+      "class": {"module": "erlang_language_server", "name": "ErlangLanguageServer"},
+      "status": "stable",
+      "matcher": {"extensions": [".erl", ".hrl"], "caseSensitive": true},
+      "provisioning": {
+        "strategy": "path",
+        "owner": {"runtime": "user", "ci": "none"},
+        "cacheInputs": [],
+        "executables": ["erlang_ls"]
+      },
+      "platforms": {
+        "supported": ["linux", "macos"],
+        "excluded": [{"os": "windows", "reason": "The Erlang fixture toolchain is unavailable on Windows."}]
+      },
+      "testing": {"tested": true, "marker": "erlang", "fixtureRepo": "erlang", "testDir": "erlang"},
+      "ci": {
+        "expected": false,
+        "waiver": "W-REG-ERLANG",
+        "skipPolicy": {"category": 3, "toolProbe": "erlang_ls"}
+      },
+      "capabilities": {"implementationSupport": "none"}
+    }
+  },
+  "waivers": {
+    "W-TEST-GDSCRIPT": {
+      "id": "W-TEST-GDSCRIPT",
+      "invariant": "C-TEST-006",
+      "subject": "gdscript",
+      "reason": "Godot owns the TCP server lifecycle and no hermetic fixture exists.",
+      "reference": "proj/cue/plan.md#2.9",
+      "added": "2026-07-24"
+    },
+    "W-REG-ERLANG": {
+      "id": "W-REG-ERLANG",
+      "invariant": "C-REG-002",
+      "subject": "erlang",
+      "reason": "Fixture models a known waived dispatch-class defect.",
+      "reference": "proj/cue/plan.md#2.9",
+      "added": "2026-07-24"
+    }
+  },
+  "extracted": {
+    "lsConfig": {
+      "members": ["python", "python_ty", "cpp", "cpp_ccls", "gdscript", "msl", "erlang"],
+      "memberSymbols": {
+        "python": "PYTHON",
+        "python_ty": "PYTHON_TY",
+        "cpp": "CPP",
+        "cpp_ccls": "CPP_CCLS",
+        "gdscript": "GDSCRIPT",
+        "msl": "MSL",
+        "erlang": "ERLANG"
+      },
+      "dispatch": {
+        "python": {"module": "pyright_server", "class": "PyrightServer"},
+        "python_ty": {"module": "ty_server", "class": "TyLanguageServer"},
+        "cpp": {"module": "clangd_language_server", "class": "ClangdLanguageServer"},
+        "cpp_ccls": {"module": "ccls_language_server", "class": "CCLS"},
+        "gdscript": {"module": "godot_language_server", "class": "GodotLanguageServer"},
+        "msl": {"module": "msl_language_server", "class": "MslLanguageServer"},
+        "erlang": {"module": "erlang_language_server", "class": "AbstractErlangLanguageServer"}
+      },
+      "matchers": {
+        "python": {"literalExtensions": [".py", ".pyi"], "caseSensitive": true},
+        "cpp": {"literalExtensions": [".c", ".h", ".cpp"], "caseSensitive": false},
+        "gdscript": {"literalExtensions": [".gd", ".gdscript"], "caseSensitive": true},
+        "msl": {"literalExtensions": [".mrc"], "caseSensitive": true},
+        "erlang": {"literalExtensions": [".erl", ".hrl"], "caseSensitive": true}
+      },
+      "experimentalSet": ["python_ty", "cpp_ccls"],
+      "nonProgrammingSet": [],
+      "priorityZeroSet": []
+    },
+    "conftest": {
+      "aliases": {"python_ty": "python", "cpp_ccls": "cpp"},
+      "rawDuplicateKeys": [],
+      "markerDict": {"python_ty": ["python"], "cpp_ccls": ["cpp"]},
+      "backendLists": {},
+      "verifiedImplementationSet": []
+    },
+    "pyproject": {
+      "markers": [
+        {"name": "python", "description": "Python tests"},
+        {"name": "cpp", "description": "C/C++ tests"},
+        {"name": "msl", "description": "MSL tests"},
+        {"name": "erlang", "description": "Erlang tests"},
+        {"name": "slow", "description": "Slow tests"},
+        {"name": "snapshot", "description": "Snapshot tests"}
+      ],
+      "devPins": {}
+    },
+    "workflow": {
+      "markerGroups": {
+        "MARKERS_JVM": [],
+        "MARKERS_NATIVE": ["cpp"],
+        "MARKERS_OTHER_LANGS": ["msl", "erlang"],
+        "MARKERS_NICHE": []
+      },
+      "matrix": {
+        "os": ["linux", "macos", "windows"],
+        "batches": ["jvm", "native", "other-langs", "niche", "catch-all"],
+        "exclude": []
+      },
+      "jobs": [{"name": "cpu", "timeoutMinutes": 60, "needs": []}],
+      "steps": [],
+      "caches": []
+    },
+    "servers": {},
+    "filesystem": {
+      "repoDirs": ["python", "cpp", "msl", "erlang"],
+      "testDirs": ["python", "cpp", "msl", "erlang"],
+      "bootstrapConftests": []
+    },
+    "docs": {
+      "readmeLabels": ["Python", "C/C++", "GDScript", "MSL", "Erlang"],
+      "docsLabels": ["Python", "C/C++", "GDScript", "MSL", "Erlang"],
+      "templateIds": ["python", "python_ty", "cpp", "cpp_ccls", "gdscript", "msl", "erlang"]
+    }
+  }
+}
