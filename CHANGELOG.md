@@ -5,6 +5,7 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: a tool call exceeding the timeout blocked the task executor indefinitely; the executor now
     recovers without user-induced cancellation
+  - Add a CUE-backed language and CI contract with deterministic registration artifacts and a fail-fast workflow gate
   - Add Grok Build support (context `grok`, setup CLI, hooks)
   - The `languages` key in project configurations was changed to `language_servers` to better reflect
     the actual semantics (configurations are automatically migrated)

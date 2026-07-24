@@ -7,9 +7,28 @@ This guide explains how to add support for a new programming language to Serena.
 Adding a new language involves:
 
 1. **Language Server Implementation** - Creating a language-specific server class
-2. **Language Registration** - Adding the language to enums and configurations  
+2. **Language Registration** - Adding the language to enums and configurations
 3. **Test Repository** - Creating a minimal test project
 4. **Test Suite** - Writing comprehensive tests
+
+## Contract-driven workflow
+
+Start by adding `contract/declaration_backend_<id>.cue` and, for a new source language, its entry in `contract/declaration_languages.cue`. Copy the closest integration class rather than inventing a partial declaration. Then run `uv run poe check-contract` after each surface below; its diagnostics identify the next missing or inconsistent surface.
+
+Use `contract/REGISTRATION.md` for the complete backend-by-surface map and `contract/INVARIANTS.md` for diagnostic meaning, fixes, and waiver policy. A language integration is complete only when all ten surfaces agree:
+
+1. **Server and provisioning:** implement the class under `src/solidlsp/language_servers/`, declare its strategy, immutable pins or executable ownership, cache inputs, and supported platforms.
+2. **Identity:** add the `LanguageServerId` value and keep its user-facing description accurate.
+3. **Matcher:** add or explicitly share the `get_source_fn_matcher` arm and its extension set.
+4. **Dispatch:** add the `get_ls_class` arm for the declared module and concrete class.
+5. **Optional enum sets:** update `is_experimental`, `is_programming_language`, and `get_priority` when the language requires those semantics.
+6. **Pytest marker:** declare the marker under `pyproject.toml`.
+7. **Fixture repository:** add `test/resources/repos/<id>/test_repo/`, or declare an intentional alias.
+8. **Focused tests and bootstrap:** add `test/solidlsp/<id>/` and any structured fixture bootstrap, tool probes, and produced-artifact postconditions.
+9. **Central test policy:** update `test/conftest.py` marker maps, disabled guards, and repository aliases, plus `test/serena/test_serena_agent.py` where the supported-language list is exercised.
+10. **CI and user surfaces:** update `.github/workflows/pytest.yml` batch membership and any platform-specific toolchain install; update `README.md`, `docs/01-about/020_programming-languages.md`, `CHANGELOG.md`, and regenerate `src/serena/resources/project.template.yml`.
+
+Finish with focused language tests, `uv run poe check-contract`, and the relevant repository regression suite. Do not turn a failed installation or required bootstrap into a silent skip.
 
 ## Step 1: Language Server Implementation
 
@@ -59,9 +78,9 @@ To implement a new language server using the DependencyProvider pattern:
   - Implement `create_launch_command()` directly (note: no automatic support for user-level launch command overrides in this case)
   - Reference implementations: `EclipseJDTLS`, `CSharpLanguageServer`, `MatlabLanguageServer`
 
-**Implementation Pointers::**
+**Implementation pointers:**
   - Override `create_launch_command_env` if the launch command needs environment variables to be set (defaults to `{}` in the base implementation)
-  - When calling subprocesses, e.g. to install dependencies, do not use `subprocess.run` directly; instead, use the `subprocess_run` helper method from `solidlsp.utils.subprocess_utils`
+  - When calling subprocesses, e.g. to install dependencies, do not use `subprocess.run` directly; instead, use the `subprocess_run` helper method from `solidlsp.util.subprocess_util`
 
 You should look at at least one existing implementation of each base class to understand how they work.
 
@@ -208,10 +227,10 @@ You should at least test:
 3. Finding cross-file references
 
 Have a look at `test/solidlsp/php/test_php_basic.py` as an example for what should be tested.
-Don't forget to add a new language marker to `pytest.ini`.
+Declare the new language marker under `[tool.pytest.ini_options].markers` in `pyproject.toml`.
 
 
-### 5 Documentation
+## Step 5: Documentation
 
 Update:
 

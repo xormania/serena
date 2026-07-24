@@ -16,7 +16,7 @@ Every PR should cover a single logical change or a set of closely related change
 
 ### Adding Support for a New Language Server
 
-See the corresponding [memory](.serena/memories/adding_new_language_support_guide.md).
+See the corresponding [memory](.serena/memories/adding_new_language_support_guide.md) and the [language/CI contract workflow](contract/README.md).
 
 ## Submitting Pull Requests
 
@@ -48,6 +48,7 @@ We use poe to execute development tasks:
 
 - `poe format` - run code auto-formatters
 - `poe type-check` - run type checkers
+- `poe check-contract` - validate language-server registration, provisioning, tests, CI placement, caches, and generated outputs
 
 ## Testing Tool Executions
 
