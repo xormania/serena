@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["waivers","W-CACHE-RESTORE-TEST"],"value":{"id":"W-CACHE-RESTORE-TEST","invariant":"C-CACHE-002","subject":"uv-venv","reason":"Fixture waiver cannot authorize omitting the version token.","reference":"proj/cue/plan.md#7.3","added":"2026-07-24"}}]}

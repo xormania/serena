@@ -1,0 +1,1 @@
+{"operations":[{"op":"append","path":["extracted","workflow","caches"],"value":{"job":"cpu","name":"Cache static","path":".cache","key":"static-${{ runner.os }}-v2","restoreKeys":["static-${{ runner.os }}-"]}}]}

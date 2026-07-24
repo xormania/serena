@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["ciLayout","caches","static"],"value":{"workflowName":"Cache static","covers":[],"inputs":[],"keyTokens":{},"managed":false,"versionToken":"v2"}}]}

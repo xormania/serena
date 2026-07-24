@@ -1,1 +1,1 @@
-{"operations": []}
+{"operations":[{"op":"set","path":["backends","qml","ci","installStep"],"value":"Install qmlls (QML Language Server)"}]}

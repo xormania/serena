@@ -9,5 +9,5 @@ backends: crystal: #DeclaredBackend & {
 	matcher: extensions: [".cr"]
 	provisioning: {strategy: "path", owner: {runtime: "user", ci: "none"}, cacheInputs: [], executables: ["crystalline"]}
 	testing: {tested: true, marker: "crystal", fixtureRepo: "crystal", testDir: "crystal"}
-	ci: {expected: false, waiver: "W-CI-CRYSTAL", skipPolicy: {category: 3, toolProbe: "crystalline"}}
+	ci: {expected: false, waiver: "W-CI-NEVER-RUN-CRYSTAL", skipPolicy: {category: 3, toolProbe: "crystalline"}}
 }

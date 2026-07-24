@@ -9,5 +9,5 @@ backends: qml: #DeclaredBackend & {
 	matcher: extensions: [".qml"]
 	provisioning: {strategy: "path", owner: {runtime: "user", ci: "workflow-step"}, cacheInputs: [".github/workflows/pytest.yml#Install qmlls (QML Language Server)"], executables: ["qmlls6", "qmlls"]}
 	testing: {tested: true, marker: "qml", fixtureRepo: "qml", testDir: "qml"}
-	ci: _CIExpected & _BatchOther & _CILinux & {skipPolicy: {category: 2, loudOn: {os: ["linux"], ci: true}, toolProbe: "qmlls6|qmlls"}}
+	ci: _CIExpected & _BatchOther & _CILinux & {skipPolicy: {category: 2, loudOn: {os: ["linux"], ci: true}, toolProbe: "qmlls6|qmlls"}} & {installStep: "Install qmlls (QML Language Server)"}
 }

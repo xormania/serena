@@ -1,1 +1,1 @@
-{"operations": []}
+{"operations":[{"op":"set","path":["backends","nix","ci","installStep"],"value":"Install nixd (Nix Language Server)"}]}

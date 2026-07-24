@@ -10,5 +10,5 @@ backends: erlang: #DeclaredBackend & {
 	provisioning: {strategy: "path", owner: {runtime: "user", ci: "none"}, cacheInputs: [], executables: ["erlang_ls"]}
 	platforms: {supported: ["linux", "macos"], excluded: [{os: "windows", reason: "The Erlang fixture toolchain is unavailable on Windows."}]}
 	testing: {tested: true, marker: "erlang", fixtureRepo: "erlang", testDir: "erlang"}
-	ci: {expected: false, waiver: "W-CI-ERLANG", skipPolicy: {category: 3, toolProbe: "erlang_ls"}}
+	ci: {expected: false, waiver: "W-CI-NEVER-RUN-ERLANG", skipPolicy: {category: 3, toolProbe: "erlang_ls"}}
 }

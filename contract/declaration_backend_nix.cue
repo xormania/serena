@@ -13,5 +13,5 @@ backends: nix: #DeclaredBackend & {
 		excluded: [{os: "windows", reason: "The Nix package manager and nixd provisioning path are unavailable on Windows."}]
 	}
 	testing: {tested: true, marker: "nix", fixtureRepo: "nix", testDir: "nix"}
-	ci: _CIExpected & _BatchNiche & _CILinux & {skipPolicy: {category: 3, toolProbe: "nixd"}}
+	ci: _CIExpected & _BatchNiche & _CILinux & {skipPolicy: {category: 3, toolProbe: "nixd"}} & {installStep: "Install nixd (Nix Language Server)"}
 }

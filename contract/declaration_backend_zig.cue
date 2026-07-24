@@ -18,5 +18,5 @@ backends: zig: #DeclaredBackend & {
 		excluded: [{os: "windows", reason: "ZigLanguageServer rejects Windows because cross-file references are unreliable."}]
 	}
 	testing: {tested: true, marker: "zig", fixtureRepo: "zig", testDir: "zig"}
-	ci: _CIExpected & _BatchNative & _CINonWindows & _SkipEverywhere
+	ci: _CIExpected & _BatchNative & _CINonWindows & _SkipEverywhere & {installStep: "Install ZLS (Zig Language Server)"}
 }

@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["backends","nix","ci","os"],"value":["windows"]}]}

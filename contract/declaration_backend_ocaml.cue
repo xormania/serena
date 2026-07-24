@@ -9,5 +9,5 @@ backends: ocaml: #DeclaredBackend & {
 	matcher: extensions: [".ml", ".mli", ".re", ".rei"]
 	provisioning: {strategy: "path", owner: {runtime: "project", ci: "workflow-step"}, cacheInputs: [".github/workflows/pytest.yml#Install OCaml language server"], executables: ["opam", "ocamllsp"]}
 	testing: {tested: true, marker: "ocaml", fixtureRepo: "ocaml", testDir: "ocaml"}
-	ci: _CIExpected & _BatchNiche & _CILinux & {skipPolicy: {category: 3, toolProbe: "opam:ocaml-lsp-server"}}
+	ci: _CIExpected & _BatchNiche & _CILinux & {skipPolicy: {category: 3, toolProbe: "opam:ocaml-lsp-server"}} & {installStep: "Install OCaml packages"}
 }

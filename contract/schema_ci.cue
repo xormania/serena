@@ -18,6 +18,30 @@ package contract
 	toolProbe?: string & !=""
 }
 
+#CIBatchLayout: {
+	os: [#PlatformOS, ...#PlatformOS]
+}
+
+#CICacheLayout: {
+	workflowName: string & !=""
+	covers: [...#BackendId]
+	inputs: [...#RepoRef]
+	keyTokens: [#RepoRef]: string & !=""
+	managed:      *false | bool
+	versionToken: *"" | (string & !="")
+}
+
+#CILayout: {
+	batches: {
+		jvm:           #CIBatchLayout
+		native:        #CIBatchLayout
+		"other-langs": #CIBatchLayout
+		niche:         #CIBatchLayout
+		"catch-all":   #CIBatchLayout
+	}
+	caches: [string]: #CICacheLayout
+}
+
 #CI: {
 	expected: bool
 	if expected {
@@ -27,5 +51,6 @@ package contract
 	if !expected {
 		waiver!: #WaiverId
 	}
-	skipPolicy: #SkipPolicy
+	installStep: *"" | (string & !="")
+	skipPolicy:  #SkipPolicy
 }

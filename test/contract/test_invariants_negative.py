@@ -39,6 +39,19 @@ INVALID_CASES = [
     "c-plat-001-unexcluded",
     "c-plat-001-overlap",
     "c-plat-001-reason-missing",
+    "c-ci-001-batch-mismatch",
+    "c-ci-002-invalid-batch",
+    "c-ci-003-duplicate-batch",
+    "c-ci-004-catchall-conflict",
+    "c-ci-005-step-missing",
+    "c-ci-006-os-outside-batch",
+    "c-ci-007-no-timeout",
+    "c-cache-001-input-uncovered",
+    "c-cache-001-source-drift",
+    "c-cache-001-waiver-scope",
+    "c-cache-002-restore-prefix",
+    "c-cache-002-waiver-scope",
+    "c-cache-002-token-omitted-waived",
     "c-waive-001-stale",
 ]
 
@@ -47,11 +60,13 @@ CATEGORIES = {
     "C_TEST": "testing",
     "C_PROV": "provisioning",
     "C_PLAT": "platform",
+    "C_CI": "ci placement",
+    "C_CACHE": "cache",
     "C_WAIVE": "waiver hygiene",
 }
 
 
-@pytest.mark.parametrize("case_name", INVALID_CASES)
+@pytest.mark.parametrize("case_name", INVALID_CASES, ids=lambda case: case.replace("-", "_"))
 def test_invalid_fixture_is_rejected_with_stable_diagnostic(case_name: str) -> None:
     case_dir = FIXTURES / "invalid" / case_name
     expected = json.loads((case_dir / "expected.json").read_text())

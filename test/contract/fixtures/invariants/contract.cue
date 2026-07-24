@@ -4,4 +4,5 @@ package contract
 languages: [#LanguageKey]: #Language
 backends: [ID=#BackendId]: #Backend & {id: ID}
 waivers: [#WaiverId]: #Waiver
+ciLayout:  #CILayout
 extracted: #Extracted

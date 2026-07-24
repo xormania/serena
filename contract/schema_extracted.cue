@@ -64,6 +64,8 @@ package contract
 	run:  string
 	batchGate: [...#Batch]
 	osGate: [...#PlatformOS]
+	batchGateOpaque: *false | bool
+	osGateOpaque:    *false | bool
 }
 
 #WorkflowCache: {
@@ -72,6 +74,10 @@ package contract
 	path: string
 	key:  string & !=""
 	restoreKeys: [...string]
+	batchGate: *[] | [...#Batch]
+	osGate: *[] | [...#PlatformOS]
+	batchGateOpaque: *false | bool
+	osGateOpaque:    *false | bool
 }
 
 #ExtractedWorkflow: {

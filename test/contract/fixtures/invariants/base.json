@@ -295,7 +295,8 @@
         "skipPolicy": {
           "category": 3,
           "toolProbe": "ccls"
-        }
+        },
+        "installStep": "Install ccls (C/C++ Language Server)"
       },
       "capabilities": {
         "implementationSupport": "none"
@@ -454,7 +455,7 @@
       },
       "ci": {
         "expected": false,
-        "waiver": "W-REG-ERLANG",
+        "waiver": "W-CI-NEVER-RUN-ERLANG",
         "skipPolicy": {
           "category": 3,
           "toolProbe": "erlang_ls"
@@ -825,7 +826,8 @@
         "skipPolicy": {
           "category": 3,
           "toolProbe": "nixd"
-        }
+        },
+        "installStep": "Install nixd (Nix Language Server)"
       },
       "capabilities": {
         "implementationSupport": "none"
@@ -889,7 +891,8 @@
             "ci": true
           },
           "toolProbe": "qmlls6|qmlls"
-        }
+        },
+        "installStep": "Install qmlls (QML Language Server)"
       },
       "capabilities": {
         "implementationSupport": "none"
@@ -947,7 +950,8 @@
         ],
         "skipPolicy": {
           "category": 4
-        }
+        },
+        "installStep": "Install Ruby language server"
       },
       "capabilities": {
         "implementationSupport": "none"
@@ -1011,7 +1015,8 @@
         "skipPolicy": {
           "category": 3,
           "toolProbe": "sourcekit-lsp"
-        }
+        },
+        "installStep": "Install Swift with swiftly (macOS)"
       },
       "capabilities": {
         "implementationSupport": "none"
@@ -1107,6 +1112,14 @@
       "invariant": "C-REG-002",
       "subject": "erlang",
       "reason": "Fixture models a known waived dispatch-class defect.",
+      "reference": "proj/cue/plan.md#2.9",
+      "added": "2026-07-24"
+    },
+    "W-CI-NEVER-RUN-ERLANG": {
+      "id": "W-CI-NEVER-RUN-ERLANG",
+      "invariant": "C-CI-001",
+      "subject": "erlang",
+      "reason": "Fixture models a tested backend intentionally excluded from CI.",
       "reference": "proj/cue/plan.md#2.9",
       "added": "2026-07-24"
     },
@@ -1420,15 +1433,25 @@
     },
     "workflow": {
       "markerGroups": {
-        "MARKERS_JVM": [],
-        "MARKERS_NATIVE": [
-          "cpp"
+        "jvm": [
+          "csharp",
+          "java"
         ],
-        "MARKERS_OTHER_LANGS": [
+        "native": [
+          "cpp",
+          "swift"
+        ],
+        "other-langs": [
           "msl",
-          "erlang"
+          "erlang",
+          "al",
+          "hlsl",
+          "qml",
+          "ruby"
         ],
-        "MARKERS_NICHE": []
+        "niche": [
+          "nix"
+        ]
       },
       "matrix": {
         "os": [
@@ -1443,7 +1466,16 @@
           "niche",
           "catch-all"
         ],
-        "exclude": []
+        "exclude": [
+          {
+            "os": "windows",
+            "batch": "niche"
+          },
+          {
+            "os": "macos",
+            "batch": "niche"
+          }
+        ]
       },
       "jobs": [
         {
@@ -1452,8 +1484,85 @@
           "needs": []
         }
       ],
-      "steps": [],
-      "caches": []
+      "steps": [
+        {
+          "job": "cpu",
+          "name": "Install ccls (C/C++ Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "native"
+          ],
+          "osGate": [
+            "linux",
+            "macos"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install nixd (Nix Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "niche"
+          ],
+          "osGate": [
+            "linux"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install qmlls (QML Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "other-langs"
+          ],
+          "osGate": [
+            "linux"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install Ruby language server",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "other-langs"
+          ],
+          "osGate": [
+            "linux",
+            "macos",
+            "windows"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install Swift with swiftly (macOS)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "native"
+          ],
+          "osGate": [
+            "macos"
+          ]
+        }
+      ],
+      "caches": [
+        {
+          "job": "cpu",
+          "name": "Cache uv virtualenv",
+          "path": ".venv",
+          "key": "uv-venv-${{ runner.os }}-lock-${{ hashFiles('uv.lock') }}",
+          "restoreKeys": []
+        }
+      ]
     },
     "servers": {
       "al_language_server": {
@@ -1994,6 +2103,56 @@
         "qml",
         "csharp_omnisharp"
       ]
+    }
+  },
+  "ciLayout": {
+    "batches": {
+      "jvm": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "native": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "other-langs": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "niche": {
+        "os": [
+          "linux"
+        ]
+      },
+      "catch-all": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      }
+    },
+    "caches": {
+      "uv-venv": {
+        "workflowName": "Cache uv virtualenv",
+        "covers": [],
+        "inputs": [
+          "uv.lock"
+        ],
+        "keyTokens": {
+          "uv.lock": "hashFiles('uv.lock')"
+        },
+        "managed": false
+      }
     }
   }
 }

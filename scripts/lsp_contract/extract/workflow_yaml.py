@@ -19,8 +19,10 @@ _MARKER_ENV = {
     "MARKERS_OTHER_LANGS": "other-langs",
     "MARKERS_NICHE": "niche",
 }
-_BATCH_GATE = re.compile(r"""matrix\.batch\s*==\s*['"]([^'"]+)['"]""")
-_OS_GATE = re.compile(r"""runner\.os\s*==\s*['"]([^'"]+)['"]""")
+_BATCH_GATE = re.compile(r"""matrix\.batch\s*==\s*['\"]([^'\"]+)['\"]""")
+_BATCH_EXCLUDE_GATE = re.compile(r"""matrix\.batch\s*!=\s*['\"]([^'\"]+)['\"]""")
+_OS_GATE = re.compile(r"""runner\.os\s*==\s*['\"]([^'\"]+)['\"]""")
+_OS_EXCLUDE_GATE = re.compile(r"""runner\.os\s*!=\s*['\"]([^'\"]+)['\"]""")
 _OS_NAMES = {
     "linux": "linux",
     "ubuntu-latest": "linux",
@@ -51,11 +53,28 @@ def _lines(value: object) -> list[str]:
     return []
 
 
-def _gates(condition: object) -> tuple[list[str], list[str]]:
+def _gates(condition: object) -> tuple[list[str], list[str], bool, bool]:
     text = condition if isinstance(condition, str) else ""
-    batches = sorted(set(_BATCH_GATE.findall(text)))
-    operating_systems = sorted({_OS_NAMES.get(value.lower(), value.lower()) for value in _OS_GATE.findall(text)})
-    return batches, operating_systems
+
+    included_batches = set(_BATCH_GATE.findall(text))
+    excluded_batches = set(_BATCH_EXCLUDE_GATE.findall(text))
+    batches = included_batches - excluded_batches
+    if not included_batches and excluded_batches:
+        batches = set(_MARKER_ENV.values()) | {"catch-all"}
+        batches -= excluded_batches
+    remaining_batch_expression = _BATCH_EXCLUDE_GATE.sub("", _BATCH_GATE.sub("", text))
+    batch_opaque = "matrix.batch" in remaining_batch_expression
+
+    included_os_values = {_OS_NAMES.get(value.lower()) or value.lower() for value in _OS_GATE.findall(text)}
+    excluded_os_values = {_OS_NAMES.get(value.lower()) or value.lower() for value in _OS_EXCLUDE_GATE.findall(text)}
+    operating_systems = included_os_values - excluded_os_values
+    if not included_os_values and excluded_os_values:
+        operating_systems = set(_OS_NAMES.values()) - excluded_os_values
+    remaining_os_expression = _OS_EXCLUDE_GATE.sub("", _OS_GATE.sub("", text))
+    known_operating_systems = set(_OS_NAMES.values())
+    os_opaque = "runner.os" in remaining_os_expression or not (included_os_values | excluded_os_values).issubset(known_operating_systems)
+
+    return sorted(batches), sorted(operating_systems), batch_opaque, os_opaque
 
 
 def _needs(value: object) -> list[str]:
@@ -122,7 +141,7 @@ def extract_workflow(path: Path, runtime: CueRuntime | None = None) -> dict[str,
             raise ExtractionError(path, 1, f"jobs.{job_name}.steps must be a list")
         for position, raw_step in enumerate(raw_steps):
             step = _mapping(raw_step, path, f"jobs.{job_name}.steps[{position}]")
-            batches, operating_systems = _gates(step.get("if"))
+            batches, operating_systems, batch_gate_opaque, os_gate_opaque = _gates(step.get("if"))
             extracted_step: dict[str, object] = {
                 "job": job_name,
                 "name": str(step.get("name", step.get("uses", f"step-{position}"))),
@@ -131,6 +150,8 @@ def extract_workflow(path: Path, runtime: CueRuntime | None = None) -> dict[str,
                 "run": str(step.get("run", "")),
                 "batchGate": batches,
                 "osGate": operating_systems,
+                "batchGateOpaque": batch_gate_opaque,
+                "osGateOpaque": os_gate_opaque,
             }
             steps.append(extracted_step)
 
@@ -153,6 +174,10 @@ def extract_workflow(path: Path, runtime: CueRuntime | None = None) -> dict[str,
                         "path": path_value,
                         "key": key,
                         "restoreKeys": _lines(settings.get("restore-keys")),
+                        "batchGate": batches,
+                        "osGate": operating_systems,
+                        "batchGateOpaque": batch_gate_opaque,
+                        "osGateOpaque": os_gate_opaque,
                     }
                 )
 

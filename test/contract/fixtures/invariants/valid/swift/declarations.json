@@ -1,1 +1,1 @@
-{"operations": []}
+{"operations":[{"op":"set","path":["backends","swift","ci","installStep"],"value":"Install Swift with swiftly (macOS)"}]}

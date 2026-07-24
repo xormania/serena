@@ -9,7 +9,7 @@ backends: groovy: #DeclaredBackend & {
 	matcher: extensions: [".groovy", ".gvy"]
 	provisioning: {
 		strategy: "composite"
-		owner: {runtime: "user", ci: "workflow-step"}
+		owner: {runtime: "user", ci: "none"}
 		cacheInputs: ["src/solidlsp/language_servers/groovy_language_server.py#DEFAULT_VSCODE_JAVA_VERSION"]
 		primary: {strategy: "path", executables: ["java"]}
 		companions: [{
@@ -27,5 +27,5 @@ backends: groovy: #DeclaredBackend & {
 		}]
 	}
 	testing: {tested: true, marker: "groovy", fixtureRepo: "groovy", testDir: "groovy"}
-	ci: _CIExpected & _BatchJVM & _CIAllOS & _SkipEverywhere
+	ci: {expected: false, waiver: "W-CI-NEVER-RUN-GROOVY"} & _SkipEverywhere
 }

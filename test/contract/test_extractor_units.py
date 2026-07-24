@@ -8,7 +8,7 @@ from scripts.lsp_contract.extract.filesystem import extract_filesystem
 from scripts.lsp_contract.extract.ls_config_ast import extract_ls_config
 from scripts.lsp_contract.extract.pyproject_toml import extract_pyproject
 from scripts.lsp_contract.extract.server_modules_ast import extract_server_modules
-from scripts.lsp_contract.extract.workflow_yaml import extract_workflow
+from scripts.lsp_contract.extract.workflow_yaml import _gates, extract_workflow
 
 FIXTURES = Path(__file__).parent / "fixtures" / "extractor" / "good"
 
@@ -52,10 +52,32 @@ def test_extracts_workflow_matrix_marker_groups_steps_and_caches() -> None:
             "path": "~/.cache/tools",
             "key": "tools-${{ runner.os }}-v1",
             "restoreKeys": ["tools-${{ runner.os }}-"],
+            "batchGate": [],
+            "osGate": [],
+            "batchGateOpaque": False,
+            "osGateOpaque": False,
         }
     ]
     assert extracted["steps"][-1]["batchGate"] == ["other-langs"]
     assert extracted["steps"][-1]["osGate"] == ["linux"]
+    assert extracted["steps"][-1]["batchGateOpaque"] is False
+    assert extracted["steps"][-1]["osGateOpaque"] is False
+
+
+def test_workflow_gate_extraction_distinguishes_complements_and_opaque_syntax() -> None:
+    assert _gates("matrix.batch == 'niche' && runner.os != 'Windows'") == (
+        ["niche"],
+        ["linux", "macos"],
+        False,
+        False,
+    )
+    assert _gates("contains(matrix.batch, 'native') && runner.os == 'Linux'") == (
+        [],
+        ["linux"],
+        True,
+        False,
+    )
+    assert _gates("") == ([], [], False, False)
 
 
 def test_extracts_filesystem_server_and_documentation_facts() -> None:

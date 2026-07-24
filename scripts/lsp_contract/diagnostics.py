@@ -84,9 +84,41 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Every waiver must identify a current violation and carry complete rationale.",
         "Remove stale waivers or repair the id, subject, reason, and reference.",
     ),
+    "C-CI-001": ContractDiagnostic(
+        "Tested backends must agree with their declared workflow batch or carry a current never-run waiver.",
+        "Correct the marker batch, enable the backend in CI, or register the exact reviewed never-run waiver.",
+    ),
     "C-CI-002": ContractDiagnostic(
         "CI batch declarations are restricted to the workflow matrix batch enum.",
-        "Use a batch present in the workflow matrix.",
+        "Use a batch present exactly once in the workflow matrix.",
+    ),
+    "C-CI-003": ContractDiagnostic(
+        "A test marker may occur in at most one named workflow batch group.",
+        "Remove the duplicate marker from the incorrect workflow group.",
+    ),
+    "C-CI-004": ContractDiagnostic(
+        "Catch-all backend markers must not occur in a named workflow group.",
+        "Remove the marker from named groups or declare its actual batch.",
+    ),
+    "C-CI-005": ContractDiagnostic(
+        "CI provisioning ownership must resolve to one exact non-opaque install step covering the declared batch and OS set.",
+        "Correct ci.installStep and its workflow gates, or declare runtime or image ownership from evidence.",
+    ),
+    "C-CI-006": ContractDiagnostic(
+        "Declared batch OS intent must equal the effective matrix and remain within backend platform support.",
+        "Correct ci.os, ciLayout batch OS intent, matrix exclusions, or platform declarations.",
+    ),
+    "C-CI-007": ContractDiagnostic(
+        "Every workflow job must declare a positive timeout-minutes value.",
+        "Add a positive timeout-minutes value to the workflow job.",
+    ),
+    "C-CACHE-001": ContractDiagnostic(
+        "Every declared cache must exactly cover its backend inputs with key tokens and execution gates, unless reviewed and waived.",
+        "Bind the exact extracted cache, add every provisioning input and token to its key, or register the current cache waiver.",
+    ),
+    "C-CACHE-002": ContractDiagnostic(
+        "Cache schema version tokens must occur in the key and every restore prefix.",
+        "Include the declared version token in the cache key and every restore-keys prefix.",
     ),
     "C-SKIP-001": ContractDiagnostic(
         "Skip-policy declarations must include the fields required by their category.",

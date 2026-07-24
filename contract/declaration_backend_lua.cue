@@ -9,5 +9,5 @@ backends: lua: #DeclaredBackend & {
 	matcher: extensions: [".lua"]
 	provisioning: {strategy: "download", owner: {runtime: "serena", ci: "workflow-step"}, cacheInputs: ["src/solidlsp/language_servers/lua_ls.py#DEFAULT_LUA_LS_VERSION"], pin: "3.15.0", checksums: "default-version-only", hosts: ["github.com"]}
 	testing: {tested: true, marker: "lua", fixtureRepo: "lua", testDir: "lua"}
-	ci: _CIExpected & _BatchOther & _CIAllOS & _SkipEverywhere
+	ci: _CIExpected & _BatchOther & _CIAllOS & _SkipEverywhere & {installStep: "Install Lua Language Server"}
 }

@@ -24,6 +24,9 @@ VALID_CASES = [
     "al",
     "swift",
     "qml-provisioning",
+    "kotlin-ci-waived",
+    "cache-unversioned-restore",
+    "ci-marker-duplicate-same-group",
 ]
 
 
