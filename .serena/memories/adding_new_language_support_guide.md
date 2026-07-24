@@ -28,7 +28,7 @@ Use `contract/REGISTRATION.md` for the complete backend-by-surface map and `cont
 9. **Central test policy:** update `test/conftest.py` marker maps, disabled guards, and repository aliases, plus `test/serena/test_serena_agent.py` where the supported-language list is exercised.
 10. **CI and user surfaces:** update `.github/workflows/pytest.yml` batch membership and any platform-specific toolchain install; update `README.md`, `docs/01-about/020_programming-languages.md`, `CHANGELOG.md`, and regenerate `src/serena/resources/project.template.yml`.
 
-Finish with focused language tests, `uv run poe check-contract`, and the relevant repository regression suite. Do not turn a failed installation or required bootstrap into a silent skip.
+Finish with focused language tests, `uv run poe check-contract`, `uv run pytest test/contract -q`, and the relevant repository regression suite. Do not turn a failed installation or required bootstrap into a silent skip.
 
 ## Step 1: Language Server Implementation
 

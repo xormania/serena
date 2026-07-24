@@ -27,12 +27,18 @@ Install or locate the pinned compiler:
 uv run python -m scripts.lsp_contract install-cue
 ```
 
-Run the complete local contract:
+Run the static CUE contract gate:
 
 ```shell
 uv run poe check-contract
 # equivalent validation command
 uv run python -m scripts.lsp_contract validate
+```
+
+Run the behavioral conformance, rejection fixtures, workflow checks, and documentation coverage that complete the local contract:
+
+```shell
+uv run pytest test/contract -q
 ```
 
 Inspect one diagnostic:
@@ -44,8 +50,8 @@ uv run python -m scripts.lsp_contract explain C-REG-001
 The command contract is stable:
 
 - **Exit code 0**: schemas and invariants are green.
-- **Exit code 1**: the repository was extracted successfully and one or more contract invariants rejected it.
-- **Exit code 2**: extraction, toolchain verification, or output handling failed; repository facts were not guessed.
+- **Exit code 1**: one or more contract/schema checks rejected the repository. Managed CUE resolution failures are exit 1 process failures and remain visible rather than falling back to another binary.
+- **Exit code 2**: extractor structure drift, invalid successful CUE output, or requested summary-output failure prevented a trustworthy result; repository facts were not guessed.
 
 The complete invariant catalogue and remediation guidance is in [`INVARIANTS.md`](INVARIANTS.md).
 
@@ -74,14 +80,14 @@ Both commands are deterministic, produce LF-terminated text, and name themselves
 
 Waivers live in [`declaration_waivers.cue`](declaration_waivers.cue). A valid waiver names one supported invariant, one exact subject, a non-empty reason, an evidence reference, and an added date. `C-WAIVE-001` checks the pre-waiver violation set so a waiver cannot justify itself or survive after its underlying mismatch disappears.
 
-Not every invariant is waivable. Schema integrity, ambiguous ownership, generated drift, gate topology, extractor drift, and most behavioral checks must be fixed. See each entry's **Waiver guidance** in [`INVARIANTS.md`](INVARIANTS.md) before adding anything to the register.
+Not every invariant is waivable. Schema integrity, ambiguous ownership, generated drift, gate topology, extractor drift, and most behavioral checks must be fixed. See each entry's **Waiver guidance** in [`INVARIANTS.md`](INVARIANTS.md) before adding anything to the register. Every waiver review must identify the underlying mismatch and explain why fixing the source is worse than waiving it.
 
 ## Known-issue register
 
 These runtime or review-quality facts are intentionally not modeled as CUE invariants or waivers. They require executable evidence, external systems, or future source fixes.
 
 1. **Haxe download bypass.** [`src/solidlsp/language_servers/haxe_language_server.py`](../src/solidlsp/language_servers/haxe_language_server.py) can fall back to `urllib` download behavior, and non-default extension versions do not have committed checksum evidence. A declaration can record the intent but cannot make that dynamic path verifiable.
-2. **SystemVerilog override checksum coupling.** [`src/solidlsp/language_servers/systemverilog_server.py`](../src/solidlsp/language_servers/systemverilog_server.py) accepts a version or URL override while its SHA table represents default release assets. Runtime override correctness remains an integration concern.
+2. **SystemVerilog override checksum coupling.** [`src/solidlsp/language_servers/systemverilog_server.py`](../src/solidlsp/language_servers/systemverilog_server.py) accepts a `verible_version` override and derives the asset URL from it, while its SHA table represents the default release assets. Runtime override correctness remains an integration concern.
 3. **ty pin skew.** [`src/solidlsp/language_servers/ty_server.py`](../src/solidlsp/language_servers/ty_server.py) launches `0.0.25`, while [`pyproject.toml`](../pyproject.toml) currently includes `ty==0.0.24` for development. The paths have different owners and should be reconciled deliberately.
 4. **Jedi is PATH-provided.** [`src/solidlsp/language_servers/jedi_server.py`](../src/solidlsp/language_servers/jedi_server.py) launches the external command directly and has no Serena-owned installation path. Availability remains the user's responsibility.
 5. **Svelte companion TypeScript skew.** [`src/solidlsp/language_servers/svelte_language_server.py`](../src/solidlsp/language_servers/svelte_language_server.py) pins companion TypeScript `6.0.3`, while [`src/solidlsp/language_servers/typescript_language_server.py`](../src/solidlsp/language_servers/typescript_language_server.py) pins standalone TypeScript `5.9.3`. Compatibility needs runtime coverage, not a false equality invariant.

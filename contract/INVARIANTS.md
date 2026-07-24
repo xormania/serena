@@ -568,7 +568,7 @@ Non-waivable. This behavioral equality is exercised directly by pytest.
 
 ### Meaning
 
-Every dispatched language-server class must be concrete and instantiable at the class level.
+Every dispatched language-server class imports successfully and is concrete and has no abstract methods; the test does not instantiate non-waived servers.
 
 ### Typical fix
 
