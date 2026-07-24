@@ -9,7 +9,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_gdscript.cue`<br>`src/solidlsp/language_servers/godot_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_gdscript.cue`<br>`src/solidlsp/language_servers/godot_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -26,7 +26,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_msl.cue`<br>`src/solidlsp/language_servers/msl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_msl.cue`<br>`src/solidlsp/language_servers/msl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -43,7 +43,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_hlsl.cue`<br>`src/solidlsp/language_servers/hlsl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_hlsl.cue`<br>`src/solidlsp/language_servers/hlsl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -60,7 +60,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_angular.cue`<br>`src/solidlsp/language_servers/angular_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_angular.cue`<br>`src/solidlsp/language_servers/angular_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -75,7 +75,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_bash.cue`<br>`src/solidlsp/language_servers/bash_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_bash.cue`<br>`src/solidlsp/language_servers/bash_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -90,7 +90,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_csharp_omnisharp.cue`<br>`src/solidlsp/language_servers/omnisharp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_csharp_omnisharp.cue`<br>`src/solidlsp/language_servers/omnisharp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -105,7 +105,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_groovy.cue`<br>`src/solidlsp/language_servers/groovy_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_groovy.cue`<br>`src/solidlsp/language_servers/groovy_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -120,7 +120,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_java.cue`<br>`src/solidlsp/language_servers/eclipse_jdtls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_java.cue`<br>`src/solidlsp/language_servers/eclipse_jdtls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -135,7 +135,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_solidity.cue`<br>`src/solidlsp/language_servers/solidity_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_solidity.cue`<br>`src/solidlsp/language_servers/solidity_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -150,7 +150,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_svelte.cue`<br>`src/solidlsp/language_servers/svelte_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_svelte.cue`<br>`src/solidlsp/language_servers/svelte_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -165,7 +165,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_vue.cue`<br>`src/solidlsp/language_servers/vue_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_vue.cue`<br>`src/solidlsp/language_servers/vue_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -182,7 +182,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_lean4.cue`<br>`src/solidlsp/language_servers/lean4_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_lean4.cue`<br>`src/solidlsp/language_servers/lean4_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -197,7 +197,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_ocaml.cue`<br>`src/solidlsp/language_servers/ocaml_lsp_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_ocaml.cue`<br>`src/solidlsp/language_servers/ocaml_lsp_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -212,7 +212,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_ruby.cue`<br>`src/solidlsp/language_servers/ruby_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_ruby.cue`<br>`src/solidlsp/language_servers/ruby_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -227,7 +227,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_ruby_solargraph.cue`<br>`src/solidlsp/language_servers/solargraph.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_ruby_solargraph.cue`<br>`src/solidlsp/language_servers/solargraph.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -244,7 +244,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_ansible.cue`<br>`src/solidlsp/language_servers/ansible_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_ansible.cue`<br>`src/solidlsp/language_servers/ansible_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -259,7 +259,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_cpp_ccls.cue`<br>`src/solidlsp/language_servers/ccls_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_cpp_ccls.cue`<br>`src/solidlsp/language_servers/ccls_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -274,7 +274,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_erlang.cue`<br>`src/solidlsp/language_servers/erlang_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_erlang.cue`<br>`src/solidlsp/language_servers/erlang_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -289,7 +289,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_nix.cue`<br>`src/solidlsp/language_servers/nixd_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_nix.cue`<br>`src/solidlsp/language_servers/nixd_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -304,7 +304,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_perl.cue`<br>`src/solidlsp/language_servers/perl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_perl.cue`<br>`src/solidlsp/language_servers/perl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -319,7 +319,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_swift.cue`<br>`src/solidlsp/language_servers/sourcekit_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_swift.cue`<br>`src/solidlsp/language_servers/sourcekit_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -334,7 +334,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_zig.cue`<br>`src/solidlsp/language_servers/zls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_zig.cue`<br>`src/solidlsp/language_servers/zls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -351,7 +351,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_clojure.cue`<br>`src/solidlsp/language_servers/clojure_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_clojure.cue`<br>`src/solidlsp/language_servers/clojure_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -366,7 +366,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_cpp.cue`<br>`src/solidlsp/language_servers/clangd_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_cpp.cue`<br>`src/solidlsp/language_servers/clangd_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -381,7 +381,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_elm.cue`<br>`src/solidlsp/language_servers/elm_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_elm.cue`<br>`src/solidlsp/language_servers/elm_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -396,7 +396,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_go.cue`<br>`src/solidlsp/language_servers/gopls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_go.cue`<br>`src/solidlsp/language_servers/gopls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -411,7 +411,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_haskell.cue`<br>`src/solidlsp/language_servers/haskell_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_haskell.cue`<br>`src/solidlsp/language_servers/haskell_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -426,7 +426,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_haxe.cue`<br>`src/solidlsp/language_servers/haxe_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_haxe.cue`<br>`src/solidlsp/language_servers/haxe_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -441,7 +441,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_julia.cue`<br>`src/solidlsp/language_servers/julia_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_julia.cue`<br>`src/solidlsp/language_servers/julia_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -456,7 +456,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_lua.cue`<br>`src/solidlsp/language_servers/lua_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_lua.cue`<br>`src/solidlsp/language_servers/lua_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -471,7 +471,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_pascal.cue`<br>`src/solidlsp/language_servers/pascal_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_pascal.cue`<br>`src/solidlsp/language_servers/pascal_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -486,7 +486,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_qml.cue`<br>`src/solidlsp/language_servers/qml_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_qml.cue`<br>`src/solidlsp/language_servers/qml_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -501,7 +501,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_r.cue`<br>`src/solidlsp/language_servers/r_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_r.cue`<br>`src/solidlsp/language_servers/r_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -516,7 +516,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_rego.cue`<br>`src/solidlsp/language_servers/regal_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_rego.cue`<br>`src/solidlsp/language_servers/regal_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -531,7 +531,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_rust.cue`<br>`src/solidlsp/language_servers/rust_analyzer.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_rust.cue`<br>`src/solidlsp/language_servers/rust_analyzer.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -546,7 +546,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_scala.cue`<br>`src/solidlsp/language_servers/scala_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_scala.cue`<br>`src/solidlsp/language_servers/scala_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -561,7 +561,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_systemverilog.cue`<br>`src/solidlsp/language_servers/systemverilog_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_systemverilog.cue`<br>`src/solidlsp/language_servers/systemverilog_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -576,7 +576,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_terraform.cue`<br>`src/solidlsp/language_servers/terraform_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_terraform.cue`<br>`src/solidlsp/language_servers/terraform_ls.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -593,7 +593,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_php_phpactor.cue`<br>`src/solidlsp/language_servers/phpactor.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_php_phpactor.cue`<br>`src/solidlsp/language_servers/phpactor.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -608,7 +608,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_php_phpantom.cue`<br>`src/solidlsp/language_servers/phpantom.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_php_phpantom.cue`<br>`src/solidlsp/language_servers/phpantom.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -623,7 +623,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_python_basedpyright.cue`<br>`src/solidlsp/language_servers/basedpyright_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_python_basedpyright.cue`<br>`src/solidlsp/language_servers/basedpyright_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -638,7 +638,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_python_jedi.cue`<br>`src/solidlsp/language_servers/jedi_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_python_jedi.cue`<br>`src/solidlsp/language_servers/jedi_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -653,7 +653,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_python_pyrefly.cue`<br>`src/solidlsp/language_servers/pyrefly_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_python_pyrefly.cue`<br>`src/solidlsp/language_servers/pyrefly_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -668,7 +668,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_python_ty.cue`<br>`src/solidlsp/language_servers/ty_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_python_ty.cue`<br>`src/solidlsp/language_servers/ty_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -683,7 +683,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_typescript_vts.cue`<br>`src/solidlsp/language_servers/vts_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_typescript_vts.cue`<br>`src/solidlsp/language_servers/vts_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -700,7 +700,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_ada.cue`<br>`src/solidlsp/language_servers/ada_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_ada.cue`<br>`src/solidlsp/language_servers/ada_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -715,7 +715,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_al.cue`<br>`src/solidlsp/language_servers/al_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_al.cue`<br>`src/solidlsp/language_servers/al_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -730,7 +730,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_bsl.cue`<br>`src/solidlsp/language_servers/bsl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_bsl.cue`<br>`src/solidlsp/language_servers/bsl_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -745,7 +745,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_crystal.cue`<br>`src/solidlsp/language_servers/crystal_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_crystal.cue`<br>`src/solidlsp/language_servers/crystal_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -760,7 +760,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_csharp.cue`<br>`src/solidlsp/language_servers/csharp_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_csharp.cue`<br>`src/solidlsp/language_servers/csharp_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -775,7 +775,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_cue.cue`<br>`src/solidlsp/language_servers/cue_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_cue.cue`<br>`src/solidlsp/language_servers/cue_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -790,7 +790,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_dart.cue`<br>`src/solidlsp/language_servers/dart_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_dart.cue`<br>`src/solidlsp/language_servers/dart_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -805,7 +805,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_elixir.cue`<br>`src/solidlsp/language_servers/elixir_tools/elixir_tools.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_elixir.cue`<br>`src/solidlsp/language_servers/elixir_tools/elixir_tools.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -820,7 +820,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_fortran.cue`<br>`src/solidlsp/language_servers/fortran_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_fortran.cue`<br>`src/solidlsp/language_servers/fortran_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -835,7 +835,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_fsharp.cue`<br>`src/solidlsp/language_servers/fsharp_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_fsharp.cue`<br>`src/solidlsp/language_servers/fsharp_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -850,7 +850,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_html.cue`<br>`src/solidlsp/language_servers/vscode_html_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_html.cue`<br>`src/solidlsp/language_servers/vscode_html_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -865,7 +865,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_json.cue`<br>`src/solidlsp/language_servers/json_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_json.cue`<br>`src/solidlsp/language_servers/json_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -880,7 +880,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_kotlin.cue`<br>`src/solidlsp/language_servers/kotlin_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_kotlin.cue`<br>`src/solidlsp/language_servers/kotlin_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -895,7 +895,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_latex.cue`<br>`src/solidlsp/language_servers/texlab_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_latex.cue`<br>`src/solidlsp/language_servers/texlab_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -910,7 +910,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_luau.cue`<br>`src/solidlsp/language_servers/luau_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_luau.cue`<br>`src/solidlsp/language_servers/luau_lsp.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -925,7 +925,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_markdown.cue`<br>`src/solidlsp/language_servers/marksman.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_markdown.cue`<br>`src/solidlsp/language_servers/marksman.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -940,7 +940,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_matlab.cue`<br>`src/solidlsp/language_servers/matlab_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_matlab.cue`<br>`src/solidlsp/language_servers/matlab_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -955,7 +955,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_php.cue`<br>`src/solidlsp/language_servers/intelephense.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_php.cue`<br>`src/solidlsp/language_servers/intelephense.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -970,7 +970,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_powershell.cue`<br>`src/solidlsp/language_servers/powershell_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_powershell.cue`<br>`src/solidlsp/language_servers/powershell_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -985,7 +985,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_python.cue`<br>`src/solidlsp/language_servers/pyright_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_python.cue`<br>`src/solidlsp/language_servers/pyright_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -1000,7 +1000,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_scss.cue`<br>`src/solidlsp/language_servers/some_sass_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_scss.cue`<br>`src/solidlsp/language_servers/some_sass_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -1015,7 +1015,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_toml.cue`<br>`src/solidlsp/language_servers/taplo_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_toml.cue`<br>`src/solidlsp/language_servers/taplo_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -1030,7 +1030,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_typescript.cue`<br>`src/solidlsp/language_servers/typescript_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_typescript.cue`<br>`src/solidlsp/language_servers/typescript_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |
@@ -1045,7 +1045,7 @@ This table is derived from the CUE declarations. Each backend appears exactly on
 
 | Surface | Path | Authority | Enforced by |
 |---:|---|---|---|
-| 1 | `contract/declaration_backend_yaml.cue`<br>`src/solidlsp/language_servers/yaml_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
+| 1 | `contract/declaration_backend_yaml.cue`<br>`src/solidlsp/language_servers/yaml_language_server.py` | contract-authoritative + declared<br>code-authoritative + extracted | C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001 |
 | 2 | `src/solidlsp/ls_config.py#LanguageServerId` | code-authoritative + extracted | C-REG-001 |
 | 3 | `src/solidlsp/ls_config.py#get_source_fn_matcher` | code-authoritative + extracted | C-REG-003, B-REG-001 |
 | 4 | `src/solidlsp/ls_config.py#get_ls_class` | code-authoritative + extracted | C-REG-002, B-REG-002 |

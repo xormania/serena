@@ -106,7 +106,7 @@ def _surface_rows(backend_id: str, backend: Mapping[str, Any]) -> tuple[tuple[in
             1,
             _code_paths(declaration_path, server_path),
             declared_and_extracted,
-            "C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001",
+            "C-REG-005, C-REG-006, C-PROV-001, C-PROV-002, C-PROV-003, C-PROV-004, C-PROV-005, C-PROV-006, C-PLAT-001, C-CACHE-001",
         ),
         (2, _code_paths("src/solidlsp/ls_config.py#LanguageServerId"), code_extracted, "C-REG-001"),
         (
