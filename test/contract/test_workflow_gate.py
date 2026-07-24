@@ -98,6 +98,14 @@ def test_explain_prints_registered_meaning_and_fix(capsys: pytest.CaptureFixture
     assert DIAGNOSTICS["C-REG-001"].fix in output
 
 
+def test_explain_covers_extractor_drift(capsys: pytest.CaptureFixture[str]) -> None:
+    assert contract_cli.main(["explain", "C-EXTR-001"]) == 0
+
+    output = capsys.readouterr().out
+    assert DIAGNOSTICS["C-EXTR-001"].meaning in output
+    assert DIAGNOSTICS["C-EXTR-001"].fix in output
+
+
 def test_explain_rejects_an_unknown_invariant(capsys: pytest.CaptureFixture[str]) -> None:
     assert contract_cli.main(["explain", "C-NOT-REAL"]) == 2
     assert "unknown invariant: C-NOT-REAL" in capsys.readouterr().err
@@ -160,6 +168,7 @@ def test_github_summary_distinguishes_extractor_drift(
 
     assert contract_cli.main(["validate", "--github-summary", "--root", str(ROOT)]) == 2
     summary = summary_path.read_text(encoding="utf-8")
+    assert "C-EXTR-001" in summary
     assert "repo structure changed" in summary
     assert "pyproject.toml:17" in summary
     assert "fix scripts/lsp_contract/extract" in summary

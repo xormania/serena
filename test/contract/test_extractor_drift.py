@@ -55,5 +55,6 @@ def test_driver_uses_exit_two_for_extractor_drift() -> None:
     )
 
     assert completed.returncode == 2
+    assert "C-EXTR-001" in completed.stderr
     assert "ls_config.py:12" in completed.stderr
     assert "matcher" in completed.stderr.lower()

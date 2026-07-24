@@ -13,15 +13,14 @@ INVARIANTS = ROOT / "contract" / "INVARIANTS.md"
 CONTRACT_README = ROOT / "contract" / "README.md"
 GUIDE = ROOT / ".serena" / "memories" / "adding_new_language_support_guide.md"
 
-BEHAVIORAL_AND_EXTRACTION_IDS = {
-    "C-EXTR-001",
+BEHAVIORAL_IDS = {
     "B-REG-001",
     "B-REG-002",
     "B-SKIP-001",
     "B-GATE-001",
     "B-GATE-002",
 }
-EXPECTED_IDS = set(DIAGNOSTICS) | BEHAVIORAL_AND_EXTRACTION_IDS
+EXPECTED_IDS = set(DIAGNOSTICS) | BEHAVIORAL_IDS
 
 
 def _required_text(path: Path) -> str:
