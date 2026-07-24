@@ -15,7 +15,7 @@ from scripts.lsp_contract.extract.server_modules_ast import extract_server_modul
 from scripts.lsp_contract.extract.workflow_yaml import extract_workflow
 
 
-def extract_repository(root: Path) -> dict[str, object]:
+def extract_repository(root: Path, *, include_freshness: bool = True) -> dict[str, object]:
     """Extract the complete normalized repository view."""
     root = root.resolve()
     extracted = {
@@ -27,15 +27,29 @@ def extract_repository(root: Path) -> dict[str, object]:
         "filesystem": extract_filesystem(root),
         "docs": extract_docs(root),
     }
+    if include_freshness:
+        from scripts.lsp_contract.render import artifact_freshness
+
+        extracted["freshness"] = artifact_freshness(root)
     return {"extracted": extracted}
 
 
-def write_extracted(root: Path, output_path: Path | None = None) -> Path:
+def write_extracted(
+    root: Path,
+    output_path: Path | None = None,
+    *,
+    include_freshness: bool = True,
+) -> Path:
     """Write the deterministic extracted JSON document."""
     destination = output_path or root / "contract" / "extracted" / "extracted.json"
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(
-        json.dumps(extract_repository(root), indent=2, sort_keys=True) + "\n",
+        json.dumps(
+            extract_repository(root, include_freshness=include_freshness),
+            indent=2,
+            sort_keys=True,
+        )
+        + "\n",
         encoding="utf-8",
     )
     return destination

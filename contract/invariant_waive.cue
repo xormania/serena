@@ -17,6 +17,7 @@ _preWaiverViolations: {
 	"C-CI-001":    _cCi001Pre
 	"C-CACHE-001": _cCache001Pre
 	"C-CACHE-002": _cCache002Pre
+	"C-DOC-001":   _cDoc001Pre
 	"C-TEST-001":  _cTest001Pre
 	"C-TEST-002":  _cTest002Pre
 	"C-TEST-003":  _cTest003Pre

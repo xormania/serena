@@ -6,6 +6,8 @@ The repository source remains authoritative; extraction supplies agreement check
 import re
 from pathlib import Path
 
+from scripts.lsp_contract.diagnostics import ExtractionError
+
 _DOC_LABEL = re.compile(r"^\s*[*-]\s+\*\*([^*]+)\*\*", re.MULTILINE)
 _IDENTIFIER = re.compile(r"^[a-z][a-z0-9_]*$")
 
@@ -31,29 +33,34 @@ def _readme_labels(text: str) -> list[str]:
 
 def _template_ids(text: str) -> list[str]:
     lines = text.splitlines()
-    generated_start = next((index for index, line in enumerate(lines) if "BEGIN generated language list" in line), None)
-    if generated_start is not None:
-        result: list[str] = []
-        for line in lines[generated_start + 1 :]:
-            if "END generated language list" in line:
-                break
-            match = re.match(r"^#\s*-\s*([a-z][a-z0-9_]*)\s*$", line)
-            if match:
-                result.append(match.group(1))
-        return result
+    starts = [index for index, line in enumerate(lines) if "BEGIN generated language list" in line]
+    ends = [index for index, line in enumerate(lines) if "END generated language list" in line]
+    path = Path("src/serena/resources/project.template.yml")
+    if len(starts) != 1 or len(ends) != 1:
+        raise ExtractionError(
+            path,
+            1,
+            "expected exactly one BEGIN and one END generated language list marker",
+        )
+    if starts[0] >= ends[0]:
+        raise ExtractionError(
+            path,
+            starts[0] + 1,
+            "END generated language list marker must follow BEGIN",
+        )
 
-    list_start = next((index for index, line in enumerate(lines) if "choose from:" in line), None)
-    if list_start is None:
-        return []
-    result = []
-    for line in lines[list_start + 1 :]:
-        if "(This list" in line:
-            break
-        if not line.startswith("#"):
-            break
-        for token in line.removeprefix("#").split():
-            if _IDENTIFIER.fullmatch(token):
-                result.append(token)
+    result: list[str] = []
+    for index in range(starts[0] + 1, ends[0]):
+        match = re.fullmatch(r"#\s*-\s*([a-z][a-z0-9_]*)\s*", lines[index])
+        if match is None:
+            raise ExtractionError(path, index + 1, "malformed generated language identifier")
+        result.append(match.group(1))
+    if result != sorted(set(result)):
+        raise ExtractionError(
+            path,
+            starts[0] + 1,
+            "generated language identifiers must be unique and sorted",
+        )
     return result
 
 

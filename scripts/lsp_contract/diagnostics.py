@@ -172,6 +172,14 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Verified implementation-support claims must exactly match the extracted evidence set.",
         "Align the declaration with _VERIFIED_IMPLEMENTATION_LANGUAGES.",
     ),
+    "C-GEN-001": ContractDiagnostic(
+        "Committed generated artifacts must match deterministic regeneration byte for byte.",
+        "Run both lsp_contract render commands and commit the resulting artifacts.",
+    ),
+    "C-DOC-001": ContractDiagnostic(
+        "Stable default and sole languages must appear in the README and language guide lists.",
+        "Add each missing language label to the reported authored document.",
+    ),
 }
 
 

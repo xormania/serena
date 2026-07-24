@@ -172,7 +172,7 @@ package contract
 	servers: [string]: #ExtractedServerModule
 	filesystem: #ExtractedFilesystem
 	docs:       #ExtractedDocs
-	freshness?: #ExtractedFreshness
+	freshness:  #ExtractedFreshness
 }
 
 #ExtractedDocument: {extracted: #Extracted}

@@ -19,6 +19,7 @@ from scripts.lsp_contract.diagnostics import (
     render_github_success_summary,
 )
 from scripts.lsp_contract.extract.assemble import write_extracted
+from scripts.lsp_contract.render import write_registration, write_template_list
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -167,6 +168,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     if arguments.command == "extract":
         try:
             print(write_extracted(arguments.root, arguments.output))
+        except ExtractionError as error:
+            print(error, file=sys.stderr)
+            return 2
+        return 0
+    if arguments.command == "render-registration":
+        try:
+            print(write_registration(arguments.root, arguments.output))
+        except ExtractionError as error:
+            print(error, file=sys.stderr)
+            return 2
+        return 0
+    if arguments.command == "render-template-list":
+        try:
+            print(write_template_list(arguments.root, arguments.output))
         except ExtractionError as error:
             print(error, file=sys.stderr)
             return 2
