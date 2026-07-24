@@ -70,6 +70,8 @@ def test_registration_renderer_is_complete_deterministic_and_ordered() -> None:
     assert "src/solidlsp/language_servers/elixir_tools/elixir_tools.py" in first
     assert "contract-authoritative + declared" in first
     assert "contract-derived + generated" in first
+    assert "C-REG-005" in first
+    assert "C-REG-006" in first
 
 
 def test_template_renderer_migrates_legacy_block_and_is_idempotent() -> None:
