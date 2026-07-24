@@ -1,0 +1,1 @@
+{"operations":[{"op":"set","path":["backends","python","testing","bootstrap"],"value":{"required":true,"steps":[{"kind":"npm-ci","detail":"npm ci"}],"produces":["node_modules/example/package.json"],"onFailure":{"ci":"skip","local":"skip"}}}]}

@@ -1138,6 +1138,38 @@
       "reason": "The runtime installs nixd from an unpinned Nix profile source.",
       "reference": "src/solidlsp/language_servers/nixd_ls.py",
       "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-CPP": {
+      "id": "W-SKIP-CI-SILENT-CPP",
+      "invariant": "C-SKIP-002",
+      "subject": "cpp",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-CPP-CCLS": {
+      "id": "W-SKIP-CI-SILENT-CPP-CCLS",
+      "invariant": "C-SKIP-002",
+      "subject": "cpp_ccls",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-NIX": {
+      "id": "W-SKIP-CI-SILENT-NIX",
+      "invariant": "C-SKIP-002",
+      "subject": "nix",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-SWIFT": {
+      "id": "W-SKIP-CI-SILENT-SWIFT",
+      "invariant": "C-SKIP-002",
+      "subject": "swift",
+      "reason": "Fixture preserves the live category-3 CI platform guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
     }
   },
   "extracted": {
@@ -1368,7 +1400,10 @@
         ]
       },
       "backendLists": {},
-      "verifiedImplementationSet": []
+      "verifiedImplementationSet": [
+        "CSHARP",
+        "JAVA"
+      ]
     },
     "pyproject": {
       "markers": [

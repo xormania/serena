@@ -1,0 +1,1 @@
+{"backend":"csharp","profile":"capability-verified","must_equal":{"backends.csharp.capabilities.implementationSupport":"verified","backends.java.capabilities.implementationSupport":"verified"}}

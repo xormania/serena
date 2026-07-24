@@ -124,6 +124,10 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Skip-policy declarations must include the fields required by their category.",
         "Add loudOn for category 2 or waiver and reason for categories 1 and 5.",
     ),
+    "C-SKIP-002": ContractDiagnostic(
+        "A backend expected in CI may not silently skip when its precondition is absent.",
+        "Use category 2 or 4, or register the exact current exception waiver.",
+    ),
     "C-PROV-001": ContractDiagnostic(
         "Provisioning declarations must satisfy their strategy-specific schema.",
         "Add the fields required by the selected provisioning strategy.",
@@ -152,9 +156,21 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Supported and excluded platforms must form an exact three-OS partition with reasons.",
         "Place each OS exactly once and provide a non-empty reason for every exclusion.",
     ),
+    "C-FIX-001": ContractDiagnostic(
+        "Bootstrap steps must be structured, evidenced, and explicitly waive opaque shell execution.",
+        "Declare structured steps and extracted evidence, or register the exact reviewed waiver.",
+    ),
+    "C-FIX-002": ContractDiagnostic(
+        "Required fixture bootstrap may not mask failures on CI without a current waiver.",
+        "Fail loudly on CI or register the exact current bootstrap waiver.",
+    ),
     "C-FIX-003": ContractDiagnostic(
         "Required bootstrap declarations must name at least one produced artifact.",
         "Add a concrete testing.bootstrap.produces postcondition.",
+    ),
+    "C-CAP-001": ContractDiagnostic(
+        "Verified implementation-support claims must exactly match the extracted evidence set.",
+        "Align the declaration with _VERIFIED_IMPLEMENTATION_LANGUAGES.",
     ),
 }
 

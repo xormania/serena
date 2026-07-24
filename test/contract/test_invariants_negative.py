@@ -52,6 +52,14 @@ INVALID_CASES = [
     "c-cache-002-restore-prefix",
     "c-cache-002-waiver-scope",
     "c-cache-002-token-omitted-waived",
+    "c-skip-001-malformed",
+    "c-skip-002-ci-silent-skip",
+    "c-fix-001-opaque-shell",
+    "c-fix-001-missing-evidence",
+    "c-fix-002-masked-bootstrap",
+    "c-fix-003-no-postcondition",
+    "c-cap-001-claim-no-evidence",
+    "c-cap-001-evidence-no-claim",
     "c-waive-001-stale",
 ]
 
@@ -62,6 +70,9 @@ CATEGORIES = {
     "C_PLAT": "platform",
     "C_CI": "ci placement",
     "C_CACHE": "cache",
+    "C_SKIP": "skip policy",
+    "C_FIX": "fixture bootstrap",
+    "C_CAP": "capability",
     "C_WAIVE": "waiver hygiene",
 }
 

@@ -1,0 +1,1 @@
+{"backend":"svelte","profile":"svelte-bootstrap","must_equal":{"backends.svelte.testing.bootstrap.required":true,"backends.svelte.testing.bootstrap.onFailure.ci":"skip","waivers.W-FIX-SVELTE-NPMCI.subject":"svelte"}}

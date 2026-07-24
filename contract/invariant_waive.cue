@@ -23,12 +23,19 @@ _preWaiverViolations: {
 	"C-TEST-004":  _cTest004Pre
 	"C-TEST-005":  _cTest005Pre
 	"C-TEST-006":  _cTest006Pre
+	"C-SKIP-001":  _cSkip001Pre
+	"C-SKIP-002":  _cSkip002Pre
+	"C-FIX-001":   _cFix001Pre
+	"C-FIX-002":   _cFix002Pre
 }
+
+_behavioralInvariants: {"B-REG-002": true}
 
 _cWaive001Pre: {
 	for waiverId, waiver in waivers
 	let current = [for invariantId, subjects in _preWaiverViolations for subject, _ in subjects if invariantId == waiver.invariant && subject == waiver.subject {1}]
-	if waiver.id != waiverId || waiver.reference == "" || len(current) == 0 {
+	let behavioral = [for invariantId, _ in _behavioralInvariants if invariantId == waiver.invariant {1}]
+	if waiver.id != waiverId || waiver.reference == "" || (len(current) == 0 && len(behavioral) == 0) {
 		"\(waiverId)": "waiver id, invariant, subject, or reference is unknown or stale"
 	}
 }

@@ -4,21 +4,19 @@ package contract
 #BootstrapStep: {
 	kind:    "npm-ci" | "npm-install" | "mix" | "rebar3" | "cabal-build" | "lake-build" | "sync-cmd" | "shell"
 	detail?: string
-	if kind == "shell" {
-		waiver!: #WaiverId
-	}
+	waiver?: #WaiverId
 }
 
 #Bootstrap: {
 	required: bool
 	steps: [#BootstrapStep, ...#BootstrapStep]
-	produces: [string, ...string]
+	produces: [...string & !=""]
 	onFailure: {
 		ci:    "fail" | "skip"
 		local: "fail" | "skip"
 	}
 	if required {
-		onFailure: ci: "fail"
+		produces: [string & !="", ...string & !=""]
 	}
 }
 

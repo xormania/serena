@@ -8,7 +8,7 @@ backends: haskell: #DeclaredBackend & {
 	status: "stable"
 	matcher: extensions: [".hs", ".lhs"]
 	provisioning: {strategy: "path", owner: {runtime: "user", ci: "workflow-step"}, cacheInputs: [".github/workflows/pytest.yml#Install Haskell language server"], executables: ["haskell-language-server-wrapper"]}
-	platforms: {supported: ["linux"], excluded: [{os: "macos", reason: "The CI Haskell toolchain is provisioned only on Linux."}, {os: "windows", reason: "The CI Haskell toolchain is provisioned only on Linux."}]}
-	testing: {tested: true, marker: "haskell", fixtureRepo: "haskell", testDir: "haskell"}
+	platforms: {supported: ["linux", "macos", "windows"], excluded: []}
+	testing: {tested: true, marker: "haskell", fixtureRepo: "haskell", testDir: "haskell", bootstrap: {required: true, steps: [{kind: "cabal-build", detail: "Pre-build Haskell test project for HLS"}], produces: ["dist-newstyle"], onFailure: {ci: "fail", local: "skip"}}}
 	ci: _CIExpected & _BatchOther & _CILinux & {skipPolicy: {category: 3, toolProbe: "haskell-language-server-wrapper"}} & {installStep: "Setup Haskell toolchain"}
 }

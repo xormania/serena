@@ -85,7 +85,7 @@ def test_extracts_filesystem_server_and_documentation_facts() -> None:
     servers = extract_server_modules(FIXTURES)
     docs = extract_docs(FIXTURES)
 
-    assert filesystem == {"repoDirs": ["python"], "testDirs": ["python"], "bootstrapConftests": ["python"]}
+    assert filesystem == {"repoDirs": ["python"], "testDirs": ["noop", "python"], "bootstrapConftests": ["python"]}
     assert servers["server"]["uvxPins"] == [{"package": "example-ls", "version": "1.2.3"}]
     assert servers["server"]["cargoCommands"] == [["cargo", "install", "example-ls", "--version", "version", "--locked"]]
     assert servers["server"]["pathProbes"] == ["example-ls"]
