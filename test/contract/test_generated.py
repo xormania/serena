@@ -13,6 +13,7 @@ import pytest
 from scripts.lsp_contract import __main__ as contract_cli
 from scripts.lsp_contract.diagnostics import ExtractionError
 from scripts.lsp_contract.extract.assemble import extract_repository
+from scripts.lsp_contract.extract.docs_presence import extract_docs
 from test.contract.invariant_support import FIXTURES, validate_fixture
 
 ROOT = Path(__file__).parents[2]
@@ -170,6 +171,29 @@ def test_generated_rejection_fixtures(case_name: str, diagnostic: str, subject: 
     assert returncode == 1
     assert diagnostic in stderr
     assert subject in stderr
+
+
+@pytest.mark.parametrize(
+    ("field", "required"),
+    [
+        (
+            "readmeLabels",
+            {"Pascal", "QML", "Rego", "SystemVerilog", "Terraform", "Vue"},
+        ),
+        (
+            "docsLabels",
+            {"MATLAB", "PowerShell", "Rego", "SystemVerilog", "Terraform", "TOML"},
+        ),
+    ],
+)
+def test_od2_authored_language_lists_include_missing_labels(
+    field: str,
+    required: set[str],
+) -> None:
+    actual = extract_docs(ROOT)[field]
+    assert isinstance(actual, list)
+    missing = {label for label in required if not any(label.casefold() in str(item).casefold() for item in actual)}
+    assert missing == set()
 
 
 def test_legacy_print_helper_is_explicitly_deprecated() -> None:
