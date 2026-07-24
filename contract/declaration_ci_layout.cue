@@ -10,6 +10,12 @@ ciLayout: #CILayout & {
 		"catch-all": os: ["linux", "macos", "windows"]
 	}
 	caches: {
+		"cue-toolchain": {
+			workflowName: "Cache CUE toolchain"
+			covers: []
+			inputs: ["contract/cue-version.json"]
+			keyTokens: "contract/cue-version.json": "hashFiles('contract/cue-version.json')"
+		}
 		"uv-venv": {
 			workflowName: "Cache uv virtualenv"
 			covers: []

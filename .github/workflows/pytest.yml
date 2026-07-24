@@ -53,7 +53,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Fail declaration drift before the 13-run OS/batch matrix starts. This stdlib-only gate is
+  # intentionally cheap: one pinned CUE download on a cold cache, then seconds on a warm cache.
+  contract:
+    name: contract (language/CI declarations)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with: { python-version: "3.11" }
+      - name: Cache CUE toolchain
+        uses: actions/cache@v3
+        with:
+          path: ~/.serena/dev_tools/cue
+          key: cue-toolchain-${{ runner.os }}-${{ hashFiles('contract/cue-version.json') }}
+      - name: Install pinned CUE
+        run: python -m scripts.lsp_contract install-cue
+      - name: Validate language/CI contract
+        run: python -m scripts.lsp_contract validate --github-summary
+
   cpu:
+    needs: contract
     name: ${{ matrix.batch }} (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     # Backstop against hung jobs: without this, GitHub's default limit is 6 hours (observed in

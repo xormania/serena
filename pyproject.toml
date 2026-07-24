@@ -164,6 +164,9 @@ type = "simple"
 [tool.poe.tasks]
 # For custom markers, use poe test -m ...
 test = "pytest test -vv"
+_contract_install = "python -m scripts.lsp_contract install-cue"
+_contract_validate = "python -m scripts.lsp_contract validate"
+check-contract = ["_contract_install", "_contract_validate"]
 _ruff_check = "ruff check src scripts test"
 _ruff_format_check = "ruff format --check src scripts test"
 _ruff_fix = "ruff check --fix src scripts test"

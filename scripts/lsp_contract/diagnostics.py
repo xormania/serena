@@ -215,3 +215,68 @@ def render_cue_diagnostics(cue_stderr: str) -> str:
             )
         )
     return "\n".join(rendered)
+
+
+def diagnostic_subjects(cue_stderr: str, diagnostic_id: str) -> tuple[str, ...]:
+    """Return stable subjects attached to one invariant in raw CUE diagnostics."""
+    cue_label = r'("(?:[^"\\]|\\.)*"|[A-Za-z0-9_-]+)'
+
+    def decode(label: str) -> str:
+        if label.startswith('"'):
+            return label[1:-1].replace('\\"', '"').replace("\\\\", "\\")
+        return label
+
+    cue_field_id = diagnostic_id.replace("-", "_")
+    subject_pattern = re.compile(rf"\b{re.escape(cue_field_id)}(?:\.{cue_label})?")
+    subjects = {decode(match.group(1)) for match in subject_pattern.finditer(cue_stderr) if match.group(1) is not None}
+
+    backend_pattern = re.compile(rf"\bbackends\.{cue_label}(?=\.)")
+    for line in cue_stderr.splitlines():
+        if not any(mapped_id == diagnostic_id and path_pattern.search(line) for path_pattern, mapped_id in _SCHEMA_PATH_DIAGNOSTICS):
+            continue
+        subjects.update(decode(match.group(1)) for match in backend_pattern.finditer(line))
+
+    return tuple(sorted(subjects))
+
+
+def render_github_failure_summary(
+    cue_stderr: str,
+    *,
+    documentation_url: str = "contract/INVARIANTS.md",
+) -> str:
+    """Render contract violations as a stable local/GitHub summary table."""
+    lines = [
+        "## Language/CI contract failed",
+        "",
+        "| Invariant | Meaning | Subjects | Fix | Reference |",
+        "|---|---|---|---|---|",
+    ]
+    ids = diagnostic_ids(cue_stderr)
+    if not ids:
+        lines.append("| unknown | CUE validation failed without a recognized invariant id. | global | Inspect raw job logs. | — |")
+    for diagnostic_id in ids:
+        diagnostic = DIAGNOSTICS.get(diagnostic_id)
+        meaning = diagnostic.meaning if diagnostic else "Unregistered contract invariant."
+        fix = diagnostic.fix if diagnostic else "Inspect the raw CUE diagnostic."
+        subjects = ", ".join(diagnostic_subjects(cue_stderr, diagnostic_id)) or "global"
+        anchor = diagnostic_id.lower()
+        cells = (diagnostic_id, meaning, subjects, fix)
+        escaped = tuple(cell.replace("|", "\\|").replace("\n", " ") for cell in cells)
+        reference = f"{documentation_url}#{anchor}"
+        lines.append(f"| {escaped[0]} | {escaped[1]} | {escaped[2]} | {escaped[3]} | [details]({reference}) |")
+    lines.extend(("", "Raw CUE diagnostics remain available in the failed job log."))
+    return "\n".join(lines) + "\n"
+
+
+def render_extractor_drift_summary(error: ExtractionError) -> str:
+    """Render exit-2 extractor drift distinctly from contract violations."""
+    return (
+        "## Language/CI contract extractor drift\n\n"
+        "**repo structure changed — fix scripts/lsp_contract/extract, see file:line**\n\n"
+        f"`{error}`\n"
+    )
+
+
+def render_github_success_summary(waiver_count: int) -> str:
+    """Render the successful contract result for a GitHub step summary."""
+    return f"## Language/CI contract passed\n\n0 violations; waivers: {waiver_count}\n"
