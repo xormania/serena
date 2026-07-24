@@ -88,7 +88,6 @@ waivers: {
 	"W-SKIP-CI-SILENT-SWIFT": {id: "W-SKIP-CI-SILENT-SWIFT", invariant: "C-SKIP-002", subject: "swift", reason: "The live guard still models Swift as a category-3 platform precondition on scheduled CI.", reference: "test/conftest.py#_determine_disabled_language_servers", added: "2026-07-24"}
 	"W-SKIP-CI-SILENT-SYSTEMVERILOG": {id: "W-SKIP-CI-SILENT-SYSTEMVERILOG", invariant: "C-SKIP-002", subject: "systemverilog", reason: "The live guard still silently skips a missing Verible server on scheduled CI.", reference: "test/conftest.py#_determine_disabled_language_servers", added: "2026-07-24"}
 
-	"W-FIX-SVELTE-NPMCI": {id: "W-FIX-SVELTE-NPMCI", invariant: "C-FIX-002", subject: "svelte", reason: "The live Svelte fixture still skips after npm-ci failure before OD-3.", reference: "test/solidlsp/svelte/conftest.py", added: "2026-07-24"}
 	"W-FIX-ANGULAR": {id: "W-FIX-ANGULAR", invariant: "C-FIX-002", subject: "angular", reason: "The Angular fixture still masks npm-install failures.", reference: "test/solidlsp/angular/conftest.py", added: "2026-07-24"}
 	"W-FIX-ELIXIR": {id: "W-FIX-ELIXIR", invariant: "C-FIX-002", subject: "elixir", reason: "The Elixir fixture still masks dependency and compile bootstrap failures.", reference: "test/solidlsp/elixir/conftest.py", added: "2026-07-24"}
 	"W-FIX-ERLANG": {id: "W-FIX-ERLANG", invariant: "C-FIX-002", subject: "erlang", reason: "The Erlang fixture still masks dependency and compile bootstrap failures.", reference: "test/solidlsp/erlang/conftest.py", added: "2026-07-24"}

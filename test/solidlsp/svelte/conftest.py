@@ -81,10 +81,10 @@ def _install_svelte_test_repo_node_modules() -> None:
             )
             if proc.returncode != 0:
                 log.error("npm ci failed (rc=%s).\nstdout:\n%s\nstderr:\n%s", proc.returncode, proc.stdout, proc.stderr)
-                pytest.skip(f"npm ci failed in {repo_path} (rc={proc.returncode}); see logs for details")
+                pytest.fail(f"npm ci failed in {repo_path} (rc={proc.returncode}); see logs for details")
 
             if not SVELTE_MARKER.exists() or not SVELTE_KIT_ADAPTER_MARKER.exists():
-                pytest.skip("npm ci completed but required Svelte fixture packages are missing")
+                pytest.fail("npm ci completed but required Svelte fixture packages are missing")
 
             log.info("Svelte test repo node_modules installed successfully")
 

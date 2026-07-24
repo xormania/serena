@@ -47,4 +47,4 @@ def test_full_repo_validates() -> None:
     )
     assert completed.returncode == 0, completed.stderr
     assert "0 violations" in completed.stdout
-    assert "waivers: 83" in completed.stdout
+    assert "waivers: 82" in completed.stdout
