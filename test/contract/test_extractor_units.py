@@ -103,4 +103,4 @@ def test_extracts_filesystem_server_and_documentation_facts() -> None:
     assert servers["unverified_file_server"]["opaqueProvisioningCalls"] == ["FileUtils.download_file_verified"]
     assert docs["readmeLabels"] == ["CUE", "Python", "QML"]
     assert docs["docsLabels"] == ["CUE", "Python", "QML"]
-    assert docs["templateIds"] == ["python", "qml", "cue"]
+    assert docs["templateIds"] == ["cue", "python", "qml"]

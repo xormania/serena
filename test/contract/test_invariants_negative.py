@@ -60,6 +60,8 @@ INVALID_CASES = [
     "c-fix-003-no-postcondition",
     "c-cap-001-claim-no-evidence",
     "c-cap-001-evidence-no-claim",
+    "c-gen-001-stale-output",
+    "c-doc-001-doclabel-missing",
     "c-waive-001-stale",
 ]
 
@@ -73,6 +75,8 @@ CATEGORIES = {
     "C_SKIP": "skip policy",
     "C_FIX": "fixture bootstrap",
     "C_CAP": "capability",
+    "C_GEN": "generated output",
+    "C_DOC": "documentation",
     "C_WAIVE": "waiver hygiene",
 }
 

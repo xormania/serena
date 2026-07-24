@@ -2107,18 +2107,34 @@
     },
     "docs": {
       "readmeLabels": [
-        "Python",
+        "AL",
+        "C#",
         "C/C++",
+        "Erlang",
         "GDScript",
+        "HLSL",
+        "Java",
         "MSL",
-        "Erlang"
+        "Nix",
+        "Python",
+        "QML",
+        "Ruby",
+        "Swift"
       ],
       "docsLabels": [
-        "Python",
+        "AL",
+        "C#",
         "C/C++",
+        "Erlang",
         "GDScript",
+        "HLSL",
+        "Java",
         "MSL",
-        "Erlang"
+        "Nix",
+        "Python",
+        "QML",
+        "Ruby",
+        "Swift"
       ],
       "templateIds": [
         "python",
@@ -2138,6 +2154,10 @@
         "qml",
         "csharp_omnisharp"
       ]
+    },
+    "freshness": {
+      "registrationCurrent": true,
+      "templateCurrent": true
     }
   },
   "ciLayout": {

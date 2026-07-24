@@ -126,10 +126,16 @@ def _expected_probe_disabled(policy: Mapping[str, Any], os_name: str, ci: bool, 
 def test_declaration_export_materializes_temporary_extracted_facts(monkeypatch: pytest.MonkeyPatch) -> None:
     outputs: list[Path] = []
 
-    def recording_write(root: Path, output_path: Path | None = None) -> Path:
+    def recording_write(
+        root: Path,
+        output_path: Path | None = None,
+        *,
+        include_freshness: bool = True,
+    ) -> Path:
         assert output_path is not None
+        assert include_freshness is False
         outputs.append(output_path)
-        return assemble_write_extracted(root, output_path)
+        return assemble_write_extracted(root, output_path, include_freshness=include_freshness)
 
     monkeypatch.setattr(decl_export, "write_extracted", recording_write, raising=False)
     decl_export.export_backends.cache_clear()
