@@ -169,21 +169,21 @@ def main(argv: Sequence[str] | None = None) -> int:
         try:
             print(write_extracted(arguments.root, arguments.output))
         except ExtractionError as error:
-            print(error, file=sys.stderr)
+            print(f"C-EXTR-001: {error}", file=sys.stderr)
             return 2
         return 0
     if arguments.command == "render-registration":
         try:
             print(write_registration(arguments.root, arguments.output))
         except ExtractionError as error:
-            print(error, file=sys.stderr)
+            print(f"C-EXTR-001: {error}", file=sys.stderr)
             return 2
         return 0
     if arguments.command == "render-template-list":
         try:
             print(write_template_list(arguments.root, arguments.output))
         except ExtractionError as error:
-            print(error, file=sys.stderr)
+            print(f"C-EXTR-001: {error}", file=sys.stderr)
             return 2
         return 0
     if arguments.command == "vet-schema":

@@ -28,6 +28,10 @@ class ContractDiagnostic:
 
 
 DIAGNOSTICS: dict[str, ContractDiagnostic] = {
+    "C-EXTR-001": ContractDiagnostic(
+        "Repository source structure must remain unambiguous to the extractor.",
+        "Update the named extractor and its drift tests for the reported file:line shape.",
+    ),
     "C-REG-001": ContractDiagnostic(
         "Backend declarations and LanguageServerId members must be the same set.",
         "Add or remove the declaration so both registration surfaces agree.",
@@ -280,7 +284,7 @@ def render_extractor_drift_summary(error: ExtractionError) -> str:
     """Render exit-2 extractor drift distinctly from contract violations."""
     return (
         "## Language/CI contract extractor drift\n\n"
-        "**repo structure changed — fix scripts/lsp_contract/extract, see file:line**\n\n"
+        "**C-EXTR-001 — repo structure changed — fix scripts/lsp_contract/extract, see file:line**\n\n"
         f"`{error}`\n"
     )
 
