@@ -1,4 +1,7 @@
-"""AST extraction of language-server provisioning facts.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""AST extraction of language-server provisioning facts.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 import ast
 import json

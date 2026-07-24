@@ -1,4 +1,7 @@
-"""TOML extraction of marker and development-pin facts.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""TOML extraction of marker and development-pin facts.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 from __future__ import annotations
 

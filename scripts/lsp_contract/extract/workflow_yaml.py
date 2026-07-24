@@ -1,4 +1,7 @@
-"""Extract CI workflow facts through the pinned CUE runtime.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""Extract CI workflow facts through the pinned CUE runtime.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 from __future__ import annotations
 

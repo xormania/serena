@@ -1,4 +1,7 @@
-"""AST extraction of central test registration and evidence facts.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""AST extraction of central test registration and evidence facts.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 from __future__ import annotations
 

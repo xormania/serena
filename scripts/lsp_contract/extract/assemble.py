@@ -1,4 +1,7 @@
-"""Deterministic assembly of all extracted repository facts.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""Deterministic assembly of all extracted repository facts.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 import json
 from pathlib import Path

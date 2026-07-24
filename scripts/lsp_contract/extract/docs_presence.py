@@ -1,4 +1,7 @@
-"""Extraction of supported-language labels from user-facing documentation.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""Extraction of supported-language labels from user-facing documentation.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 import re
 from pathlib import Path

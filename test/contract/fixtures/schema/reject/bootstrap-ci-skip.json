@@ -1,0 +1,1 @@
+{"required":true,"steps":[{"kind":"npm-ci"}],"produces":["node_modules"],"onFailure":{"ci":"skip","local":"skip"}}

@@ -1,4 +1,7 @@
-"""Filesystem extraction of fixture and test-directory facts.\n\nThe repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.\n"""
+"""Filesystem extraction of fixture and test-directory facts.
+
+The repository source remains authoritative; extraction supplies agreement checks and never a competing editable truth.
+"""
 
 from pathlib import Path
 
