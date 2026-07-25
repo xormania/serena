@@ -85,8 +85,8 @@ DIAGNOSTICS: dict[str, ContractDiagnostic] = {
         "Add tests or add the reviewed untested-backend waiver.",
     ),
     "C-WAIVE-001": ContractDiagnostic(
-        "Every waiver must identify a current violation and carry complete rationale.",
-        "Remove stale waivers or repair the id, subject, reason, and reference.",
+        "Every waiver must identify a current violation, carry complete rationale, and reference tracked repository evidence.",
+        "Remove stale waivers or repair the id, subject, reason, and reference to a tracked file or directory.",
     ),
     "C-CI-001": ContractDiagnostic(
         "Tested backends must agree with their declared workflow batch or carry a current never-run waiver.",

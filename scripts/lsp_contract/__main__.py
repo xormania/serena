@@ -6,10 +6,11 @@ import argparse
 import json
 import os
 import shutil
+import subprocess
 import sys
-from collections.abc import Iterator, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from contextlib import contextmanager
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from tempfile import TemporaryDirectory
 
 from scripts.lsp_contract.cue_runtime import CueRuntime, install
@@ -119,6 +120,74 @@ def _repository_local_cue_input(root: Path, input_path: Path) -> Iterator[Path]:
         yield staged_input
 
 
+class _GitInventoryError(RuntimeError):
+    """Raised when Git cannot establish the repository's tracked evidence."""
+
+
+def _tracked_repository_paths(root: Path) -> frozenset[str]:
+    """Return repository-relative paths present in the Git index."""
+    try:
+        completed = subprocess.run(
+            ["git", "-C", str(root), "ls-files", "-z", "--cached", "--"],
+            check=False,
+            capture_output=True,
+        )
+    except OSError as error:
+        raise _GitInventoryError(f"Git tracked-file inventory could not start: {error}") from error
+    if completed.returncode:
+        detail = completed.stderr.decode("utf-8", errors="replace").strip()
+        if not detail:
+            detail = f"git ls-files exited with status {completed.returncode}"
+        raise _GitInventoryError(f"Git tracked-file inventory failed: {detail}")
+
+    try:
+        return frozenset(path.decode("utf-8") for path in completed.stdout.split(b"\0") if path)
+    except UnicodeDecodeError as error:
+        raise _GitInventoryError("Git tracked-file inventory contains a non-UTF-8 path") from error
+
+
+def _waiver_reference_path(reference: object) -> str | None:
+    """Return a normalized repository path before an optional opaque fragment."""
+    if not isinstance(reference, str):
+        return None
+
+    path_component = reference.split("#", 1)[0]
+    windows_path = PureWindowsPath(path_component)
+    repository_path = PurePosixPath(path_component.replace("\\", "/"))
+    if (
+        not path_component
+        or windows_path.drive
+        or windows_path.is_absolute()
+        or repository_path.is_absolute()
+        or ".." in repository_path.parts
+    ):
+        return None
+
+    normalized = repository_path.as_posix()
+    return None if normalized in {"", "."} else normalized
+
+
+def _waiver_reference_diagnostics(root: Path, waivers: Mapping[str, Mapping[str, object]]) -> str:
+    """Render C-WAIVE-001 diagnostics for references unavailable to reviewers."""
+    tracked_paths = _tracked_repository_paths(root)
+    violations: list[str] = []
+    for waiver_id, waiver in sorted(waivers.items()):
+        reference = waiver.get("reference") if isinstance(waiver, Mapping) else None
+        reference_path = _waiver_reference_path(reference)
+        if reference_path is not None:
+            directory_prefix = f"{reference_path.rstrip('/')}/"
+            if reference_path in tracked_paths or any(path.startswith(directory_prefix) for path in tracked_paths):
+                continue
+
+        rendered_reference = reference if isinstance(reference, str) else repr(reference)
+        violations.append(
+            f"C_WAIVE_001.{json.dumps(waiver_id)}: waiver reference {json.dumps(rendered_reference)} "
+            "does not name a Git-tracked file or directory with tracked descendants"
+        )
+
+    return "\n".join(violations)
+
+
 def _validate(
     root: Path,
     output: Path | None = None,
@@ -161,7 +230,10 @@ def _validate(
 
     try:
         document = json.loads(stdout)
-        waiver_count = len(document["waivers"])
+        waivers = document["waivers"]
+        if not isinstance(waivers, dict):
+            raise TypeError("waivers must be an object")
+        waiver_count = len(waivers)
     except (json.JSONDecodeError, KeyError, TypeError) as error:
         print(f"contract: invalid CUE export output: {error}", file=sys.stderr)
         _write_github_summary(
@@ -169,6 +241,30 @@ def _validate(
             requested=github_summary,
         )
         return 2
+
+    try:
+        reference_diagnostics = _waiver_reference_diagnostics(root, waivers)
+    except _GitInventoryError as error:
+        inventory_diagnostic = f"C_WAIVE_001.global: {error}"
+        rendered = render_cue_diagnostics(inventory_diagnostic)
+        print(rendered, file=sys.stderr)
+        failure_summary = render_github_failure_summary(
+            inventory_diagnostic,
+            documentation_url=_documentation_url(),
+        )
+        print(failure_summary, file=sys.stderr, end="")
+        _write_github_summary(failure_summary, requested=github_summary)
+        return 2
+    if reference_diagnostics:
+        rendered = render_cue_diagnostics(reference_diagnostics)
+        print(rendered, file=sys.stderr)
+        failure_summary = render_github_failure_summary(
+            reference_diagnostics,
+            documentation_url=_documentation_url(),
+        )
+        print(failure_summary, file=sys.stderr, end="")
+        _write_github_summary(failure_summary, requested=github_summary)
+        return 1
 
     print(f"contract: 0 violations; waivers: {waiver_count}")
     summary_written = _write_github_summary(

@@ -1104,7 +1104,7 @@
       "invariant": "C-TEST-006",
       "subject": "gdscript",
       "reason": "Godot owns the TCP server lifecycle and no hermetic fixture exists.",
-      "reference": "proj/cue/plan.md#2.9",
+      "reference": "src/solidlsp/language_servers/godot_language_server.py#GodotLanguageServer",
       "added": "2026-07-24"
     },
     "W-REG-ERLANG": {
@@ -1112,7 +1112,7 @@
       "invariant": "C-REG-002",
       "subject": "erlang",
       "reason": "Fixture models a known waived dispatch-class defect.",
-      "reference": "proj/cue/plan.md#2.9",
+      "reference": "test/contract/fixtures/invariants/base.json",
       "added": "2026-07-24"
     },
     "W-CI-NEVER-RUN-ERLANG": {
@@ -1120,7 +1120,7 @@
       "invariant": "C-CI-001",
       "subject": "erlang",
       "reason": "Fixture models a tested backend intentionally excluded from CI.",
-      "reference": "proj/cue/plan.md#2.9",
+      "reference": "test/contract/fixtures/invariants/base.json",
       "added": "2026-07-24"
     },
     "W-TEST-OMNISHARP": {
@@ -1128,7 +1128,7 @@
       "invariant": "C-TEST-006",
       "subject": "csharp_omnisharp",
       "reason": "The alternate has no dedicated collected test surface.",
-      "reference": "proj/cue/plan.md#2.9",
+      "reference": "test/solidlsp/csharp",
       "added": "2026-07-24"
     },
     "W-PROV-NIXD-UNPINNED": {

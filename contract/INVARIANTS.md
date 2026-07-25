@@ -540,11 +540,13 @@ Waivable per exact document path for a reviewed, temporary authored-list gap.
 
 ### Meaning
 
-Every waiver must identify a current pre-waiver violation and carry complete rationale and reference data.
+Every waiver must identify a current pre-waiver violation, carry complete rationale, and reference evidence available in Git. The path before an optional `#fragment` must name a tracked file or a repository directory containing tracked descendants. Fragments remain opaque source-symbol or document-anchor locators; this check does not claim that a fragment resolves semantically.
+
+Validation fails loudly when Git cannot establish the tracked-file inventory. Ignored, untracked, absolute, and repository-escaping references are never accepted as reviewer evidence.
 
 ### Typical fix
 
-Remove stale waivers or repair the id, invariant, subject, reason, and reference.
+Remove stale waivers or repair the id, invariant, subject, reason, and reference to point at the most direct tracked repository evidence. Restore usable Git metadata when the inventory itself cannot be established.
 
 ### Waiver guidance
 

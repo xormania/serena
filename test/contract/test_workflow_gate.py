@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import tomllib
 from pathlib import Path
 from typing import Any, cast
@@ -175,3 +176,171 @@ def test_github_summary_distinguishes_extractor_drift(
     assert "pyproject.toml:17" in summary
     assert "fix scripts/lsp_contract/extract" in summary
     assert summary in capsys.readouterr().err
+
+
+def _git_tracked_paths(root: Path) -> frozenset[str]:
+    completed = subprocess.run(
+        ["git", "-C", str(root), "ls-files", "-z", "--cached"],
+        check=True,
+        capture_output=True,
+    )
+    return frozenset(path.decode("utf-8") for path in completed.stdout.split(b"\0") if path)
+
+
+def _initialize_reference_repository(root: Path, tracked_paths: tuple[str, ...]) -> None:
+    subprocess.run(["git", "init", "--quiet", str(root)], check=True, capture_output=True)
+    for relative_path in tracked_paths:
+        evidence_path = root / relative_path
+        evidence_path.parent.mkdir(parents=True, exist_ok=True)
+        evidence_path.write_text("review evidence\n", encoding="utf-8")
+    if tracked_paths:
+        subprocess.run(["git", "-C", str(root), "add", "--", *tracked_paths], check=True, capture_output=True)
+
+
+def _run_waiver_reference_validation(
+    monkeypatch: pytest.MonkeyPatch,
+    root: Path,
+    references: tuple[str, ...],
+    *,
+    github_summary: bool = False,
+) -> int:
+    extracted_path = root / "extracted.json"
+    extracted_path.write_text('{"extracted": {}}\n', encoding="utf-8")
+    waivers = {f"W-REFERENCE-{index}": {"reference": reference} for index, reference in enumerate(references)}
+
+    monkeypatch.setattr(contract_cli, "write_extracted", lambda _root, _output: extracted_path)
+    monkeypatch.setattr(contract_cli, "_vet_schema", lambda _root: 0)
+    monkeypatch.setattr(
+        contract_cli.CueRuntime,
+        "run",
+        lambda _self, _args, _input_files=(): (0, json.dumps({"waivers": waivers}), ""),
+    )
+    arguments = ["validate", "--root", str(root)]
+    if github_summary:
+        arguments.append("--github-summary")
+    return contract_cli.main(arguments)
+
+
+@pytest.mark.parametrize("reference", ["docs/evidence.md", "docs/evidence.md#review-anchor"])
+def test_waiver_reference_accepts_tracked_file(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    reference: str,
+) -> None:
+    _initialize_reference_repository(tmp_path, ("docs/evidence.md",))
+
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, (reference,)) == 0
+
+
+def test_waiver_reference_rejects_missing_path(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    _initialize_reference_repository(tmp_path, ("docs/evidence.md",))
+    summary_path = tmp_path / "summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
+
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, ("docs/missing.md",), github_summary=True) == 1
+    stderr = capsys.readouterr().err
+    assert "C_WAIVE_001" in stderr
+    assert "W-REFERENCE-0" in stderr
+    assert "docs/missing.md" in stderr
+    summary = summary_path.read_text(encoding="utf-8")
+    assert "C-WAIVE-001" in summary
+    assert "W-REFERENCE-0" in summary
+    assert DIAGNOSTICS["C-WAIVE-001"].fix in summary
+
+
+def test_waiver_reference_rejects_existing_untracked_file(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    _initialize_reference_repository(tmp_path, ("docs/evidence.md",))
+    (tmp_path / "local-only.md").write_text("unavailable to reviewers\n", encoding="utf-8")
+
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, ("local-only.md",)) == 1
+    stderr = capsys.readouterr().err
+    assert "C_WAIVE_001" in stderr
+    assert "local-only.md" in stderr
+
+
+@pytest.mark.parametrize("reference", ["", "/outside.md", "../outside.md", "C:\\outside.md"])
+def test_waiver_reference_rejects_empty_absolute_or_escaping_path(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    reference: str,
+) -> None:
+    _initialize_reference_repository(tmp_path, ("docs/evidence.md",))
+
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, (reference,)) == 1
+
+
+def test_waiver_reference_accepts_only_tracked_directories(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    _initialize_reference_repository(tmp_path, ("docs/review/evidence.md",))
+    (tmp_path / "empty").mkdir()
+
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, ("docs/review",)) == 0
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, ("empty",)) == 1
+
+
+def test_waiver_reference_fails_loudly_without_git_metadata(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    assert _run_waiver_reference_validation(monkeypatch, tmp_path, ("evidence.md",)) == 2
+    stderr = capsys.readouterr().err
+    assert "C_WAIVE_001" in stderr
+    assert "Git" in stderr
+
+
+def test_live_waiver_references_resolve_to_tracked_evidence() -> None:
+    returncode, stdout, stderr = CueRuntime().run(
+        [
+            "export",
+            str(ROOT / "contract" / "schema_waiver.cue"),
+            str(ROOT / "contract" / "declaration_waivers.cue"),
+            "-e",
+            "waivers",
+            "--out",
+            "json",
+        ]
+    )
+    assert returncode == 0, stderr
+    waivers = cast(dict[str, dict[str, str]], json.loads(stdout))
+    tracked_paths = _git_tracked_paths(ROOT)
+    invalid_references: dict[str, str] = {}
+    for waiver_id, waiver in waivers.items():
+        reference_path = waiver["reference"].split("#", 1)[0]
+        tracked = reference_path in tracked_paths or any(path.startswith(f"{reference_path.rstrip('/')}/") for path in tracked_paths)
+        if not tracked:
+            invalid_references[waiver_id] = waiver["reference"]
+
+    assert len(waivers) == 81
+    assert invalid_references == {}
+
+
+def test_committed_waiver_references_do_not_use_local_plan() -> None:
+    completed = subprocess.run(
+        [
+            "git",
+            "-C",
+            str(ROOT),
+            "grep",
+            "-n",
+            "-F",
+            "proj/cue/plan.md",
+            "--",
+            "contract",
+            "test/contract/fixtures/invariants",
+        ],
+        check=False,
+        capture_output=True,
+    )
+
+    assert completed.returncode == 1, completed.stdout.decode("utf-8")
