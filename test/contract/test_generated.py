@@ -150,6 +150,31 @@ def test_render_cli_subcommands_write_requested_outputs(tmp_path: Path) -> None:
     assert BEGIN_MARKER in template.read_text(encoding="utf-8")
 
 
+def test_validate_stages_external_extracted_facts_for_cue(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    extracted_path = (tmp_path / "facts.json").resolve()
+    extracted_path.write_text('{"extracted": {}}\n', encoding="utf-8")
+    assert not extracted_path.is_relative_to(ROOT)
+
+    monkeypatch.setattr(contract_cli, "write_extracted", lambda _root, _output: extracted_path)
+    monkeypatch.setattr(contract_cli, "_vet_schema", lambda _root: 0)
+    observed_inputs: list[Path] = []
+
+    def recording_run(_self, args, _input_files=()):
+        cue_input = Path(args[2]).resolve()
+        observed_inputs.append(cue_input)
+        assert cue_input != extracted_path
+        assert cue_input.is_relative_to(ROOT)
+        assert cue_input.read_bytes() == extracted_path.read_bytes()
+        return 1, "", 'C_GEN_001.registration: conflicting values false and "generated artifact is stale"\n'
+
+    monkeypatch.setattr(contract_cli.CueRuntime, "run", recording_run)
+
+    assert contract_cli.main(["validate", "--root", str(ROOT), "--output", str(extracted_path)]) == 1
+    assert extracted_path.exists()
+    assert len(observed_inputs) == 1
+    assert not observed_inputs[0].exists()
+
+
 def test_tampered_registration_is_stale_and_validate_rejects_it(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

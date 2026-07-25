@@ -13,7 +13,7 @@ _REPOSITORY_ROOT = Path(__file__).parents[2]
 
 
 def _export_mapping(expression: str) -> dict[str, dict[str, object]]:
-    with TemporaryDirectory(prefix="serena-contract-conformance-") as directory:
+    with TemporaryDirectory(prefix="serena-contract-conformance-", dir=_REPOSITORY_ROOT) as directory:
         extracted_path = write_extracted(
             _REPOSITORY_ROOT,
             Path(directory) / "extracted.json",

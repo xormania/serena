@@ -144,8 +144,10 @@ def test_declaration_export_materializes_temporary_extracted_facts(monkeypatch: 
     finally:
         decl_export.export_backends.cache_clear()
 
+    repository_root = Path(__file__).parents[2]
     assert len(outputs) == 1
-    assert not outputs[0].is_relative_to(Path(__file__).parents[2] / "contract" / "extracted")
+    assert outputs[0].is_relative_to(repository_root)
+    assert not outputs[0].is_relative_to(repository_root / "contract" / "extracted")
 
 
 @pytest.mark.parametrize("language_server_id", list(LanguageServerId), ids=lambda item: item.value)

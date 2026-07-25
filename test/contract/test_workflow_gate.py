@@ -117,11 +117,13 @@ def test_github_summary_reports_contract_failure(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     summary_path = tmp_path / "summary.md"
+    extracted_path = tmp_path / "extracted.json"
+    extracted_path.write_text('{"extracted": {}}\n', encoding="utf-8")
     monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary_path))
     monkeypatch.setenv("GITHUB_SERVER_URL", "https://github.com")
     monkeypatch.setenv("GITHUB_REPOSITORY", "xormania/serena")
     monkeypatch.setenv("GITHUB_SHA", "deadbeef")
-    monkeypatch.setattr(contract_cli, "write_extracted", lambda _root, _output: tmp_path / "extracted.json")
+    monkeypatch.setattr(contract_cli, "write_extracted", lambda _root, _output: extracted_path)
     monkeypatch.setattr(contract_cli, "_vet_schema", lambda _root: 0)
     monkeypatch.setattr(
         contract_cli.CueRuntime,

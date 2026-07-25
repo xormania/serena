@@ -5,9 +5,12 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shutil
 import sys
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
+from contextlib import contextmanager
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from scripts.lsp_contract.cue_runtime import CueRuntime, install
 from scripts.lsp_contract.diagnostics import (
@@ -101,6 +104,21 @@ def _documentation_url() -> str:
     return "contract/INVARIANTS.md"
 
 
+@contextmanager
+def _repository_local_cue_input(root: Path, input_path: Path) -> Iterator[Path]:
+    """Stage a generated CUE input under the repository when it lives elsewhere."""
+    resolved_root = root.resolve()
+    resolved_input = input_path.resolve()
+    if resolved_input.is_relative_to(resolved_root):
+        yield resolved_input
+        return
+
+    with TemporaryDirectory(prefix="serena-contract-input-", dir=resolved_root) as directory:
+        staged_input = Path(directory) / resolved_input.name
+        shutil.copyfile(resolved_input, staged_input)
+        yield staged_input
+
+
 def _validate(
     root: Path,
     output: Path | None = None,
@@ -127,7 +145,8 @@ def _validate(
         return schema_result
 
     runtime = CueRuntime()
-    returncode, stdout, stderr = runtime.run(["export", str(root / "contract"), str(extracted_path), "--out", "json"])
+    with _repository_local_cue_input(root, extracted_path) as cue_input:
+        returncode, stdout, stderr = runtime.run(["export", str(root / "contract"), str(cue_input), "--out", "json"])
     if returncode:
         rendered = render_cue_diagnostics(stderr)
         if rendered:
