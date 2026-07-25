@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -111,3 +112,18 @@ def test_all_named_rejection_fixture_files_exist() -> None:
             "expected.json",
             "extracted.json",
         }
+
+
+def test_documentation_labels_do_not_accept_substring_only_matches(tmp_path: Path) -> None:
+    overlays = {
+        "declarations.json": {"operations": [{"op": "set", "path": ["languages", "ruby", "docLabel"], "value": "R"}]},
+        "extracted.json": {"operations": []},
+    }
+    for filename, document in overlays.items():
+        (tmp_path / filename).write_text(json.dumps(document), encoding="utf-8")
+
+    returncode, _, stderr = validate_fixture(tmp_path)
+
+    assert returncode == 1
+    assert "C_DOC_001" in stderr
+    assert "README.md" in stderr

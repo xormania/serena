@@ -102,7 +102,13 @@ class CueRuntime:
         except (OSError, subprocess.SubprocessError):
             return False
 
-        return completed.returncode == 0 and self.release.version in completed.stdout
+        if completed.returncode != 0:
+            return False
+        for line in completed.stdout.splitlines():
+            fields = line.split()
+            if fields[:2] == ["cue", "version"]:
+                return len(fields) == 3 and fields[2] == self.release.version
+        return False
 
     @staticmethod
     def _sha256(path: Path) -> str:

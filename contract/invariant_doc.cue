@@ -11,13 +11,21 @@ _stableDocLabels: {
 
 _cDocReadmeMissing: [
 	for label, _ in _stableDocLabels
-	let matches = [for actual in extracted.docs.readmeLabels if strings.Contains(strings.ToLower(actual), strings.ToLower(label)) {1}]
+	let matches = [
+		for actual in extracted.docs.readmeLabels
+		for alias in strings.Split(actual, " / ")
+		if strings.ToLower(alias) == strings.ToLower(label) {1}
+	]
 	if len(matches) == 0 {label},
 ]
 
 _cDocPageMissing: [
 	for label, _ in _stableDocLabels
-	let matches = [for actual in extracted.docs.docsLabels if strings.Contains(strings.ToLower(actual), strings.ToLower(label)) {1}]
+	let matches = [
+		for actual in extracted.docs.docsLabels
+		for alias in strings.Split(actual, " / ")
+		if strings.ToLower(alias) == strings.ToLower(label) {1}
+	]
 	if len(matches) == 0 {label},
 ]
 
