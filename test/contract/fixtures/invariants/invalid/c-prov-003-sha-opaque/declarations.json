@@ -1,3 +1,1 @@
-{
-  "operations": []
-}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","servers","csharp_language_server","runtimeDeps",0,"sha256Opaque"],"value":true}]},"expected":{"diagnostic":"C_PROV_003","category":"provisioning","subject":"csharp:checksum-opaque"}}

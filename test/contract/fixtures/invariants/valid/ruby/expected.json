@@ -1,8 +1,0 @@
-{
-  "backend": "ruby",
-  "must_equal": {
-    "backends.ruby.provisioning.strategy": "package-manager",
-    "backends.ruby.provisioning.owner.runtime": "project",
-    "backends.ruby.provisioning.pin": "0.26.8"
-  }
-}

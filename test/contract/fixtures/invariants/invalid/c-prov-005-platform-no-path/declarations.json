@@ -1,1 +1,1 @@
-{"operations": []}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","servers","hlsl_language_server","runtimeDeps"],"value":[{"id":"shader-language-server","platformId":"linux-x64","url":"https://example.invalid/server.zip","sha256":"fixture-sha256","opaque":false}]}]},"expected":{"diagnostic":"C_PROV_005","category":"provisioning","subject":"hlsl:windows"}}

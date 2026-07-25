@@ -1,1 +1,1 @@
-{"operations":[{"op":"set","path":["backends","python","status"],"value":"experimental"}]}
+{"declarations":{"operations":[{"op":"set","path":["backends","python","status"],"value":"experimental"}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_REG_004","category":"registration","subject":"python"}}

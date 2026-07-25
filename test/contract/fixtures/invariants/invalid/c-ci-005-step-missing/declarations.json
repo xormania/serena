@@ -1,1 +1,1 @@
-{"operations":[{"op":"set","path":["backends","cpp_ccls","ci","installStep"],"value":"Install unrelated server"}]}
+{"declarations":{"operations":[{"op":"set","path":["backends","cpp_ccls","ci","installStep"],"value":"Install unrelated server"}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_CI_005","category":"ci placement","subject":"cpp_ccls"}}

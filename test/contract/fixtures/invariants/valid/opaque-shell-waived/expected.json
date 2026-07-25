@@ -1,1 +1,0 @@
-{"backend":"python","profile":"opaque-shell-waived","must_equal":{"backends.python.testing.bootstrap.steps.0.waiver":"W-FIX-SHELL-FIXTURE","waivers.W-FIX-SHELL-FIXTURE.invariant":"C-FIX-001"}}

@@ -1,1 +1,1 @@
-{"operations":[{"op":"set","path":["backends","python","platforms"],"value":{"supported":["linux","windows"],"excluded":[]}}]}
+{"declarations":{"operations":[{"op":"set","path":["backends","python","platforms"],"value":{"supported":["linux","windows"],"excluded":[]}}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_PLAT_001","category":"platform","subject":"python:macos"}}

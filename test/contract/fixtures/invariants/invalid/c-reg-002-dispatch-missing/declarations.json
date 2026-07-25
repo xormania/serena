@@ -1,1 +1,1 @@
-{"operations":[]}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"delete","path":["extracted","lsConfig","dispatch","python"]}]},"expected":{"diagnostic":"C_REG_002","category":"registration","subject":"python"}}

@@ -1,1 +1,0 @@
-{"operations":[{"op":"set","path":["extracted","servers","hlsl_language_server","cargoCommands"],"value":[["cargo","install","shader_language_server","--version","version","--root","."]]}]}

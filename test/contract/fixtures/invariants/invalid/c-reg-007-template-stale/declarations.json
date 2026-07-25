@@ -1,1 +1,1 @@
-{"operations":[]}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","docs","templateIds"],"value":["python_ty","cpp","cpp_ccls","gdscript","msl","erlang"]}]},"expected":{"diagnostic":"C_REG_007","category":"registration","subject":"project.template.yml"}}

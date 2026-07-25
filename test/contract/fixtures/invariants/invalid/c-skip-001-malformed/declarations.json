@@ -1,1 +1,1 @@
-{"operations":[{"op":"set","path":["backends","python","ci","skipPolicy"],"value":{"category":2,"toolProbe":"python"}}]}
+{"declarations":{"operations":[{"op":"set","path":["backends","python","ci","skipPolicy"],"value":{"category":2,"toolProbe":"python"}}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_SKIP_001","category":"skip policy","subject":"python","raw_path":"backends.python.ci.skipPolicy"}}

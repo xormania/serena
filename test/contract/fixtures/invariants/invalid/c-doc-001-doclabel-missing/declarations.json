@@ -1,1 +1,1 @@
-{"operations":[]}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","docs","readmeLabels"],"value":["AL","C#","C/C++","Erlang","GDScript","HLSL","Java","MSL","Nix","Python","Ruby","Swift"]}]},"expected":{"diagnostic":"C_DOC_001","category":"documentation","subject":"README.md"}}

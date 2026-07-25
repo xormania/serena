@@ -1,1 +1,0 @@
-{"backend":"kotlin","must_equal":{"backends.kotlin.testing.tested":true,"backends.kotlin.ci.expected":false,"backends.kotlin.ci.waiver":"W-CI-NEVER-RUN-KOTLIN","backends.kotlin.provisioning.owner.ci":"none","waivers.W-CI-NEVER-RUN-KOTLIN.invariant":"C-CI-001"}}

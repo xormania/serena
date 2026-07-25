@@ -1,1 +1,1 @@
-{"operations":[{"op":"set","path":["backends","python_ty","role"],"value":"default"}]}
+{"declarations":{"operations":[{"op":"set","path":["backends","python_ty","role"],"value":"default"}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_REG_006","category":"registration","subject":"python"}}

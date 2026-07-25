@@ -1,1 +1,1 @@
-{"operations": []}
+{"declarations":{"operations":[]},"extracted":{"operations":[]},"expected":{"backend":"java","must_equal":{"backends.java.provisioning.strategy":"composite","backends.java.provisioning.primary.strategy":"download","backends.java.provisioning.companions.0.name":"gradle","backends.java.provisioning.companions.1.name":"intellicode"},"must_have_length":{"backends.java.provisioning.companions":2,"extracted.servers.eclipse_jdtls.runtimeDeps":5},"all_nonempty":["extracted.servers.eclipse_jdtls.runtimeDeps.sha256"]}}

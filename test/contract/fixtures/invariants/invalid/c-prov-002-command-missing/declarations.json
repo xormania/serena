@@ -1,3 +1,1 @@
-{
-  "operations": []
-}
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","servers","hlsl_language_server","cargoCommands"],"value":[]}]},"expected":{"diagnostic":"C_PROV_002","category":"provisioning","subject":"hlsl"}}

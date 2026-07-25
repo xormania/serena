@@ -1,1 +1,0 @@
-{"backend":"elixir","profile":"elixir-waived-bootstrap","must_equal":{"backends.elixir.testing.bootstrap.onFailure.ci":"skip","waivers.W-FIX-ELIXIR.invariant":"C-FIX-002","waivers.W-FIX-ELIXIR.subject":"elixir"}}

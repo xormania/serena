@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import json
 from unittest.mock import patch
 
 import pytest
 
-from test.contract.invariant_support import FIXTURES, ROOT, load_fixture, validate_fixture
+from test.contract.invariant_support import FIXTURES, ROOT, load_case, load_fixture, validate_fixture
 
 VALID_CASES = [
     "python",
@@ -38,7 +37,7 @@ VALID_CASES = [
 @pytest.mark.parametrize("case_name", VALID_CASES)
 def test_valid_integration_class_is_accepted(case_name: str) -> None:
     case_dir = FIXTURES / "valid" / case_name
-    metadata = json.loads((case_dir / "expected.json").read_text())
+    metadata = load_case(case_dir).expected
     document = load_fixture(case_dir)
     assert metadata["backend"] in document["backends"]
 

@@ -1,1 +1,1 @@
-{"operations":[{"op":"copy","from":["backends","python"],"path":["backends","ghost"]},{"op":"set","path":["backends","ghost","id"],"value":"ghost"},{"op":"set","path":["backends","ghost","role"],"value":"alternate"}]}
+{"declarations":{"operations":[{"op":"copy","from":["backends","python"],"path":["backends","ghost"]},{"op":"set","path":["backends","ghost","id"],"value":"ghost"},{"op":"set","path":["backends","ghost","role"],"value":"alternate"}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_REG_001","category":"registration","subject":"ghost"}}
