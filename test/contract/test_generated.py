@@ -5,6 +5,7 @@ from __future__ import annotations
 import importlib
 import json
 import re
+import subprocess
 from pathlib import Path
 from typing import cast
 
@@ -121,6 +122,22 @@ def test_committed_generated_artifacts_are_byte_current() -> None:
         "registrationCurrent": True,
         "templateCurrent": True,
     }
+
+
+def test_contract_sources_and_generated_artifacts_checkout_as_lf() -> None:
+    relative_paths = sorted(path.relative_to(ROOT).as_posix() for path in (ROOT / "contract").rglob("*.cue"))
+    relative_paths.extend([REGISTRATION.relative_to(ROOT).as_posix(), TEMPLATE.relative_to(ROOT).as_posix()])
+    completed = subprocess.run(
+        ["git", "check-attr", "eol", "--", *relative_paths],
+        cwd=ROOT,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    attributes = dict(line.rsplit(": eol: ", 1) for line in completed.stdout.splitlines())
+    assert attributes == dict.fromkeys(relative_paths, "lf")
 
 
 def test_render_cli_subcommands_write_requested_outputs(tmp_path: Path) -> None:

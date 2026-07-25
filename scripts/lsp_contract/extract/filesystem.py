@@ -25,7 +25,7 @@ def _is_session_autouse_fixture(decorator: ast.expr) -> bool:
 
 
 def _has_bootstrap_fixture(path: Path) -> bool:
-    tree = ast.parse(path.read_text(), filename=str(path))
+    tree = ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
     return any(
         any(_is_session_autouse_fixture(decorator) for decorator in node.decorator_list)
         for node in ast.walk(tree)

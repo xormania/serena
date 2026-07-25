@@ -2,9 +2,13 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
+from unittest.mock import patch
+
+import pytest
 
 from scripts.lsp_contract.extract.server_modules_ast import extract_server_modules
 
@@ -43,8 +47,19 @@ def test_full_repo_validates() -> None:
         check=False,
         capture_output=True,
         text=True,
-        env={"CUE_REGISTRY": "host.invalid"},
+        env={**os.environ, "CUE_REGISTRY": "host.invalid"},
     )
     assert completed.returncode == 0, completed.stderr
     assert "0 violations" in completed.stdout
     assert "waivers: 81" in completed.stdout
+
+
+def test_full_repo_validation_preserves_parent_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("USERPROFILE", "C:/Users/runner")
+    completed = subprocess.CompletedProcess(args=[], returncode=0, stdout="contract: 0 violations; waivers: 81\n", stderr="")
+
+    with patch.object(subprocess, "run", return_value=completed) as run:
+        test_full_repo_validates()
+
+    assert run.call_args.kwargs["env"]["USERPROFILE"] == "C:/Users/runner"
+    assert run.call_args.kwargs["env"]["CUE_REGISTRY"] == "host.invalid"

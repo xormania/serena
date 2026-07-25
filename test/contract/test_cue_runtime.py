@@ -8,6 +8,7 @@ import os
 import subprocess
 import tarfile
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -42,11 +43,15 @@ def test_tampered_archive_is_rejected_without_installing(tmp_path: Path, tampere
 
 def test_locate_honors_serena_cue_override(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     executable = tmp_path / "cue"
-    executable.write_text("#!/bin/sh\necho 'cue version v0.17.1'\n", encoding="utf-8")
-    executable.chmod(0o755)
+    executable.touch()
+    executable = executable.resolve()
     monkeypatch.setenv("SERENA_CUE", str(executable))
+    completed = subprocess.CompletedProcess(args=[executable, "version"], returncode=0, stdout="cue version v0.17.1\n", stderr="")
 
-    assert CueRuntime(managed_root=tmp_path / "managed").locate() == executable
+    with patch.object(subprocess, "run", return_value=completed) as run:
+        assert CueRuntime(managed_root=tmp_path / "managed").locate() == executable
+
+    run.assert_called_once_with([executable, "version"], check=False, capture_output=True, text=True, timeout=10)
 
 
 @pytest.mark.skipif(os.environ.get("SERENA_CONTRACT_OFFLINE") == "1", reason="explicit offline contract run")

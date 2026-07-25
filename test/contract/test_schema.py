@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import os
 import subprocess
 import sys
 from pathlib import Path
+from unittest.mock import patch
 
 import pytest
 
@@ -80,6 +82,17 @@ def test_vet_schema_driver_runs_the_offline_schema_gate() -> None:
         check=False,
         capture_output=True,
         text=True,
-        env={"CUE_REGISTRY": "host.invalid"},
+        env={**os.environ, "CUE_REGISTRY": "host.invalid"},
     )
     assert completed.returncode == 0, completed.stderr
+
+
+def test_schema_driver_preserves_parent_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("USERPROFILE", "C:/Users/runner")
+    completed = subprocess.CompletedProcess(args=[], returncode=0, stdout="", stderr="")
+
+    with patch.object(subprocess, "run", return_value=completed) as run:
+        test_vet_schema_driver_runs_the_offline_schema_gate()
+
+    assert run.call_args.kwargs["env"]["USERPROFILE"] == "C:/Users/runner"
+    assert run.call_args.kwargs["env"]["CUE_REGISTRY"] == "host.invalid"

@@ -2,6 +2,8 @@
 
 from pathlib import Path
 
+import pytest
+
 from scripts.lsp_contract.extract.conftest_ast import extract_conftest
 from scripts.lsp_contract.extract.docs_presence import extract_docs
 from scripts.lsp_contract.extract.filesystem import extract_filesystem
@@ -104,3 +106,20 @@ def test_extracts_filesystem_server_and_documentation_facts() -> None:
     assert docs["readmeLabels"] == ["CUE", "Python", "QML"]
     assert docs["docsLabels"] == ["CUE", "Python", "QML"]
     assert docs["templateIds"] == ["cue", "python", "qml"]
+
+
+def test_filesystem_reads_bootstrap_sources_as_utf8(monkeypatch: pytest.MonkeyPatch) -> None:
+    original_read_text = Path.read_text
+    bootstrap_encodings: list[str | None] = []
+
+    def read_text(path: Path, encoding: str | None = None, errors: str | None = None) -> str:
+        if path.name == "conftest.py":
+            bootstrap_encodings.append(encoding)
+        return original_read_text(path, encoding=encoding, errors=errors)
+
+    monkeypatch.setattr(Path, "read_text", read_text)
+
+    extract_filesystem(FIXTURES)
+
+    assert bootstrap_encodings
+    assert set(bootstrap_encodings) == {"utf-8"}

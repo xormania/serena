@@ -60,7 +60,7 @@ def validate_fixture(case_dir: Path) -> tuple[int, str, str]:
         FIXTURES / "contract.cue",
     ]
     document = load_fixture(case_dir)
-    with tempfile.TemporaryDirectory(prefix="serena-contract-fixture-") as directory:
+    with tempfile.TemporaryDirectory(prefix="serena-contract-fixture-", dir=ROOT) as directory:
         input_path = Path(directory) / "input.json"
-        input_path.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n")
+        input_path.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
         return CueRuntime().run(["export", "--out", "json"], [*cue_files, input_path])

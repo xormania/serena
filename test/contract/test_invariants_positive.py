@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import json
+from unittest.mock import patch
 
 import pytest
 
-from test.contract.invariant_support import FIXTURES, load_fixture, validate_fixture
+from test.contract.invariant_support import FIXTURES, ROOT, load_fixture, validate_fixture
 
 VALID_CASES = [
     "python",
@@ -65,3 +66,11 @@ def test_valid_integration_class_is_accepted(case_name: str) -> None:
 
     returncode, _, stderr = validate_fixture(case_dir)
     assert returncode == 0, f"expected valid fixture {case_name} to pass:\n{stderr}"
+
+
+def test_fixture_input_is_created_on_repository_volume() -> None:
+    with patch("test.contract.invariant_support.CueRuntime.run", return_value=(0, "", "")) as run:
+        validate_fixture(FIXTURES / "valid" / "python")
+
+    input_path = run.call_args.args[-1][-1]
+    assert input_path.is_relative_to(ROOT)
