@@ -53,8 +53,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Fail declaration drift before the 13-run OS/batch matrix starts. This stdlib-only gate is
-  # intentionally cheap: one pinned CUE download on a cold cache, then seconds on a warm cache.
+  # Fail declaration drift before the 13-run OS/batch matrix starts. The gate proper is stdlib-only
+  # and intentionally cheap: one pinned CUE download on a cold cache, then seconds on a warm cache.
+  # Only once live validation has passed does the job install the uv environment and re-run the full
+  # contract regression suite, so a contract regression is caught here rather than in the matrix.
   contract:
     name: contract (language/CI declarations)
     runs-on: ubuntu-latest
@@ -72,6 +74,15 @@ jobs:
         run: python -m scripts.lsp_contract install-cue
       - name: Validate language/CI contract
         run: python -m scripts.lsp_contract validate --github-summary
+      # Everything below runs only after the cheap gate above is green. The regression suite needs
+      # the project + dev extras (solidlsp, pytest, ruamel), hence the uv environment; it reuses the
+      # CUE binary installed and cached above (~/.serena/dev_tools/cue, same HOME).
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+      - name: Install Python environment
+        run: uv sync --extra dev --locked
+      - name: Contract regression suite
+        run: uv run pytest test/contract -q --tb=short
 
   cpu:
     needs: contract

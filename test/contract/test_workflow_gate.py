@@ -18,6 +18,8 @@ from scripts.lsp_contract.extract.workflow_yaml import extract_workflow
 ROOT = Path(__file__).parents[2]
 WORKFLOW = ROOT / ".github" / "workflows" / "pytest.yml"
 PYPROJECT = ROOT / "pyproject.toml"
+LIVE_VALIDATION_COMMAND = "python -m scripts.lsp_contract validate --github-summary"
+REGRESSION_COMMAND = "uv run pytest test/contract -q --tb=short"
 
 
 def _workflow_document() -> dict[str, Any]:
@@ -31,6 +33,24 @@ def _poe_tasks() -> dict[str, object]:
     return cast(dict[str, object], document["tool"]["poe"]["tasks"])
 
 
+def _job_steps(job: str) -> list[dict[str, Any]]:
+    return cast(list[dict[str, Any]], _workflow_document()["jobs"][job]["steps"])
+
+
+def _run_step_index(steps: list[dict[str, Any]], command: str) -> int:
+    # position of the single step whose `run` executes exactly the given command
+    positions = [index for index, step in enumerate(steps) if str(step.get("run", "")).strip() == command]
+    assert len(positions) == 1, f"expected exactly one step running {command!r}, found {len(positions)}"
+    return positions[0]
+
+
+def _uses_step_index(steps: list[dict[str, Any]], action: str) -> int:
+    # position of the single step invoking the given action (matched by `owner/name@` prefix)
+    positions = [index for index, step in enumerate(steps) if str(step.get("uses", "")).startswith(action)]
+    assert len(positions) == 1, f"expected exactly one step using {action!r}, found {len(positions)}"
+    return positions[0]
+
+
 def test_contract_job_gates_the_cpu_matrix() -> None:
     extracted = extract_workflow(WORKFLOW)
     jobs = {str(job["name"]): job for job in cast(list[dict[str, object]], extracted["jobs"])}
@@ -42,7 +62,8 @@ def test_contract_job_gates_the_cpu_matrix() -> None:
 
 def test_contract_job_has_the_exact_cheap_platform_shape() -> None:
     contract_job = _workflow_document()["jobs"]["contract"]
-    steps = contract_job["steps"]
+    steps = cast(list[dict[str, Any]], contract_job["steps"])
+    gate_steps = steps[: _run_step_index(steps, LIVE_VALIDATION_COMMAND) + 1]
 
     assert contract_job["name"] == "contract (language/CI declarations)"
     assert contract_job["runs-on"] == "ubuntu-latest"
@@ -50,8 +71,9 @@ def test_contract_job_has_the_exact_cheap_platform_shape() -> None:
     assert steps[0] == {"uses": "actions/checkout@v4"}
     assert steps[1]["uses"] == "actions/setup-python@v4"
     assert steps[1]["with"] == {"python-version": "3.11"}
-    assert all("uv sync" not in str(step.get("run", "")) for step in steps)
-    assert all("setup-uv" not in str(step.get("uses", "")) for step in steps)
+    # the fail-fast gate itself stays stdlib-only; uv enters the job only afterwards, for the regression suite
+    assert all("uv sync" not in str(step.get("run", "")) for step in gate_steps)
+    assert all("setup-uv" not in str(step.get("uses", "")) for step in gate_steps)
 
 
 def test_contract_job_caches_the_pinned_cue_toolchain() -> None:
@@ -64,13 +86,51 @@ def test_contract_job_caches_the_pinned_cue_toolchain() -> None:
 
 
 def test_contract_job_runs_install_then_validate_exactly_once() -> None:
-    contract_steps = _workflow_document()["jobs"]["contract"]["steps"]
-    run_commands = [step.get("run") for step in contract_steps if step.get("run")]
+    run_commands = [str(step["run"]).strip() for step in _job_steps("contract") if step.get("run")]
 
-    assert run_commands == [
+    assert run_commands[:2] == [
         "python -m scripts.lsp_contract install-cue",
-        "python -m scripts.lsp_contract validate --github-summary",
+        LIVE_VALIDATION_COMMAND,
     ]
+    assert run_commands.count("python -m scripts.lsp_contract install-cue") == 1
+    assert run_commands.count(LIVE_VALIDATION_COMMAND) == 1
+
+
+def test_contract_job_runs_the_full_regression_suite_after_live_validation() -> None:
+    steps = _job_steps("contract")
+    validation = _run_step_index(steps, LIVE_VALIDATION_COMMAND)
+    regression = _run_step_index(steps, REGRESSION_COMMAND)
+
+    assert regression > validation, "the contract regression suite must run after live validation"
+    assert not steps[regression].get("if"), "the regression suite must not be conditional"
+    assert not steps[regression].get("continue-on-error"), "a failing regression suite must fail the gate"
+
+
+def test_contract_job_installs_the_locked_uv_environment_before_the_regression() -> None:
+    steps = _job_steps("contract")
+    regression = _run_step_index(steps, REGRESSION_COMMAND)
+    uv_action = _uses_step_index(steps, "astral-sh/setup-uv@")
+    syncs = [index for index, step in enumerate(steps) if str(step.get("run", "")).strip().startswith("uv sync")]
+
+    assert uv_action < regression, "uv must be installed before the regression suite runs"
+    assert len(syncs) == 1, f"expected exactly one dependency sync step, found {len(syncs)}"
+    assert syncs[0] < regression, "the environment must be synced before the regression suite runs"
+    assert "--locked" in str(steps[syncs[0]]["run"]), "the gate must install from the lock file"
+
+
+def test_matrix_batches_still_run_the_contract_tests() -> None:
+    extracted = extract_workflow(WORKFLOW)
+    matrix = cast(dict[str, Any], extracted["matrix"])
+    steps = _job_steps("cpu")
+    test_commands = [str(step["run"]).strip() for step in steps if str(step.get("run", "")).strip().startswith("uv run poe test")]
+
+    assert "catch-all" in matrix["batches"]
+    assert all(exclusion["batch"] != "catch-all" for exclusion in matrix["exclude"])
+    assert len(test_commands) == 1, f"expected exactly one matrix test step, found {len(test_commands)}"
+    command = test_commands[0]
+    assert '-m "${{ steps.markers.outputs.expr }}"' in command, "the matrix must keep running the batch's marker expression"
+    assert "--ignore" not in command and "--deselect" not in command, "the matrix run must not exclude any tests"
+    assert "test/" not in command, "the matrix run must stay unrestricted over the whole test tree"
 
 
 def test_poe_contract_tasks_match_the_plan() -> None:
