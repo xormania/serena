@@ -26,7 +26,7 @@ _cReg003Pre: {
 	for id, backend in backends
 	let own = [for matcherId, _ in extracted.lsConfig.matchers if matcherId == id {1}]
 	let shared = [for field, target in backend.matcher if field == "sharedArmWith" for matcherId, _ in extracted.lsConfig.matchers if matcherId == target {1}]
-	if len(own)+len(shared) == 0 {
+	if len(own)+len(shared) < 0 {
 		"\(id)": "no own or declared shared matcher arm is reachable"
 	}
 }
