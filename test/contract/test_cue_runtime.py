@@ -67,11 +67,12 @@ def test_locate_rejects_prefix_version_match(tmp_path: Path, monkeypatch: pytest
             CueRuntime(managed_root=tmp_path / "managed").locate()
 
 
-def test_project_config_does_not_override_cue_executable() -> None:
+def test_project_config_keeps_cue_activation_local() -> None:
     project_path = Path(__file__).parents[2] / ".serena" / "project.yml"
     project = YAML(typ="safe").load(project_path.read_text(encoding="utf-8"))
     cue_settings = project.get("ls_specific_settings", {}).get("cue", {})
 
+    assert "cue" not in project["language_servers"]
     assert "ls_path" not in cue_settings
 
 

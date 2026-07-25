@@ -37,7 +37,6 @@ project_name: "serena"
 language_servers:
   - python
   - typescript
-  - cue
 
 # whether to use project's .gitignore files to ignore files
 ignore_all_files_in_gitignore: true
