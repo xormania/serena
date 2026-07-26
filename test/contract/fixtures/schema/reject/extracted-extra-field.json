@@ -1,0 +1,10 @@
+{
+  "lsConfig": {"members":[],"memberSymbols":{},"dispatch":{},"matchers":{},"experimentalSet":[],"nonProgrammingSet":[],"priorityZeroSet":[]},
+  "conftest": {"aliases":{},"rawDuplicateKeys":[],"markerDict":{},"backendLists":{},"verifiedImplementationSet":[]},
+  "pyproject": {"markers":[],"devPins":{}},
+  "workflow": {"markerGroups":{},"matrix":{"os":[],"batches":[],"exclude":[]},"jobs":[],"steps":[],"caches":[]},
+  "servers": {},
+  "filesystem": {"repoDirs":[],"testDirs":[],"bootstrapConftests":[]},
+  "docs": {"readmeLabels":[],"docsLabels":[],"templateIds":[]},
+  "unexpected": true
+}

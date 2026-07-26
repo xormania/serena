@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"set","path":["backends","nix","ci","os"],"value":["windows"]}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_CI_006","category":"ci placement","subject":"nix:windows"}}

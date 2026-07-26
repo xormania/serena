@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","filesystem","repoDirs"],"value":["cpp","msl","erlang"]}]},"expected":{"diagnostic":"C_TEST_002","category":"testing","subject":"python"}}

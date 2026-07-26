@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","servers","csharp_language_server","runtimeDeps"],"value":[]},{"op":"set","path":["extracted","servers","csharp_language_server","opaqueProvisioningCalls"],"value":[]}]},"expected":{"diagnostic":"C_PROV_003","category":"provisioning","subject":"csharp"}}

@@ -1,0 +1,9 @@
+[tool.pytest.ini_options]
+markers = [
+  "python: Python tests",
+  "slow: slow tests",
+  "snapshot: snapshot tests",
+]
+
+[dependency-groups]
+dev = ["ty==0.0.24"]

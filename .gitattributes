@@ -2,3 +2,8 @@
 # The Haxe language server cannot properly parse/index files with CRLF endings, causing it to fail on Windows without this.
 *.hxml text eol=lf
 *.hx text eol=lf
+
+# Keep CUE sources and byte-checked generated artifacts deterministic.
+*.cue text eol=lf
+contract/REGISTRATION.md text eol=lf
+src/serena/resources/project.template.yml text eol=lf

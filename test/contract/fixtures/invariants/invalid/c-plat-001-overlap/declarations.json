@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"set","path":["backends","python","platforms"],"value":{"supported":["linux","macos","windows"],"excluded":[{"os":"macos","reason":"Synthetic overlap."}]}}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_PLAT_001","category":"platform","subject":"python:macos"}}

@@ -276,3 +276,6 @@ zz-misc/
 vue-implementation/
 
 news/news.json
+
+# Ephemeral language-integration contract extraction
+/contract/extracted/

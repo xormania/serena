@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"append","path":["extracted","conftest","rawDuplicateKeys"],"value":["python_ty",44,45]}]},"expected":{"diagnostic":"C_TEST_005","category":"testing","subject":"python_ty"}}

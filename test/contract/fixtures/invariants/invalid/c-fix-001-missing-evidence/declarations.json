@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"set","path":["backends","python","testing","bootstrap"],"value":{"required":true,"steps":[{"kind":"npm-ci","detail":"npm ci"}],"produces":["node_modules/example/package.json"],"onFailure":{"ci":"fail","local":"skip"}}}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_FIX_001","category":"fixture bootstrap","subject":"python"}}

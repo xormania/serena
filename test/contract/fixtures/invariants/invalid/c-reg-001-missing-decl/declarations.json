@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"delete","path":["backends","python"]}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_REG_001","category":"registration","subject":"python"}}

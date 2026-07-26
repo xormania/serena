@@ -1,5 +1,6 @@
-"""
-Prints the list of supported languages, for use in the project.yml template
+"""Print the legacy supported-language list.
+
+Deprecated in favor of ``uv run python -m scripts.lsp_contract render-template-list``.
 """
 
 from solidlsp.ls_config import LanguageServerId

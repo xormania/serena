@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"set","path":["backends","ruby","provisioning","pin"],"value":"UNPINNED"},{"op":"set","path":["backends","ruby","provisioning","waiver"],"value":"W-PROV-FIXTURE-UNPINNED"}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_PROV_004","category":"provisioning","subject":"ruby"}}

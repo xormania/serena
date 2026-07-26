@@ -1,0 +1,1 @@
+{"declarations":{"operations":[{"op":"delete","path":["backends","python","provisioning","owner"]}]},"extracted":{"operations":[]},"expected":{"diagnostic":"C_PROV_006","category":"provisioning","subject":"provisioning.owner","raw_path":"backends.python.provisioning.owner"}}

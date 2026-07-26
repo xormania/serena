@@ -1,0 +1,28 @@
+name: tests
+on: [pull_request]
+env:
+  MARKERS_JVM: java or kotlin
+  MARKERS_NATIVE: cpp or rust
+  MARKERS_OTHER_LANGS: qml or cue
+  MARKERS_NICHE: msl
+jobs:
+  cpu:
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        batch: [jvm, native, other-langs, niche, catch-all]
+        exclude:
+          - {os: macos-latest, batch: niche}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache tools
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/tools
+          key: tools-${{ runner.os }}-v1
+          restore-keys: |
+            tools-${{ runner.os }}-
+      - name: Install QML
+        if: matrix.batch == 'other-langs' && runner.os == 'Linux'
+        run: install-qml

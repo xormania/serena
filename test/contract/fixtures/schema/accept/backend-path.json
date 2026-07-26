@@ -1,0 +1,13 @@
+{
+  "id": "python",
+  "language": "python",
+  "role": "sole",
+  "class": {"module": "solidlsp.python", "name": "PythonLanguageServer"},
+  "status": "stable",
+  "matcher": {"extensions": [".py"], "caseSensitive": true},
+  "provisioning": {"strategy": "path", "owner": {"runtime": "user", "ci": "image"}, "cacheInputs": [], "executables": ["pyright-langserver"]},
+  "platforms": {"supported": ["linux", "macos", "windows"], "excluded": []},
+  "testing": {"tested": false, "waiver": "W-TEST-PYTHON"},
+  "ci": {"expected": false, "waiver": "W-CI-PYTHON", "skipPolicy": {"category": 5, "waiver": "W-SKIP-PYTHON", "reason": "fixture"}},
+  "capabilities": {"implementationSupport": "advertised"}
+}

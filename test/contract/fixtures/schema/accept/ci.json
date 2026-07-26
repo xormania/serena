@@ -1,0 +1,1 @@
+{"expected":true,"batch":"other-langs","os":["linux","macos"],"skipPolicy":{"category":2,"loudOn":{"os":["linux"],"ci":true},"toolProbe":"qmlls6|qmlls"}}

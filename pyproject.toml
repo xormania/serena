@@ -164,6 +164,9 @@ type = "simple"
 [tool.poe.tasks]
 # For custom markers, use poe test -m ...
 test = "pytest test -vv"
+_contract_install = "python -m scripts.lsp_contract install-cue"
+_contract_validate = "python -m scripts.lsp_contract validate"
+check-contract = ["_contract_install", "_contract_validate"]
 _ruff_check = "ruff check src scripts test"
 _ruff_format_check = "ruff format --check src scripts test"
 _ruff_fix = "ruff check --fix src scripts test"
@@ -172,7 +175,8 @@ lint = ["_ruff_format_check", "_ruff_check"]
 format = ["_ruff_fix", "_ruff_format"]
 _ty_core = "ty check src/serena src/solidlsp"
 _ty_test = "ty check test --exclude test/resources"
-type-check = ["_ty_core", "_ty_test"]
+_ty_contract = "ty check scripts/lsp_contract"
+type-check = ["_ty_core", "_ty_test", "_ty_contract"]
 ty = ["type-check"]
 # docs
 _autogen_docs = "python docs/autogen_docs.py"
