@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"delete","path":["extracted","servers","omnisharp","runtimeDependencyJson","runtimeDependencies",3,"integrity"]}]},"expected":{"diagnostic":"C_PROV_003","category":"provisioning","subject":"csharp_omnisharp"}}

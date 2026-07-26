@@ -461,7 +461,7 @@ def _determine_disabled_language_servers() -> list[LanguageServerId]:
         result.append(LanguageServerId.CRYSTAL)
     if _sh.which("julia") is None:  # LanguageServer.jl is auto-installed by the LS when julia is present
         result.append(LanguageServerId.JULIA)
-    if _sh.which("nixd") is None:
+    if _sh.which("nixd") is None or is_windows:
         result.append(LanguageServerId.NIX)
     if _sh.which("haskell-language-server-wrapper") is None:
         result.append(LanguageServerId.HASKELL)
@@ -469,7 +469,7 @@ def _determine_disabled_language_servers() -> list[LanguageServerId]:
         result.append(LanguageServerId.R)
     if not _is_ocaml_lsp_available():  # opam alone isn't enough -- needs the ocaml-lsp-server package
         result.append(LanguageServerId.OCAML)
-    if not _is_perl_language_server_available():  # perl ships with the OS; the LS module is the real signal
+    if not _is_perl_language_server_available() or is_windows:  # Perl LS runtime supports Linux/macOS only
         result.append(LanguageServerId.PERL)
 
     # === 4. Enabled everywhere: every language NOT listed in this function (python, go, java, ...) ===

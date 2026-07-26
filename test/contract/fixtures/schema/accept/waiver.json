@@ -1,0 +1,1 @@
+{"id":"W-PROV-JULIA-UNPINNED","invariant":"C-PROV-004","subject":"julia","reason":"Upstream package manager has no stable pin","reference":"https://example.test/issue/1","added":"2026-07-24"}

@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"append","path":["extracted","workflow","markerGroups","jvm"],"value":"csharp"}]},"expected":{"backend":"csharp","must_have_length":{"extracted.workflow.markerGroups.jvm":3}}}

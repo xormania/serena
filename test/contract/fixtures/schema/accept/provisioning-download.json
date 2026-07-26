@@ -1,0 +1,1 @@
+{"strategy":"download","owner":{"runtime":"serena","ci":"runtime"},"cacheInputs":["src/server.py#VERSION"],"pin":"v1.2.3","checksums":"all-platform-assets","hosts":["github.com"]}

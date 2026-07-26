@@ -1,0 +1,1 @@
+{"strategy":"composite","owner":{"runtime":"serena","ci":"workflow-step"},"cacheInputs":[],"primary":{"strategy":"path","executables":["svelteserver"]},"companions":[{"name":"typescript","provisioning":{"strategy":"npm","packages":[{"name":"typescript","pin":"5.9.2"}]}}]}

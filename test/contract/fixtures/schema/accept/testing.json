@@ -1,0 +1,1 @@
+{"tested":true,"marker":"svelte","fixtureRepo":"svelte","testDir":"svelte","bootstrap":{"required":true,"steps":[{"kind":"npm-ci"}],"produces":["node_modules/.package-lock.json"],"onFailure":{"ci":"fail","local":"skip"}}}

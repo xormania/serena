@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"append","path":["extracted","pyproject","markers"],"value":{"name":"orphan","description":"No backend owns this marker"}}]},"expected":{"diagnostic":"C_TEST_004","category":"testing","subject":"orphan"}}

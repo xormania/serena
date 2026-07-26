@@ -1,0 +1,2213 @@
+{
+  "languages": {
+    "python": {
+      "displayName": "Python",
+      "defaultBackend": "python",
+      "docLabel": "Python"
+    },
+    "cpp": {
+      "displayName": "C/C++",
+      "defaultBackend": "cpp",
+      "docLabel": "C/C++"
+    },
+    "gdscript": {
+      "displayName": "GDScript",
+      "defaultBackend": "gdscript",
+      "docLabel": "GDScript"
+    },
+    "msl": {
+      "displayName": "MSL",
+      "defaultBackend": "msl",
+      "docLabel": "MSL"
+    },
+    "erlang": {
+      "displayName": "Erlang",
+      "defaultBackend": "erlang",
+      "docLabel": "Erlang"
+    },
+    "csharp": {
+      "displayName": "C#",
+      "defaultBackend": "csharp",
+      "docLabel": "C#"
+    },
+    "java": {
+      "displayName": "Java",
+      "defaultBackend": "java",
+      "docLabel": "Java"
+    },
+    "ruby": {
+      "displayName": "Ruby",
+      "defaultBackend": "ruby",
+      "docLabel": "Ruby"
+    },
+    "swift": {
+      "displayName": "Swift",
+      "defaultBackend": "swift",
+      "docLabel": "Swift"
+    },
+    "nix": {
+      "displayName": "Nix",
+      "defaultBackend": "nix",
+      "docLabel": "Nix"
+    },
+    "al": {
+      "displayName": "AL",
+      "defaultBackend": "al",
+      "docLabel": "AL"
+    },
+    "qml": {
+      "displayName": "QML",
+      "defaultBackend": "qml",
+      "docLabel": "QML"
+    },
+    "hlsl": {
+      "displayName": "HLSL",
+      "defaultBackend": "hlsl",
+      "docLabel": "HLSL"
+    }
+  },
+  "backends": {
+    "python": {
+      "id": "python",
+      "language": "python",
+      "role": "default",
+      "class": {
+        "module": "pyright_server",
+        "name": "PyrightServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "extensions": [
+          ".py",
+          ".pyi"
+        ],
+        "caseSensitive": true
+      },
+      "provisioning": {
+        "strategy": "uvx",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/pyright_server.py#PYRIGHT_VERSION"
+        ],
+        "package": "basedpyright",
+        "pin": "1.31.4"
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "tested": true,
+        "marker": "python",
+        "fixtureRepo": "python",
+        "testDir": "python"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "catch-all",
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "python_ty": {
+      "id": "python_ty",
+      "language": "python",
+      "role": "alternate",
+      "class": {
+        "module": "ty_server",
+        "name": "TyLanguageServer"
+      },
+      "status": "experimental",
+      "matcher": {
+        "sharedArmWith": "python",
+        "caseSensitive": true
+      },
+      "provisioning": {
+        "strategy": "uvx",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/ty_server.py#TY_VERSION"
+        ],
+        "package": "ty",
+        "pin": "0.0.25"
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "tested": true,
+        "marker": "python",
+        "fixtureRepo": "python",
+        "aliasOf": "python",
+        "testDir": "python"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "catch-all",
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "cpp": {
+      "id": "cpp",
+      "language": "cpp",
+      "role": "default",
+      "class": {
+        "module": "clangd_language_server",
+        "name": "ClangdLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "extensions": [
+          ".c",
+          ".h",
+          ".cpp"
+        ],
+        "caseSensitive": false
+      },
+      "provisioning": {
+        "strategy": "path",
+        "owner": {
+          "runtime": "user",
+          "ci": "image"
+        },
+        "cacheInputs": [],
+        "executables": [
+          "clangd"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "tested": true,
+        "marker": "cpp",
+        "fixtureRepo": "cpp",
+        "testDir": "cpp"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "native",
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 3,
+          "toolProbe": "clangd"
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "cpp_ccls": {
+      "id": "cpp_ccls",
+      "language": "cpp",
+      "role": "alternate",
+      "class": {
+        "module": "ccls_language_server",
+        "name": "CCLS"
+      },
+      "status": "experimental",
+      "matcher": {
+        "sharedArmWith": "cpp",
+        "caseSensitive": false
+      },
+      "provisioning": {
+        "strategy": "path",
+        "owner": {
+          "runtime": "user",
+          "ci": "workflow-step"
+        },
+        "cacheInputs": [
+          ".github/workflows/pytest.yml#Install ccls"
+        ],
+        "executables": [
+          "ccls"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos"
+        ],
+        "excluded": [
+          {
+            "os": "windows",
+            "reason": "No current Windows ccls binary is available."
+          }
+        ]
+      },
+      "testing": {
+        "tested": true,
+        "marker": "cpp",
+        "fixtureRepo": "cpp",
+        "aliasOf": "cpp",
+        "testDir": "cpp"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "native",
+        "os": [
+          "linux",
+          "macos"
+        ],
+        "skipPolicy": {
+          "category": 3,
+          "toolProbe": "ccls"
+        },
+        "installStep": "Install ccls (C/C++ Language Server)"
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "gdscript": {
+      "id": "gdscript",
+      "language": "gdscript",
+      "role": "sole",
+      "class": {
+        "module": "godot_language_server",
+        "name": "GodotLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "extensions": [
+          ".gd",
+          ".gdscript"
+        ],
+        "caseSensitive": true
+      },
+      "provisioning": {
+        "strategy": "tcp",
+        "owner": {
+          "runtime": "user",
+          "ci": "none"
+        },
+        "cacheInputs": [],
+        "host": "127.0.0.1",
+        "port": 6005
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "tested": false,
+        "waiver": "W-TEST-GDSCRIPT"
+      },
+      "ci": {
+        "expected": false,
+        "waiver": "W-TEST-GDSCRIPT",
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "msl": {
+      "id": "msl",
+      "language": "msl",
+      "role": "sole",
+      "class": {
+        "module": "msl_language_server",
+        "name": "MslLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "extensions": [
+          ".mrc"
+        ],
+        "caseSensitive": true
+      },
+      "provisioning": {
+        "strategy": "bundled",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "pyproject.toml#pygls",
+          "uv.lock"
+        ],
+        "enginePin": "pyproject.toml#pygls==2.1.1"
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "tested": true,
+        "marker": "msl",
+        "fixtureRepo": "msl",
+        "testDir": "msl"
+      },
+      "ci": {
+        "expected": true,
+        "batch": "other-langs",
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "erlang": {
+      "id": "erlang",
+      "language": "erlang",
+      "role": "sole",
+      "class": {
+        "module": "erlang_language_server",
+        "name": "ErlangLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "extensions": [
+          ".erl",
+          ".hrl"
+        ],
+        "caseSensitive": true
+      },
+      "provisioning": {
+        "strategy": "path",
+        "owner": {
+          "runtime": "user",
+          "ci": "none"
+        },
+        "cacheInputs": [],
+        "executables": [
+          "erlang_ls"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos"
+        ],
+        "excluded": [
+          {
+            "os": "windows",
+            "reason": "The Erlang fixture toolchain is unavailable on Windows."
+          }
+        ]
+      },
+      "testing": {
+        "tested": true,
+        "marker": "erlang",
+        "fixtureRepo": "erlang",
+        "testDir": "erlang"
+      },
+      "ci": {
+        "expected": false,
+        "waiver": "W-CI-NEVER-RUN-ERLANG",
+        "skipPolicy": {
+          "category": 3,
+          "toolProbe": "erlang_ls"
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "al": {
+      "id": "al",
+      "language": "al",
+      "role": "sole",
+      "class": {
+        "module": "al_language_server",
+        "name": "ALLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".al",
+          ".dal"
+        ]
+      },
+      "provisioning": {
+        "pin": "18.0.2242655",
+        "checksums": "default-version-only",
+        "hosts": [
+          "marketplace.visualstudio.com"
+        ],
+        "strategy": "download",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/al_language_server.py#DEFAULT_AL_EXTENSION_VERSION"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "marker": "al",
+        "fixtureRepo": "al",
+        "testDir": "al",
+        "tested": true
+      },
+      "ci": {
+        "batch": "other-langs",
+        "expected": true,
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "csharp": {
+      "id": "csharp",
+      "language": "csharp",
+      "role": "default",
+      "class": {
+        "module": "csharp_language_server",
+        "name": "CSharpLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".cs"
+        ]
+      },
+      "provisioning": {
+        "pin": "5.5.0-2.26078.4",
+        "checksums": "all-platform-assets",
+        "hosts": [
+          "www.nuget.org",
+          "nuget.org",
+          "globalcdn.nuget.org"
+        ],
+        "strategy": "nuget-download",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/csharp_language_server.py#DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "marker": "csharp",
+        "fixtureRepo": "csharp",
+        "testDir": "csharp",
+        "tested": true
+      },
+      "ci": {
+        "batch": "jvm",
+        "expected": true,
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "verified"
+      }
+    },
+    "hlsl": {
+      "id": "hlsl",
+      "language": "hlsl",
+      "role": "sole",
+      "class": {
+        "module": "hlsl_language_server",
+        "name": "HlslLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".hlsl",
+          ".hlsli",
+          ".fx",
+          ".fxh",
+          ".cginc",
+          ".compute",
+          ".shader",
+          ".glsl",
+          ".vert",
+          ".frag",
+          ".geom",
+          ".tesc",
+          ".tese",
+          ".comp",
+          ".wgsl"
+        ]
+      },
+      "provisioning": {
+        "pin": "1.3.1",
+        "checksums": "default-version-only",
+        "hosts": [
+          "github.com",
+          "release-assets.githubusercontent.com",
+          "objects.githubusercontent.com"
+        ],
+        "strategy": "download",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/hlsl_language_server.py#_DEFAULT_VERSION"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": [],
+        "provisioningOverrides": {
+          "macos": {
+            "pin": "1.3.1",
+            "lockDiscipline": {
+              "tool": "cargo",
+              "flag": "--locked"
+            },
+            "strategy": "source-build"
+          }
+        }
+      },
+      "testing": {
+        "marker": "hlsl",
+        "fixtureRepo": "hlsl",
+        "testDir": "hlsl",
+        "tested": true
+      },
+      "ci": {
+        "batch": "other-langs",
+        "expected": true,
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "java": {
+      "id": "java",
+      "language": "java",
+      "role": "sole",
+      "class": {
+        "module": "eclipse_jdtls",
+        "name": "EclipseJDTLS"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".java"
+        ]
+      },
+      "provisioning": {
+        "strategy": "composite",
+        "owner": {
+          "runtime": "serena",
+          "ci": "runtime"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/eclipse_jdtls.py#DEFAULT_VSCODE_JAVA_VERSION",
+          "src/solidlsp/language_servers/eclipse_jdtls.py#DEFAULT_INTELLICODE_VERSION",
+          "src/solidlsp/language_servers/eclipse_jdtls.py#GRADLE_SHA256"
+        ],
+        "primary": {
+          "strategy": "download",
+          "pin": "1.54.0-923",
+          "checksums": "all-platform-assets",
+          "hosts": [
+            "github.com",
+            "release-assets.githubusercontent.com",
+            "objects.githubusercontent.com"
+          ]
+        },
+        "companions": [
+          {
+            "name": "gradle",
+            "provisioning": {
+              "strategy": "download",
+              "pin": "8.14.2",
+              "checksums": "default-version-only",
+              "hosts": [
+                "services.gradle.org",
+                "github.com",
+                "release-assets.githubusercontent.com",
+                "objects.githubusercontent.com"
+              ]
+            }
+          },
+          {
+            "name": "intellicode",
+            "provisioning": {
+              "strategy": "download",
+              "pin": "1.2.30",
+              "checksums": "default-version-only",
+              "hosts": [
+                "visualstudioexptteam.gallery.vsassets.io",
+                "marketplace.visualstudio.com",
+                "download.visualstudio.microsoft.com"
+              ]
+            }
+          }
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": [],
+        "archNotes": "vscode-java assets cover Linux and macOS x64/ARM64 and Windows x64."
+      },
+      "testing": {
+        "marker": "java",
+        "fixtureRepo": "java",
+        "testDir": "java",
+        "tested": true
+      },
+      "ci": {
+        "batch": "jvm",
+        "expected": true,
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "verified"
+      }
+    },
+    "nix": {
+      "id": "nix",
+      "language": "nix",
+      "role": "sole",
+      "class": {
+        "module": "nixd_ls",
+        "name": "NixLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".nix"
+        ]
+      },
+      "provisioning": {
+        "manager": "nix profile",
+        "pin": "UNPINNED",
+        "strategy": "package-manager",
+        "owner": {
+          "runtime": "serena",
+          "ci": "workflow-step"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/nixd_ls.py"
+        ],
+        "waiver": "W-PROV-NIXD-UNPINNED"
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos"
+        ],
+        "excluded": [
+          {
+            "os": "windows",
+            "reason": "Nix is not supported natively on Windows."
+          }
+        ]
+      },
+      "testing": {
+        "marker": "nix",
+        "fixtureRepo": "nix",
+        "testDir": "nix",
+        "tested": true
+      },
+      "ci": {
+        "batch": "niche",
+        "expected": true,
+        "os": [
+          "linux"
+        ],
+        "skipPolicy": {
+          "category": 3,
+          "toolProbe": "nixd"
+        },
+        "installStep": "Install nixd (Nix Language Server)"
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "qml": {
+      "id": "qml",
+      "language": "qml",
+      "role": "sole",
+      "class": {
+        "module": "qml_language_server",
+        "name": "QmlLanguageServer"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".qml"
+        ]
+      },
+      "provisioning": {
+        "executables": [
+          "qmlls6",
+          "qmlls"
+        ],
+        "strategy": "path",
+        "owner": {
+          "runtime": "user",
+          "ci": "workflow-step"
+        },
+        "cacheInputs": [
+          ".github/workflows/pytest.yml#Install qmlls (QML Language Server)"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "marker": "qml",
+        "fixtureRepo": "qml",
+        "testDir": "qml",
+        "tested": true
+      },
+      "ci": {
+        "batch": "other-langs",
+        "expected": true,
+        "os": [
+          "linux"
+        ],
+        "skipPolicy": {
+          "category": 2,
+          "loudOn": {
+            "os": [
+              "linux"
+            ],
+            "ci": true
+          },
+          "toolProbe": "qmlls6|qmlls"
+        },
+        "installStep": "Install qmlls (QML Language Server)"
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "ruby": {
+      "id": "ruby",
+      "language": "ruby",
+      "role": "sole",
+      "class": {
+        "module": "ruby_lsp",
+        "name": "RubyLsp"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".rb",
+          ".erb"
+        ]
+      },
+      "provisioning": {
+        "manager": "bundler/gem",
+        "pin": "0.26.8",
+        "strategy": "package-manager",
+        "owner": {
+          "runtime": "project",
+          "ci": "workflow-step"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/ruby_lsp.py#RUBY_LSP_VERSION"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "excluded": []
+      },
+      "testing": {
+        "marker": "ruby",
+        "fixtureRepo": "ruby",
+        "testDir": "ruby",
+        "tested": true
+      },
+      "ci": {
+        "batch": "other-langs",
+        "expected": true,
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "skipPolicy": {
+          "category": 4
+        },
+        "installStep": "Install Ruby language server"
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "swift": {
+      "id": "swift",
+      "language": "swift",
+      "role": "sole",
+      "class": {
+        "module": "sourcekit_lsp",
+        "name": "SourceKitLSP"
+      },
+      "status": "stable",
+      "matcher": {
+        "caseSensitive": true,
+        "extensions": [
+          ".swift"
+        ]
+      },
+      "provisioning": {
+        "executables": [
+          "sourcekit-lsp"
+        ],
+        "strategy": "path",
+        "owner": {
+          "runtime": "user",
+          "ci": "workflow-step"
+        },
+        "cacheInputs": [
+          ".github/workflows/pytest.yml#Install Swift with swiftly (macOS)"
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "macos"
+        ],
+        "excluded": [
+          {
+            "os": "linux",
+            "reason": "The CI Swift toolchain is provisioned only on macOS."
+          },
+          {
+            "os": "windows",
+            "reason": "The CI Swift toolchain is provisioned only on macOS."
+          }
+        ]
+      },
+      "testing": {
+        "marker": "swift",
+        "fixtureRepo": "swift",
+        "testDir": "swift",
+        "tested": true
+      },
+      "ci": {
+        "batch": "native",
+        "expected": true,
+        "os": [
+          "macos"
+        ],
+        "skipPolicy": {
+          "category": 3,
+          "toolProbe": "sourcekit-lsp"
+        },
+        "installStep": "Install Swift with swiftly (macOS)"
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    },
+    "csharp_omnisharp": {
+      "id": "csharp_omnisharp",
+      "language": "csharp",
+      "role": "alternate",
+      "class": {
+        "module": "omnisharp",
+        "name": "OmniSharp"
+      },
+      "status": "experimental",
+      "matcher": {
+        "caseSensitive": true,
+        "sharedArmWith": "csharp"
+      },
+      "provisioning": {
+        "strategy": "composite",
+        "owner": {
+          "runtime": "serena",
+          "ci": "none"
+        },
+        "cacheInputs": [
+          "src/solidlsp/language_servers/omnisharp.py#DEFAULT_OMNISHARP_VERSION",
+          "src/solidlsp/language_servers/omnisharp.py#DEFAULT_RAZOR_OMNISHARP_VERSION"
+        ],
+        "primary": {
+          "strategy": "download",
+          "pin": "1.39.10",
+          "checksums": "all-platform-assets",
+          "hosts": [
+            "roslynomnisharp.blob.core.windows.net",
+            "download.visualstudio.microsoft.com"
+          ]
+        },
+        "companions": [
+          {
+            "name": "RazorOmnisharp",
+            "provisioning": {
+              "strategy": "download",
+              "pin": "7.0.0-preview.23363.1",
+              "checksums": "all-platform-assets",
+              "hosts": [
+                "roslynomnisharp.blob.core.windows.net",
+                "download.visualstudio.microsoft.com"
+              ]
+            }
+          }
+        ]
+      },
+      "platforms": {
+        "supported": [
+          "linux",
+          "windows"
+        ],
+        "excluded": [
+          {
+            "os": "macos",
+            "reason": "OmniSharp runtime provisioning permits only linux-x64 and win-x64."
+          }
+        ],
+        "archNotes": "Runtime provisioning is restricted to x64."
+      },
+      "testing": {
+        "tested": false,
+        "waiver": "W-TEST-OMNISHARP"
+      },
+      "ci": {
+        "expected": false,
+        "waiver": "W-TEST-OMNISHARP",
+        "skipPolicy": {
+          "category": 4
+        }
+      },
+      "capabilities": {
+        "implementationSupport": "none"
+      }
+    }
+  },
+  "waivers": {
+    "W-TEST-GDSCRIPT": {
+      "id": "W-TEST-GDSCRIPT",
+      "invariant": "C-TEST-006",
+      "subject": "gdscript",
+      "reason": "Godot owns the TCP server lifecycle and no hermetic fixture exists.",
+      "reference": "src/solidlsp/language_servers/godot_language_server.py#GodotLanguageServer",
+      "added": "2026-07-24"
+    },
+    "W-REG-ERLANG": {
+      "id": "W-REG-ERLANG",
+      "invariant": "C-REG-002",
+      "subject": "erlang",
+      "reason": "Fixture models a known waived dispatch-class defect.",
+      "reference": "test/contract/fixtures/invariants/base.json",
+      "added": "2026-07-24"
+    },
+    "W-CI-NEVER-RUN-ERLANG": {
+      "id": "W-CI-NEVER-RUN-ERLANG",
+      "invariant": "C-CI-001",
+      "subject": "erlang",
+      "reason": "Fixture models a tested backend intentionally excluded from CI.",
+      "reference": "test/contract/fixtures/invariants/base.json",
+      "added": "2026-07-24"
+    },
+    "W-TEST-OMNISHARP": {
+      "id": "W-TEST-OMNISHARP",
+      "invariant": "C-TEST-006",
+      "subject": "csharp_omnisharp",
+      "reason": "The alternate has no dedicated collected test surface.",
+      "reference": "test/solidlsp/csharp",
+      "added": "2026-07-24"
+    },
+    "W-PROV-NIXD-UNPINNED": {
+      "id": "W-PROV-NIXD-UNPINNED",
+      "invariant": "C-PROV-004",
+      "subject": "nix",
+      "reason": "The runtime installs nixd from an unpinned Nix profile source.",
+      "reference": "src/solidlsp/language_servers/nixd_ls.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-CPP": {
+      "id": "W-SKIP-CI-SILENT-CPP",
+      "invariant": "C-SKIP-002",
+      "subject": "cpp",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-CPP-CCLS": {
+      "id": "W-SKIP-CI-SILENT-CPP-CCLS",
+      "invariant": "C-SKIP-002",
+      "subject": "cpp_ccls",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-NIX": {
+      "id": "W-SKIP-CI-SILENT-NIX",
+      "invariant": "C-SKIP-002",
+      "subject": "nix",
+      "reason": "Fixture preserves the live category-3 CI guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    },
+    "W-SKIP-CI-SILENT-SWIFT": {
+      "id": "W-SKIP-CI-SILENT-SWIFT",
+      "invariant": "C-SKIP-002",
+      "subject": "swift",
+      "reason": "Fixture preserves the live category-3 CI platform guard.",
+      "reference": "test/conftest.py",
+      "added": "2026-07-24"
+    }
+  },
+  "extracted": {
+    "lsConfig": {
+      "members": [
+        "python",
+        "python_ty",
+        "cpp",
+        "cpp_ccls",
+        "gdscript",
+        "msl",
+        "erlang",
+        "hlsl",
+        "csharp",
+        "java",
+        "ruby",
+        "nix",
+        "al",
+        "swift",
+        "qml",
+        "csharp_omnisharp"
+      ],
+      "memberSymbols": {
+        "python": "PYTHON",
+        "python_ty": "PYTHON_TY",
+        "cpp": "CPP",
+        "cpp_ccls": "CPP_CCLS",
+        "gdscript": "GDSCRIPT",
+        "msl": "MSL",
+        "erlang": "ERLANG",
+        "al": "AL",
+        "csharp": "CSHARP",
+        "hlsl": "HLSL",
+        "java": "JAVA",
+        "nix": "NIX",
+        "qml": "QML",
+        "ruby": "RUBY",
+        "swift": "SWIFT",
+        "csharp_omnisharp": "CSHARP_OMNISHARP"
+      },
+      "dispatch": {
+        "python": {
+          "module": "pyright_server",
+          "class": "PyrightServer"
+        },
+        "python_ty": {
+          "module": "ty_server",
+          "class": "TyLanguageServer"
+        },
+        "cpp": {
+          "module": "clangd_language_server",
+          "class": "ClangdLanguageServer"
+        },
+        "cpp_ccls": {
+          "module": "ccls_language_server",
+          "class": "CCLS"
+        },
+        "gdscript": {
+          "module": "godot_language_server",
+          "class": "GodotLanguageServer"
+        },
+        "msl": {
+          "module": "msl_language_server",
+          "class": "MslLanguageServer"
+        },
+        "erlang": {
+          "module": "erlang_language_server",
+          "class": "AbstractErlangLanguageServer"
+        },
+        "al": {
+          "class": "ALLanguageServer",
+          "module": "solidlsp.language_servers.al_language_server"
+        },
+        "csharp": {
+          "class": "CSharpLanguageServer",
+          "module": "solidlsp.language_servers.csharp_language_server"
+        },
+        "hlsl": {
+          "class": "HlslLanguageServer",
+          "module": "solidlsp.language_servers.hlsl_language_server"
+        },
+        "java": {
+          "class": "EclipseJDTLS",
+          "module": "solidlsp.language_servers.eclipse_jdtls"
+        },
+        "nix": {
+          "class": "NixLanguageServer",
+          "module": "solidlsp.language_servers.nixd_ls"
+        },
+        "qml": {
+          "class": "QmlLanguageServer",
+          "module": "solidlsp.language_servers.qml_language_server"
+        },
+        "ruby": {
+          "class": "RubyLsp",
+          "module": "solidlsp.language_servers.ruby_lsp"
+        },
+        "swift": {
+          "class": "SourceKitLSP",
+          "module": "solidlsp.language_servers.sourcekit_lsp"
+        },
+        "csharp_omnisharp": {
+          "module": "omnisharp",
+          "class": "OmniSharp"
+        }
+      },
+      "matchers": {
+        "python": {
+          "literalExtensions": [
+            ".py",
+            ".pyi"
+          ],
+          "caseSensitive": true
+        },
+        "cpp": {
+          "literalExtensions": [
+            ".c",
+            ".h",
+            ".cpp"
+          ],
+          "caseSensitive": false
+        },
+        "gdscript": {
+          "literalExtensions": [
+            ".gd",
+            ".gdscript"
+          ],
+          "caseSensitive": true
+        },
+        "msl": {
+          "literalExtensions": [
+            ".mrc"
+          ],
+          "caseSensitive": true
+        },
+        "erlang": {
+          "literalExtensions": [
+            ".erl",
+            ".hrl"
+          ],
+          "caseSensitive": true
+        },
+        "al": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".al",
+            ".dal"
+          ]
+        },
+        "csharp": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".cs"
+          ]
+        },
+        "hlsl": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".hlsl",
+            ".hlsli",
+            ".fx",
+            ".fxh",
+            ".cginc",
+            ".compute",
+            ".shader",
+            ".glsl",
+            ".vert",
+            ".frag",
+            ".geom",
+            ".tesc",
+            ".tese",
+            ".comp",
+            ".wgsl"
+          ]
+        },
+        "java": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".java"
+          ]
+        },
+        "nix": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".nix"
+          ]
+        },
+        "qml": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".qml"
+          ]
+        },
+        "ruby": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".rb",
+            ".erb"
+          ]
+        },
+        "swift": {
+          "caseSensitive": true,
+          "literalExtensions": [
+            ".swift"
+          ]
+        }
+      },
+      "experimentalSet": [
+        "python_ty",
+        "cpp_ccls",
+        "csharp_omnisharp"
+      ],
+      "nonProgrammingSet": [],
+      "priorityZeroSet": []
+    },
+    "conftest": {
+      "aliases": {
+        "python_ty": "python",
+        "cpp_ccls": "cpp"
+      },
+      "rawDuplicateKeys": [],
+      "markerDict": {
+        "python_ty": [
+          "python"
+        ],
+        "cpp_ccls": [
+          "cpp"
+        ]
+      },
+      "backendLists": {},
+      "verifiedImplementationSet": [
+        "CSHARP",
+        "JAVA"
+      ]
+    },
+    "pyproject": {
+      "markers": [
+        {
+          "name": "python",
+          "description": "Python tests"
+        },
+        {
+          "name": "cpp",
+          "description": "C/C++ tests"
+        },
+        {
+          "name": "msl",
+          "description": "MSL tests"
+        },
+        {
+          "name": "erlang",
+          "description": "Erlang tests"
+        },
+        {
+          "name": "slow",
+          "description": "Slow tests"
+        },
+        {
+          "name": "snapshot",
+          "description": "Snapshot tests"
+        },
+        {
+          "description": "language server running for Java",
+          "name": "java"
+        },
+        {
+          "description": "language server running for C#",
+          "name": "csharp"
+        },
+        {
+          "description": "language server running for Swift",
+          "name": "swift"
+        },
+        {
+          "description": "language server running for Ruby (uses ruby-lsp)",
+          "name": "ruby"
+        },
+        {
+          "description": "language server running for Nix",
+          "name": "nix"
+        },
+        {
+          "description": "language server running for AL (Microsoft Dynamics 365 Business Central)",
+          "name": "al"
+        },
+        {
+          "description": "language server running for HLSL shaders (uses shader-language-server)",
+          "name": "hlsl"
+        },
+        {
+          "description": "language server running for QML (uses Qt's qmlls)",
+          "name": "qml"
+        }
+      ],
+      "devPins": {}
+    },
+    "workflow": {
+      "markerGroups": {
+        "jvm": [
+          "csharp",
+          "java"
+        ],
+        "native": [
+          "cpp",
+          "swift"
+        ],
+        "other-langs": [
+          "msl",
+          "erlang",
+          "al",
+          "hlsl",
+          "qml",
+          "ruby"
+        ],
+        "niche": [
+          "nix"
+        ]
+      },
+      "matrix": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ],
+        "batches": [
+          "jvm",
+          "native",
+          "other-langs",
+          "niche",
+          "catch-all"
+        ],
+        "exclude": [
+          {
+            "os": "windows",
+            "batch": "niche"
+          },
+          {
+            "os": "macos",
+            "batch": "niche"
+          }
+        ]
+      },
+      "jobs": [
+        {
+          "name": "cpu",
+          "timeoutMinutes": 60,
+          "needs": []
+        }
+      ],
+      "steps": [
+        {
+          "job": "cpu",
+          "name": "Install ccls (C/C++ Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "native"
+          ],
+          "osGate": [
+            "linux",
+            "macos"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install nixd (Nix Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "niche"
+          ],
+          "osGate": [
+            "linux"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install qmlls (QML Language Server)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "other-langs"
+          ],
+          "osGate": [
+            "linux"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install Ruby language server",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "other-langs"
+          ],
+          "osGate": [
+            "linux",
+            "macos",
+            "windows"
+          ]
+        },
+        {
+          "job": "cpu",
+          "name": "Install Swift with swiftly (macOS)",
+          "if": "synthetic fixture gate",
+          "uses": "",
+          "run": "fixture install",
+          "batchGate": [
+            "native"
+          ],
+          "osGate": [
+            "macos"
+          ]
+        }
+      ],
+      "caches": [
+        {
+          "job": "cpu",
+          "name": "Cache uv virtualenv",
+          "path": ".venv",
+          "key": "uv-venv-${{ runner.os }}-lock-${{ hashFiles('uv.lock') }}",
+          "restoreKeys": []
+        }
+      ]
+    },
+    "servers": {
+      "al_language_server": {
+        "cargoCommands": [],
+        "pathProbes": [],
+        "pins": {
+          "DEFAULT_AL_EXTENSION_SHA256": "3971995e61a59dc4fcce4a65053072a67991ed624a16635c4f2911f12564b2b9",
+          "DEFAULT_AL_EXTENSION_VERSION": "18.0.2242655",
+          "INITIAL_AL_EXTENSION_SHA256": "3971995e61a59dc4fcce4a65053072a67991ed624a16635c4f2911f12564b2b9",
+          "INITIAL_AL_EXTENSION_VERSION": "18.0.2242655"
+        },
+        "runtimeDeps": [
+          {
+            "id": "al-extension",
+            "platformId": null,
+            "platformIdOpaque": false,
+            "url": "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/ms-dynamics-smb/vsextensions/al/18.0.2242655/vspackage",
+            "sha256": "3971995e61a59dc4fcce4a65053072a67991ed624a16635c4f2911f12564b2b9",
+            "allowedHosts": [
+              "marketplace.visualstudio.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          }
+        ],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "csharp_language_server": {
+        "cargoCommands": [],
+        "pathProbes": [],
+        "pins": {
+          "DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION": "5.5.0-2.26078.4"
+        },
+        "runtimeDeps": [
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for Windows (x64)",
+            "extract_path": "tools/net10.0/win-x64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.win-x64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "win-x64",
+            "sha256": "7f3d4119e75305399e6faa81a68240b33c48b94ad523a904594abd00db95572a",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.win-x64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for Windows (ARM64)",
+            "extract_path": "tools/net10.0/win-arm64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.win-arm64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "win-arm64",
+            "sha256": "0fe3381c4340a7494a5242c3d0c8be1af6ef0802de8b458f947cebca76fd26bc",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.win-arm64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for macOS (x64)",
+            "extract_path": "tools/net10.0/osx-x64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.osx-x64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "osx-x64",
+            "sha256": "c8de61a88c65150e12f561a2659f70b59d27a7465865136a1de950d2ef826c6d",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.osx-x64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for macOS (ARM64)",
+            "extract_path": "tools/net10.0/osx-arm64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.osx-arm64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "osx-arm64",
+            "sha256": "995207c14e01dafa71e84080a7eb1f045a697b0c3bb468077bb3809b69bdf456",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.osx-arm64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for Linux (x64)",
+            "extract_path": "tools/net10.0/linux-x64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.linux-x64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "linux-x64",
+            "sha256": "1aad25de456d637a1eee993ca0d569a1b78d711744ccb36410a3a20250a48aa6",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.linux-x64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "www.nuget.org",
+              "nuget.org",
+              "globalcdn.nuget.org"
+            ],
+            "archiveType": "nupkg",
+            "binaryName": "Microsoft.CodeAnalysis.LanguageServer.dll",
+            "description": "Roslyn Language Server for Linux (ARM64)",
+            "extract_path": "tools/net10.0/linux-arm64",
+            "id": "CSharpLanguageServer",
+            "opaque": true,
+            "packageName": "roslyn-language-server.linux-arm64",
+            "packageVersion": "5.5.0-2.26078.4",
+            "platformId": "linux-arm64",
+            "sha256": "a7dd49bbc0e25d0e2968ae31ec5f3c774373866db51f3500fcea0ac320e2bbc1",
+            "url": "f'https://www.nuget.org/api/v2/package/roslyn-language-server.linux-arm64/{DEFAULT_CSHARP_LANGUAGE_SERVER_VERSION}'",
+            "platformIdOpaque": false
+          }
+        ],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "eclipse_jdtls": {
+        "cargoCommands": [],
+        "pathProbes": [
+          "java"
+        ],
+        "pins": {
+          "DEFAULT_INTELLICODE_SHA256": "7f61a7f96d101cdf230f96821be3fddd8f890ebfefb3695d18beee43004ae251",
+          "DEFAULT_INTELLICODE_VERSION": "1.2.30",
+          "DEFAULT_VSCODE_JAVA_VERSION": "1.54.0-923",
+          "GRADLE_SHA256": "7197a12f450794931532469d4ff21a59ea2c1cd59a3ec3f89c035c3c420a6999",
+          "INITIAL_INTELLICODE_SHA256": "7f61a7f96d101cdf230f96821be3fddd8f890ebfefb3695d18beee43004ae251",
+          "INITIAL_INTELLICODE_VERSION": "1.2.30",
+          "INITIAL_VSCODE_JAVA_VERSION": "1.42.0-561",
+          "JDTLS_MIN_JDK_VERSION": 21
+        },
+        "runtimeDeps": [
+          {
+            "id": "gradle",
+            "platformId": null,
+            "platformIdOpaque": false,
+            "url": "https://services.gradle.org/distributions/gradle-8.14.2-bin.zip",
+            "sha256": "7197a12f450794931532469d4ff21a59ea2c1cd59a3ec3f89c035c3c420a6999",
+            "allowedHosts": [
+              "services.gradle.org",
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          },
+          {
+            "id": "vscode-java",
+            "platformId": "linux-x64",
+            "platformIdOpaque": false,
+            "url": "https://github.com/redhat-developer/vscode-java/releases/download/v1.54.0/java-linux-x64-1.54.0-923.vsix",
+            "sha256": "9d4b15da54e25a0192f9bac073f086c015397d3676623b68dbf83a5dbaf5132b",
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          },
+          {
+            "id": "vscode-java",
+            "platformId": "osx-x64",
+            "platformIdOpaque": false,
+            "url": "https://github.com/redhat-developer/vscode-java/releases/download/v1.54.0/java-darwin-x64-1.54.0-923.vsix",
+            "sha256": "dfc98abc4e54165a78372e280242a039671729b1b03420608df3b10c6b629fb6",
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          },
+          {
+            "id": "vscode-java",
+            "platformId": "win-x64",
+            "platformIdOpaque": false,
+            "url": "https://github.com/redhat-developer/vscode-java/releases/download/v1.54.0/java-win32-x64-1.54.0-923.vsix",
+            "sha256": "66f3914987edeccfee8a2558470e0fde4f8c4154232ff4baa5d73373ebc819d4",
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          },
+          {
+            "id": "intellicode",
+            "platformId": null,
+            "platformIdOpaque": false,
+            "url": "https://visualstudioexptteam.gallery.vsassets.io/_apis/public/gallery/publisher/VisualStudioExptTeam/extension/vscodeintellicode/1.2.30/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+            "sha256": "7f61a7f96d101cdf230f96821be3fddd8f890ebfefb3695d18beee43004ae251",
+            "allowedHosts": [
+              "visualstudioexptteam.gallery.vsassets.io",
+              "marketplace.visualstudio.com",
+              "download.visualstudio.microsoft.com"
+            ],
+            "archiveType": "zip",
+            "opaque": false
+          }
+        ],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "hlsl_language_server": {
+        "cargoCommands": [
+          [
+            "cargo",
+            "install",
+            "shader_language_server",
+            "--version",
+            "version",
+            "--locked",
+            "--root",
+            "."
+          ]
+        ],
+        "pathProbes": [
+          "shader-language-server"
+        ],
+        "pins": {
+          "_DEFAULT_VERSION": "1.3.1",
+          "_INITIAL_VERSION": "1.3.1"
+        },
+        "runtimeDeps": [
+          {
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "binaryName": "shader-language-server.exe",
+            "description": "shader-language-server for Windows (x64)",
+            "id": "shader-language-server",
+            "opaque": true,
+            "platformId": "win-x64",
+            "sha256": "_hlsl_sha(version, 'shader-language-server-x86_64-pc-windows-msvc.zip')",
+            "url": "f'{base_url}/shader-language-server-x86_64-pc-windows-msvc.zip'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "binaryName": "shader-language-server",
+            "description": "shader-language-server for Linux (x64)",
+            "id": "shader-language-server",
+            "opaque": true,
+            "platformId": "linux-x64",
+            "sha256": "_hlsl_sha(version, 'shader-language-server-x86_64-unknown-linux-gnu.zip')",
+            "url": "f'{base_url}/shader-language-server-x86_64-unknown-linux-gnu.zip'",
+            "platformIdOpaque": false
+          },
+          {
+            "allowedHosts": [
+              "github.com",
+              "release-assets.githubusercontent.com",
+              "objects.githubusercontent.com"
+            ],
+            "archiveType": "zip",
+            "binaryName": "shader-language-server.exe",
+            "description": "shader-language-server for Windows (ARM64)",
+            "id": "shader-language-server",
+            "opaque": true,
+            "platformId": "win-arm64",
+            "sha256": "_hlsl_sha(version, 'shader-language-server-aarch64-pc-windows-msvc.zip')",
+            "url": "f'{base_url}/shader-language-server-aarch64-pc-windows-msvc.zip'",
+            "platformIdOpaque": false
+          },
+          {
+            "binaryName": "bin/shader-language-server",
+            "command": "cargo_install_cmd",
+            "description": "shader-language-server for macOS (x64) - built from source",
+            "id": "shader-language-server",
+            "opaque": true,
+            "platformId": "osx-x64",
+            "platformIdOpaque": false
+          },
+          {
+            "binaryName": "bin/shader-language-server",
+            "command": "cargo_install_cmd",
+            "description": "shader-language-server for macOS (ARM64) - built from source",
+            "id": "shader-language-server",
+            "opaque": true,
+            "platformId": "osx-arm64",
+            "platformIdOpaque": false
+          }
+        ],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "nixd_ls": {
+        "cargoCommands": [],
+        "pathProbes": [
+          "nix",
+          "nixd"
+        ],
+        "pins": {},
+        "runtimeDeps": [],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "qml_language_server": {
+        "cargoCommands": [],
+        "pathProbes": [
+          "qmlls",
+          "qmlls6"
+        ],
+        "pins": {},
+        "runtimeDeps": [],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "ruby_lsp": {
+        "cargoCommands": [],
+        "pathProbes": [
+          "asdf",
+          "mise",
+          "rbenv",
+          "rvm-exec"
+        ],
+        "pins": {
+          "RUBY_LSP_VERSION": "0.26.8"
+        },
+        "runtimeDeps": [],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "sourcekit_lsp": {
+        "cargoCommands": [],
+        "pathProbes": [],
+        "pins": {},
+        "runtimeDeps": [],
+        "uvxPins": [],
+        "opaqueProvisioningCalls": []
+      },
+      "omnisharp": {
+        "runtimeDeps": [],
+        "opaqueProvisioningCalls": [
+          "FileUtils.download_and_extract_archive_verified"
+        ],
+        "uvxPins": [],
+        "cargoCommands": [],
+        "pathProbes": [],
+        "pins": {
+          "DEFAULT_OMNISHARP_VERSION": "1.39.10",
+          "DEFAULT_RAZOR_OMNISHARP_VERSION": "7.0.0-preview.23363.1"
+        },
+        "runtimeDependencyJson": {
+          "_description": "Synthetic default-version OmniSharp fixture.",
+          "runtimeDependencies": [
+            {
+              "id": "OmniSharp",
+              "description": "OmniSharp for Linux",
+              "url": "https://roslynomnisharp.blob.core.windows.net/releases/1.39.10/omnisharp-linux-x64-net6.0-1.39.10.zip",
+              "installPath": ".omnisharp/1.39.10-net6.0",
+              "platforms": [
+                "linux"
+              ],
+              "architectures": [
+                "x86_64"
+              ],
+              "platformId": "linux-x64",
+              "dotnet_version": "6",
+              "integrity": "0926D3BEA060BF4373356B2FC0A68C10D0DE1B1150100B551BA5932814CE51E2",
+              "binaryName": "OmniSharp"
+            },
+            {
+              "id": "RazorOmnisharp",
+              "description": "Razor for Linux",
+              "url": "https://download.visualstudio.microsoft.com/download/razor-linux.zip",
+              "installPath": ".razoromnisharp",
+              "platforms": [
+                "linux"
+              ],
+              "architectures": [
+                "x86_64"
+              ],
+              "platformId": "linux-x64",
+              "integrity": "4B08C47D70AA96BE40AEDE22CDFCD909EB9073F1E1992E2B5B99D9D7A47F3276",
+              "dll_path": "OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll"
+            },
+            {
+              "id": "OmniSharp",
+              "description": "OmniSharp for Windows",
+              "url": "https://roslynomnisharp.blob.core.windows.net/releases/1.39.10/omnisharp-win-x64-net6.0-1.39.10.zip",
+              "installPath": ".omnisharp/1.39.10-net6.0",
+              "platforms": [
+                "win32"
+              ],
+              "architectures": [
+                "x86_64"
+              ],
+              "platformId": "win-x64",
+              "dotnet_version": "6",
+              "integrity": "A73327395E7EF92C1D8E307055463DA412662C03F077ECC743462FD2760BB537",
+              "binaryName": "OmniSharp.exe"
+            },
+            {
+              "id": "RazorOmnisharp",
+              "description": "Razor for Windows",
+              "url": "https://download.visualstudio.microsoft.com/download/razor-win.zip",
+              "installPath": ".razoromnisharp",
+              "platforms": [
+                "win32"
+              ],
+              "architectures": [
+                "x86_64"
+              ],
+              "platformId": "win-x64",
+              "integrity": "8D2DC5484018A2390A2366D05CADDD2BE21F619122DACD1BA1A87815B98D7361",
+              "dll_path": "OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll"
+            },
+            {
+              "id": "RazorOmnisharp",
+              "description": "Dormant Razor artifact for macOS",
+              "url": "https://download.visualstudio.microsoft.com/download/razor-osx.zip",
+              "installPath": ".razoromnisharp",
+              "platforms": [
+                "darwin"
+              ],
+              "architectures": [
+                "x86_64"
+              ],
+              "platformId": "osx-x64",
+              "integrity": "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF",
+              "dll_path": "OmniSharpPlugin/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll"
+            }
+          ]
+        }
+      }
+    },
+    "filesystem": {
+      "repoDirs": [
+        "python",
+        "cpp",
+        "msl",
+        "erlang",
+        "hlsl",
+        "csharp",
+        "java",
+        "ruby",
+        "nix",
+        "al",
+        "swift",
+        "qml"
+      ],
+      "testDirs": [
+        "python",
+        "cpp",
+        "msl",
+        "erlang",
+        "hlsl",
+        "csharp",
+        "java",
+        "ruby",
+        "nix",
+        "al",
+        "swift",
+        "qml"
+      ],
+      "bootstrapConftests": []
+    },
+    "docs": {
+      "readmeLabels": [
+        "AL",
+        "C#",
+        "C/C++",
+        "Erlang",
+        "GDScript",
+        "HLSL",
+        "Java",
+        "MSL",
+        "Nix",
+        "Python",
+        "QML",
+        "Ruby",
+        "Swift"
+      ],
+      "docsLabels": [
+        "AL",
+        "C#",
+        "C/C++",
+        "Erlang",
+        "GDScript",
+        "HLSL",
+        "Java",
+        "MSL",
+        "Nix",
+        "Python",
+        "QML",
+        "Ruby",
+        "Swift"
+      ],
+      "templateIds": [
+        "python",
+        "python_ty",
+        "cpp",
+        "cpp_ccls",
+        "gdscript",
+        "msl",
+        "erlang",
+        "hlsl",
+        "csharp",
+        "java",
+        "ruby",
+        "nix",
+        "al",
+        "swift",
+        "qml",
+        "csharp_omnisharp"
+      ]
+    },
+    "freshness": {
+      "registrationCurrent": true,
+      "templateCurrent": true
+    }
+  },
+  "ciLayout": {
+    "batches": {
+      "jvm": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "native": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "other-langs": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      },
+      "niche": {
+        "os": [
+          "linux"
+        ]
+      },
+      "catch-all": {
+        "os": [
+          "linux",
+          "macos",
+          "windows"
+        ]
+      }
+    },
+    "caches": {
+      "uv-venv": {
+        "workflowName": "Cache uv virtualenv",
+        "covers": [],
+        "inputs": [
+          "uv.lock"
+        ],
+        "keyTokens": {
+          "uv.lock": "hashFiles('uv.lock')"
+        },
+        "managed": false
+      }
+    }
+  }
+}

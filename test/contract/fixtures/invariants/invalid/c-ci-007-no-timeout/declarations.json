@@ -1,0 +1,1 @@
+{"declarations":{"operations":[]},"extracted":{"operations":[{"op":"set","path":["extracted","workflow","jobs",0,"timeoutMinutes"],"value":null}]},"expected":{"diagnostic":"C_CI_007","category":"ci placement","subject":"cpu"}}
