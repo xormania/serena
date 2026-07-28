@@ -2,6 +2,7 @@
 
 Security is important to us, and we take this topic seriously.
 
+(serena-assumptions)=
 ## Serena's Assumptions
 
 The current security model for Serena assumes:
@@ -185,4 +186,69 @@ All of the above are installed with exact pinned package versions by default, in
 ### No Automatic Download by Serena
 
 - **Go (`gopls`)**, **Rust (`rust-analyzer`)**, and several other system-tool based integrations expect the language server to be available locally and do not download it automatically.
+```
+
+(repository-trust)=
+## Repository Trust and Language Servers
+
+Serena's security model assumes that the code repository being worked on is trusted (see [Serena's Assumptions](serena-assumptions)).
+This section makes the practical consequences of that assumption explicit, so that you can judge whether it holds for a given repository.
+
+Language servers are ordinary development tools, and Serena runs them the way a code editor does: each language server is started with the project directory as its working directory and as its workspace root.
+For many languages, producing accurate symbol information *requires* the language server to understand the project's build, so it resolves the build definition and, in several cases, executes it, exactly as an IDE would.
+This happens when the project's language server starts, i.e. when you activate or index a project, and therefore before any tool call is made.
+
+Activating a project in Serena should therefore be treated like opening it in a full-featured IDE, or like running its build: build logic provided by the repository may run.
+Where a language server would otherwise run *user*-provided startup files that are not needed for analysis (shell profiles, `.Rprofile`, Julia startup files), Serena suppresses them; those cases are listed below.
+Build logic provided by the repository is not suppressed, because the analysis depends on it.
+
+If you need to work with a repository that you do not fully trust, use a [sandboxed environment](sandboxing).
+
+```{dropdown} What Language Servers Execute from the Repository by Default
+:open:
+
+The lists below cover the cases that are explicit in Serena's language server integrations.
+They are informational rather than a security boundary, and are not guaranteed to be exhaustive: a language server may invoke project tooling on its own, and its behaviour can change between its own versions.
+Read the "does not enable this" list as "Serena configures no such behaviour", not as a guarantee.
+
+### Build Definitions and Project Models
+
+- **C#**: Serena opens the repository's `.sln`/`.slnx` and `.csproj` files, so that MSBuild evaluates the project's own props and targets. Serena does not trigger `dotnet restore`.
+- **Elixir**: the server runs with `mix_env: dev`, so the project's `mix.exs` is evaluated. Credo integration is enabled and reads the project's `.credo.exs`.
+- **F#**: automatic workspace initialisation opens the repository's `.fsproj`/`.sln` files for MSBuild evaluation.
+- **Java**: Maven and Gradle project import are enabled and run automatically on first start, with annotation processing and autobuild enabled, so `pom.xml`, `build.gradle`, `build.gradle.kts` and `settings.gradle` are evaluated. By default, Serena uses its own pinned Gradle distribution rather than the repository's `gradlew` (`ls_specific_settings.java.gradle_wrapper_enabled`); this selects *which* Gradle runs the project's build scripts, not *whether* they run.
+- **Kotlin**: Serena enables build script support, so Gradle Kotlin build scripts (`build.gradle.kts`) are part of the analysis.
+- **Lean 4**: Serena runs `lake env` in the project directory to obtain `LEAN_PATH`, which elaborates the project's `lakefile.lean`.
+- **OCaml**: Serena runs `dune build @ocaml-index` in the project directory before starting the server, which executes the project's dune rules.
+- **Ruby**: if the project has a `Gemfile`, the server is started through `bundle exec`, which evaluates that `Gemfile`. A `.ruby-version` or `.tool-versions` file is honoured by version managers on the `PATH` and therefore influences which Ruby runs. This applies to both `ruby` (ruby-lsp) and `ruby_solargraph`.
+- **Rust**: Cargo build scripts and procedural macros are enabled, so the project's `build.rs` and its proc-macro crates are compiled and run by rust-analyzer.
+- **Scala**: Metals derives its compilation model from the project's build definition (`build.sbt` and equivalents) and drives the corresponding build tool in order to do so. This is Metals' own behaviour rather than a Serena setting.
+- **Swift**: background indexing and background preparation are enabled, so SourceKit-LSP builds the package; `Package.swift` is itself a Swift program and is run in order to describe the package.
+- **Zig**: Serena opens the project's `build.zig` so that ZLS can determine the build graph from it.
+
+### Configuration Discovered in the Repository
+
+- **Clojure**: if the project contains `.lsp/config.edn`, clojure-lsp reads it natively. That file may specify a `:classpath-cmd`, which clojure-lsp runs.
+- **Haxe**: Serena auto-discovers an `.hxml` file in the project and passes it to the language server as `displayArguments`. An `.hxml` file may contain compiler directives, including `--cmd`. Set `ls_specific_settings.haxe.buildFile` to choose the file explicitly.
+- **Svelte**: Serena starts svelte-language-server in its trusted mode, which is the mode in which it loads the project's `svelte.config.js`.
+
+### Repository-Driven Network Requests
+
+These do not execute content from the repository, but content in the repository determines what is fetched.
+
+- **TOML**: Taplo reads a project-level `.taplo.toml`, which may point it at schema URLs. This is Taplo's own behaviour; Serena passes no schema configuration.
+- **YAML**: the SchemaStore catalog is enabled, and per-file `$schema` references cause the referenced schemas to be fetched.
+
+### Language Servers for Which Serena Does Not Enable This
+
+For reference, Serena configures no evaluation of repository build logic for `bash`, `clangd` and `ccls` (C/C++), `gdscript`, `gopls` (Go), `marksman` (Markdown), the Python servers (`python`/Pyright, `python_basedpyright`, `python_ty`, `python_pyrefly`, `python_jedi`) and `typescript` (automatic type acquisition is disabled, so `@types/*` packages are not fetched during indexing).
+
+### Where Serena Suppresses Startup Code
+
+Serena deliberately suppresses startup files that are not needed for analysis:
+
+- **Ansible**: `ansible-lint` integration is off by default (`lint_enabled`), so the project's `.ansible-lint` is not loaded unless you enable it.
+- **Julia**: launched with `--startup-file=no --history-file=no`.
+- **PowerShell**: launched with `-NoProfile`.
+- **R**: launched with `--vanilla`, which suppresses `.Rprofile` and `.Renviron`.
 ```
