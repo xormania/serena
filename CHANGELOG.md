@@ -5,6 +5,9 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - Fix: eleven overridable language-server settings were missing from the configuration docs (Ada, CUE,
+    Fortran, JSON, Nextflow and PHPantom had no section at all) and the Pascal table lacked a Default
+    column; a test now keeps the documented settings in sync with the versions pinned in the source
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
