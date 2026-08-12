@@ -141,6 +141,7 @@ def make_rst(src_root, rst_root, clean=False, overwrite=False, package_prefix=""
                 module_rst_path = os.path.join(rst_root, base_package_relpath, f"{base_name}.rst")
                 if os.path.exists(module_rst_path) and not overwrite:
                     log.debug(f"{module_rst_path} already exists, skipping it")
+                    continue
 
                 log.info(f"Writing module documentation to {module_rst_path}")
                 write_to_file(module_template(module_qualname), module_rst_path)
@@ -235,15 +236,13 @@ def autogen_about_intro_features():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     docs_root = Path(__file__).parent
-    enable_module_docs = False
 
     autogen_about_intro_features()
 
     autogen_tool_list()
 
-    if enable_module_docs:
-        make_rst(
-            docs_root / ".." / "src" / "serena",
-            docs_root / "serena",
-            clean=True,
-        )
+    make_rst(
+        docs_root / ".." / "src" / "serena",
+        docs_root / "serena",
+        clean=True,
+    )
