@@ -4,7 +4,7 @@
 
 > **Codex (GPT 5.4, high):** "As a coding agent, I would ask my owner to add Serena because it turns fragile text-and-line-number work into precise symbol-aware navigation and refactoring, which makes real code changes feel faster, safer, and far less blind."
 
-> **Codex (GPT 5.4, medium):** "As a coding agent, I’d absolutely ask my owner to add Serena because it makes me noticeably sharper and calmer on
+> **Copilot CLI (GPT 5.4, medium):** "As a coding agent, I’d absolutely ask my owner to add Serena because it makes me noticeably sharper and calmer on
 real code – especially symbol-aware navigation, cross-file refactors, and monorepo dependency jumps – while I still lean
 on built-ins for tiny text edits and non-code work." 
 
@@ -45,3 +45,14 @@ leading to the following summary result for Junie:
 > **Junie Plugin (Opus 4.6)**: Serena gives me what my built-in tools can't — the ability to move a function between modules with all imports updated atomically, trace a class hierarchy into dependencies, and safely delete symbols with usage guards — and I'd ask my owner to add it for the move-refactoring and semantic navigation capabilities alone.
 
 See the full evaluation [here](030_results/050_junie_plugin_on_tianshou.md).
+
+## What to read next
+
+- [Methodology](010_methodology.md) — how the evaluation is designed, why it is not a benchmark, and an assessment of its soundness.
+- [Prompts](020_prompts/000_prompts.md) — the verbatim [evaluation prompt](020_prompts/010_evaluation-prompt.md) (~20 tasks) and the [summary prompt](020_prompts/020_summary-prompt.md) that produced the one-sentence verdicts — everything needed to rerun the evaluation on a project of your own.
+- [Results](030_results/000_evaluation-results.md) — the five runs, all performed with the JetBrains-powered backend:
+  - [Claude Code (Opus 4.6, medium)](030_results/010_cc_on_tianshou.md) — Tianshou (Python), 2026-04-13
+  - [Codex (GPT-5.4, high)](030_results/020_codex_on_jbplugin.md) — Serena's own JetBrains plugin (Java), 2026-04-13
+  - [Copilot CLI (GPT-5.4, medium)](030_results/030_copilot_cli_on_ente.md) — the ente monorepo (TypeScript/Rust focus), 2026-04-14
+  - [Claude Code (GLM 5.1)](030_results/040_glm_on_tianshou.md) — Tianshou (Python), 2026-04-14
+  - [JetBrains Junie Plugin (Opus 4.6)](030_results/050_junie_plugin_on_tianshou.md) — Tianshou (Python), 2026-04-17
