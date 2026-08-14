@@ -15,18 +15,18 @@ reading the code, not a substitute for it.
 
 ## The shape of the package, in the order you'll meet it
 
-1. **The agent** — [serena.agent](serena/agent) holds `SerenaAgent`: it loads the configuration,
+1. **The agent** — [serena.agent](agent) holds `SerenaAgent`: it loads the configuration,
    activates a project, starts language servers, and decides which tools exist. Everything else
    hangs off it.
 2. **The tools** — every capability an LLM sees is a `Tool` subclass. The base machinery
    (execution, logging, error recovery) lives in
-   [serena.tools.tools_base](serena/tools/tools_base); the symbolic operations you'd actually
+   [serena.tools.tools_base](tools/tools_base); the symbolic operations you'd actually
    recognize — `find_symbol`, `replace_symbol_body` — are in
-   [serena.tools.symbol_tools](serena/tools/symbol_tools). A tool's docstring *is* its prompt: what
+   [serena.tools.symbol_tools](tools/symbol_tools). A tool's docstring *is* its prompt: what
    you read there is exactly what the LLM reads.
-3. **The configuration** — [serena.config.serena_config](serena/config/serena_config) contains the
+3. **The configuration** — [serena.config.serena_config](config/serena_config) contains the
    dataclasses behind `serena_config.yml` and project configuration.
-4. **The project layer** — [serena.project](serena/project) is file access, ignore handling, and
+4. **The project layer** — [serena.project](project) is file access, ignore handling, and
    the bridge to the language-server library.
 
 Want to build your own agent on top of Serena? The

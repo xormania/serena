@@ -2,7 +2,6 @@ import ast
 import logging
 import os
 import re
-import shutil
 from pathlib import Path
 from typing import Optional, List
 
@@ -125,24 +124,24 @@ def write_to_file(content: str, path: str):
     os.chmod(path, 0o666)
 
 
-_SUBTITLE = (
-    "\n\nReference for the ``serena`` package, generated from the docstrings in the source. "
-    "Undocumented members and modules are deliberately omitted -- every entry here carries an "
-    "explanation, and links to its source.\n"
-)
-
-
 def make_rst(src_root, rst_root, clean=False, overwrite=False, package_prefix=""):
     """Creates/updates documentation in form of rst files for modules and packages.
 
-    Does not delete any existing rst files. Thus, rst files for packages or modules that have been removed or renamed
-    should be deleted by hand.
+    The package tree is mirrored directly into ``rst_root``: a page per documented module, an index page
+    per documented subpackage. The top-level package itself gets no index page — the section's
+    hand-written intro is the landing page, and the navigation carries the listing. (Keeping the tree
+    one level flatter also keeps every module page within the theme's sidebar depth, which renders
+    four levels.)
+
+    Without ``clean``, does not delete any existing rst files. Thus, rst files for packages or modules
+    that have been removed or renamed should be deleted by hand.
 
     This method should be executed from the project's top-level directory
 
     :param src_root: path to library base directory, typically "src/<library_name>"
     :param rst_root: path to the root directory to which .rst files will be written
-    :param clean: whether to completely clean the target directory beforehand, removing any existing .rst files
+    :param clean: whether to remove all .rst files beneath the target directory beforehand (pages that are
+        not generated — the hand-written intro — are left in place)
     :param overwrite: whether to overwrite existing rst files. This should be used with caution as it will delete
         all manual changes to documentation files
     :package_prefix: a prefix to prepend to each module (for the case where the src_root is not the base package),
@@ -152,38 +151,13 @@ def make_rst(src_root, rst_root, clean=False, overwrite=False, package_prefix=""
     rst_root = os.path.abspath(rst_root)
 
     if clean and os.path.isdir(rst_root):
-        shutil.rmtree(rst_root)
-
-    base_package_name = package_prefix + os.path.basename(src_root)
-
-    # TODO: reduce duplication with same logic for subpackages below
-    files_in_dir = os.listdir(src_root)
-    module_names = [
-        (f[:-3], _module_summary(os.path.join(src_root, f)))
-        for f in sorted(files_in_dir)
-        if f.endswith(".py") and not f.startswith("_") and _module_is_documented(os.path.join(src_root, f))
-    ]
-    subdir_refs = [
-        (f"{f}/index", _package_summary(os.path.join(src_root, f)))
-        for f in sorted(files_in_dir)
-        if os.path.isdir(os.path.join(src_root, f))
-        and not f.startswith("_")
-        and not f.startswith(".")
-        and _package_is_documented(os.path.join(src_root, f))
-    ]
-    package_index_rst_path = os.path.join(
-        rst_root,
-        "index.rst",
-    )
-    log.info(f"Writing {package_index_rst_path}")
-    write_to_file(
-        index_template(
-            base_package_name,
-            doc_references=module_names + subdir_refs,
-            text_prefix=_SUBTITLE,
-        ),
-        package_index_rst_path,
-    )
+        # the target directory also holds hand-written pages (the section intro), so cleaning
+        # removes only what this generator produces: the .rst tree, and any directory it empties
+        for rst_path in Path(rst_root).rglob("*.rst"):
+            rst_path.unlink()
+        for dir_path in sorted((p for p in Path(rst_root).rglob("*") if p.is_dir()), reverse=True):
+            if not any(dir_path.iterdir()):
+                dir_path.rmdir()
 
     for root, dirnames, filenames in os.walk(src_root):
         if os.path.basename(root).startswith("_"):
@@ -340,6 +314,6 @@ if __name__ == "__main__":
 
     make_rst(
         docs_root / ".." / "src" / "serena",
-        docs_root / "06-contributing" / "code-reference" / "serena",
+        docs_root / "06-contributing" / "code-reference",
         clean=True,
     )
