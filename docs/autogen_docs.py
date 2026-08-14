@@ -262,10 +262,17 @@ def autogen_tool_reference(target_dirname="05-tool-reference"):
 
 
 def _schema_type(spec: dict) -> str:
-    """Renders a JSON-schema type the way a reader would say it, unions included."""
+    """Renders a JSON-schema type the way a reader would say it, unions included.
+
+    `null` is kept rather than filtered out. Pydantic emits it in the `anyOf` for a nullable
+    parameter, and it is a real part of the interface: the client may send an explicit JSON
+    `null`. Dropping it left `cwd` reading as `string` when `null` is also accepted, and the
+    required column cannot carry that — it says only whether the argument may be omitted,
+    which is a different question from what values it takes.
+    """
     if "type" in spec:
         return f"`{spec['type']}`"
-    options = [o.get("type") for o in spec.get("anyOf", []) if o.get("type") and o.get("type") != "null"]
+    options = [o.get("type") for o in spec.get("anyOf", []) if o.get("type")]
     return " or ".join(f"`{o}`" for o in options) if options else "`any`"
 
 
