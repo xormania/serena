@@ -90,7 +90,7 @@ class RenameMemoryTool(Tool, ToolMarkerCanEdit):
         References to other memories that are marked with the `mem:` prefix will be updated accordingly.
         References in read-only memories are not affected.
 
-        :return: a description of the rename, including how many references to the memory were updated
+        :return: a confirmation naming the memory before and after the rename
         """
         renaming_message, n_references_updated = self.memory_manager.rename_memory_and_propagate_references(
             old_name, new_name, is_tool_context=True

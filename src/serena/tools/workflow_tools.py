@@ -57,7 +57,9 @@ class SerenaInfoTool(Tool, ToolMarkerOptional, ToolMarkerDoesNotRequireActivePro
         """
         Retrieves Serena-specific information
         :param topic: the topic, which you must have been given explicitly
-        :return: a summary of the running Serena instance, its configuration and its dashboard
+        :return: the guidance for the requested topic; for `jet_brains_debug_repl`, how to drive the
+            debugger — the line-number convention, what persists between calls, and the pre-bound
+            variables
         """
         match topic:
             case "jet_brains_debug_repl":
