@@ -5,6 +5,8 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - The documentation now includes a Tool Reference: a page per tool module, generated from the
+    same metadata that builds the schema sent to MCP clients, so it cannot drift from the interface
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
