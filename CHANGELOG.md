@@ -5,6 +5,9 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - The documentation now has a Contributing section, whose first content is an auto-generated
+    code reference for the `serena` package (the generator existed but had been disabled since
+    the documentation build was introduced)
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
