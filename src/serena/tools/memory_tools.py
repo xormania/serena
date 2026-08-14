@@ -23,6 +23,7 @@ class WriteMemoryTool(Tool, ToolMarkerCanEdit):
         :param memory_name: memory name
         :param content: memory content, utf8-encoded
         :param max_chars: see other tools
+        :return: a confirmation naming the memory that was written
         """
         # NOTE: utf-8 encoding is configured in the MemoriesManager
         if max_chars == -1:
@@ -43,6 +44,8 @@ class ReadMemoryTool(Tool):
     def apply(self, memory_name: str) -> str:
         """
         Use to read a memory that is likely to be relevant to the current task, inferring relevance e.g. from the name.
+
+        :return: the memory's content
         """
         return self.memory_manager.load_memory(memory_name)
 
@@ -55,6 +58,8 @@ class ListMemoriesTool(Tool):
     def apply(self, topic: str = "") -> str:
         """
         Lists available memories, optionally filtered by topic.
+
+        :return: a JSON listing of the available memories
         """
         return self._to_json(self.memory_manager.list_memories(topic).to_dict())
 
@@ -67,6 +72,8 @@ class DeleteMemoryTool(Tool, ToolMarkerCanEdit):
     def apply(self, memory_name: str) -> str:
         """
         Delete a memory, only call if instructed explicitly or permission was granted by the user.
+
+        :return: a confirmation naming the memory that was deleted, or a message saying it was not found
         """
         return self.memory_manager.delete_memory(memory_name, is_tool_context=True)
 
@@ -82,6 +89,8 @@ class RenameMemoryTool(Tool, ToolMarkerCanEdit):
         The "global" topic should only be used if explicitly instructed.
         References to other memories that are marked with the `mem:` prefix will be updated accordingly.
         References in read-only memories are not affected.
+
+        :return: a description of the rename, including how many references to the memory were updated
         """
         renaming_message, n_references_updated = self.memory_manager.rename_memory_and_propagate_references(
             old_name, new_name, is_tool_context=True
@@ -116,6 +125,8 @@ class EditMemoryTool(Tool, ToolMarkerCanEdit):
         :param mode: either "literal" or "regex", specifying how the `needle` parameter is to be interpreted.
         :param allow_multiple_occurrences: whether to allow matching and replacing multiple occurrences.
             If false and multiple occurrences are found, an error will be returned.
+
+        :return: a confirmation naming the memory that was edited
         """
         return self.memory_manager.edit_memory(
             memory_name, needle, repl, mode, allow_multiple_occurrences, is_tool_context=True, regex_multiline=True

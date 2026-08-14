@@ -177,6 +177,7 @@ class JetBrainsMoveTool(Tool, ToolMarkerSymbolicEdit, ToolMarkerOptional, ToolMa
         :param name_path: the name path of the symbol to move (empty for moving file or dir).
         :param target_relative_path: the relative path of the target directory or file.
         :param target_parent_name_path: the name path of the target parent symbol.
+        :return: a JSON object describing what the move changed
         """
         name_path = name_path or None
         target_relative_path = target_relative_path or None
@@ -219,6 +220,8 @@ class JetBrainsSafeDeleteTool(Tool, ToolMarkerSymbolicEdit, ToolMarkerOptional, 
             Default is False (safe mode: will report usages instead of deleting).
         :param propagate: whether to propagate the deletion to usages of the symbol and also
             remove symbols that become unused after the deletion. Default is False.
+
+        :return: a JSON object describing what the deletion changed, or what prevented it
         """
         relative_path = self._sanitize_input_param(relative_path)
         name_path = name_path or None
@@ -254,6 +257,8 @@ class JetBrainsInlineSymbol(Tool, ToolMarkerSymbolicEdit, ToolMarkerOptional, To
         :param relative_path: the relative path to the file containing the symbol to inline.
         :param keep_definition: whether to keep the original method definition after inlining all call sites.
             May be ignored in some cases (e.g. when inlining a class).
+
+        :return: a JSON object describing what the inlining changed
         """
         relative_path = self._sanitize_input_param(relative_path)
         with JetBrainsPluginClient.from_project(self.project) as client:
@@ -288,6 +293,7 @@ class JetBrainsFindReferencingSymbolsTool(Tool, ToolMarkerSymbolicRead, ToolMark
             Note: for external dependencies, this must be an identifier starting with `<ext` that you have received
             earlier (don't try to guess!).
         :param max_answer_chars: max characters for the result (-1 for default). If exceeded, no content/a shortened result is returned.
+        :return: a JSON collection of the referencing symbols, or a shortened summary if the full result would be too long
         """
         relative_path = self._sanitize_input_param(relative_path)
         with JetBrainsPluginClient.from_project(self.project) as client:
@@ -354,6 +360,7 @@ class JetBrainsGetSymbolsOverviewTool(Tool, ToolMarkerSymbolicRead, ToolMarkerOp
             Default (-1) results in a language specific choice: 1 for java and kotlin and 0 for other languages
         :param max_answer_chars: max characters for the result (-1 for default). If exceeded, no content/a shortened result is returned.
         :param include_file_documentation: whether to include the file's docstring. Default False.
+        :return: a JSON overview of the symbols defined in the file, or a shortened summary if the full result would be too long
         """
         if depth == -1:
             if relative_path.endswith((".java", ".kt")):
@@ -518,6 +525,7 @@ class JetBrainsFindDeclarationTool(Tool, ToolMarkerSymbolicRead, ToolMarkerOptio
             Prefer regexes with sufficiently large context around the group to render the match unambiguous.
             Uses Python syntax with MULTILINE and DOTALL flags enabled.
         :param include_body: whether to include the symbol's body in the result. Default False.
+        :return: a JSON object describing the declaration that was found
         """
         relative_path = self._sanitize_input_param(relative_path)
         regex = self._sanitize_input_param(regex)
@@ -545,6 +553,7 @@ class JetBrainsFindImplementationsTool(Tool, ToolMarkerSymbolicRead, ToolMarkerO
 
         :param relative_path: the relative path to the source file containing the symbol for which to find implementations.
         :param name_path: name path of the symbol for which to find implementations
+        :return: a JSON collection of the implementations that were found
         """
         with JetBrainsPluginClient.from_project(self.project) as client:
             symbol_collection = client.find_implementations(

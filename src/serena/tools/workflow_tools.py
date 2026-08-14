@@ -42,6 +42,8 @@ class InitialInstructionsTool(Tool, ToolMarkerDoesNotRequireActiveProject):
         Provides the 'Serena Instructions Manual', which contains essential information on how to use the Serena toolbox.
         IMPORTANT: If you have not yet read the manual, call this tool immediately after you are given your task by the user,
         as it will critically inform you!
+
+        :return: the system prompt for the active project, modes and context
         """
         return self.agent.create_system_prompt(session_id=session_id)
 
@@ -55,6 +57,7 @@ class SerenaInfoTool(Tool, ToolMarkerOptional, ToolMarkerDoesNotRequireActivePro
         """
         Retrieves Serena-specific information
         :param topic: the topic, which you must have been given explicitly
+        :return: a summary of the running Serena instance, its configuration and its dashboard
         """
         match topic:
             case "jet_brains_debug_repl":
