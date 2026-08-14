@@ -42,6 +42,27 @@ dl.py > dt .pre {
     white-space: normal;
 }
 
+/* The page TOC in the right rail lists the documented objects, so its entries are
+   code literals — and a constant like DEFAULT_PROJECT_SERENA_FOLDER_LOCATION is one
+   nowrap chunk, 700px of rail in a 320px viewport, taking the page sideways with it.
+   Not scoped to dl.py because the rail sits outside the article; on prose pages a
+   heading rarely carries a literal, and wrapping it there is just as right. */
+.bd-toc-nav code .pre {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* The same chunk problem exists in the body: a ``literal`` in a docstring or a type
+   name in the Parameters list is one unbreakable run — a .pre chunk or an <em> —
+   and a single class name (ModeSelectionDefinitionWithAddedModes, 36 characters)
+   is wider than a phone. Same cure as above, plus a mid-word break where the name
+   offers no better opportunity. */
+dl.py dd .pre,
+dl.py dd em {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
 /* nested members (methods within a class) get a lighter accent */
 dl.py dl.py > dt {
     border-left-color: var(--pst-color-border, #d1d5db);
