@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import re
@@ -238,7 +239,11 @@ def autogen_tool_reference(target_dirname="05-tool-reference"):
                         requirement = "yes"
                     else:
                         default = spec.get("default", None)
-                        requirement = "no" if default is None else f"no, defaults to `{default!r}`"
+                        # Rendered as JSON, not as Python. The schema is JSON schema and the
+                        # reader is looking at what goes over the wire, so `"both"`, `true`
+                        # and `false` — not `'both'`, `True` and `False`, which would be
+                        # rejected if copied into a tool call.
+                        requirement = "no" if default is None else f"no, defaults to `{json.dumps(default)}`"
                     description = " ".join(described.get(name, "").split()) or "—"
                     text.with_line(f"| `{name}` | {kind} | {requirement} | {description} |")
                 text.with_line("")
