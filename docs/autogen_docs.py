@@ -238,12 +238,20 @@ def autogen_tool_reference(target_dirname="05-tool-reference"):
                     if name in required:
                         requirement = "yes"
                     else:
-                        default = spec.get("default", None)
-                        # Rendered as JSON, not as Python. The schema is JSON schema and the
-                        # reader is looking at what goes over the wire, so `"both"`, `true`
-                        # and `false` — not `'both'`, `True` and `False`, which would be
-                        # rejected if copied into a tool call.
-                        requirement = "no" if default is None else f"no, defaults to `{json.dumps(default)}`"
+                        # Test for the KEY, not for a None value. A nullable parameter such
+                        # as execute_shell_command's cwd carries an explicit "default": null,
+                        # so using None as the sentinel made that indistinguishable from
+                        # having no default at all, and the page silently dropped a default
+                        # it had promised to report.
+                        #
+                        # Rendered as JSON, not as Python: the schema is JSON schema and the
+                        # reader is looking at what goes over the wire, so `null`, `true` and
+                        # `"both"` — not `None`, `True` and `'both'`, which would be rejected
+                        # if copied into a tool call.
+                        if "default" in spec:
+                            requirement = f"no, defaults to `{json.dumps(spec['default'])}`"
+                        else:
+                            requirement = "no"
                     description = " ".join(described.get(name, "").split()) or "—"
                     text.with_line(f"| `{name}` | {kind} | {requirement} | {description} |")
                 text.with_line("")
