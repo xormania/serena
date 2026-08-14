@@ -138,6 +138,8 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+# generated tool-reference pages (docs/autogen_docs.py); the intro is hand-written
+docs/05-api-reference/0[1-9]0_*.md
 
 # PyBuilder
 target/

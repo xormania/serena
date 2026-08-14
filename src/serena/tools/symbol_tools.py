@@ -696,6 +696,10 @@ class RenameSymbolTool(Tool, ToolMarkerSymbolicEdit):
 
 
 class SafeDeleteSymbol(Tool, ToolMarkerSymbolicEdit):
+    """
+    Deletes a symbol if nothing references it, reporting the references otherwise.
+    """
+
     def apply(
         self,
         name_path_pattern: str,

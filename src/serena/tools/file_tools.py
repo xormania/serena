@@ -541,6 +541,10 @@ class InsertAtLineTool(EditingToolWithDiagnostics, ToolMarkerOptional):
 
 
 class SearchForPatternTool(Tool):
+    """
+    Searches for a regular expression across project files.
+    """
+
     def apply(
         self,
         substring_pattern: str,
