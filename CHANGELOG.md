@@ -5,7 +5,7 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
-  - Tools now document what they return: 28 tools that described only what they do gained a
+  - Tools now document what they return: 30 tools that described only what they do gained a
     return-value description, which agents receive as part of the tool description
 
 * Language Servers:
