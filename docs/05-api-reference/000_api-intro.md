@@ -21,10 +21,7 @@ That is the point of generating it. The reference cannot describe a parameter th
 does not accept, or omit one it does, because it is reading the same definition the server
 transmits. What you see here is what your client is told.
 
-## What is not here yet
+## Return values
 
-Every tool returns a string, and about half of them do not yet describe what that string
-contains. Where a tool documents its return value it is shown; where it does not, nothing
-is invented to fill the space. The gap is visible on purpose, and it is being worked
-through — the tools whose returns are undocumented are exactly the ones this page will
-grow a *Returns* line for.
+Every tool returns a string. Where a tool describes what that string contains, the
+description appears beneath its parameters as *Returns*.
