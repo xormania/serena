@@ -176,7 +176,7 @@ def autogen_tool_list(target_filename = "01-about/035_tools.md"):
         f.write(text.build())
 
 
-def autogen_tool_reference(target_dirname="05-api-reference"):
+def autogen_tool_reference(target_dirname="05-tool-reference"):
     """
     Writes one page per tool module describing every tool it registers: what the tool does,
     and each parameter's type, whether it is required, its default and its description.

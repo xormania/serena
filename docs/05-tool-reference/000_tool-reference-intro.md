@@ -1,4 +1,4 @@
-# API Reference
+# Tool Reference
 
 Serena's interface is its tools. This section documents them one by one: what each does,
 what it takes, and which of those are required.
