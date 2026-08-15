@@ -98,5 +98,6 @@ Make the change, then let the tooling carry it home:
    both: the changelog entry, and a scope that fits `CONTRIBUTING.md`'s rules.
 
 CI runs the same commands across Linux, macOS and Windows, so a green local loop is most of
-the way there. And if a review takes a few days to arrive, that is [normal
-here](040_faq) — it is a small team with a large surface.
+the way there. And if the review takes a few days to arrive, that is [normal
+here](040_faq) — important changes get unhurried attention, and quiet does not mean
+forgotten.
