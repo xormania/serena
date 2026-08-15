@@ -290,6 +290,17 @@ def autogen_about_intro_features():
 
         f.write(f"{about_text}\n\n")
 
+        # a fast path to the most-welcomed contribution, placed by the generator so it
+        # survives regeneration of this page from the README
+        f.write(
+            "```{admonition} Want your language supported?\n"
+            ":class: tip\n"
+            "A new language server is the contribution Serena is built to receive — no issue\n"
+            "required, and the path is mapped end to end in\n"
+            "[Adding Language Support](../06-contributing/030_adding-a-language).\n"
+            "```\n\n"
+        )
+
     jetbrains_marketplace_link = ('```{raw} html\n'
         '<p><a href="https://plugins.jetbrains.com/plugin/28946-serena/">'
         '<img style="background-color:transparent;" src="../_static/images/jetbrains-marketplace-button.png">'
