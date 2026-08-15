@@ -1,4 +1,4 @@
-# Using Serena on Serena
+# Serena for Serena
 
 The tightest loop for working on Serena is Serena itself: point your coding agent at your
 development checkout, and every change you make is immediately the server you are using. This
