@@ -57,9 +57,8 @@ The test workflow batches the markers into five jobs — `jvm`, `native`, `other
 `poe lint` and `poe type-check` run once per OS, in the catch-all batch. The docs build
 (`poe doc-build`, Sphinx with warnings as errors) and a spell check run alongside.
 
-The reasoning behind the batching — and why the suite deliberately does not use xdist — is
-written down in the header comment of `.github/workflows/pytest.yml`, worth reading before
-touching anything CI-adjacent.
+The full walk through the matrix — the batches, the ceilings, the caching, and why the
+suite deliberately does not use xdist — is [The CI Matrix](045_ci).
 
 ## Generated files: regenerate, never edit
 

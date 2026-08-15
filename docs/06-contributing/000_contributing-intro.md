@@ -31,6 +31,10 @@ In the order a new contributor meets them:
    agent attached, the generators, and the introspection utilities.
 6. **[FAQ](040_faq)** — the questions that keep arriving on the tracker, answered the way the
    maintainers answered them, with the threads linked.
-7. **[Code Reference](code-reference/000_code-reference-intro)** — generated from the docstrings
+7. **[The CI Matrix](045_ci)** — five batches, three operating systems, and the reasons
+   behind both; what the matrix means for your pull request.
+8. **[SolidLSP](050_solidlsp)** — the language-server library under everything: its shape,
+   how Serena uses it, and the etiquette of changing it.
+9. **[Code Reference](code-reference/000_code-reference-intro)** — generated from the docstrings
    in `src/serena`, ordered the way you meet the package rather than alphabetically: readable
    forwards on a first pass, a lookup afterwards.

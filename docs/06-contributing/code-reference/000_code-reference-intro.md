@@ -34,4 +34,5 @@ Want to build your own agent on top of Serena? The
 
 Undocumented members are deliberately left out — every entry you find here carries an actual
 explanation. (The [solidlsp](https://github.com/oraios/serena/tree/main/src/solidlsp)
-language-server library is not yet included.)
+language-server library is not part of the generated reference —
+[SolidLSP](../050_solidlsp) is its guided tour.)

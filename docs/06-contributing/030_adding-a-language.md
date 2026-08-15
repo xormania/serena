@@ -135,7 +135,8 @@ Four small updates and you are done:
 Declare the marker and CI seats your language in one of the batched jobs — `jvm`, `native`,
 `other-langs` or `niche`, per the lists in `.github/workflows/pytest.yml`. On machines
 without your toolchain the tests skip rather than fail, centrally, via `test/conftest.py`.
-Nothing to configure.
+Nothing to configure. The wider machinery — and why it is shaped the way it is — lives in
+[The CI Matrix](045_ci).
 
 ## You would be in good company
 
