@@ -1,36 +1,40 @@
 # Adding Language Support
 
-The most common substantial contribution, and the one `CONTRIBUTING.md` singles out as
-welcome without an issue first: an isolated addition that extends the system along existing
-lines. Some sixty languages have walked this path, the maintainers' answer to "would you
-accept this?" has consistently been yes, and language servers that follow the template
+Your language belongs here. Serena speaks some sixty languages because people kept walking
+exactly this path — and the maintainers' answer to "would you accept mine?" has been a
+consistent yes. No issue required, no permission to ask: `CONTRIBUTING.md` names this the
+contribution that can go straight to a pull request, and servers that follow the template
 routinely merge within hours.
 
-The authority is the project's own guide,
-[`adding_new_language_support_guide.md`](https://github.com/oraios/serena/blob/main/.serena/memories/adding_new_language_support_guide.md)
-— read it in full before starting. This page is the human walk through it.
+The project's own guide,
+[`adding_new_language_support_guide.md`](https://github.com/oraios/serena/blob/main/.serena/memories/adding_new_language_support_guide.md),
+is the authority — read it in full before starting. This page is the friendly walk beside
+it.
 
-## What you will build
+## The shape of the trip
 
-Five artifacts, each with its own section below:
+You will make five things. None of them is big, and every one has working examples to learn
+from:
 
-1. a language-server class,
-2. its registration,
-3. a fixture repository,
-4. a test suite and a pytest marker,
-5. the paper trail.
+1. a language-server class — the only real code,
+2. one enum entry to register it,
+3. a tiny fixture project,
+4. the tests that prove it works,
+5. a short paper trail.
 
 ## 1. The language-server class
 
-Your class lives under `src/solidlsp/language_servers/` and follows the
+The heart of it. Your class lives under `src/solidlsp/language_servers/` and follows the
 `DependencyProvider` pattern: the launch command comes from a dependency provider rather
-than being assembled inline. Pass `None` for `process_launch_info` in `super().__init__()`
-and implement `_create_dependency_provider()` to return an inner `DependencyProvider`.
+than being assembled inline. Pass `None` for `process_launch_info` in `super().__init__()`,
+implement `_create_dependency_provider()`, and you are most of the way there.
 
-### Choose a base class
+### Pick your base class
 
-Take the most specific one that fits, and read at least one existing implementation of it
-before writing your own:
+Good news: most of the work is already done for you. Four base classes cover the usual
+shapes, and your job is mostly picking the right one and filling in a method or two. Take
+the most specific one that fits — and read one existing implementation of it first; that
+half hour will save you an evening.
 
 | base class | fits when | reference |
 |:--|:--|:--|
@@ -39,101 +43,107 @@ before writing your own:
 | `LanguageServerDependencyProviderSinglePath` | one core dependency (an executable, a JAR) that is not itself the base command | `TypeScriptLanguageServer`, `Intelephense`, `ClojureLSP`, `ClangdLanguageServer` |
 | `LanguageServerDependencyProvider` (root) | multiple dependencies or custom setup; implement `create_launch_command()` directly — no automatic user override support | `EclipseJDTLS`, `CSharpLanguageServer`, `MatlabLanguageServer` |
 
-Two implementation notes from the guide: override `create_launch_command_env` if the launch
-needs environment variables, and never call `subprocess.run` directly — use the
-`subprocess_run` helper from `solidlsp.util.subprocess_util`.
+Two habits the guide asks of you: override `create_launch_command_env` when the launch
+needs environment variables, and reach for the `subprocess_run` helper from
+`solidlsp.util.subprocess_util` instead of `subprocess.run` — it exists for a reason.
 
-### Downloads are declared and verified
+### Downloads: declared, verified, done
 
-Anything your provider downloads goes through `DownloadedDependency`
-(`solidlsp.dependency_provider`), which bundles the URL, archive type, allowed hosts and
-checksum verification behind a single `download_to()` call. The checksums live in a
-URL-keyed database, `src/solidlsp/resources/downloaded_dependency_hashes.json`.
+If your server needs anything downloaded, `DownloadedDependency`
+(`solidlsp.dependency_provider`) does the careful parts — URL, archive type, allowed hosts
+and checksum verification, all behind one `download_to()` call. The checksums live in a
+URL-keyed database, `src/solidlsp/resources/downloaded_dependency_hashes.json`, so a
+tampered download simply refuses to arrive.
 
-The consequences for your class:
+Four small rules keep it honest:
 
 - build each dependency in a factory classmethod (`_create_dep_*`) that takes an optional
   version and falls back to a pinned `DEFAULT_*` constant;
-- add an `update_dep_hashes()` classmethod that constructs every dependency and updates the
-  database, and hook it into `scripts/update_downloaded_dependency_hashes.py`;
-- after bumping any pinned version, re-run that script and commit the JSON — a stale
-  database means unverified downloads locally and a CI failure;
-- pass `verified=False` only for dependencies whose hash cannot be pinned by design.
+- add an `update_dep_hashes()` classmethod that refreshes the database, and hook it into
+  `scripts/update_downloaded_dependency_hashes.py`;
+- after bumping a pinned version, re-run that script and commit the JSON — a stale database
+  means unverified downloads locally and a red CI;
+- `verified=False` is only for hashes that cannot be pinned by design.
 
-The reference implementation is `EclipseJDTLS.DependencyProvider`. Several older servers
-still hard-code hashes in constants and call the download helper directly — the guide is
-explicit that this legacy shape is not to be copied.
+`EclipseJDTLS.DependencyProvider` is the reference. You will notice a few older servers
+hard-coding hashes in constants — that is the legacy shape, and you are building the new
+one. Don't copy them.
 
-### Initialization parameters
+### Initialization: less than you think
 
-Override `_create_base_initialize_params` to return **only** the server-specific keys —
-typically `capabilities` and `initializationOptions`. The common keys (`processId`,
-`rootPath`, `rootUri`, `clientInfo`, `workspaceFolders`) are set centrally by the
-`InitializeParamsBuilder`, and your override must not touch them.
+A pleasant surprise: you provide only what is specific to *your* server. Override
+`_create_base_initialize_params` and return just the server-specific keys — typically
+`capabilities` and `initializationOptions`. The common ones (`processId`, `rootPath`,
+`rootUri`, `clientInfo`, `workspaceFolders`) belong to the `InitializeParamsBuilder`, which
+sets them centrally — one less thing for you to get wrong, so your override must not touch
+them.
 
-Two edge cases the builder handles: a server that needs the folder list *nested inside*
+Two edge cases, both already solved: a server that wants the folder list *nested inside*
 `initializationOptions` (as `EclipseJDTLS` and `KotlinLanguageServer` do) sets it there
-explicitly — only the top-level `workspaceFolders` is builder-managed; and suppressing the
-top-level key entirely goes through `_create_initialize_params_builder` with
-`set_workspace_folders=False`.
+explicitly — only the top-level `workspaceFolders` is builder-managed; and if the top-level
+key must go entirely, `_create_initialize_params_builder` with
+`set_workspace_folders=False` does it.
 
-If the server needs to wait for notifications before it is ready, that logic belongs in
-`_start_server` — `EclipseJDTLS._start_server` is the example.
+Some servers like to warm up before they answer. If yours needs to wait for a notification
+before it is ready, that logic belongs in `_start_server` — `EclipseJDTLS._start_server`
+shows how.
 
-## 2. Registration
+## 2. Registration — one enum, two match arms
 
-One entry in the `LanguageServerId` enum in `src/solidlsp/ls_config.py`, plus two `match`
-arms: `get_source_fn_matcher()` returns the file extensions your language claims, and
-`get_ls_class()` imports and returns your server class.
+Genuinely the easy part: add your language to the `LanguageServerId` enum in
+`src/solidlsp/ls_config.py`, teach `get_source_fn_matcher()` which file extensions are
+yours, and have `get_ls_class()` import and return your server class. Done.
 
 ## 3. The fixture repository
 
-A minimal but real project under `test/resources/repos/<language>/test_repo/`. Its source
-files are what your tests assert against, so they should demonstrate: classes or types (for
-symbol lookup), functions with callers (for reference finding), imports (for cross-file
-operations), and nesting (for hierarchical symbols).
+Make a tiny, real project under `test/resources/repos/<language>/test_repo/` — think of it
+as the stage your tests will perform on. Give it something worth finding: classes or types
+(for symbol lookup), functions with callers (for reference finding), an import or two (for
+cross-file operations), and some nesting (for hierarchical symbols).
 
-## 4. Tests and the marker
+## 4. Tests — where the review happens
 
-In the guide's own words: the tests will form the main part of the review. Create
-`test/solidlsp/<language>/test_<language>_basic.py`, modelled on
-`test/solidlsp/php/test_php_basic.py`, covering at minimum: finding symbols, within-file
-references, and cross-file references.
+The guide says it plainly: the tests will form the main part of the review, so this is
+where care pays off most. Create `test/solidlsp/<language>/test_<language>_basic.py`,
+modelled on `test/solidlsp/php/test_php_basic.py`, and cover at least: finding symbols,
+within-file references, and cross-file references.
 
-Three rules are firm:
+Three rules, all firm, all fair:
 
-1. assert on the actual symbol and reference names — "a list came back" is not a test;
+1. assert on the actual symbol and reference names — "a list came back" proves nothing;
 2. never skip, except on package availability or an unsupported OS;
-3. the tests must run in CI — check whether a GitHub action exists for installing the
+3. the tests must run in CI — check whether a GitHub action exists for installing your
    toolchain.
 
-Declare the language's marker under `[tool.pytest.ini_options].markers` in
-`pyproject.toml`, and run your suite locally with `uv run poe test -m <marker>`.
+Declare your marker under `[tool.pytest.ini_options].markers` in `pyproject.toml`, then run
+your suite with `uv run poe test -m <marker>` and watch it go green.
 
 ## 5. The paper trail
 
-Four updates close the contribution:
+Four small updates and you are done:
 
-- **README.md** — add the language to the list;
-- **`docs/01-about/020_programming-languages.md`** — add it with any special notes
-  (required installations, compatibility);
-- **`src/serena/resources/project.template.yml`** — regenerate the commented
-  language-server list with `uv run python scripts/print_language_list.py` and paste it
-  over the old one, stripping the trailing spaces the script pads with;
-- **CHANGELOG.md** — one concise entry.
+- **README.md** — add your language to the list;
+- **`docs/01-about/020_programming-languages.md`** — add it, with any special notes a user
+  needs (required installations, compatibility);
+- **`src/serena/resources/project.template.yml`** — regenerate the commented list with
+  `uv run python scripts/print_language_list.py` and paste it over the old one (strip the
+  trailing spaces the script pads with);
+- **CHANGELOG.md** — one concise line to mark the occasion.
 
-## Running in CI
+## CI does the rest
 
-Your marker lands in one of the batched jobs — `jvm`, `native`, `other-langs` or `niche` —
-according to the lists in `.github/workflows/pytest.yml`; there is nothing to configure
-beyond declaring it. On machines without your toolchain the tests skip rather than fail,
-centrally, via `test/conftest.py`.
+Declare the marker and CI seats your language in one of the batched jobs — `jvm`, `native`,
+`other-langs` or `niche`, per the lists in `.github/workflows/pytest.yml`. On machines
+without your toolchain the tests skip rather than fail, centrally, via `test/conftest.py`.
+Nothing to configure.
 
-## The precedent
+## You would be in good company
 
-The recent record is encouraging: language servers that follow this template merge fast and
-with little friction — Nextflow ([#1815](https://github.com/oraios/serena/pull/1815)),
-Gleam ([#1765](https://github.com/oraios/serena/pull/1765)), Deno
+Nextflow ([#1815](https://github.com/oraios/serena/pull/1815)), Gleam
+([#1765](https://github.com/oraios/serena/pull/1765)), Deno
 ([#1778](https://github.com/oraios/serena/pull/1778)) and BasedPyright
-([#1705](https://github.com/oraios/serena/pull/1705)) all landed this way. Gleam landed on
-its third attempt — persistence with the template works.
+([#1705](https://github.com/oraios/serena/pull/1705)) all landed exactly this way —
+most within hours, with reviews closer to "Thanks, looks good, merging!" than to a
+checklist. Gleam took three tries and got there anyway.
+
+Bring your language.
