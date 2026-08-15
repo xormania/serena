@@ -24,8 +24,10 @@ In the order a new contributor meets them:
    from the project's own checked-in doctrine.
 4. **[Adding language support](030_adding-a-language)** — the most common substantial
    contribution, mapped end to end.
-5. **[FAQ](040_faq)** — the questions that keep arriving on the tracker, answered the way the
+5. **[The scripts](035_scripts)** — the map of `scripts/`: demos that run tools without an
+   agent attached, the generators, and the introspection utilities.
+6. **[FAQ](040_faq)** — the questions that keep arriving on the tracker, answered the way the
    maintainers answered them, with the threads linked.
-6. **[Code Reference](code-reference/000_code-reference-intro)** — generated from the docstrings
+7. **[Code Reference](code-reference/000_code-reference-intro)** — generated from the docstrings
    in `src/serena`, ordered the way you meet the package rather than alphabetically: readable
    forwards on a first pass, a lookup afterwards.
