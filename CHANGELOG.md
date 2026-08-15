@@ -5,7 +5,8 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
-  - The documentation now has a Contributing section, whose first content is an auto-generated
+  - The documentation now has a Contributing section: the development loop, the house style,
+    the language-support path, an FAQ distilled from the issue tracker, and an auto-generated
     code reference for the `serena` package (the generator existed but had been disabled since
     the documentation build was introduced)
 
