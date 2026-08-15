@@ -1,4 +1,4 @@
-# Adding language support
+# Adding Language Support
 
 The most common substantial contribution, and the one `CONTRIBUTING.md` singles out as welcome
 without an issue first: an isolated addition that extends the system along existing lines. Some

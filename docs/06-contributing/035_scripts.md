@@ -27,7 +27,7 @@ the natural starting point for tool work.
 ## Generators: outputs, not sources
 
 Four scripts regenerate files that are never edited by hand; *when* each one must run is
-covered in [Getting started](010_getting-started).
+covered in [Getting Started](010_getting-started).
 
 | script | regenerates |
 |:--|:--|

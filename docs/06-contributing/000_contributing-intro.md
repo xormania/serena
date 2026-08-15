@@ -13,16 +13,16 @@ the conventions the code holds itself to, and a guided way into the source.
 
 In the order a new contributor meets them:
 
-1. **[Getting started](010_getting-started)** — from a fresh clone to a verified change: the
+1. **[Getting Started](010_getting-started)** — from a fresh clone to a verified change: the
    environment, the four commands that gate every commit, how the tests are selected and
    skipped, what CI runs against a pull request, and the files that are generated rather than
    edited.
 2. **[Using Serena on Serena](015_using-serena)** — keep your daily server on current
    `main`, run a specific branch when testing calls for it, and let the diagnostics tools
    tell you what each edit did.
-3. **[House style](020_house-style)** — the design, testing and docstring conventions, rendered
+3. **[House Style](020_house-style)** — the design, testing and docstring conventions, rendered
    from the project's own checked-in doctrine.
-4. **[Adding language support](030_adding-a-language)** — the most common substantial
+4. **[Adding Language Support](030_adding-a-language)** — the most common substantial
    contribution, mapped end to end.
 5. **[Scripts](035_scripts)** — the map of `scripts/`: demos that run tools without an
    agent attached, the generators, and the introspection utilities.

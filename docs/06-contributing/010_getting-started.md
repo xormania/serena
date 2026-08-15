@@ -1,4 +1,4 @@
-# Getting started
+# Getting Started
 
 Welcome — this page takes you from a fresh clone to a verified change. By the end of it you
 will have a working environment, know the four commands that gate every commit, understand how

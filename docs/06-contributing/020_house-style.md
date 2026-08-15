@@ -1,4 +1,4 @@
-# House style
+# House Style
 
 Serena keeps its conventions where its agents can read them: as checked-in memories under
 [`.serena/memories/`](https://github.com/oraios/serena/tree/main/.serena/memories). This page is
@@ -31,7 +31,7 @@ The style is idiomatic, object-oriented Python — Java-esque principles, Python
   implementation-coupled one.
 - Language-server tests are marker-gated per language, and snapshot tests use
   [syrupy](https://github.com/syrupy-project/syrupy) — see
-  [Getting started](010_getting-started) for how tests are selected and skipped.
+  [Getting Started](010_getting-started) for how tests are selected and skipped.
 
 ## Docstrings and comments
 
