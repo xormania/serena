@@ -31,7 +31,7 @@ The style is idiomatic, object-oriented Python — Java-esque principles, Python
   implementation-coupled one.
 - Language-server tests are marker-gated per language, and snapshot tests use
   [syrupy](https://github.com/syrupy-project/syrupy) — see
-  [the development loop](010_development-loop) for how tests are selected and skipped.
+  [Getting started](010_getting-started) for how tests are selected and skipped.
 
 ## Docstrings and comments
 
@@ -49,5 +49,5 @@ The style is idiomatic, object-oriented Python — Java-esque principles, Python
 
 The formatter and linter is ruff (line length 140, double quotes, docstring code formatting on);
 the type checker is [`ty`](https://github.com/astral-sh/ty). None of this needs remembering:
-`uv run poe format` and `uv run poe type-check` apply it, and [CI](010_development-loop) holds
+`uv run poe format` and `uv run poe type-check` apply it, and [CI](010_getting-started) holds
 the same line.

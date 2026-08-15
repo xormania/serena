@@ -13,9 +13,10 @@ the conventions the code holds itself to, and a guided way into the source.
 
 In the order a new contributor meets them:
 
-1. **[The development loop](010_development-loop)** — the four commands that gate every change,
-   how the tests are selected and skipped, what CI actually runs against a pull request, and the
-   generated files that are regenerated rather than edited.
+1. **[Getting started](010_getting-started)** — from a fresh clone to a verified change: the
+   environment, the four commands that gate every commit, how the tests are selected and
+   skipped, what CI runs against a pull request, and the files that are generated rather than
+   edited.
 2. **[House style](020_house-style)** — the design, testing and docstring conventions, rendered
    from the project's own checked-in doctrine.
 3. **[Adding language support](030_adding-a-language)** — the most common substantial

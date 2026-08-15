@@ -1,8 +1,15 @@
-# The development loop
+# Getting started
+
+Welcome — this page takes you from a fresh clone to a verified change. By the end of it you
+will have a working environment, know the four commands that gate every commit, understand how
+the test suite decides what to run on your machine, and know which files are generated rather
+than edited. None of it assumes prior context, and none of it takes long.
 
 Environment setup is three commands, described in
 [CONTRIBUTING.md](https://github.com/oraios/serena/blob/main/CONTRIBUTING.md): create a
-virtualenv with `uv`, activate it, `uv sync --extra dev`. Everything below assumes that.
+virtualenv with `uv`, activate it, `uv sync --extra dev`. That is the whole install — no
+services, no containers; language servers are fetched on demand when a test or a project
+needs them.
 
 ## The four commands
 
@@ -65,6 +72,18 @@ A tool is an ordinary Python object and does not need an agent attached:
 siblings (`demo_diagnostics.py`, `demo_find_defining_symbol.py`, …) do the same for narrower
 surfaces. This is the fastest loop for tool work — no MCP client, no model, no waiting.
 
-Last, before the pull request: a concise entry in `CHANGELOG.md` under the matching section.
-The PR template asks for exactly two things, and that is one of them; the other is the scope
-rule in `CONTRIBUTING.md`.
+## Your first change, end to end
+
+Make the change, then let the tooling carry it home:
+
+1. `uv run poe format` — the formatter fixes what it can and tells you the rest.
+2. `uv run poe type-check` — fast, and worth trusting.
+3. `uv run poe test -m <marker>` for the languages you touched, or bare `poe test` for core
+   work.
+4. One concise line in `CHANGELOG.md` under the matching section.
+5. Open the pull request — the template asks for exactly two things, and you have just done
+   both: the changelog entry, and a scope that fits `CONTRIBUTING.md`'s rules.
+
+CI runs the same commands across Linux, macOS and Windows, so a green local loop is most of
+the way there. And if a review takes a few days to arrive, that is [normal
+here](040_faq) — it is a small team with a large surface.
