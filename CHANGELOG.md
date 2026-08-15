@@ -9,6 +9,10 @@ Status of the `main` branch. Changes prior to the next official version change w
   - Fix: eleven overridable language-server settings were missing from the configuration docs (Ada, CUE,
     Fortran, JSON, Nextflow and PHPantom had no section at all) and the Pascal table lacked a Default
     column; a test now keeps the documented settings in sync with the versions pinned in the source
+  - The documentation now has a Contributing section: the development loop, the house style,
+    the language-support path, an FAQ distilled from the issue tracker, and an auto-generated
+    code reference for the `serena` package (the generator existed but had been disabled since
+    the documentation build was introduced)
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
