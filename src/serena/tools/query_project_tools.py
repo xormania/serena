@@ -51,6 +51,7 @@ class QueryProjectTool(Tool, ToolMarkerOptional, ToolMarkerDoesNotRequireActiveP
         :param project_name: the name of the project to query (or root path)
         :param tool_name: the name of the tool to execute in the other project. The tool must be read-only.
         :param tool_params_json: the parameters to pass to the tool, encoded as a JSON string
+        :return: the result the queried tool produced, verbatim
         """
         tool = self.agent.get_tool_by_name(tool_name)
         assert tool.is_readonly(), f"Tool {tool_name} is not read-only and cannot be executed in another project."

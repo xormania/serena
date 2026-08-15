@@ -13,6 +13,8 @@ Status of the `main` branch. Changes prior to the next official version change w
     the language-support path, an FAQ distilled from the issue tracker, and an auto-generated
     code reference for the `serena` package (the generator existed but had been disabled since
     the documentation build was introduced)
+  - Tools now document what they return: 30 tools that described only what they do gained a
+    return-value description, which agents receive as part of the tool description
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)

@@ -204,6 +204,8 @@ class ReplaceContentTool(EditingToolWithDiagnostics):
         :param mode: either "literal" or "regex", specifying how the `needle` parameter is to be interpreted.
         :param allow_multiple_occurrences: whether to allow matching and replacing multiple occurrences.
             If false and multiple occurrences are found, an error will be returned
+
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         with self.DiagnosticsContext(self, relative_path) as diagnostics_context:
             self.project.validate_relative_path(relative_path)
@@ -468,6 +470,7 @@ class DeleteLinesTool(EditingToolWithDiagnostics, ToolMarkerOptional):
         :param relative_path: the relative path to the file
         :param start_line: the 0-based index of the first line to be deleted
         :param end_line: the 0-based index of the last line to be deleted
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         with self.DiagnosticsContext(self, relative_path) as diagnostics_context:
             code_editor = self.create_code_editor()
@@ -496,6 +499,7 @@ class ReplaceLinesTool(EditingToolWithDiagnostics, ToolMarkerOptional):
         :param start_line: the 0-based index of the first line to be deleted
         :param end_line: the 0-based index of the last line to be deleted
         :param content: the content to insert
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         # normalizing the replacement content
         if not content.endswith("\n"):
@@ -529,6 +533,7 @@ class InsertAtLineTool(EditingToolWithDiagnostics, ToolMarkerOptional):
         :param relative_path: the relative path to the file
         :param line: the 0-based index of the line to insert content at
         :param content: the content to be inserted
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         # normalizing the inserted content
         if not content.endswith("\n"):
