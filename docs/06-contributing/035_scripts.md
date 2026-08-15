@@ -1,4 +1,4 @@
-# The scripts
+# Scripts
 
 Everything in `scripts/` runs the same way, from the repository root:
 
