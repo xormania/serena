@@ -2,13 +2,28 @@
 
 The tightest loop for working on Serena is Serena itself: point your coding agent at your
 development checkout, and every change you make is immediately the server you are using. This
-page covers the two skills that make that loop work — running the server from a branch, and
-letting the diagnostics tools tell you what an edit did.
+page covers the two skills that make that loop work — choosing which Serena you run (and how
+to run a specific branch when the work calls for it), and letting the diagnostics tools tell
+you what an edit did.
 
-## Running the server from a branch
+## Which Serena you run
 
-**From your checkout.** Configure your MCP client to launch the server through `uv run` in the
-working tree:
+For everyday use — including while working on Serena — run current `main`. It is where every
+fix lands first, and using it daily is the cheapest way to notice a regression before a
+release does. From a checkout tracking `main`, the persistent install `CONTRIBUTING.md`
+describes keeps it fresh:
+
+```bash
+git pull && uv tool install --reinstall -p 3.13 .
+```
+
+Your MCP clients launch `serena` by name and always get an up-to-date main.
+
+## Running the server from a specific branch
+
+Two situations call for a branch instead: testing a change you are making, and trying a
+branch someone else has proposed. In both, leave the main install alone and scope the branch
+to a separate client entry:
 
 ```json
 {
@@ -21,12 +36,12 @@ working tree:
 }
 ```
 
-`uv run` rebuilds the package from the tree on launch, so what runs is exactly the code on
-your branch — switch branches, restart the server, and you are testing the other branch. No
-install step in between.
+`uv run` rebuilds the package from the tree on launch, so what runs is exactly the code that
+is checked out — switch branches, restart the server, and you are testing the other branch.
+No install step in between.
 
-**From a remote branch, without cloning.** To try a branch — yours on a second machine, or a
-pull request you are reviewing — `uvx` can run it straight from git:
+To try a remote branch without cloning — a pull request you are reviewing, say — `uvx` can
+run it straight from git:
 
 ```bash
 uvx --from git+https://github.com/<owner>/serena@<branch> serena start-mcp-server
@@ -35,11 +50,10 @@ uvx --from git+https://github.com/<owner>/serena@<branch> serena start-mcp-serve
 This path ignores the lockfile, which is exactly why the project pins its dependencies to
 exact versions — the git install resolves to the same environment anyway.
 
-**One gotcha worth knowing.** `uv tool install .` (the persistent install from
-`CONTRIBUTING.md`) holds a single slot per tool name: installing your branch this way
-replaces the released Serena for every client that launches it by name. Prefer the
-`uv run --directory` form for day-to-day development — it scopes the branch to one client
-entry and leaves the released install alone.
+**Why not `uv tool install .` from the branch:** the persistent install holds a single slot
+per tool name, so installing a branch that way replaces your main-based Serena for every
+client that launches it by name — and it stays replaced after you have moved on. The
+`--directory` form keeps the branch scoped to the one client entry that asked for it.
 
 **Restart semantics.** Configuration is read at startup, so config changes need a server
 restart; a language can be added to a running instance from the dashboard. The
