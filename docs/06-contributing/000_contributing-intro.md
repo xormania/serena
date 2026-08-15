@@ -4,7 +4,10 @@
 projects — [Usage](../02-usage/000_intro) is where to start. Nothing in this section is needed for
 that.
 
-This section is for working on Serena itself. The policy for a contribution — what can go
+This section is for working on Serena itself — and if that is why you are here, welcome.
+The learning curve used to be real; these pages exist to flatten it.
+
+The policy for a contribution — what can go
 straight to a pull request and what wants an issue first — is set by
 [CONTRIBUTING.md](https://github.com/oraios/serena/blob/main/CONTRIBUTING.md) at the repository
 root; that file is the authority, and this section defers to it wherever they touch the same

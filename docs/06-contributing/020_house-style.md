@@ -1,6 +1,7 @@
 # House Style
 
-Serena keeps its conventions where its agents can read them: as checked-in memories under
+Every codebase has opinions; Serena writes its down where its agents can read them — as
+checked-in memories under
 [`.serena/memories/`](https://github.com/oraios/serena/tree/main/.serena/memories). This page is
 the human rendering of the load-bearing one,
 [`critical_info.md`](https://github.com/oraios/serena/blob/main/.serena/memories/critical_info.md);
@@ -51,3 +52,6 @@ The formatter and linter is ruff (line length 140, double quotes, docstring code
 the type checker is [`ty`](https://github.com/astral-sh/ty). None of this needs remembering:
 `uv run poe format` and `uv run poe type-check` apply it, and [CI](010_getting-started) holds
 the same line.
+
+When in doubt, open a neighbouring file: the codebase is consistent enough to teach by
+example, and review will nudge you the rest of the way.

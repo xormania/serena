@@ -41,8 +41,9 @@ operations, via syrupy) and `slow`.
 
 ### Missing toolchains skip, never fail
 
-A language whose server or toolchain is not installed locally is skipped, not failed. That
-decision lives in exactly one place — `test/conftest.py` — rather than per test file.
+A language whose server or toolchain is not installed locally is skipped, not failed — you
+can work on Python without installing sixty compilers. That decision lives in exactly one
+place, `test/conftest.py`, rather than per test file.
 
 ### Fixtures are real repositories
 

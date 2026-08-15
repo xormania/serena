@@ -6,7 +6,7 @@ Everything in `scripts/` runs the same way, from the repository root:
 uv run python scripts/<name>.py
 ```
 
-This page is the map — what each script does, and when to reach for it.
+This page is the map — what each one does, and when you will be glad it exists.
 
 ## Demos: see a tool run, no agent attached
 

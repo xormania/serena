@@ -1,7 +1,9 @@
 # Serena for Serena
 
 The tightest loop for working on Serena is Serena itself: point your coding agent at your
-development checkout, and every change you make is immediately the server you are using. This
+development checkout, and every change you make is immediately the server you are using.
+The first time you fix a tool, restart, and feel the fix under your own hands, the loop
+makes sense for good. This
 page covers the two skills that make that loop work — choosing which Serena you run (and how
 to run a specific branch when the work calls for it), and letting the diagnostics tools tell
 you what an edit did.
