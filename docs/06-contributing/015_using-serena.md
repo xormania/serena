@@ -1,0 +1,68 @@
+# Using Serena on Serena
+
+The tightest loop for working on Serena is Serena itself: point your coding agent at your
+development checkout, and every change you make is immediately the server you are using. This
+page covers the two skills that make that loop work — running the server from a branch, and
+letting the diagnostics tools tell you what an edit did.
+
+## Running the server from a branch
+
+**From your checkout.** Configure your MCP client to launch the server through `uv run` in the
+working tree:
+
+```json
+{
+  "mcpServers": {
+    "serena-dev": {
+      "command": "uv",
+      "args": ["run", "--directory", "/abs/path/to/your/serena", "serena", "start-mcp-server"]
+    }
+  }
+}
+```
+
+`uv run` rebuilds the package from the tree on launch, so what runs is exactly the code on
+your branch — switch branches, restart the server, and you are testing the other branch. No
+install step in between.
+
+**From a remote branch, without cloning.** To try a branch — yours on a second machine, or a
+pull request you are reviewing — `uvx` can run it straight from git:
+
+```bash
+uvx --from git+https://github.com/<owner>/serena@<branch> serena start-mcp-server
+```
+
+This path ignores the lockfile, which is exactly why the project pins its dependencies to
+exact versions — the git install resolves to the same environment anyway.
+
+**One gotcha worth knowing.** `uv tool install .` (the persistent install from
+`CONTRIBUTING.md`) holds a single slot per tool name: installing your branch this way
+replaces the released Serena for every client that launches it by name. Prefer the
+`uv run --directory` form for day-to-day development — it scopes the branch to one client
+entry and leaves the released install alone.
+
+**Restart semantics.** Configuration is read at startup, so config changes need a server
+restart; a language can be added to a running instance from the dashboard. The
+[FAQ](040_faq) covers the details.
+
+## Letting diagnostics do the checking
+
+Serena's language servers already know what is wrong with a file — the diagnostics tools
+expose that, and for the inner loop they are much cheaper than a build or a test run:
+
+- **`get_diagnostics_for_file`** returns a file's diagnostics grouped by severity and by the
+  symbol they belong to, with a `min_severity` filter (error, warning, information, hint) —
+  raise the threshold and hint-level noise disappears. Reach for it after a series of edits,
+  before spending minutes on `poe test`.
+- **The editing tools report their own damage.** Every editing tool checks the diagnostics
+  delta of its edit and reports newly introduced warning-or-higher findings in its result —
+  not the file's pre-existing noise, only what the edit itself caused. An agent using Serena
+  sees the consequence of each change at the moment it makes it, which is the difference
+  between fixing one mistake and discovering twelve at build time. The machinery is
+  `EditingToolWithDiagnostics` in
+  [serena.tools.tools_base](code-reference/tools/tools_base).
+
+The runnable illustration of both is `scripts/demo_diagnostics.py`: it creates a temporary
+file in this repository, introduces a warning, shows file- and symbol-level diagnostics, then
+makes a second flawed edit and demonstrates that only the new warning is reported. Five
+minutes with it and the loop makes sense.
