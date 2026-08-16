@@ -188,6 +188,17 @@ jobs:
         uses: DeLaGuardo/setup-clojure@13.4
         with:
           cli: latest
+      # Windows only: ccls publishes no binaries of its own, so the Chocolatey community
+      # package is the only source of a Windows build -- and it was unreachable for over an
+      # hour on 2026-08-15, failing `native (windows-latest)` twice (504 at 05:29, 503 at
+      # 06:37). Cached and fetched the same way ZLS, verible and Regal already are.
+      - name: Cache ccls (C/C++ Language Server)
+        if: matrix.batch == 'native' && runner.os == 'Windows'
+        id: cache-ccls
+        uses: actions/cache@v3
+        with:
+          path: ~/.ccls-bin
+          key: ccls-${{ runner.os }}-0.20220729.0
       - name: Install ccls (C/C++ Language Server)
         if: matrix.batch == 'native'
         shell: bash
@@ -198,7 +209,22 @@ jobs:
           elif [[ "${{ runner.os }}" == "macOS" ]]; then
             brew install ccls
           elif [[ "${{ runner.os }}" == "Windows" ]]; then
-            choco install ccls -y
+            # The .nupkg is a zip whose tools/x64/ccls.exe is a single static binary, so it
+            # can be unpacked directly. This deliberately does not call `choco install`: what
+            # failed both times was the OData *query* endpoint it consults first
+            # (api/v2/Packages(Id='ccls',...)), which this path never touches -- and on a
+            # cache hit there is no request at all.
+            CCLS_VERSION="0.20220729.0"
+            CCLS_DIR="$HOME/.ccls-bin"
+            if [[ "${{ steps.cache-ccls.outputs.cache-hit }}" != "true" ]]; then
+              mkdir -p "$CCLS_DIR"
+              curl -fL --retry 3 --retry-delay 5 -o ccls.zip \
+                "https://community.chocolatey.org/api/v2/package/ccls/${CCLS_VERSION}"
+              unzip -o ccls.zip -d "$CCLS_DIR" && rm ccls.zip
+            fi
+            # GITHUB_PATH only affects later steps, so also export it for the check below.
+            echo "$CCLS_DIR/tools/x64" >> "$GITHUB_PATH"
+            export PATH="$CCLS_DIR/tools/x64:$PATH"
           fi
           # Verify installation
           if command -v ccls &> /dev/null; then
