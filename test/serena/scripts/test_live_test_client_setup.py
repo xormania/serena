@@ -295,6 +295,40 @@ class TestStatePreservation:
         assert link.is_symlink()
         assert target.read_bytes() == original
 
+    @posix_only
+    def test_a_link_replaced_by_an_identical_regular_file_is_recreated(self, probe_module, tmp_path) -> None:
+        """Given a client that rewrites configs by atomic rename — replacing the symlinked
+        config with a regular file whose bytes are IDENTICAL — when the clean lifecycle
+        verifies the baseline, then the link is recreated: byte-identity alone must not
+        declare the baseline intact while the user's dotfile link is gone.
+        """
+        dotfiles = tmp_path / "dotfiles"
+        dotfiles.mkdir()
+        target = dotfiles / "config.json"
+        original = b'{"linked": true}'
+        target.write_bytes(original)
+        link = tmp_path / "config.json"
+        link.symlink_to(target)
+        probe = _probe(probe_module, tmp_path, link)
+        calls = {"lists": 0}
+
+        def link_replacing_run(argv):
+            if "setup" in argv:
+                link.unlink()
+                link.write_bytes(original)  # same bytes, but the link is now a regular file
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = link_replacing_run
+        result = probe.run()
+        assert result.status == probe_module.Status.PASS
+        assert link.is_symlink()
+        assert os.readlink(link) == str(target)
+        assert target.read_bytes() == original
+        assert any("link was recreated" in note for note in result.notes)
+
     def test_a_config_rewritten_during_the_lifecycle_is_restored_with_disclosure(self, probe_module, tmp_path) -> None:
         """Given a clean lifecycle during which the config's bytes changed (a client rewrite
         and a concurrent edit by another process are indistinguishable on opaque bytes), when

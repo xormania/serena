@@ -155,6 +155,8 @@ class ClientProbe:
         self._config_existed = False
         self._config_mode: int | None = None
         self._config_restore_path: Path | None = None
+        self._config_was_symlink = False
+        self._config_link_target: str | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
         # execute, record in the transcript, and echo for the live reader. On POSIX the child
@@ -225,8 +227,13 @@ class ClientProbe:
             return
         self._config_mode = stat.S_IMODE(config_path.stat().st_mode)
         # restores must write through a symlinked config (dotfile trees), never replace the
-        # link itself with a regular file -- so the restore target is resolved NOW
+        # link itself with a regular file -- so the restore target is resolved NOW, and the
+        # link's shape and literal target are recorded so a client that atomically replaces
+        # the link with a regular file can be undone too
         self._config_restore_path = config_path.resolve()
+        self._config_was_symlink = config_path.is_symlink()
+        if self._config_was_symlink:
+            self._config_link_target = os.readlink(config_path)
         self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
         self._backup_path.write_bytes(config_path.read_bytes())
         self._backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
@@ -245,6 +252,15 @@ class ClientProbe:
         # the temp file BEFORE it atomically replaces the config, so no wider-than-intended
         # window ever exists and an interruption leaves only a 0600 temp file behind.
         assert self._backup_path is not None and self.spec.user_config_path is not None
+        config_path = self.spec.user_config_path
+        if self._config_was_symlink and not config_path.is_symlink():
+            # the client replaced the symlink with a regular file (atomic-rename writers do);
+            # remove the impostor and recreate the recorded link, preserving a relative target
+            if config_path.exists() or config_path.is_symlink():
+                config_path.unlink()
+            assert self._config_link_target is not None
+            config_path.symlink_to(self._config_link_target)
+            self._notes.append("the client replaced the config symlink with a regular file; the link was recreated")
         # the resolved target recorded at backup time: replacing the config PATH would clobber
         # a symlinked dotfile with a regular file
         restore_path = self._config_restore_path or self.spec.user_config_path
@@ -271,18 +287,23 @@ class ClientProbe:
             self._remove_config_created_by_probe()
             return
         assert self._backup_path is not None
-        if config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes():
+        bytes_intact = config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes()
+        # identical bytes are not enough: a client that rewrites configs by atomic rename
+        # replaces a symlinked config with a regular file while preserving every byte
+        link_shape_intact = not self._config_was_symlink or config_path.is_symlink()
+        if bytes_intact and link_shape_intact:
             self._notes.append("user config is byte-identical to the baseline")
         else:
+            if not bytes_intact:
+                # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
+                # another process are indistinguishable; the byte-restore contract wins, and the
+                # note DISCLOSES that concurrent changes (if any) were rolled back with it
+                self._notes.append(
+                    "user config restored from backup: its bytes changed during the probe. A client rewrite and a"
+                    " concurrent edit by another process look the same, so any concurrent change was rolled back"
+                    " too -- avoid editing client configs while the probe runs"
+                )
             self._restore_config_bytes()
-            # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
-            # another process are indistinguishable; the byte-restore contract wins, and the
-            # note DISCLOSES that concurrent changes (if any) were rolled back with it
-            self._notes.append(
-                "user config restored from backup: its bytes changed during the probe. A client rewrite and a"
-                " concurrent edit by another process look the same, so any concurrent change was rolled back"
-                " too -- avoid editing client configs while the probe runs"
-            )
         if self._config_mode is not None and stat.S_IMODE(config_path.stat().st_mode) != self._config_mode:
             config_path.chmod(self._config_mode)
             self._notes.append("user config permissions restored to the pre-probe mode")
@@ -452,24 +473,27 @@ def main() -> int:
     backup_dir = Path(tempfile.mkdtemp(prefix="serena-client-probe-"))
 
     results = []
-    for handler in handlers:
-        print(f"\n== {handler.name}")
-        probe = ClientProbe(handler, specs[handler.name], Path(serena_executable), backup_dir)
-        result = probe.run()
-        results.append(result)
-        print(f"  {result.status.value}: {result.detail}")
-        if result.cli_version is not None:
-            print(f"    client version: {result.cli_version}")
-        for note in result.notes:
-            print(f"    note: {note}")
-        if record_dir is not None:
-            print(f"    snapshot: {_write_snapshot(record_dir, result)}")
-
-    # drop the backup directory unless a failure left a backup behind
-    if not any(backup_dir.iterdir()):
-        backup_dir.rmdir()
-    else:
-        print(f"\nBackups kept at {backup_dir} (a probe failed or restored state); review and delete manually.")
+    try:
+        for handler in handlers:
+            print(f"\n== {handler.name}")
+            probe = ClientProbe(handler, specs[handler.name], Path(serena_executable), backup_dir)
+            result = probe.run()
+            results.append(result)
+            print(f"  {result.status.value}: {result.detail}")
+            if result.cli_version is not None:
+                print(f"    client version: {result.cli_version}")
+            for note in result.notes:
+                print(f"    note: {note}")
+            if record_dir is not None:
+                print(f"    snapshot: {_write_snapshot(record_dir, result)}")
+    finally:
+        # ALWAYS dispose of the backup directory, interrupt included: emergency restore
+        # retains credential-bearing backups, and an exception between backup and summary
+        # must not leave a secret copy in a temp dir the user was never told about
+        if not any(backup_dir.iterdir()):
+            backup_dir.rmdir()
+        else:
+            print(f"\nBackups kept at {backup_dir} (a probe failed or restored state); review and delete manually.")
 
     print("\nSummary:")
     for result in results:
