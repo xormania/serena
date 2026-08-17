@@ -248,3 +248,19 @@ class TestStatePreservation:
             os.umask(old_umask)
         assert snapshot_path.is_file()
         assert stat.S_IMODE(snapshot_path.stat().st_mode) == 0o600
+
+    @posix_only
+    def test_a_leftover_snapshot_with_a_looser_mode_is_tightened_before_content_lands(self, probe_module, tmp_path) -> None:
+        """Given a snapshot file left by an earlier run with a permissive mode, when the
+        probe snapshots over it, then the rewritten file is owner-only — creation-time
+        modes only govern new files, so the leftover must be tightened explicitly.
+        """
+        leftover = tmp_path / "stub.json"
+        leftover.write_text("{}")
+        leftover.chmod(0o644)
+        assert stat.S_IMODE(leftover.stat().st_mode) == 0o644  # the plant landed
+        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
+        snapshot_path = probe_module._write_snapshot(tmp_path, result)
+        assert snapshot_path == leftover
+        assert "transcript" in snapshot_path.read_text()  # the content really was rewritten
+        assert stat.S_IMODE(snapshot_path.stat().st_mode) == 0o600

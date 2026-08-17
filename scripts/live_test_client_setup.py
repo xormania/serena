@@ -44,6 +44,7 @@ Exit code: 1 if any probed client failed, 0 otherwise (skipped and undetected cl
 
 import argparse
 import json
+import os
 import re
 import shutil
 import stat
@@ -350,10 +351,15 @@ def _write_snapshot(record_dir: Path, result: ProbeResult) -> Path:
         "transcript": [executed.as_dict() for executed in result.transcript],
     }
     snapshot_path = record_dir / f"{result.client}.json"
-    snapshot_path.write_text(json.dumps(snapshot, indent=2) + "\n", encoding="utf-8")
     # transcripts echo other servers' registration lines, which can carry credentials in
-    # commands or env values -- owner-only, like the config backups above
-    snapshot_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+    # commands or env values -- owner-only from the first byte, not chmod'd after the
+    # content already sits readable; fchmod covers a leftover file from an earlier run,
+    # whose looser mode O_CREAT would not correct
+    fd = os.open(snapshot_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, stat.S_IRUSR | stat.S_IWUSR)
+    if hasattr(os, "fchmod"):
+        os.fchmod(fd, stat.S_IRUSR | stat.S_IWUSR)
+    with os.fdopen(fd, "w", encoding="utf-8") as snapshot_file:
+        snapshot_file.write(json.dumps(snapshot, indent=2) + "\n")
     return snapshot_path
 
 
