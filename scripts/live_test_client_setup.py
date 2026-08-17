@@ -47,6 +47,7 @@ import json
 import os
 import re
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -155,13 +156,28 @@ class ClientProbe:
         self._config_mode: int | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
-        # execute, record in the transcript, and echo for the live reader
+        # execute, record in the transcript, and echo for the live reader. On POSIX the child
+        # gets its own process group so a timeout can terminate the WHOLE tree: setup shells
+        # out to the client CLI, and an orphaned grandchild finishing its registration AFTER
+        # the rollback would silently undo the cleanup.
         print(f"    $ {' '.join(argv)}", flush=True)
         try:
-            completed = subprocess.run(argv, check=False, capture_output=True, text=True, timeout=COMMAND_TIMEOUT_SECONDS)
-            executed = ExecutedCommand(argv, completed.returncode, completed.stdout, completed.stderr)
-        except subprocess.TimeoutExpired:
-            executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s")
+            with subprocess.Popen(
+                argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, start_new_session=(os.name == "posix")
+            ) as process:
+                try:
+                    stdout, stderr = process.communicate(timeout=COMMAND_TIMEOUT_SECONDS)
+                    executed = ExecutedCommand(argv, process.returncode, stdout, stderr)
+                except subprocess.TimeoutExpired:
+                    if os.name == "posix":
+                        try:
+                            os.killpg(process.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass
+                    else:
+                        process.kill()
+                    process.communicate()
+                    executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
         except OSError as e:
             executed = ExecutedCommand(argv, -1, "", str(e))
         self._transcript.append(executed)
@@ -271,9 +287,12 @@ class ClientProbe:
         self._backup_config()
         mutated = False
         try:
+            # arm the rollback BEFORE the mutating command runs: an interrupt mid-setup may
+            # arrive after the registration was already written, and the finally below must
+            # then restore -- arming afterwards would skip it
+            mutated = True
             # the real user-facing path: serena setup <client>
             setup = self._run((str(self.serena_executable), "setup", self.handler.name))
-            mutated = True
             if setup.returncode != 0:
                 return self._result(Status.FAIL, f"serena setup {self.handler.name} exited {setup.returncode}", cli_version)
 

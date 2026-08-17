@@ -10,6 +10,7 @@ behavior under test runs.
 import os
 import stat
 import sys
+import time
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -254,6 +255,50 @@ class TestStatePreservation:
         probe._emergency_restore()
         assert config_path.read_bytes() == original
         assert stat.S_IMODE(config_path.stat().st_mode) == 0o600
+
+    def test_an_interrupt_during_setup_still_restores_the_config(self, probe_module, tmp_path) -> None:
+        """Given the user interrupts while serena setup is running, when the probe unwinds,
+        then the config is restored from backup — the rollback must be armed BEFORE the
+        mutating command, because the registration may already have been written.
+        """
+        config_path = tmp_path / "config.json"
+        original = b'{"clean": true}'
+        config_path.write_bytes(original)
+        probe = _probe(probe_module, tmp_path, config_path)
+
+        def interrupting_run(argv):
+            if "setup" in argv:
+                config_path.write_bytes(b'{"mutated": true}')  # the half-written registration
+                raise KeyboardInterrupt
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = interrupting_run
+        with pytest.raises(KeyboardInterrupt):
+            probe.run()
+        assert config_path.read_bytes() == original
+
+    @posix_only
+    def test_a_timeout_kills_the_whole_process_tree(self, probe_module, tmp_path, monkeypatch) -> None:
+        """Given a timed-out command whose child spawned a long-running grandchild, when
+        _run gives up, then the grandchild is dead too — an orphan finishing its
+        registration after the rollback would silently undo the cleanup.
+        """
+        pid_file = tmp_path / "grandchild.pid"
+        monkeypatch.setattr(probe_module, "COMMAND_TIMEOUT_SECONDS", 2)
+        probe = _probe(probe_module, tmp_path)
+        # the grandchild detaches its stdio, as a daemonizing client would — otherwise its
+        # inherited pipes keep communicate() blocked until it exits, masking the orphan
+        executed = probe._run(("sh", "-c", f"sleep 60 >/dev/null 2>&1 & echo $! > {pid_file}; wait"))
+        assert executed.returncode == -1 and "timed out" in executed.stderr
+        grandchild = int(pid_file.read_text())
+        for _ in range(40):  # SIGKILL is immediate, but init may not have reaped the orphan yet
+            try:
+                os.kill(grandchild, 0)
+            except ProcessLookupError:
+                break
+            time.sleep(0.05)
+        with pytest.raises(ProcessLookupError):
+            os.kill(grandchild, 0)
 
     @posix_only
     def test_a_recorded_snapshot_is_owner_only_regardless_of_umask(self, probe_module, tmp_path) -> None:

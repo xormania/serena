@@ -201,10 +201,12 @@ def _hlsl_macos_bootstrap_check() -> str | None:
 
 
 def _matlab_installation_check() -> str | None:
-    # mirrors _is_matlab_available (test/conftest.py) verbatim: MATLAB_PATH or a known install
-    # location -- a bare PATH launcher is NOT accepted, because neither the guard nor the
-    # provider's _find_matlab_installation resolves one
-    if os.environ.get("MATLAB_PATH"):
+    # mirrors _is_matlab_available (test/conftest.py): MATLAB_PATH or a known install location --
+    # a bare PATH launcher is NOT accepted, because neither the guard nor the provider's
+    # _find_matlab_installation resolves one; and the provider rejects a MATLAB_PATH that is
+    # not a real directory, so a stale value must not count
+    matlab_path = os.environ.get("MATLAB_PATH")
+    if matlab_path and Path(matlab_path).is_dir():
         return None
     known_locations = (
         "/Applications/MATLAB_R2024b.app",
@@ -214,7 +216,7 @@ def _matlab_installation_check() -> str | None:
     )
     if any(Path(location).exists() for location in known_locations):
         return None
-    return "a locatable MATLAB installation (MATLAB_PATH or a standard install dir)"
+    return "a locatable MATLAB installation (a MATLAB_PATH naming a real directory, or a standard install dir)"
 
 
 def _suite_always_disabled_check() -> str | None:
@@ -320,7 +322,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (the suite is enabled on macOS only)", extra_check=_macos_only_check
     ),
     # other-langs batch
-    ToolchainRequirement(("ruby",), ("ruby", "gem"), "Ruby (ruby-lsp is installed via gem)"),
+    ToolchainRequirement(("ruby",), ("ruby", "gem|ruby-lsp"), "Ruby (a global ruby-lsp is used if present, else gem installs it)"),
     ToolchainRequirement(
         ("php",),
         ("php", "node", "npm"),
@@ -343,7 +345,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("dart",), ("dart",), "Dart SDK"),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
     ToolchainRequirement(
-        ("haxe",), ("haxe", "neko", "node"), "Haxe + Neko + Node.js (the downloaded haxe server is server.js, run via node)"
+        ("haxe",), ("haxe", "node"), "Haxe + Node.js (the downloaded haxe server is server.js, run via node; neko is never invoked)"
     ),
     ToolchainRequirement(
         ("haskell",),
@@ -354,8 +356,8 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("rego",), ("regal",), "Regal"),
     ToolchainRequirement(
         ("ansible",),
-        ("ansible", "ansible-lint", "node", "npm"),
-        "ansible-core + ansible-lint + Node.js with npm; no native Windows support",
+        ("ansible", "node", "npm"),
+        "ansible-core + Node.js with npm (ansible-lint only matters when the optional linting setting is on); no native Windows support",
         extra_check=_windows_disabled_check,
     ),
     ToolchainRequirement(("gleam",), ("gleam",), "Gleam compiler (bundles `gleam lsp`)"),
@@ -382,7 +384,9 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("crystal",), ("crystalline",), "Crystalline (not auto-installed by Serena; crystal tests skip without it)"),
     # niche batch
     ToolchainRequirement(("julia",), ("julia",), "Julia (plus the LanguageServer.jl package)"),
-    ToolchainRequirement(("r",), ("R", "Rscript"), "R + the languageserver package (probed)", extra_check=_r_languageserver_check),
+    ToolchainRequirement(
+        ("r",), ("R",), "R + the languageserver package (probed; CI uses Rscript only to install it)", extra_check=_r_languageserver_check
+    ),
     ToolchainRequirement(
         ("perl",),
         ("perl",),
