@@ -6,6 +6,7 @@ argv itself.
 
 import ast
 import os
+import subprocess
 import sys
 from pathlib import Path
 
@@ -48,3 +49,28 @@ class TestScriptConventions:
     def test_is_executable(self, script: Path) -> None:
         """Given any script, its executable bit is set, so ./scripts/... works directly."""
         assert os.access(script, os.X_OK), f"{script.name} is not executable"
+
+
+SERVED_APPS = {"agno_agent.py"}
+"""scripts that build a served application at import time; --help is not a safe probe there"""
+
+
+class TestScriptSmoke:
+    """Every script actually starts. Scripts are the least-executed code in the repository,
+    so their natural failure mode is an import silently broken by a refactor; --help is the
+    cheapest execution that proves imports resolve and the argument wiring works.
+    """
+
+    @pytest.mark.parametrize(
+        "script",
+        [script for script in _ALL_SCRIPTS if script.name not in SERVED_APPS],
+        ids=lambda p: str(p.relative_to(_SCRIPTS_DIR)),
+    )
+    def test_help_exits_zero(self, script: Path) -> None:
+        """Given any script that is not a served app, when it is invoked with --help,
+        then it exits 0.
+        """
+        result = subprocess.run(
+            [sys.executable, str(script), "--help"], capture_output=True, text=True, timeout=120, check=False, cwd=_REPO_ROOT
+        )
+        assert result.returncode == 0, f"{script.name} --help exited {result.returncode}:\n{result.stderr[-800:]}"
