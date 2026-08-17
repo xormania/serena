@@ -234,6 +234,28 @@ class ClientProbe:
             config_path.unlink()
             self._notes.append(f"removed {config_path}, which the probe had created")
 
+    def _restore_config_bytes(self) -> None:
+        # restore the backup atomically, owner-only from the first byte: recreating a deleted
+        # config with write_bytes would land at the process umask -- credentials readable by
+        # other users until a later chmod. mkstemp starts 0600; the pre-probe mode goes onto
+        # the temp file BEFORE it atomically replaces the config, so no wider-than-intended
+        # window ever exists and an interruption leaves only a 0600 temp file behind.
+        assert self._backup_path is not None and self.spec.user_config_path is not None
+        config_path = self.spec.user_config_path
+        fd, temp_name = tempfile.mkstemp(dir=str(config_path.parent), prefix=f".{config_path.name}.")
+        try:
+            with os.fdopen(fd, "wb") as temp_file:
+                temp_file.write(self._backup_path.read_bytes())
+            if self._config_mode is not None:
+                os.chmod(temp_name, self._config_mode)
+            os.replace(temp_name, config_path)
+        except BaseException:
+            try:
+                os.unlink(temp_name)
+            except OSError:
+                pass
+            raise
+
     def _verify_config_baseline(self) -> None:
         # after a clean lifecycle, ensure the config file is back at its pre-probe state
         config_path = self.spec.user_config_path
@@ -246,8 +268,15 @@ class ClientProbe:
         if config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes():
             self._notes.append("user config is byte-identical to the baseline")
         else:
-            config_path.write_bytes(self._backup_path.read_bytes())
-            self._notes.append("user config restored from backup (the client rewrote it during add/remove)")
+            self._restore_config_bytes()
+            # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
+            # another process are indistinguishable; the byte-restore contract wins, and the
+            # note DISCLOSES that concurrent changes (if any) were rolled back with it
+            self._notes.append(
+                "user config restored from backup: its bytes changed during the probe. A client rewrite and a"
+                " concurrent edit by another process look the same, so any concurrent change was rolled back"
+                " too -- avoid editing client configs while the probe runs"
+            )
         if self._config_mode is not None and stat.S_IMODE(config_path.stat().st_mode) != self._config_mode:
             config_path.chmod(self._config_mode)
             self._notes.append("user config permissions restored to the pre-probe mode")
@@ -258,9 +287,7 @@ class ClientProbe:
         # best-effort rollback for a probe that failed after mutating the client
         self._run(self.spec.remove_argv)
         if self._backup_path is not None and self.spec.user_config_path is not None:
-            self.spec.user_config_path.write_bytes(self._backup_path.read_bytes())
-            if self._config_mode is not None:
-                self.spec.user_config_path.chmod(self._config_mode)
+            self._restore_config_bytes()
             self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
         else:
             self._remove_config_created_by_probe()

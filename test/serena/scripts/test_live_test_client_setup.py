@@ -256,6 +256,49 @@ class TestStatePreservation:
         assert config_path.read_bytes() == original
         assert stat.S_IMODE(config_path.stat().st_mode) == 0o600
 
+    @posix_only
+    def test_an_emergency_recreate_restores_a_wider_mode_than_the_temp_files(self, probe_module, tmp_path) -> None:
+        """Given a config whose pre-probe mode was 0644, when emergency restore recreates it
+        from backup, then it carries 0644 — the atomic temp file starts owner-only, so the
+        pre-probe mode must be applied explicitly, not inherited from the temp.
+        """
+        probe, config_path = self._restore_probe(probe_module, tmp_path)
+        original = b'{"perm": "wide"}'
+        config_path.write_bytes(original)
+        config_path.chmod(0o644)
+        probe._backup_config()
+        config_path.unlink()
+        assert not config_path.is_file()  # the plant landed
+        probe._emergency_restore()
+        assert config_path.read_bytes() == original
+        assert stat.S_IMODE(config_path.stat().st_mode) == 0o644
+
+    def test_a_config_rewritten_during_the_lifecycle_is_restored_with_disclosure(self, probe_module, tmp_path) -> None:
+        """Given a clean lifecycle during which the config's bytes changed (a client rewrite
+        and a concurrent edit by another process are indistinguishable on opaque bytes), when
+        the baseline is verified, then the backup is restored and the result DISCLOSES that
+        any concurrent change was rolled back with it.
+        """
+        config_path = tmp_path / "config.json"
+        original = b'{"clean": true}'
+        config_path.write_bytes(original)
+        probe = _probe(probe_module, tmp_path, config_path)
+        calls = {"lists": 0}
+
+        def rewriting_run(argv):
+            if "setup" in argv:
+                config_path.write_bytes(b'{"rewritten": true}')
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = rewriting_run
+        result = probe.run()
+        assert result.status == probe_module.Status.PASS
+        assert config_path.read_bytes() == original
+        assert any("concurrent" in note for note in result.notes)
+
     def test_an_interrupt_during_setup_still_restores_the_config(self, probe_module, tmp_path) -> None:
         """Given the user interrupts while serena setup is running, when the probe unwinds,
         then the config is restored from backup — the rollback must be armed BEFORE the
