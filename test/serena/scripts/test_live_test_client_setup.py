@@ -123,6 +123,22 @@ class TestLifecycleVerdicts:
         assert "registration set differs from the baseline" in result.detail
         assert calls[-1] == ("stub", "remove")
 
+    def test_a_rewritten_registration_fails_even_when_the_name_survives(self, probe_module, tmp_path) -> None:
+        """Given a client with no known config file whose other registration kept its name
+        but changed its command during the lifecycle, when the final list is compared with
+        the baseline, then the probe FAILs — records are compared, not names.
+        """
+        result, calls = _run_lifecycle(
+            probe_module,
+            _probe(probe_module, tmp_path),
+            baseline=(0, "othertool  foo --serve"),
+            after_add=(0, f"othertool  foo --serve\nserena  {EXPECTED_COMMAND}"),
+            final=(0, "othertool  foo --other"),
+        )
+        assert result.status == probe_module.Status.FAIL
+        assert "registration set differs from the baseline" in result.detail
+        assert calls[-1] == ("stub", "remove")
+
     def test_a_preserved_registration_set_passes_and_is_noted(self, probe_module, tmp_path) -> None:
         """Given a client with no known config file whose other registration survived the
         lifecycle untouched, when the final list matches the baseline, then the probe

@@ -159,7 +159,6 @@ class TestTableIntegrity:
             "al",
             "cue",
             "fortran",
-            "hlsl",
             "latex",
             "luau",
             "markdown",
@@ -169,6 +168,8 @@ class TestTableIntegrity:
             "lua",
             # the managed Kotlin server ships bin/intellij-server with a bundled JBR (kotlin_language_server.py)
             "kotlin",
+            # the default jdtls setup downloads the vscode-java bundle with its own JRE 21 (eclipse_jdtls.py)
+            "java",
             # the language Serena itself runs on; the dev environment provides it
             "python",
         }

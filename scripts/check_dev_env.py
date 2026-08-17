@@ -161,6 +161,39 @@ def _perl_language_server_check() -> str | None:
     return None if _probe_succeeds(["perl", "-MPerl::LanguageServer", "-e", "1"], timeout=30) else "the Perl::LanguageServer module"
 
 
+def _windows_disabled_check() -> str | None:
+    # ansible-language-server has no native Windows support; the erlang and zig suites skip on Windows
+    return "a non-Windows platform (the suite is disabled on native Windows)" if sys.platform == "win32" else None
+
+
+def _macos_only_check() -> str | None:
+    # test/conftest.py enables the swift suite only on macOS (swiftly is set up on the macOS batch)
+    return None if sys.platform == "darwin" else "macOS (the swift suite is enabled only there)"
+
+
+def _hlsl_macos_bootstrap_check() -> str | None:
+    # Linux/Windows download a prebuilt shader-language-server; macOS builds it via cargo install
+    if sys.platform != "darwin" or shutil.which("shader-language-server") or shutil.which("cargo"):
+        return None
+    return "an existing shader-language-server, or cargo to build it (macOS has no prebuilt binary)"
+
+
+def _matlab_installation_check() -> str | None:
+    # mirrors _is_matlab_available (test/conftest.py), plus a PATH launcher: MATLAB_PATH, a known
+    # install location, or matlab on the PATH
+    if os.environ.get("MATLAB_PATH") or shutil.which("matlab"):
+        return None
+    known_locations = (
+        "/Applications/MATLAB_R2024b.app",
+        "/Applications/MATLAB_R2025b.app",
+        "/Volumes/S1/Applications/MATLAB_R2024b.app",
+        "/Volumes/S1/Applications/MATLAB_R2025b.app",
+    )
+    if any(Path(location).exists() for location in known_locations):
+        return None
+    return "a locatable MATLAB installation (MATLAB_PATH, a standard install dir, or PATH)"
+
+
 def _suite_always_disabled_check() -> str | None:
     # test/conftest.py section 1: the suite is disabled everywhere, regardless of toolchains
     return "a conftest re-enable (the suite is currently always-disabled as unreliable)"
@@ -197,10 +230,12 @@ def _wolfram_kernel_check() -> str | None:
 
 TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     # jvm batch (see MARKERS_JVM in .github/workflows/pytest.yml)
-    ToolchainRequirement(("java",), ("java",), "JDK 21+ (JDTLS_MIN_JDK_VERSION in eclipse_jdtls.py)", min_java=21),
     ToolchainRequirement(("scala",), ("java", "metals|cs|coursier"), "JDK + Metals (a global metals, or cs/coursier to bootstrap it)"),
     ToolchainRequirement(
-        ("groovy",), ("java",), "JDK + a Groovy language-server JAR named by GROOVY_LS_JAR_PATH", extra_check=_groovy_ls_jar_check
+        ("groovy",),
+        (),
+        "a Groovy language-server JAR named by GROOVY_LS_JAR_PATH (run on Serena's managed JRE)",
+        extra_check=_groovy_ls_jar_check,
     ),
     ToolchainRequirement(
         ("bsl",),
@@ -228,12 +263,14 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("rust",), ("cargo", "rustup|rust-analyzer"), "Rust toolchain + rust-analyzer (resolved via rustup, or standalone on the PATH)"
     ),
-    ToolchainRequirement(("zig",), ("zig", "zls"), "Zig + ZLS"),
+    ToolchainRequirement(("zig",), ("zig", "zls"), "Zig + ZLS (the suite skips on native Windows)", extra_check=_windows_disabled_check),
     ToolchainRequirement(
         ("cpp",), ("clangd",), "clangd (part of the cpp suite launches it unconditionally; ccls is an optional extra server)"
     ),
     ToolchainRequirement(("pascal",), ("fpc",), "Free Pascal (fpc + fpc-source)"),
-    ToolchainRequirement(("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (CI runs Swift tests on macOS only)"),
+    ToolchainRequirement(
+        ("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (the suite is enabled on macOS only)", extra_check=_macos_only_check
+    ),
     # other-langs batch
     ToolchainRequirement(("ruby",), ("ruby", "gem"), "Ruby (ruby-lsp is installed via gem)"),
     ToolchainRequirement(
@@ -245,7 +282,10 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("powershell",), ("pwsh",), "PowerShell 7 (preinstalled on CI runners)"),
     ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
     ToolchainRequirement(
-        ("erlang",), ("erl", "rebar3", "erlang_ls"), "Erlang/OTP + rebar3 (the fixture compiles with it) + erlang_ls (resolved from PATH)"
+        ("erlang",),
+        ("erl", "rebar3", "erlang_ls"),
+        "Erlang/OTP + rebar3 (the fixture compiles with it) + erlang_ls; the suite is disabled on native Windows",
+        extra_check=_windows_disabled_check,
     ),
     ToolchainRequirement(("dart",), ("dart",), "Dart SDK"),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
@@ -259,11 +299,27 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ),
     ToolchainRequirement(("terraform",), ("terraform",), "Terraform CLI"),
     ToolchainRequirement(("rego",), ("regal",), "Regal"),
-    ToolchainRequirement(("ansible",), ("ansible", "ansible-lint", "node", "npm"), "ansible-core + ansible-lint + Node.js with npm"),
+    ToolchainRequirement(
+        ("ansible",),
+        ("ansible", "ansible-lint", "node", "npm"),
+        "ansible-core + ansible-lint + Node.js with npm; no native Windows support",
+        extra_check=_windows_disabled_check,
+    ),
     ToolchainRequirement(("gleam",), ("gleam",), "Gleam compiler (bundles `gleam lsp`)"),
     ToolchainRequirement(("systemverilog",), ("verible-verilog-ls",), "Verible"),
     ToolchainRequirement(("qml",), ("qmlls6|qmlls",), "Qt qmlls, qmlls6 preferred (CI runs QML tests on Linux only)"),
-    ToolchainRequirement(("matlab",), ("matlab", "node"), "MATLAB R2021b+ + Node.js (the MATLAB language server runs via node)"),
+    ToolchainRequirement(
+        ("matlab",),
+        ("node",),
+        "MATLAB R2021b+ (discovered via MATLAB_PATH, a standard install dir, or the PATH) + Node.js for its language server",
+        extra_check=_matlab_installation_check,
+    ),
+    ToolchainRequirement(
+        ("hlsl",),
+        (),
+        "shader-language-server (downloaded on Linux/Windows; macOS builds it via cargo)",
+        extra_check=_hlsl_macos_bootstrap_check,
+    ),
     ToolchainRequirement(
         ("wolfram",),
         (),
