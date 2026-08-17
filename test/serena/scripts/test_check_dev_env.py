@@ -167,6 +167,8 @@ class TestTableIntegrity:
             "toml",
             # lua-language-server is downloaded by LuaLanguageServer itself when absent (lua_ls.py)
             "lua",
+            # the managed Kotlin server ships bin/intellij-server with a bundled JBR (kotlin_language_server.py)
+            "kotlin",
             # the language Serena itself runs on; the dev environment provides it
             "python",
         }

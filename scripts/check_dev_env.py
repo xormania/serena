@@ -161,6 +161,13 @@ def _perl_language_server_check() -> str | None:
     return None if _probe_succeeds(["perl", "-MPerl::LanguageServer", "-e", "1"], timeout=30) else "the Perl::LanguageServer module"
 
 
+def _clojure_cli_check() -> str | None:
+    # mirrors verify_clojure_cli (clojure_lsp.py): distro launchers without tools.deps fail -Spath
+    if _probe_succeeds(["clojure", "-Spath"], timeout=120):
+        return None
+    return "a functional tools.deps Clojure CLI (clojure -Spath failed)"
+
+
 def _groovy_ls_jar_check() -> str | None:
     # the groovy suite skips unless GROOVY_LS_JAR_PATH names an existing JAR (test/solidlsp/groovy)
     jar_path = os.environ.get("GROOVY_LS_JAR_PATH")
@@ -186,7 +193,6 @@ def _wolfram_kernel_check() -> str | None:
 TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     # jvm batch (see MARKERS_JVM in .github/workflows/pytest.yml)
     ToolchainRequirement(("java",), ("java",), "JDK 21+ (JDTLS_MIN_JDK_VERSION in eclipse_jdtls.py)", min_java=21),
-    ToolchainRequirement(("kotlin",), ("java",), "JDK (no declared minimum; CI uses 21)"),
     ToolchainRequirement(("scala",), ("java", "metals|cs|coursier"), "JDK + Metals (a global metals, or cs/coursier to bootstrap it)"),
     ToolchainRequirement(
         ("groovy",), ("java",), "JDK + a Groovy language-server JAR named by GROOVY_LS_JAR_PATH", extra_check=_groovy_ls_jar_check
@@ -195,7 +201,9 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("bsl",), ("java",), "JDK 21+ (bsl_language_server.py; suite currently always-disabled in test/conftest.py as flaky)", min_java=21
     ),
     ToolchainRequirement(("nextflow",), ("java",), "JDK 17+ (MIN_JDK_VERSION in nextflow_language_server.py)", min_java=17),
-    ToolchainRequirement(("clojure",), ("java", "clojure"), "JDK + Clojure CLI"),
+    ToolchainRequirement(
+        ("clojure",), ("java", "clojure"), "JDK + a functional tools.deps Clojure CLI (probed)", extra_check=_clojure_cli_check
+    ),
     ToolchainRequirement(
         ("csharp",), ("dotnet",), ".NET SDK with a 10+ runtime (the Roslyn server ships as net10.0)", min_dotnet_runtime=10
     ),
@@ -218,10 +226,17 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (CI runs Swift tests on macOS only)"),
     # other-langs batch
     ToolchainRequirement(("ruby",), ("ruby", "gem"), "Ruby (ruby-lsp is installed via gem)"),
-    ToolchainRequirement(("php",), ("php",), "PHP 8.1+ (enforced by phpactor, whose phar Serena downloads itself)", min_php=(8, 1)),
+    ToolchainRequirement(
+        ("php",),
+        ("php", "node", "npm"),
+        "PHP 8.1+ with Node.js/npm (intelephense, the default php server, runs on node; phpactor is the conditional extra)",
+        min_php=(8, 1),
+    ),
     ToolchainRequirement(("powershell",), ("pwsh",), "PowerShell 7 (preinstalled on CI runners)"),
     ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
-    ToolchainRequirement(("erlang",), ("erl", "rebar3"), "Erlang/OTP + rebar3 (the test fixture compiles with rebar3)"),
+    ToolchainRequirement(
+        ("erlang",), ("erl", "rebar3", "erlang_ls"), "Erlang/OTP + rebar3 (the fixture compiles with it) + erlang_ls (resolved from PATH)"
+    ),
     ToolchainRequirement(("dart",), ("dart",), "Dart SDK"),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
     ToolchainRequirement(
@@ -234,7 +249,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ),
     ToolchainRequirement(("terraform",), ("terraform",), "Terraform CLI"),
     ToolchainRequirement(("rego",), ("regal",), "Regal"),
-    ToolchainRequirement(("ansible",), ("ansible", "ansible-lint", "node"), "ansible-core + ansible-lint + Node.js"),
+    ToolchainRequirement(("ansible",), ("ansible", "ansible-lint", "node", "npm"), "ansible-core + ansible-lint + Node.js with npm"),
     ToolchainRequirement(("gleam",), ("gleam",), "Gleam compiler (bundles `gleam lsp`)"),
     ToolchainRequirement(("systemverilog",), ("verible-verilog-ls",), "Verible"),
     ToolchainRequirement(("qml",), ("qmlls6|qmlls",), "Qt qmlls, qmlls6 preferred (CI runs QML tests on Linux only)"),
@@ -266,7 +281,11 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("node", "npm"),
         "Node.js (npm-distributed language servers; Angular and Svelte fixtures also run npm installs)",
     ),
-    ToolchainRequirement(("elm",), ("elm", "node"), "Elm compiler (CI installs it via npm)"),
+    ToolchainRequirement(
+        ("elm",),
+        ("elm", "elm-language-server|node", "elm-language-server|npm"),
+        "Elm plus either a system elm-language-server or node+npm for Serena to install it",
+    ),
 ]
 
 
