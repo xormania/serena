@@ -16,6 +16,9 @@ _REPO_ROOT = Path(__file__).resolve().parents[3]
 _SCRIPTS_DIR = _REPO_ROOT / "scripts"
 
 _ALL_SCRIPTS = sorted(_SCRIPTS_DIR.rglob("*.py"))
+# a parametrization over an empty list collects zero tests and reports success, so a moved
+# or renamed scripts/ directory would silently retire every check on this page
+assert _ALL_SCRIPTS, f"no scripts found under {_SCRIPTS_DIR}: this suite would pass by collecting nothing"
 
 posix_only = pytest.mark.skipif(sys.platform == "win32", reason="POSIX file modes")
 
