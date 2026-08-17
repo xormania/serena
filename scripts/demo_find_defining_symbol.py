@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 """
 Demonstrates both defining-symbol tools on the Python test repository.
 """
 
+import argparse
 import json
 import re
 from pathlib import Path
@@ -64,6 +66,7 @@ def find_identifier_occurrence_position(file_path: Path, identifier: str, occurr
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     agent = make_agent(PYTHON_TEST_REPO, LanguageServerId.PYTHON, "demo_python_test_repo")
 
     try:

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Reports whether this machine is ready for Serena development: core environment checks
 (Python version, uv, the project virtual environment), version skew between an installed

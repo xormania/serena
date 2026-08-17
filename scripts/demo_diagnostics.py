@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Demonstrates diagnostics tools and edit-tool diagnostic reporting on the Serena repo itself.
 
@@ -6,6 +7,7 @@ shows file and symbol diagnostics, then introduces another warning and verifies 
 second edit reports only the newly introduced warning.
 """
 
+import argparse
 import json
 import shutil
 import tempfile
@@ -75,6 +77,7 @@ def parse_edit_diagnostics_result(result: str) -> dict:
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     EditingToolWithDiagnostics.ENABLE_DIAGNOSTICS = True
 
     temp_dir = Path(tempfile.mkdtemp(prefix="serena_demo_", dir=REPO_PATH))
