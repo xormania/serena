@@ -87,7 +87,10 @@ def client_probe_specs() -> dict[str, ClientProbeSpec]:
         "claude-code": ClientProbeSpec(
             ("claude", "mcp", "list"),
             ("claude", "mcp", "remove", "--scope", "user", "serena"),
-            Path.home() / ".claude.json",
+            # claude keeps .claude.json under CLAUDE_CONFIG_DIR when set (verified live:
+            # CLAUDE_CONFIG_DIR=<tmp> claude mcp list creates <tmp>/.claude.json) -- backing
+            # up the home-directory path would guard a file the client never touches
+            Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home()) / ".claude.json",
         ),
         # untested mirror of claude-code (CodeBuddy's setup handler is command-compatible)
         "codebuddy": ClientProbeSpec(
@@ -97,7 +100,11 @@ def client_probe_specs() -> dict[str, ClientProbeSpec]:
         "codex": ClientProbeSpec(
             ("codex", "mcp", "list"),
             ("codex", "mcp", "remove", "serena"),
-            Path.home() / ".codex" / "config.toml",
+            # codex resolves its home from CODEX_HOME when set (verified live: codex names
+            # the override as its codex_home and lists from there; `codex mcp add` writes
+            # $CODEX_HOME/config.toml). serena's handler shells out to the codex CLI, so
+            # the CLI's resolution is the one that counts
+            Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex") / "config.toml",
         ),
         "grok": ClientProbeSpec(
             ("grok", "mcp", "list"),

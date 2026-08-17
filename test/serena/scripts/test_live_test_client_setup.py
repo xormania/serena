@@ -187,6 +187,27 @@ class TestLifecycleVerdicts:
         assert calls[-1] == ("stub", "remove")
 
 
+class TestClientSpecs:
+    """The specs must name the configs the CLIs actually mutate."""
+
+    def test_client_homes_follow_their_env_overrides(self, probe_module, monkeypatch, tmp_path) -> None:
+        """Given CODEX_HOME and CLAUDE_CONFIG_DIR point at custom directories, the specs
+        track the configs the CLIs would actually write — backing up ~/.codex while the
+        client mutates $CODEX_HOME would guard the wrong file; without the overrides, the
+        home-directory defaults stand.
+        """
+        monkeypatch.setenv("CODEX_HOME", str(tmp_path / "codexhome"))
+        monkeypatch.setenv("CLAUDE_CONFIG_DIR", str(tmp_path / "claudehome"))
+        specs = probe_module.client_probe_specs()
+        assert specs["codex"].user_config_path == tmp_path / "codexhome" / "config.toml"
+        assert specs["claude-code"].user_config_path == tmp_path / "claudehome" / ".claude.json"
+        monkeypatch.delenv("CODEX_HOME")
+        monkeypatch.delenv("CLAUDE_CONFIG_DIR")
+        specs = probe_module.client_probe_specs()
+        assert specs["codex"].user_config_path == Path.home() / ".codex" / "config.toml"
+        assert specs["claude-code"].user_config_path == Path.home() / ".claude.json"
+
+
 class TestStatePreservation:
     """Whatever happens, the client's configuration returns to its pre-probe state."""
 
