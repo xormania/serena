@@ -7,6 +7,7 @@ real toolchain is consulted: PATH lookups and version probes are replaced per sc
 
 import os
 import subprocess
+import sys
 
 import pytest
 
@@ -95,16 +96,39 @@ class TestRequirementVerdicts:
     def test_rust_analyzer_is_found_in_the_providers_fallback_locations(self, doctor, monkeypatch, tmp_path) -> None:
         """Given neither rustup nor rust-analyzer on the PATH but an executable binary in
         ~/.cargo/bin, the check accepts it — the provider searches its common locations
-        after the PATH, and which() alone missed them. (Only the accepting direction is
-        asserted: the rejecting one would depend on the host's real /usr/local contents.)
+        after the PATH, and which() alone missed them; with that binary gone it reports
+        rust-analyzer missing. The machine-wide locations are neutralised so the verdict
+        comes from the code rather than from whatever this host has in /usr/local.
         """
         monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        monkeypatch.setattr(doctor, "RUST_ANALYZER_FIXED_PATHS", ())
+        monkeypatch.setattr(doctor.Path, "home", classmethod(lambda cls: tmp_path))
+        assert doctor._rust_analyzer_check() == "rust-analyzer (via rustup, the PATH, or a standard install location)"
         (tmp_path / ".cargo" / "bin").mkdir(parents=True)
         binary = tmp_path / ".cargo" / "bin" / ("rust-analyzer.exe" if os.name == "nt" else "rust-analyzer")
         binary.write_text("#!/bin/sh\n")
         binary.chmod(0o755)
-        monkeypatch.setattr(doctor.Path, "home", classmethod(lambda cls: tmp_path))
         assert doctor._rust_analyzer_check() is None
+
+    def test_mandatory_helper_binaries_gate_platforms_their_upstream_skips(self, doctor, monkeypatch) -> None:
+        """Given Windows on arm64, the rows whose servers download a mandatory helper report
+        it missing — ShellCheck, foundry forge and pasls publish no build there, and the
+        provider RAISES rather than skipping, so the marker must not be called runnable;
+        on Windows x64 the same rows are satisfied, and a pasls already on the PATH rescues
+        the pascal row anywhere.
+        """
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._bash_shellcheck_check() == "a Windows arm64 build of ShellCheck (none is published)"
+        assert doctor._solidity_forge_check() == "a Windows arm64 build of foundry forge (none is published)"
+        assert doctor._pascal_pasls_check() == "a Windows arm64 build of pasls (none is published)"
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"pasls": "C:/tools/pasls.exe"}))
+        assert doctor._pascal_pasls_check() is None
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "AMD64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._bash_shellcheck_check() is None
+        assert doctor._solidity_forge_check() is None
 
     def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
         """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow
@@ -118,9 +142,22 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
         monkeypatch.setattr(doctor, "_java_major_version", lambda exe="java": 17)
         assert doctor._nextflow_java_check() is None
-        monkeypatch.delenv("JAVA_HOME")
+
+        # BOTH present and disagreeing: this is the scenario that actually pins the ORDER.
+        # With only one source present at a time, an inverted implementation passes too.
+        def major_of(executable="java"):
+            return 17 if str(tmp_path) in str(executable) else 11
+
         monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
-        monkeypatch.setattr(doctor, "_java_major_version", lambda exe="java": 11)
+        monkeypatch.setattr(doctor, "_java_major_version", major_of)
+        assert doctor._nextflow_java_check() is None  # JAVA_HOME's 17 decides, not the PATH's 11
+        monkeypatch.setattr(doctor, "_java_major_version", lambda executable="java": 11 if str(tmp_path) in str(executable) else 17)
+        # JAVA_HOME's 11 decides even though a newer java sits on the PATH: the provider takes
+        # the first candidate that exists and version-checks THAT one, with no fall-through
+        assert doctor._nextflow_java_check() == "java >= 17 for nextflow (found 11 via the server's resolution order)"
+
+        monkeypatch.delenv("JAVA_HOME")
+        monkeypatch.setattr(doctor, "_java_major_version", lambda executable="java": 11)
         assert doctor._nextflow_java_check() == "java >= 17 for nextflow (found 11 via the server's resolution order)"
 
     def test_a_runtime_only_dotnet_does_not_satisfy_an_sdk_minimum(self, doctor, monkeypatch) -> None:
@@ -224,6 +261,34 @@ class TestVersionProbes:
         assert doctor._dotnet_sdk_majors() is None
 
 
+class TestCoreEnvironment:
+    """The core checks decide the exit code, so what they accept has to be exact."""
+
+    def test_bounds_are_checked_and_unknown_constraints_are_reported_not_assumed(self, doctor) -> None:
+        """Given a specifier this script fully understands, the verdict is the bounds check;
+        given one carrying an exclusion it cannot parse, the constraint comes back named —
+        silently treating it as satisfied would clear an interpreter the project excludes.
+        """
+        current = ".".join(str(c) for c in sys.version_info[:2])
+        assert doctor._python_version_in_range(">=3.11, <3.15") == (True, [])
+        assert doctor._python_version_in_range(f">={current}") == (True, [])
+        assert doctor._python_version_in_range(">=99.0")[0] is False
+        assert doctor._python_version_in_range(f">=3.11, !={current}.*") == (True, [f"!={current}.*"])
+
+    def test_the_exit_code_follows_the_core_checks_only(self, doctor, monkeypatch, capsys) -> None:
+        """Given the core checks fail, main exits 1; given they pass, main exits 0 even when
+        toolchains are missing — a missing compiler is information, not a failed environment.
+        """
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py"])
+        monkeypatch.setattr(doctor, "_check_install_skew", lambda pyproject: None)
+        monkeypatch.setattr(doctor, "_report_toolchains", lambda markers, evaluated: [])
+        monkeypatch.setattr(doctor, "_check_core_environment", lambda pyproject: False)
+        assert doctor.main() == 1
+        monkeypatch.setattr(doctor, "_check_core_environment", lambda pyproject: True)
+        assert doctor.main() == 0
+        assert "none —" in capsys.readouterr().out
+
+
 class TestMarkersExpression:
     """--markers composes into `pytest -m "<expr>"`, so what it prints has to be safe there."""
 
@@ -254,9 +319,12 @@ class TestTableIntegrity:
     KNOWN_UNCOVERED_MARKERS = frozenset(
         {
             # verified per server: their language servers are installed or bundled by Serena
-            # itself (cue/ada/al/luau/hlsl download pinned releases; marksman, texlab and
-            # taplo are downloaded binaries; fortls and pyright run via uvx; msl ships a
-            # bundled server), so no local toolchain is required
+            # itself (cue/ada/al/luau download pinned releases for every platform Serena
+            # runs on; marksman, texlab and taplo are downloaded binaries; fortls and
+            # pyright run via uvx; msl ships a bundled server), so no local toolchain is
+            # required. hlsl is NOT here: its download has a platform matrix, so it carries
+            # a row of its own — a managed dependency only waives a language when it covers
+            # every platform
             "ada",
             "al",
             "cue",

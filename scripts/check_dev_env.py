@@ -227,6 +227,21 @@ def _dart_managed_sdk_check() -> str | None:
     return "a platform in the managed-SDK matrix (the provider does not use a system dart)"
 
 
+# rust-analyzer's fallback locations, split by whether they are under the home directory, so
+# a test can neutralise the machine-wide ones instead of depending on what this host happens
+# to have in /usr/local
+RUST_ANALYZER_HOME_RELATIVE_PATHS: tuple[str, ...] = (
+    (".cargo/bin/rust-analyzer.exe", "scoop/shims/rust-analyzer.exe", "scoop/apps/rust-analyzer/current/rust-analyzer.exe")
+    if os.name == "nt"
+    else (".cargo/bin/rust-analyzer", ".local/bin/rust-analyzer")
+)
+RUST_ANALYZER_FIXED_PATHS: tuple[str, ...] = (
+    (str(Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "rust-analyzer" / "rust-analyzer.exe"),)
+    if os.name == "nt"
+    else ("/opt/homebrew/bin/rust-analyzer", "/usr/local/bin/rust-analyzer")
+)
+
+
 def _rust_analyzer_check() -> str | None:
     # mirrors _ensure_rust_analyzer_installed (rust_analyzer.py) read-only: rustup counts
     # (it can install the matching component), then a PATH rust-analyzer, then the
@@ -234,23 +249,52 @@ def _rust_analyzer_check() -> str | None:
     if shutil.which("rustup") or shutil.which("rust-analyzer"):
         return None
     home = Path.home()
-    if os.name == "nt":
-        candidates = [
-            home / ".cargo" / "bin" / "rust-analyzer.exe",
-            home / "scoop" / "shims" / "rust-analyzer.exe",
-            home / "scoop" / "apps" / "rust-analyzer" / "current" / "rust-analyzer.exe",
-            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "rust-analyzer" / "rust-analyzer.exe",
-        ]
-    else:
-        candidates = [
-            Path("/opt/homebrew/bin/rust-analyzer"),
-            Path("/usr/local/bin/rust-analyzer"),
-            home / ".cargo" / "bin" / "rust-analyzer",
-            home / ".local" / "bin" / "rust-analyzer",
-        ]
+    candidates = [home / relative for relative in RUST_ANALYZER_HOME_RELATIVE_PATHS] + [Path(fixed) for fixed in RUST_ANALYZER_FIXED_PATHS]
     if any(candidate.is_file() and os.access(candidate, os.X_OK) for candidate in candidates):
         return None
     return "rust-analyzer (via rustup, the PATH, or a standard install location)"
+
+
+def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches: bool = False) -> str | None:
+    """
+    :param what: the managed binary, named in the verdict
+    :param windows_arm64: whether a Windows arm64 build exists
+    :param extra_arches: whether architectures beyond x86_64/arm64 are supported
+    :return: what is missing, or None when this platform is served
+
+    Several servers download a mandatory helper whose upstream publishes a narrower platform
+    set than Serena runs on, and the failure is a hard raise during startup rather than a
+    skip -- so the marker must not be reported runnable there.
+    """
+    machine = platform.machine().lower()
+    is_x64 = machine in ("x86_64", "amd64")
+    is_arm64 = machine in ("arm64", "aarch64")
+    if not (is_x64 or is_arm64 or extra_arches):
+        return f"a supported architecture for {what} (no build exists for {machine})"
+    if sys.platform == "win32" and is_arm64 and not windows_arm64:
+        return f"a Windows arm64 build of {what} (none is published)"
+    return None
+
+
+def _solidity_forge_check() -> str | None:
+    # mirrors _get_forge_npm_package (solidity_language_server.py): forge publishes no
+    # Windows arm64 package and nothing outside x86_64/arm64, and the raise happens while
+    # BUILDING the dependency collection -- before any install or cache check
+    return _managed_binary_platform_check("foundry forge", windows_arm64=False)
+
+
+def _bash_shellcheck_check() -> str | None:
+    # mirrors _SHELLCHECK_DEPENDENCIES (bash_language_server.py): linux/osx x64+arm64 and
+    # win x64 only; _install_shellcheck_if_missing raises on anything else
+    return _managed_binary_platform_check("ShellCheck", windows_arm64=False)
+
+
+def _pascal_pasls_check() -> str | None:
+    # mirrors the pasls download matrix (pascal_server.py): linux/osx x64+arm64 and win x64.
+    # A pasls already on the PATH short-circuits the download, so it is accepted first
+    if shutil.which("pasls"):
+        return None
+    return _managed_binary_platform_check("pasls", windows_arm64=False)
 
 
 def _matlab_installation_check() -> str | None:
@@ -397,7 +441,12 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("cpp",), ("clangd",), "clangd (part of the cpp suite launches it unconditionally; ccls is an optional extra server)"
     ),
-    ToolchainRequirement(("pascal",), ("fpc",), "Free Pascal (fpc + fpc-source)"),
+    ToolchainRequirement(
+        ("pascal",),
+        ("fpc",),
+        "Free Pascal (fpc + fpc-source); pasls is downloaded for linux/macOS x64+arm64 and Windows x64",
+        extra_check=_pascal_pasls_check,
+    ),
     ToolchainRequirement(
         ("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (the suite is enabled on macOS only)", extra_check=_macos_only_check
     ),
@@ -489,9 +538,23 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ),
     # catch-all batch: npm-distributed language servers need a Node.js runtime
     ToolchainRequirement(
-        ("typescript", "vue", "angular", "svelte", "yaml", "json", "html", "scss", "bash", "solidity"),
+        ("typescript", "vue", "angular", "svelte", "yaml", "json", "html", "scss"),
         ("node", "npm"),
         "Node.js (npm-distributed language servers; Angular and Svelte fixtures also run npm installs)",
+    ),
+    # same npm-distributed servers, but each pulls a mandatory helper binary whose upstream
+    # platform set is narrower than Serena's -- and a missing build RAISES, it does not skip
+    ToolchainRequirement(
+        ("bash",),
+        ("node", "npm"),
+        "Node.js + a ShellCheck release for this platform (linux/macOS x64+arm64, Windows x64)",
+        extra_check=_bash_shellcheck_check,
+    ),
+    ToolchainRequirement(
+        ("solidity",),
+        ("node", "npm"),
+        "Node.js + a foundry forge npm package for this platform (no Windows arm64 build)",
+        extra_check=_solidity_forge_check,
     ),
     ToolchainRequirement(
         ("elm",),
@@ -519,26 +582,35 @@ def _language_markers(pyproject: dict) -> list[str]:
     return [name for name in names if name not in NON_LANGUAGE_MARKERS]
 
 
-def _python_version_in_range(requires_python: str) -> bool:
+def _python_version_in_range(requires_python: str) -> tuple[bool, list[str]]:
     """
     :param requires_python: the requires-python specifier from pyproject.toml (e.g. ">=3.11, <3.15")
-    :return: whether the running interpreter satisfies the lower and upper bounds of the specifier
+    :return: whether the running interpreter satisfies every constraint this function
+        understands, and the constraints it could not parse. Unparsed constraints are
+        REPORTED rather than skipped: silently treating an unrecognised ``!=3.13.*`` as
+        satisfied would tell a contributor their interpreter is fine when the project
+        excludes it.
     """
     current = sys.version_info[:2]
+    satisfied = True
+    unparsed: list[str] = []
     for constraint in requires_python.split(","):
+        if not constraint.strip():
+            continue
         match = re.fullmatch(r"\s*(>=|<=|<|>)\s*(\d+)\.(\d+)\s*", constraint)
         if match is None:
+            unparsed.append(constraint.strip())
             continue
         operator, bound = match.group(1), (int(match.group(2)), int(match.group(3)))
         if operator == ">=" and current < bound:
-            return False
+            satisfied = False
         if operator == ">" and current <= bound:
-            return False
+            satisfied = False
         if operator == "<" and current >= bound:
-            return False
+            satisfied = False
         if operator == "<=" and current > bound:
-            return False
-    return True
+            satisfied = False
+    return satisfied, unparsed
 
 
 def _find_external_serena() -> Path | None:
@@ -586,11 +658,15 @@ def _check_core_environment(pyproject: dict) -> bool:
     # running interpreter vs. the project's requires-python
     requires_python = pyproject["project"]["requires-python"]
     python_version = ".".join(str(c) for c in sys.version_info[:3])
-    if _python_version_in_range(requires_python):
-        print(f"  OK       Python {python_version} (project requires {requires_python})")
-    else:
+    in_range, unparsed = _python_version_in_range(requires_python)
+    if not in_range:
         print(f"  FAIL     Python {python_version} does not satisfy the project requirement '{requires_python}'")
         ok = False
+    elif unparsed:
+        print(f"  NOTE     Python {python_version} satisfies the bounds this script understands in '{requires_python}';")
+        print(f"           it could not check: {', '.join(unparsed)}")
+    else:
+        print(f"  OK       Python {python_version} (project requires {requires_python})")
 
     # uv, the entry point for every dev task
     uv = shutil.which("uv")

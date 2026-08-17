@@ -28,18 +28,23 @@ def _probe(probe_module, backup_dir: Path, config_path: Path | None = None):
 
 
 def _run_lifecycle(probe_module, probe, after_add: tuple[int, str], final: tuple[int, str] = (0, ""), baseline: tuple[int, str] = (0, "")):
-    """Drive the full lifecycle with scripted responses for the six commands it issues:
-    --version, baseline list, setup, list after add, remove, final list.
+    """Drive the full lifecycle, answering by WHAT was asked rather than by call position:
+    the registration queries get baseline / after-add / final in that order, everything else
+    (version, setup, remove, any emergency-restore command) gets a bland success. Scripting
+    by position would bind these tests to the incidental order of unrelated commands.
     """
-    responses = iter([(0, "1.0"), baseline, (0, ""), after_add, (0, ""), final])
+    list_responses = iter([baseline, after_add, final])
     calls: list[tuple[str, ...]] = []
 
     def scripted(argv: tuple[str, ...]):
-        try:
-            returncode, stdout = next(responses)
-        except StopIteration:  # emergency-restore commands issued after the scripted six
-            returncode, stdout = 0, ""
         calls.append(argv)
+        if argv == probe.spec.list_argv:
+            try:
+                returncode, stdout = next(list_responses)
+            except StopIteration:  # a further query after the scripted three (rollback paths)
+                returncode, stdout = 0, ""
+        else:
+            returncode, stdout = 0, "1.0" if "--version" in argv else ""
         return probe_module.ExecutedCommand(argv, returncode, stdout, "")
 
     probe._run = scripted
@@ -48,6 +53,46 @@ def _run_lifecycle(probe_module, probe, after_add: tuple[int, str], final: tuple
 
 class TestLifecycleVerdicts:
     """A verdict is only ever reported on observed evidence."""
+
+    def test_a_client_that_already_has_serena_is_skipped_untouched(self, probe_module, tmp_path) -> None:
+        """Given the client already carries a serena registration, when the probe runs, then
+        it SKIPs without issuing setup — this is the guard that keeps the probe off a live
+        user setup, and mutating one would be the worst thing this script could do.
+        """
+        probe = _probe(probe_module, tmp_path)
+        issued: list[tuple[str, ...]] = []
+
+        def recording_run(argv):
+            issued.append(argv)
+            if argv == ("stub", "list"):
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = recording_run
+        result = probe.run()
+        assert result.status == probe_module.Status.SKIP
+        assert "already registered" in result.detail
+        assert not any("setup" in argv for argv in issued)
+
+    def test_an_unreadable_baseline_skips_rather_than_mutating(self, probe_module, tmp_path) -> None:
+        """Given the baseline registration query fails, when the probe runs, then it SKIPs
+        without issuing setup — empty output from a failed query must never be read as
+        'no serena registered here', which is the misreading that would license a mutation.
+        """
+        probe = _probe(probe_module, tmp_path)
+        issued: list[tuple[str, ...]] = []
+
+        def failing_baseline_run(argv):
+            issued.append(argv)
+            if argv == ("stub", "list"):
+                return probe_module.ExecutedCommand(argv, 1, "", "cli exploded")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = failing_baseline_run
+        result = probe.run()
+        assert result.status == probe_module.Status.SKIP
+        assert "cannot query registrations" in result.detail
+        assert not any("setup" in argv for argv in issued)
 
     def test_a_clean_lifecycle_passes_and_names_the_verified_command(self, probe_module, tmp_path) -> None:
         """Given a client that registers, echoes the expected command, and removes
@@ -208,6 +253,25 @@ class TestClientSpecs:
         assert specs["claude-code"].user_config_path == Path.home() / ".claude.json"
 
 
+class TestRecordDirectory:
+    """--record writes credential-bearing transcripts, so where it writes them matters."""
+
+    @posix_only
+    def test_a_symlinked_record_directory_is_refused(self, probe_module, monkeypatch, tmp_path, capsys) -> None:
+        """Given --record names a pre-existing symlink to a directory, when the script runs,
+        then it refuses: mkdir(exist_ok=True) accepts such a link, and every snapshot write
+        would then be redirected through it — the leaf-only O_NOFOLLOW guard cannot see that.
+        """
+        victim_dir = tmp_path / "victim"
+        victim_dir.mkdir()
+        link = tmp_path / "records"
+        link.symlink_to(victim_dir)
+        monkeypatch.setattr(probe_module.sys, "argv", ["live_test_client_setup.py", "--record", str(link)])
+        monkeypatch.setattr(probe_module.shutil, "which", lambda name: "/usr/bin/serena")
+        assert probe_module.main() == 2
+        assert "symlink" in capsys.readouterr().err
+
+
 class TestStatePreservation:
     """Whatever happens, the client's configuration returns to its pre-probe state."""
 
@@ -241,7 +305,10 @@ class TestStatePreservation:
         assert config_path.read_bytes() != original  # the plant landed
         probe._emergency_restore()
         assert config_path.read_bytes() == original
-        assert probe._backup_path is not None and probe._backup_path.is_file()
+        # the backup is kept for review, and the result SAYS where — that note and the file
+        # on disk are the contract; the attribute holding the path is not
+        assert any("backup kept at" in note for note in probe._result(probe_module.Status.FAIL, "x").notes)
+        assert list(tmp_path.glob("fake-config.json"))
 
     @posix_only
     def test_the_clean_path_restores_bytes_and_permissions(self, probe_module, tmp_path) -> None:
@@ -401,7 +468,6 @@ class TestStatePreservation:
             return probe_module.ExecutedCommand(argv, 0, "", "")
 
         probe._run = rewriting_run
-        real_verify = probe._verify_config_baseline
 
         def interrupted_verify():
             raise KeyboardInterrupt
@@ -409,8 +475,87 @@ class TestStatePreservation:
         probe._verify_config_baseline = interrupted_verify
         with pytest.raises(KeyboardInterrupt):
             probe.run()
-        assert real_verify is not None
         assert config_path.read_bytes() == original
+
+    @posix_only
+    def test_a_dangling_link_replaced_by_a_regular_file_is_recreated(self, probe_module, tmp_path) -> None:
+        """Given the config was a dangling symlink and the client writes by atomic rename —
+        replacing the link itself with a regular file — when the probe cleans up, then the
+        link is back: deleting the file and stopping there would leave the user with neither
+        their link nor a file.
+        """
+        dotfiles = tmp_path / "dotfiles"
+        dotfiles.mkdir()
+        target = dotfiles / "config.json"  # absent: the link dangles
+        link = tmp_path / "config.json"
+        link.symlink_to(target)
+        probe = _probe(probe_module, tmp_path, link)
+        calls = {"lists": 0}
+
+        def rename_writing_run(argv):
+            if "setup" in argv:
+                link.unlink()
+                link.write_text('{"written-by-rename": true}')  # the link is now a regular file
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = rename_writing_run
+        result = probe.run()
+        assert result.status == probe_module.Status.PASS
+        assert link.is_symlink()
+        assert os.readlink(link) == str(target)
+        assert not target.exists()
+
+    @posix_only
+    def test_a_hardlinked_config_is_restored_through_its_inode(self, probe_module, tmp_path) -> None:
+        """Given the config is hardlinked into a dotfiles tree, when the probe restores it,
+        then the twin name carries the baseline bytes too — an atomic replace would install a
+        new inode and leave the twin holding whatever the client wrote.
+        """
+        config_path = tmp_path / "config.json"
+        twin = tmp_path / "dotfiles-config.json"
+        original = b'{"hardlinked": true}'
+        config_path.write_bytes(original)
+        os.link(config_path, twin)
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        with open(config_path, "wb") as mutated:  # in-place rewrite: the twin sees it too
+            mutated.write(b'{"client-wrote": true}')
+        assert twin.read_bytes() == b'{"client-wrote": true}'  # the plant landed
+        probe._emergency_restore()
+        assert config_path.read_bytes() == original
+        assert twin.read_bytes() == original
+
+    def test_a_failing_emergency_restore_keeps_the_probes_own_verdict(self, probe_module, tmp_path) -> None:
+        """Given the rollback itself fails, when the probe unwinds, then the probe's own FAIL
+        verdict survives with a loud note — raising from the finally would discard the
+        verdict, its transcript, and every client still to be probed.
+        """
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"clean": true}')
+        probe = _probe(probe_module, tmp_path, config_path)
+        calls = {"lists": 0}
+
+        def failing_run(argv):
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                if calls["lists"] == 2:
+                    return probe_module.ExecutedCommand(argv, 1, "", "boom")  # FAIL after mutating
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = failing_run
+
+        def exploding_restore():
+            raise OSError("no space left on device")
+
+        probe._restore_config_bytes = exploding_restore
+        result = probe.run()
+        assert result.status == probe_module.Status.FAIL
+        assert "cannot verify the registration landed" in result.detail
+        assert any("EMERGENCY RESTORE FAILED" in note for note in result.notes)
 
     def test_a_config_rewritten_during_the_lifecycle_is_restored_with_disclosure(self, probe_module, tmp_path) -> None:
         """Given a clean lifecycle during which the config's bytes changed (a client rewrite
@@ -517,6 +662,36 @@ class TestStatePreservation:
             time.sleep(0.05)
         with pytest.raises(ProcessLookupError):
             os.kill(child, 0)
+
+    @posix_only
+    @pytest.mark.timeout(30)
+    def test_a_timeout_returns_even_when_a_grandchild_holds_the_pipes(self, probe_module, tmp_path, monkeypatch) -> None:
+        """Given a timed-out command whose grandchild escaped the process group with its own
+        session AND still holds the inherited pipes, when _run gives up, then it returns
+        rather than blocking forever on EOF — the probe has already mutated the client at
+        this point, so a wedged reap would strand the rollback. The grandchild deliberately
+        outlives this test's timeout, so an unbounded drain cannot resolve itself into a pass.
+        """
+        monkeypatch.setattr(probe_module, "COMMAND_TIMEOUT_SECONDS", 2)
+        probe = _probe(probe_module, tmp_path)
+        # setsid puts the grandchild outside the killed group; it inherits stdout/stderr
+        executed = probe._run(("sh", "-c", "setsid sleep 300 & sleep 300"))
+        assert executed.returncode == -1 and "timed out" in executed.stderr
+
+    def test_sigterm_unwinds_instead_of_killing_the_process(self, probe_module) -> None:
+        """Given the handlers this script installs, when SIGTERM arrives, then it raises
+        rather than terminating silently — the default disposition would skip every finally,
+        leaving the client registered and the backup unreported.
+        """
+        import signal as signal_module
+        from collections.abc import Callable
+        from typing import cast
+
+        probe_module._install_unwinding_signal_handlers()
+        installed = signal_module.getsignal(signal_module.SIGTERM)
+        assert callable(installed)  # not SIG_DFL/SIG_IGN, which would kill the process instead
+        with pytest.raises(SystemExit):
+            cast(Callable[[int, object], None], installed)(signal_module.SIGTERM, None)
 
     @posix_only
     def test_a_snapshot_never_writes_through_a_planted_symlink(self, probe_module, tmp_path) -> None:

@@ -79,6 +79,44 @@ def _kill_process_tree(process: subprocess.Popen) -> None:
         process.kill()
 
 
+def _drain(process: subprocess.Popen, timeout: int = 5) -> None:
+    """
+    :param process: an already-killed child whose pipes are being closed
+    :param timeout: seconds to wait for EOF before giving up
+
+    Reaps the child without waiting forever. ``communicate()`` returns only at EOF on every
+    pipe, and EOF needs every inherited write end closed -- a grandchild that called
+    ``setsid`` itself escapes the process-group kill and can hold them open indefinitely,
+    which would wedge the probe after it has already mutated the client.
+    """
+    try:
+        process.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        pass
+
+
+def _install_unwinding_signal_handlers() -> None:
+    """
+    Makes SIGTERM and SIGHUP unwind instead of killing the process outright.
+
+    Python's default disposition for both terminates without raising, so no ``finally``
+    runs: closing the terminal mid-probe would skip the rollback, leave the client
+    registered and leave a credential-bearing backup in a temp directory the user was never
+    told about. Raising ``SystemExit`` puts them on the same footing as Ctrl-C.
+    """
+
+    def unwind(signum: int, _frame: object) -> None:
+        raise SystemExit(f"terminated by signal {signum}")
+
+    for name in ("SIGTERM", "SIGHUP"):
+        signum = getattr(signal, name, None)
+        if signum is not None:
+            try:
+                signal.signal(signum, unwind)
+            except (OSError, ValueError):  # not the main thread, or unsupported here
+                pass
+
+
 """generous per-command cap; `mcp list` implementations may health-check the registered servers"""
 
 
@@ -183,6 +221,7 @@ class ClientProbe:
         self._config_restore_path: Path | None = None
         self._config_was_symlink = False
         self._config_link_target: str | None = None
+        self._config_hardlinked = False
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
         # execute, record in the transcript, and echo for the live reader. On POSIX the child
@@ -199,7 +238,7 @@ class ClientProbe:
                     executed = ExecutedCommand(argv, process.returncode, stdout, stderr)
                 except subprocess.TimeoutExpired:
                     _kill_process_tree(process)
-                    process.communicate()
+                    _drain(process)
                     executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
                 except BaseException:
                     # a Ctrl-C reaches this process but NOT the detached child (own session),
@@ -207,7 +246,7 @@ class ClientProbe:
                     # keeping the emergency restore from ever running -- kill the tree, reap,
                     # and let the interrupt continue unwinding
                     _kill_process_tree(process)
-                    process.communicate()
+                    _drain(process)
                     raise
         except OSError as e:
             executed = ExecutedCommand(argv, -1, "", str(e))
@@ -259,7 +298,12 @@ class ClientProbe:
                 else f"{config_path} did not exist before the probe"
             )
             return
-        self._config_mode = stat.S_IMODE(config_path.stat().st_mode)
+        config_stat = config_path.stat()
+        self._config_mode = stat.S_IMODE(config_stat.st_mode)
+        # a hardlinked config (dotfile managers use them) must be restored THROUGH its inode:
+        # os.replace would install a new one, leaving the twin permanently carrying whatever
+        # the client wrote while the probed path looked pristine
+        self._config_hardlinked = config_stat.st_nlink > 1
         # restores must write through a symlinked config (dotfile trees), never replace the
         # link itself with a regular file -- so the restore target is resolved NOW, and the
         # link's shape and literal target are recorded so a client that atomically replaces
@@ -275,9 +319,16 @@ class ClientProbe:
         if config_path is None or self._config_existed:
             return
         if self._config_was_symlink:
-            # the baseline was a DANGLING link: setup wrote through it and created the
-            # target. Remove that target and leave the link exactly as it was found --
-            # unlinking the path here would destroy the user's link instead
+            # the baseline was a DANGLING link. Two client behaviours to undo, and the link
+            # must survive both: a write-through created the target, or an atomic-rename
+            # writer replaced the link itself with a regular file
+            if not config_path.is_symlink():
+                if config_path.exists():
+                    config_path.unlink()
+                assert self._config_link_target is not None
+                config_path.symlink_to(self._config_link_target)
+                self._notes.append(f"the client replaced the dangling symlink at {config_path} with a file; the link was recreated")
+                return
             target = config_path.resolve()
             if target.is_file():
                 target.unlink()
@@ -306,6 +357,17 @@ class ClientProbe:
         # the resolved target recorded at backup time: replacing the config PATH would clobber
         # a symlinked dotfile with a regular file
         restore_path = self._config_restore_path or self.spec.user_config_path
+        if self._config_hardlinked:
+            # write THROUGH the inode: os.replace would install a new one and leave the
+            # hardlinked twin holding whatever the client wrote. Atomicity is traded for
+            # link preservation here, and the backup survives a failure mid-write
+            fd = os.open(restore_path, os.O_WRONLY | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0))
+            with os.fdopen(fd, "wb") as config_file:
+                config_file.write(self._backup_path.read_bytes())
+            if self._config_mode is not None:
+                os.chmod(restore_path, self._config_mode)
+            self._notes.append("the config is hardlinked; it was restored through its inode so the other name keeps the baseline")
+            return
         fd, temp_name = tempfile.mkstemp(dir=str(restore_path.parent), prefix=f".{restore_path.name}.")
         try:
             with os.fdopen(fd, "wb") as temp_file:
@@ -353,13 +415,21 @@ class ClientProbe:
         self._backup_path = None
 
     def _emergency_restore(self) -> None:
-        # best-effort rollback for a probe that failed after mutating the client
-        self._run(self.spec.remove_argv)
-        if self._backup_path is not None and self.spec.user_config_path is not None:
-            self._restore_config_bytes()
-            self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
-        else:
-            self._remove_config_created_by_probe()
+        # best-effort rollback for a probe that failed after mutating the client -- and
+        # best-effort means it may not raise: this runs from a finally, so an exception here
+        # would discard the in-flight verdict (its detail, notes and transcript), abandon the
+        # remaining clients, and tell the user about the restore instead of the failure
+        try:
+            self._run(self.spec.remove_argv)
+            if self._backup_path is not None and self.spec.user_config_path is not None:
+                self._restore_config_bytes()
+                self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
+            else:
+                self._remove_config_created_by_probe()
+        except Exception as e:
+            self._notes.append(f"EMERGENCY RESTORE FAILED ({e}) — the client may still be mutated; backup kept at {self._backup_path}")
+            print(f"    !! emergency restore failed: {e}", flush=True)
+            print(f"    !! the client may still carry a serena registration; backup kept at {self._backup_path}", flush=True)
 
     def _result(self, status: Status, detail: str, cli_version: str | None = None) -> ProbeResult:
         return ProbeResult(self.handler.name, status, detail, cli_version, self._notes, self._transcript)
@@ -497,6 +567,7 @@ def _write_snapshot(record_dir: Path, result: ProbeResult) -> Path:
 
 
 def main() -> int:
+    _install_unwinding_signal_handlers()
     specs = client_probe_specs()
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
     parser.add_argument("--client", choices=sorted(specs), help="probe only this client")
@@ -521,6 +592,15 @@ def main() -> int:
     if args.record is not None:
         record_dir = Path(args.record)
         record_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
+        # O_NOFOLLOW on the snapshot guards only the final component: a pre-existing record
+        # directory that is itself a symlink (mkdir(exist_ok=True) accepts one) would
+        # redirect every write, and one owned by another user is theirs to swap at will
+        if record_dir.is_symlink():
+            print(f"--record must not be a symlink: {record_dir}", file=sys.stderr)
+            return 2
+        if os.name == "posix" and record_dir.stat().st_uid != os.getuid():
+            print(f"--record directory is owned by another user: {record_dir}", file=sys.stderr)
+            return 2
 
     # one private 0700 directory holds all config backups for this run
     backup_dir = Path(tempfile.mkdtemp(prefix="serena-client-probe-"))
