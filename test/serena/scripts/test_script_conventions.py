@@ -39,21 +39,15 @@ class TestScriptConventions:
         assert os.access(script, os.X_OK), f"{script.name} is not executable"
 
 
-SERVED_APPS = {"agno_agent.py"}
-"""scripts that build a served application at import time; --help is not a safe probe there"""
-
-
 class TestScriptSmoke:
-    """Every script actually starts. Scripts are the least-executed code in the repository,
-    so their natural failure mode is an import silently broken by a refactor; --help is the
-    cheapest execution that proves imports resolve and the argument wiring works.
+    """Every script actually starts — no exclusions: even the served agno app answers
+    --help before its optional imports. Scripts are the least-executed code in the
+    repository, so their natural failure mode is an import silently broken by a refactor;
+    --help is the cheapest execution that proves imports resolve and the argument wiring
+    works.
     """
 
-    @pytest.mark.parametrize(
-        "script",
-        [script for script in _ALL_SCRIPTS if script.name not in SERVED_APPS],
-        ids=lambda p: str(p.relative_to(_SCRIPTS_DIR)),
-    )
+    @pytest.mark.parametrize("script", _ALL_SCRIPTS, ids=lambda p: str(p.relative_to(_SCRIPTS_DIR)))
     def test_help_exits_zero_and_prints_help(self, script: Path) -> None:
         """Given any script that is not a served app, when it is invoked with --help,
         then it exits 0 and prints usage text — exit code alone would also pass a script
