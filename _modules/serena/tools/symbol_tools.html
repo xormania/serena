@@ -1,0 +1,1284 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.tools.symbol_tools &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/tools/symbol_tools';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/tools/symbol_tools.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.tools.symbol_tools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Language server-related tools</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.symbol</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerSymbol</span><span class="p">,</span> <span class="n">LanguageServerSymbolDictGrouper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.tools</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SUCCESS_RESULT</span><span class="p">,</span>
+    <span class="n">EditingToolWithDiagnostics</span><span class="p">,</span>
+    <span class="n">Tool</span><span class="p">,</span>
+    <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span>
+    <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.tools.tools_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolMarkerOptional</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.ls_diagnostics</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroupedDiagnostics</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.text_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_text_coordinates</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">solidlsp.ls_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SymbolKind</span>
+
+
+<div class="viewcode-block" id="RestartLanguageServerTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.RestartLanguageServerTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RestartLanguageServerTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restarts the language server(s).&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RestartLanguageServerTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.RestartLanguageServerTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use this tool only on explicit user request or after confirmation.</span>
+<span class="sd">        It may be necessary to restart the language server if it hangs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">reset_language_server_manager</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">SUCCESS_RESULT</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GetSymbolsOverviewTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetSymbolsOverviewTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GetSymbolsOverviewTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets an overview of the top-level symbols defined in a given file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">LanguageServerSymbolDictGrouper</span><span class="p">([</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GetSymbolsOverviewTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetSymbolsOverviewTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use this tool to get a high-level understanding of the code symbols in a file.</span>
+<span class="sd">        This should be the first tool to call when you want to understand a new file, unless you already know</span>
+<span class="sd">        what you are looking for.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file to get the overview of</span>
+<span class="sd">        :param depth: depth up to which descendants shall be retrieved.</span>
+<span class="sd">            Default (-1) results in a language specific choice: 1 for java and kotlin and 0 for other languages</span>
+<span class="sd">        :param max_answer_chars: if the overview is longer than this number of characters,</span>
+<span class="sd">            no content will be returned. -1 means the default value from the config will be used.</span>
+<span class="sd">            Don&#39;t adjust unless there is really no other way to get the content required for the task.</span>
+<span class="sd">        :return: a JSON object containing symbols grouped by kind in a compact format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Note: file system sync not required (relevant file is opened in the language server explicitly)</span>
+
+        <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">relative_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">&quot;.java&quot;</span><span class="p">,</span> <span class="s2">&quot;.kt&quot;</span><span class="p">)):</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_symbol_overview</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">)</span>
+
+        <span class="c1"># capture kind names and depth-0 snapshots before grouping, which mutates the dicts</span>
+        <span class="n">kind_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">depth_0_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">depth_0_result</span><span class="p">:</span>
+                <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="n">compact_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="n">result_json_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">compact_result</span><span class="p">)</span>
+
+        <span class="c1"># shortened result closures</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">make_kind_counts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Symbol counts by kind:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">kind_names</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">shortened_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_kind_counts</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">make_depth_0_result</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">compact_depth_0_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">depth_0_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="s2">&quot;Depth 0 overview:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">compact_depth_0_result</span><span class="p">)</span>
+
+            <span class="n">shortened_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_depth_0_result</span><span class="p">,</span> <span class="n">make_kind_counts</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result_json_str</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">,</span> <span class="n">shortened_result_factories</span><span class="o">=</span><span class="n">shortened_results</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GetSymbolsOverviewTool.get_symbol_overview">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetSymbolsOverviewTool.get_symbol_overview">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_symbol_overview</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">LanguageServerSymbol</span><span class="o">.</span><span class="n">OutputDict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param relative_path: relative path to a source file</span>
+<span class="sd">        :param depth: the depth up to which descendants shall be retrieved</span>
+<span class="sd">        :return: a list of symbol dictionaries representing the symbol overview of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+
+        <span class="c1"># The symbol overview is capable of working with both files and directories,</span>
+        <span class="c1"># but we want to ensure that the user provides a file path.</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;File or directory </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2"> does not exist in the project.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected a file path, but got a directory path: </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">. &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">can_analyze_file</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot extract symbols from file </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">. Active language servers: </span><span class="si">{</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">value</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_active_language_server_ids</span><span class="p">()]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">symbols</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">get_symbol_overview</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)[</span><span class="n">relative_path</span><span class="p">]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">child_inclusion_predicate</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="n">LanguageServerSymbol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="n">s</span><span class="o">.</span><span class="n">is_low_level</span><span class="p">()</span>
+
+        <span class="n">symbol_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+            <span class="n">symbol_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="n">symbol</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span>
+                    <span class="n">name_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+                    <span class="n">kind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">relative_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">location</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">child_inclusion_predicate</span><span class="o">=</span><span class="n">child_inclusion_predicate</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_dicts</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FindSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindSymbolTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs a global (or local) search using the language server backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># group children by kind, keeping just the name (the parent&#39;s name_path makes it unambiguous);</span>
+    <span class="c1"># we don&#39;t group the top-level result list because many tests rely on it being a flat list of symbol dicts</span>
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">LanguageServerSymbolDictGrouper</span><span class="p">([],</span> <span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># noinspection PyDefaultArgument</span>
+<div class="viewcode-block" id="FindSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">exclude_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">substring_matching</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">max_matches</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds symbols and code entities (classes, methods, etc.) based on the given name path pattern.</span>
+<span class="sd">        The returned symbol information can be used for edits or further queries.</span>
+<span class="sd">        Specify `depth &gt; 0` to also retrieve children/descendants (e.g., methods of a class).</span>
+
+<span class="sd">        A name path is a path in the symbol tree *within a source file*.</span>
+<span class="sd">        For example, the method `my_method` defined in class `MyClass` would have the name path `MyClass/my_method`.</span>
+<span class="sd">        If a symbol is overloaded (e.g., in Java), a 0-based index is appended (e.g. &quot;MyClass/my_method[0]&quot;) to</span>
+<span class="sd">        uniquely identify it.</span>
+
+<span class="sd">        To search for a symbol, you provide a name path pattern that is used to match against name paths.</span>
+<span class="sd">        It can be</span>
+
+<span class="sd">         * a simple name (e.g. &quot;method&quot;), which will match any symbol with that name</span>
+<span class="sd">         * a relative path like &quot;class/method&quot;, which will match any symbol with that name path suffix</span>
+<span class="sd">         * an absolute name path &quot;/class/method&quot; (absolute name path), which requires an exact match of the full name path within the source file.</span>
+
+<span class="sd">        Append an index `[i]` to match a specific overload only, e.g. &quot;MyClass/my_method[1]&quot;.</span>
+
+<span class="sd">        :param name_path_pattern: the name path matching pattern (see above)</span>
+<span class="sd">        :param depth: depth up to which descendants shall be retrieved (e.g. use 1 to also retrieve immediate children;</span>
+<span class="sd">            for the case where the symbol is a class, this will return its methods).</span>
+<span class="sd">            Ignored if `include_body=True`. Default 0.</span>
+<span class="sd">        :param relative_path: (optional) restrict search to this file or directory. If None, searches entire codebase.</span>
+<span class="sd">            If a directory is passed, the search will be restricted to the files in that directory.</span>
+<span class="sd">            If a file is passed, the search will be restricted to that file.</span>
+<span class="sd">        :param include_body: whether to include the symbol&#39;s source code. Use judiciously.</span>
+<span class="sd">        :param include_info: whether to include additional info (hover-like, typically including docstring and signature),</span>
+<span class="sd">            about the symbol (ignored if include_body is True). Info is never included for child symbols.</span>
+<span class="sd">            Note: Depending on the language, this can be slow (e.g., C/C++).</span>
+<span class="sd">        :param include_kinds: (optional) limits results to the given LSP symbol kinds (integers)</span>
+<span class="sd">        :param exclude_kinds: (optional) list of LSP symbol kinds (integers) to exclude.</span>
+<span class="sd">        :param substring_matching: If True, use substring matching for the last element of the pattern, such that</span>
+<span class="sd">            &quot;Foo/get&quot; would match &quot;Foo/getValue&quot; and &quot;Foo/getData&quot;.</span>
+<span class="sd">        :param max_matches: maximum number of permitted matches. If exceeded, a shortened result is returned</span>
+<span class="sd">             which allows refining the search. -1 (default) means no limit. Set to 1 if you search for a single symbol.</span>
+<span class="sd">        :param max_answer_chars: max result length; -1 for default</span>
+<span class="sd">        :return: symbols (with locations) matching the name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Note: file system sync not required; the symbol finder opens all relevant source files explicitly in the case of changes</span>
+
+        <span class="k">if</span> <span class="n">include_body</span><span class="p">:</span>
+            <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># ignore user-specified depth if include_body is True</span>
+        <span class="k">assert</span> <span class="n">max_matches</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max_matches must be &gt; 0 or equal to -1.&quot;</span>
+        <span class="n">parsed_include_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">include_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">parsed_exclude_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">exclude_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">exclude_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+            <span class="n">name_path_pattern</span><span class="p">,</span>
+            <span class="n">include_kinds</span><span class="o">=</span><span class="n">parsed_include_kinds</span><span class="p">,</span>
+            <span class="n">exclude_kinds</span><span class="o">=</span><span class="n">parsed_exclude_kinds</span><span class="p">,</span>
+            <span class="n">substring_matching</span><span class="o">=</span><span class="n">substring_matching</span><span class="p">,</span>
+            <span class="n">within_relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">n_matches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_short_result_relative_path_to_name_paths</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">relative_path_to_name_paths</span><span class="p">:</span> <span class="n">defaultdict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">relative_path_to_name_paths</span><span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">relative_path</span> <span class="ow">or</span> <span class="s2">&quot;unknown&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">get_name_path</span><span class="p">())</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Shortened result:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">relative_path_to_name_paths</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">max_matches</span> <span class="o">&lt;</span> <span class="n">n_matches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Matched </span><span class="si">{</span><span class="n">n_matches</span><span class="si">}</span><span class="s2">&gt;</span><span class="si">{</span><span class="n">max_matches</span><span class="si">=}</span><span class="s2"> symbols.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">create_short_result_relative_path_to_name_paths</span><span class="p">()</span>
+
+        <span class="n">symbol_dicts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">s</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span>
+                <span class="n">kind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">body_location</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+                <span class="n">body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span>
+                <span class="n">children_name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">children_name_path</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">include_body</span> <span class="ow">and</span> <span class="n">include_info</span><span class="p">:</span>
+            <span class="n">info_by_symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">request_info_for_symbol_batch</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">s_dict</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">symbol_dicts</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">symbol_info</span> <span class="o">:=</span> <span class="n">info_by_symbol</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="c1"># In python 3.15 we could specify extra_items=True in the TypedDict definition,</span>
+                    <span class="c1"># https://peps.python.org/pep-0728/</span>
+                    <span class="c1"># If we ever upgrade to 3.15, we can remove the type: ignore[typeddict-unknown-key]</span>
+                    <span class="n">s_dict</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol_info</span>
+
+        <span class="n">grouped_symbol_dicts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">symbol_dicts</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped_symbol_dicts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">,</span> <span class="n">shortened_result_factories</span><span class="o">=</span><span class="p">[</span><span class="n">create_short_result_relative_path_to_name_paths</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="FindSymbolTool.get_param_aliases">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindSymbolTool.get_param_aliases">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_param_aliases</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name_path&quot;</span><span class="p">:</span> <span class="s2">&quot;name_path_pattern&quot;</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FindReferencingSymbolsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindReferencingSymbolsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindReferencingSymbolsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds symbols that reference the given symbol using the language server backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">LanguageServerSymbolDictGrouper</span><span class="p">([</span><span class="s2">&quot;relative_path&quot;</span><span class="p">,</span> <span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;kind&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># noinspection PyDefaultArgument</span>
+<div class="viewcode-block" id="FindReferencingSymbolsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindReferencingSymbolsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">include_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">exclude_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds references to the symbol at the given `name_path`. The result will contain metadata about the referencing symbols</span>
+<span class="sd">        as well as a short code snippet around the reference.</span>
+
+<span class="sd">        :param name_path: name path of the symbol</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol for which to find references.</span>
+<span class="sd">        :param include_kinds: (optional) limits results to the given LSP symbol kinds (integers)</span>
+<span class="sd">        :param exclude_kinds: optional list of LSP symbol kinds (integers) to exclude.</span>
+<span class="sd">        :param max_answer_chars: max result length; -1 for default</span>
+<span class="sd">        :return: a list of JSON objects with the symbols referencing the requested symbol</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># file system sync needed for case where symbol finder does not perform a global search, updating everything</span>
+        <span class="k">if</span> <span class="n">relative_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">include_body</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># It is probably never a good idea to include the body of the referencing symbols</span>
+        <span class="n">parsed_include_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">include_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">parsed_exclude_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">exclude_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">exclude_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">references_in_symbols</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find_referencing_symbols</span><span class="p">(</span>
+            <span class="n">name_path</span><span class="p">,</span>
+            <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+            <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span>
+            <span class="n">include_kinds</span><span class="o">=</span><span class="n">parsed_include_kinds</span><span class="p">,</span>
+            <span class="n">exclude_kinds</span><span class="o">=</span><span class="n">parsed_exclude_kinds</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">reference_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">references_in_symbols</span><span class="p">:</span>
+            <span class="n">ref_dict_orig</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">symbol</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relative_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">body_location</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">ref_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ref_dict_orig</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">include_body</span><span class="p">:</span>
+                <span class="n">ref_relative_path</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">symbol</span><span class="o">.</span><span class="n">location</span><span class="o">.</span><span class="n">relative_path</span>
+                <span class="k">assert</span> <span class="n">ref_relative_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Referencing symbol </span><span class="si">{</span><span class="n">ref</span><span class="o">.</span><span class="n">symbol</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has no relative path, this is likely a bug.&quot;</span>
+                <span class="n">content_around_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">retrieve_content_around_line</span><span class="p">(</span>
+                    <span class="n">relative_file_path</span><span class="o">=</span><span class="n">ref_relative_path</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="n">ref</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="n">context_lines_before</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">context_lines_after</span><span class="o">=</span><span class="mi">1</span>
+                <span class="p">)</span>
+                <span class="n">ref_dict</span><span class="p">[</span><span class="s2">&quot;content_around_reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content_around_ref</span><span class="o">.</span><span class="n">to_display_string</span><span class="p">()</span>
+            <span class="n">reference_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ref_dict</span><span class="p">)</span>
+
+        <span class="c1"># capture lightweight reference data before grouping</span>
+        <span class="n">ref_summaries</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ref</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">references_in_symbols</span><span class="p">,</span> <span class="n">reference_dicts</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">ref_summaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;name_path&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name_path&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;relative_path&quot;</span><span class="p">:</span> <span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;relative_path&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;reference_line&quot;</span><span class="p">:</span> <span class="n">ref</span><span class="o">.</span><span class="n">line</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">reference_dicts</span><span class="p">)</span>
+
+        <span class="c1"># shortened result closures, from least to most aggressive shortening</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">make_refs_without_context</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;References with name_path and reference line, without surrounding code lines&quot;&quot;&quot;</span>
+            <span class="n">grouped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ref_summaries</span><span class="p">))</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;References without surrounding lines:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">make_per_file_counts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">counts</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;relative_path&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">ref_summaries</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Reference counts per file:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">make_summary</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_summaries</span><span class="p">)</span><span class="si">}</span><span class="s2"> references.&quot;</span>
+
+        <span class="n">shortened_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">make_refs_without_context</span><span class="p">,</span> <span class="n">make_per_file_counts</span><span class="p">,</span> <span class="n">make_summary</span><span class="p">]</span>
+
+        <span class="n">result_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result_json</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">,</span> <span class="n">shortened_result_factories</span><span class="o">=</span><span class="n">shortened_results</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FindImplementationsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindImplementationsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindImplementationsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds symbols that implement the given symbol using the language server backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># noinspection PyDefaultArgument</span>
+<div class="viewcode-block" id="FindImplementationsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindImplementationsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">include_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">exclude_kinds</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>  <span class="c1"># noqa: B006</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds implementations of the symbol at the given `name_path`.</span>
+
+<span class="sd">        :param name_path: the symbol&#39;s name path</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol for which to find implementations.</span>
+<span class="sd">            Note that here you can&#39;t pass a directory but must pass a file.</span>
+<span class="sd">        :param include_info: whether to include additional info (hover-like, typically including docstring and signature),</span>
+<span class="sd">            about the implementing symbols.</span>
+<span class="sd">        :param include_kinds: (optional) limits results to the given LSP symbol kinds (integers)</span>
+<span class="sd">        :param exclude_kinds: (optional) list of LSP symbol kinds (integers) to exclude.</span>
+<span class="sd">        :param max_answer_chars: max result length; -1 for default</span>
+<span class="sd">        :return: a list of JSON objects with the symbols implementing the requested symbol</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">include_body</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">parsed_include_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">include_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">include_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">parsed_exclude_kinds</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">SymbolKind</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[</span><span class="n">SymbolKind</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">exclude_kinds</span><span class="p">]</span> <span class="k">if</span> <span class="n">exclude_kinds</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+
+        <span class="n">implementing_symbols</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find_implementing_symbols</span><span class="p">(</span>
+            <span class="n">name_path</span><span class="p">,</span>
+            <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+            <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span>
+            <span class="n">include_kinds</span><span class="o">=</span><span class="n">parsed_include_kinds</span><span class="p">,</span>
+            <span class="n">exclude_kinds</span><span class="o">=</span><span class="n">parsed_exclude_kinds</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">symbol_dicts</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">dict</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relative_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">body_location</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">implementing_symbols</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="n">include_info</span><span class="p">:</span>
+            <span class="n">info_by_symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">request_info_for_symbol_batch</span><span class="p">(</span><span class="n">implementing_symbols</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">s_dict</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">implementing_symbols</span><span class="p">,</span> <span class="n">symbol_dicts</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">symbol_info</span> <span class="o">:=</span> <span class="n">info_by_symbol</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="n">s_dict</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol_info</span>
+                    <span class="n">s_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># name is included in the info</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">symbol_dicts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="FindDeclarationTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindDeclarationTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FindDeclarationTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the declaration/definition of a symbol</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="FindDeclarationTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.FindDeclarationTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">containing_symbol_name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the declaration of a symbol.</span>
+
+<span class="sd">        :param relative_path: the relative path to the source file containing the symbol for which to find the declaration.</span>
+<span class="sd">        :param regex: a regular expression with one group, where the group matches the symbol for which to perform the lookup.</span>
+<span class="sd">            For example, to find the declaration of the `process` method in a call like `obj.process()`,</span>
+<span class="sd">            pass an expression like &quot;obj\.(process)\(process_input_arg=37\)&quot;.</span>
+<span class="sd">            Prefer regexes with sufficiently large context around the group to render the match unambiguous.</span>
+<span class="sd">            Uses Python syntax with MULTILINE and DOTALL flags enabled.</span>
+<span class="sd">        :param containing_symbol_name_path: optional name path of a containing symbol whose body shall be searched instead of the full file.</span>
+<span class="sd">        :param include_body: whether to include the symbol&#39;s body in the result. Default False.</span>
+<span class="sd">        :param include_info: whether to include additional info (hover-like). Default False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">regex</span><span class="p">)</span>
+
+        <span class="c1"># find relevant location for lookup</span>
+        <span class="n">editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_code_editor</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">containing_symbol_name_path</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">find_text_coordinates</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">require_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find_unique</span><span class="p">(</span><span class="n">name_path_pattern</span><span class="o">=</span><span class="n">containing_symbol_name_path</span><span class="p">,</span> <span class="n">within_relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">)</span>
+            <span class="n">body_line_numers</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">get_body_line_numbers_or_raise</span><span class="p">()</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">lines</span><span class="o">=</span><span class="n">body_line_numers</span><span class="p">)</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">find_text_coordinates</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">require_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="n">coords</span><span class="o">.</span><span class="n">line</span> <span class="o">+=</span> <span class="n">body_line_numers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># retrieve declaration</span>
+        <span class="n">defining_symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find_declaration</span><span class="p">(</span>
+            <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">coords</span><span class="o">.</span><span class="n">line</span><span class="p">,</span>
+            <span class="n">column</span><span class="o">=</span><span class="n">coords</span><span class="o">.</span><span class="n">col</span><span class="p">,</span>
+            <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">defining_symbol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;No symbol declaration found at the location of the regex match. Location: </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">coords</span><span class="o">.</span><span class="n">line</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">coords</span><span class="o">.</span><span class="n">col</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># create output</span>
+        <span class="n">symbol_dict</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_defining_symbol_to_result_dict</span><span class="p">(</span>
+            <span class="n">symbol_retriever</span><span class="p">,</span>
+            <span class="n">defining_symbol</span><span class="p">,</span>
+            <span class="n">include_body</span><span class="p">,</span>
+            <span class="n">include_info</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">symbol_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_defining_symbol_to_result_dict</span><span class="p">(</span>
+        <span class="n">symbol_retriever</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+        <span class="n">defining_symbol</span><span class="p">:</span> <span class="n">LanguageServerSymbol</span><span class="p">,</span>
+        <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+        <span class="n">include_info</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">symbol_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">defining_symbol</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">relative_path</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span> <span class="n">body_location</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">include_body</span> <span class="ow">and</span> <span class="n">include_info</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">symbol_info</span> <span class="o">:=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">request_info_for_symbol</span><span class="p">(</span><span class="n">defining_symbol</span><span class="p">):</span>
+                <span class="n">symbol_dict</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol_info</span>
+                <span class="n">symbol_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_dict</span></div>
+
+
+
+<div class="viewcode-block" id="GetDiagnosticsForFileTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetDiagnosticsForFileTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GetDiagnosticsForFileTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets diagnostics for a file, optionally restricted to a line range, grouped by file, severity, and containing symbol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">FILE_LEVEL_DIAGNOSTIC_BUCKET</span> <span class="o">=</span> <span class="s2">&quot;&lt;file&gt;&quot;</span>
+
+<div class="viewcode-block" id="GetDiagnosticsForFileTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetDiagnosticsForFileTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">end_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">min_severity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets diagnostics for a file. Diagnostics are grouped as `relative_path -&gt; severity -&gt; name_path -&gt; diagnostics_results`.</span>
+<span class="sd">        If a diagnostic cannot be mapped to a symbol, it is grouped under the special name path `&lt;file&gt;`.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file to inspect.</span>
+<span class="sd">        :param start_line: the first 0-based line to include. Defaults to 0.</span>
+<span class="sd">        :param end_line: the last 0-based line to include. Defaults to -1, which means until the end of the file.</span>
+<span class="sd">        :param min_severity: minimum LSP severity to include, where 1=Error, 2=Warning, 3=Information, 4=Hint.</span>
+<span class="sd">            Diagnostics with lower-or-equal numeric severity are returned.</span>
+<span class="sd">        :param max_answer_chars: max result length; -1 for default</span>
+<span class="sd">        :return: grouped diagnostics for the requested file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">diagnostics</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">get_file_diagnostics</span><span class="p">(</span>
+            <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+            <span class="n">start_line</span><span class="o">=</span><span class="n">start_line</span><span class="p">,</span>
+            <span class="n">end_line</span><span class="o">=</span><span class="n">end_line</span><span class="p">,</span>
+            <span class="n">min_severity</span><span class="o">=</span><span class="n">min_severity</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">grouped_diagnostics</span> <span class="o">=</span> <span class="n">GroupedDiagnostics</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">diagnostic</span> <span class="ow">in</span> <span class="n">diagnostics</span><span class="p">:</span>
+            <span class="n">diag_range</span> <span class="o">=</span> <span class="n">diagnostic</span><span class="p">[</span><span class="s2">&quot;range&quot;</span><span class="p">][</span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
+            <span class="n">name_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FILE_LEVEL_DIAGNOSTIC_BUCKET</span>
+            <span class="n">owner_symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">find_diagnostic_owner_symbol</span><span class="p">(</span>
+                <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">line</span><span class="o">=</span><span class="n">diag_range</span><span class="p">[</span><span class="s2">&quot;line&quot;</span><span class="p">],</span>
+                <span class="n">column</span><span class="o">=</span><span class="n">diag_range</span><span class="p">[</span><span class="s2">&quot;character&quot;</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">owner_symbol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">name_path</span> <span class="o">=</span> <span class="n">owner_symbol</span><span class="o">.</span><span class="n">get_name_path</span><span class="p">()</span>
+            <span class="n">grouped_diagnostics</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">name_path</span><span class="p">,</span> <span class="n">diagnostic</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped_diagnostics</span><span class="o">.</span><span class="n">get_dict</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="GetDiagnosticsForSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetDiagnosticsForSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GetDiagnosticsForSymbolTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gets diagnostics for a symbol and, optionally, for symbols that reference it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GetDiagnosticsForSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.GetDiagnosticsForSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reference_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">check_symbol_references</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">min_severity</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets diagnostics for the specified symbol. When `check_symbol_references` is true, diagnostics for all</span>
+<span class="sd">        referencing symbols are also included. The result is grouped as</span>
+<span class="sd">        `relative_path -&gt; severity -&gt; name_path -&gt; diagnostics_results`.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol to inspect.</span>
+<span class="sd">        :param reference_file: optional file path used to disambiguate the symbol search.</span>
+<span class="sd">        :param check_symbol_references: whether to additionally collect diagnostics for symbols that reference the symbol.</span>
+<span class="sd">        :param min_severity: minimum LSP severity to include, where 1=Error, 2=Warning, 3=Information, 4=Hint.</span>
+<span class="sd">            Diagnostics with lower-or-equal numeric severity are returned.</span>
+<span class="sd">        :param max_answer_chars: max result length; -1 for default</span>
+<span class="sd">        :return: grouped diagnostics for the requested symbol and, optionally, its referencing symbols.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">diagnostics_by_symbol</span> <span class="o">=</span> <span class="n">symbol_retriever</span><span class="o">.</span><span class="n">get_symbol_diagnostics</span><span class="p">(</span>
+            <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+            <span class="n">reference_file</span><span class="o">=</span><span class="n">reference_file</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">check_symbol_references</span><span class="o">=</span><span class="n">check_symbol_references</span><span class="p">,</span>
+            <span class="n">min_severity</span><span class="o">=</span><span class="n">min_severity</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">grouped_diagnostics</span> <span class="o">=</span> <span class="n">GroupedDiagnostics</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">diagnostics</span> <span class="ow">in</span> <span class="n">diagnostics_by_symbol</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">relative_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">relative_path</span>
+            <span class="k">if</span> <span class="n">relative_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">symbol_name_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">get_name_path</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">diagnostic</span> <span class="ow">in</span> <span class="n">diagnostics</span><span class="p">:</span>
+                <span class="n">grouped_diagnostics</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">symbol_name_path</span><span class="p">,</span> <span class="n">diagnostic</span><span class="p">)</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped_diagnostics</span><span class="o">.</span><span class="n">get_dict</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ReplaceSymbolBodyTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.ReplaceSymbolBodyTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReplaceSymbolBodyTool</span><span class="p">(</span><span class="n">EditingToolWithDiagnostics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replaces the full definition of a symbol using the language server backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ReplaceSymbolBodyTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.ReplaceSymbolBodyTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replaces the body of the given symbol.</span>
+
+<span class="sd">        IMPORTANT: Only replace symbol bodies if you have previously made a retrieval with include_body=True and thus know what</span>
+<span class="sd">        constitutes the body!</span>
+
+<span class="sd">        :param name_path: name path of the symbol whose body to replace</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param body: the new symbol body. The symbol body is the definition of a symbol</span>
+<span class="sd">            in the programming language, including e.g. the signature line for functions.</span>
+<span class="sd">            Depending on the language, it may or may not include a preceding docstring or other preceding annotations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">DiagnosticsContext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">diagnostics_context</span><span class="p">:</span>
+            <span class="n">code_editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_code_editor</span><span class="p">()</span>
+            <span class="n">code_editor</span><span class="o">.</span><span class="n">replace_body</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="p">,</span>
+                <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">return</span> <span class="n">diagnostics_context</span><span class="o">.</span><span class="n">format_result</span><span class="p">(</span><span class="n">SUCCESS_RESULT</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="InsertAfterSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.InsertAfterSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InsertAfterSymbolTool</span><span class="p">(</span><span class="n">EditingToolWithDiagnostics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inserts content after the end of the definition of a given symbol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="InsertAfterSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.InsertAfterSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use this to insert code after a class/method/function definition.</span>
+<span class="sd">        Don&#39;t use to insert after assignments (constants, fields).</span>
+
+<span class="sd">        :param name_path: name path of the symbol after which to insert content</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param body: the body/content to be inserted. The inserted code shall begin with the next line after</span>
+<span class="sd">            the symbol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">DiagnosticsContext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">diagnostics_context</span><span class="p">:</span>
+            <span class="n">code_editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_code_editor</span><span class="p">()</span>
+            <span class="n">code_editor</span><span class="o">.</span><span class="n">insert_after_symbol</span><span class="p">(</span><span class="n">name_path</span><span class="p">,</span> <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">diagnostics_context</span><span class="o">.</span><span class="n">format_result</span><span class="p">(</span><span class="n">SUCCESS_RESULT</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="InsertBeforeSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.InsertBeforeSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InsertBeforeSymbolTool</span><span class="p">(</span><span class="n">EditingToolWithDiagnostics</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inserts content before the beginning of the definition of a given symbol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="InsertBeforeSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.InsertBeforeSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inserts the given content before the beginning of the definition of the given symbol (via the symbol&#39;s location).</span>
+<span class="sd">        A typical use case is to insert a new class, function, method, field or variable assignment; or</span>
+<span class="sd">        a new import statement before the first symbol in the file.</span>
+
+<span class="sd">        :param name_path: name path of the symbol before which to insert content</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param body: the body/content to be inserted before the line in which the referenced symbol is defined</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">DiagnosticsContext</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">diagnostics_context</span><span class="p">:</span>
+            <span class="n">code_editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_code_editor</span><span class="p">()</span>
+            <span class="n">code_editor</span><span class="o">.</span><span class="n">insert_before_symbol</span><span class="p">(</span><span class="n">name_path</span><span class="p">,</span> <span class="n">relative_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">diagnostics_context</span><span class="o">.</span><span class="n">format_result</span><span class="p">(</span><span class="n">SUCCESS_RESULT</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="RenameSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.RenameSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">RenameSymbolTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renames a symbol throughout the codebase using language server refactoring capabilities.</span>
+<span class="sd">    For JB, we use a separate tool.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="RenameSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.RenameSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames the symbol with the given `name_path` to `new_name` throughout the entire codebase.</span>
+<span class="sd">        Note: for languages with method overloading, like Java, name_path may have to include a method&#39;s</span>
+<span class="sd">        signature to uniquely identify a method.</span>
+
+<span class="sd">        :param name_path: name path of the symbol to rename</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol to rename</span>
+<span class="sd">        :param new_name: the new name for the symbol</span>
+<span class="sd">        :return: result summary indicating success or failure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+        <span class="n">code_editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_ls_code_editor</span><span class="p">()</span>
+        <span class="n">status_message</span> <span class="o">=</span> <span class="n">code_editor</span><span class="o">.</span><span class="n">rename_symbol</span><span class="p">(</span><span class="n">name_path</span><span class="p">,</span> <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">status_message</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SafeDeleteSymbol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.SafeDeleteSymbol">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SafeDeleteSymbol</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">):</span>
+<div class="viewcode-block" id="SafeDeleteSymbol.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/symbol_tools.html#serena.tools.symbol_tools.SafeDeleteSymbol.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Deletes the symbol if it is safe to do so (i.e., if there are no references to it)</span>
+<span class="sd">        or returns a list of references to it.</span>
+
+<span class="sd">        :param name_path_pattern: name path of the symbol to delete</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol to delete</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">ls_sync_file_system_changes</span><span class="p">()</span>
+
+        <span class="n">ls_symbol_retriever</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+        <span class="n">symbol</span> <span class="o">=</span> <span class="n">ls_symbol_retriever</span><span class="o">.</span><span class="n">find_unique</span><span class="p">(</span><span class="n">name_path_pattern</span><span class="p">,</span> <span class="n">substring_matching</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">within_relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="n">symbol_rel_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">relative_path</span>
+        <span class="k">assert</span> <span class="n">symbol_rel_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Symbol </span><span class="si">{</span><span class="n">name_path_pattern</span><span class="si">}</span><span class="s2"> has no relative path, this is likely a bug.&quot;</span>
+        <span class="k">assert</span> <span class="n">symbol_rel_path</span> <span class="o">==</span> <span class="n">relative_path</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Symbol </span><span class="si">{</span><span class="n">name_path_pattern</span><span class="si">}</span><span class="s2"> is not in the expected relative path </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">symbol_name_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">get_name_path</span><span class="p">()</span>
+
+        <span class="n">symbol_line</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">line</span>
+        <span class="n">symbol_col</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">column</span>
+        <span class="k">assert</span> <span class="n">symbol_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">symbol_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Symbol </span><span class="si">{</span><span class="n">name_path_pattern</span><span class="si">}</span><span class="s2"> has no identifier position, this is likely a bug.&quot;</span>
+        <span class="p">)</span>
+        <span class="n">lang_server</span> <span class="o">=</span> <span class="n">ls_symbol_retriever</span><span class="o">.</span><span class="n">get_language_server</span><span class="p">(</span><span class="n">symbol_rel_path</span><span class="p">)</span>
+        <span class="n">references_locations</span> <span class="o">=</span> <span class="n">lang_server</span><span class="o">.</span><span class="n">request_references</span><span class="p">(</span><span class="n">symbol_rel_path</span><span class="p">,</span> <span class="n">symbol_line</span><span class="p">,</span> <span class="n">symbol_col</span><span class="p">)</span>
+        <span class="n">file_to_lines</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">references_locations</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">ref_loc</span> <span class="ow">in</span> <span class="n">references_locations</span><span class="p">:</span>
+                <span class="n">ref_relative_path</span> <span class="o">=</span> <span class="n">ref_loc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;relativePath&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">ref_relative_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="n">file_to_lines</span><span class="p">[</span><span class="n">ref_relative_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ref_loc</span><span class="p">[</span><span class="s2">&quot;range&quot;</span><span class="p">][</span><span class="s2">&quot;start&quot;</span><span class="p">][</span><span class="s2">&quot;line&quot;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">file_to_lines</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Cannot delete, the symbol </span><span class="si">{</span><span class="n">symbol_name_path</span><span class="si">}</span><span class="s2"> is referenced in: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">file_to_lines</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">code_editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_ls_code_editor</span><span class="p">()</span>
+        <span class="n">code_editor</span><span class="o">.</span><span class="n">delete_symbol</span><span class="p">(</span><span class="n">symbol_name_path</span><span class="p">,</span> <span class="n">relative_file_path</span><span class="o">=</span><span class="n">symbol_rel_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">SUCCESS_RESULT</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

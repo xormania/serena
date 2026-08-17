@@ -1,0 +1,912 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.gui_log_viewer &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/gui_log_viewer';</script>
+    <script src="../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/gui_log_viewer.html" />
+    <link rel="icon" href="../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.gui_log_viewer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">queue</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">auto</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryLogHandler</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LogLevel">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.LogLevel">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LogLevel</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">DEBUG</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">INFO</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">WARNING</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">ERROR</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="n">auto</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="GuiLogViewer">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GuiLogViewer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class that creates a Tkinter GUI for displaying log messages in a separate thread.</span>
+<span class="sd">    The log viewer supports coloring based on log levels (DEBUG, INFO, WARNING, ERROR).</span>
+<span class="sd">    It can also highlight tool names in boldface when they appear in log messages.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;dashboard&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">],</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Log Viewer&quot;</span><span class="p">,</span>
+        <span class="n">memory_log_handler</span><span class="p">:</span> <span class="n">MemoryLogHandler</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+        <span class="n">shutdown_handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param mode: the mode; if &quot;dashboard&quot;, run a dashboard with logs and some control options; if &quot;error&quot;, run</span>
+<span class="sd">            a simple error log viewer (for fatal exceptions)</span>
+<span class="sd">        :param title: the window title</span>
+<span class="sd">        :param memory_log_handler: an optional log handler from which to obtain log messages; If not provided,</span>
+<span class="sd">            must pass the instance to a `GuiLogViewerHandler` to add log messages.</span>
+<span class="sd">        :param width: the initial window width</span>
+<span class="sd">        :param height: the initial window height</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_thread</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="p">:</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_names</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># List to store tool names for highlighting</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_handler</span> <span class="o">=</span> <span class="n">shutdown_handler</span>
+
+        <span class="c1"># Define colors for different log levels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_colors</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">LogLevel</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span> <span class="s2">&quot;#808080&quot;</span><span class="p">,</span>  <span class="c1"># Gray</span>
+            <span class="n">LogLevel</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>  <span class="c1"># Black</span>
+            <span class="n">LogLevel</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span> <span class="s2">&quot;#FF8C00&quot;</span><span class="p">,</span>  <span class="c1"># Dark Orange</span>
+            <span class="n">LogLevel</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span> <span class="s2">&quot;#FF0000&quot;</span><span class="p">,</span>  <span class="c1"># Red</span>
+            <span class="n">LogLevel</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">:</span> <span class="s2">&quot;#000000&quot;</span><span class="p">,</span>  <span class="c1"># Black</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">memory_log_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">memory_log_handler</span><span class="o">.</span><span class="n">get_log_messages</span><span class="p">()</span><span class="o">.</span><span class="n">messages</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">memory_log_handler</span><span class="o">.</span><span class="n">add_emit_callback</span><span class="p">(</span><span class="k">lambda</span> <span class="n">msg</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+
+<div class="viewcode-block" id="GuiLogViewer.start">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer.start">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the log viewer in a separate thread.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_gui</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_thread</span><span class="o">.</span><span class="n">daemon</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="GuiLogViewer.stop">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer.stop">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stop the log viewer.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="c1"># Add a sentinel value to the queue to signal the GUI to exit</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="GuiLogViewer.set_tool_names">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer.set_tool_names">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_tool_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_names</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set or update the list of tool names to be highlighted in log messages.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tool_names (list): A list of tool name strings to highlight</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_names</span> <span class="o">=</span> <span class="n">tool_names</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_dashboard_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">copy_url</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">clipboard_clear</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">clipboard_append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Copied dashboard URL to clipboard: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">menubar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dashboard_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">dashboard_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Copy URL&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">copy_url</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Dashboard&quot;</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">dashboard_menu</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GuiLogViewer.add_log">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer.add_log">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add a log message to the viewer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The log message to display</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_determine_log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine the log level from the message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            message (str): The log message</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            LogLevel: The determined log level</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">message_upper</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">message_upper</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">LogLevel</span><span class="o">.</span><span class="n">DEBUG</span>
+        <span class="k">elif</span> <span class="n">message_upper</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;INFO&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">LogLevel</span><span class="o">.</span><span class="n">INFO</span>
+        <span class="k">elif</span> <span class="n">message_upper</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">LogLevel</span><span class="o">.</span><span class="n">WARNING</span>
+        <span class="k">elif</span> <span class="n">message_upper</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">LogLevel</span><span class="o">.</span><span class="n">ERROR</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LogLevel</span><span class="o">.</span><span class="n">DEFAULT</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_process_queue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process messages from the queue and update the text widget.&quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">message_queue</span><span class="o">.</span><span class="n">get_nowait</span><span class="p">()</span>
+
+                <span class="c1"># Check for sentinel value to exit</span>
+                <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+                    <span class="k">return</span>
+
+                <span class="c1"># Check if scrollbar is at the bottom before adding new text</span>
+                <span class="c1"># Get current scroll position</span>
+                <span class="n">current_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">yview</span><span class="p">()</span>
+                <span class="c1"># If near the bottom (allowing for small floating point differences)</span>
+                <span class="n">was_at_bottom</span> <span class="o">=</span> <span class="n">current_position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.99</span>
+
+                <span class="n">log_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_determine_log_level</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+                <span class="c1"># Insert the message at the end of the text with appropriate log level tag</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">NORMAL</span><span class="p">)</span>
+
+                <span class="c1"># Find tool names in the message and highlight them</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_names</span><span class="p">:</span>
+                    <span class="c1"># Capture start position (before insertion)</span>
+                    <span class="n">start_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;end-1c&quot;</span><span class="p">)</span>
+
+                    <span class="c1"># Insert the message</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">message</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+                    <span class="c1"># Convert start index to line/char format</span>
+                    <span class="n">line</span><span class="p">,</span> <span class="n">char</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">start_index</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">))</span>
+
+                    <span class="c1"># Search for tool names in the message string directly</span>
+                    <span class="k">for</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_names</span><span class="p">:</span>
+                        <span class="n">start_offset</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                            <span class="n">found_at</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">tool_name</span><span class="p">,</span> <span class="n">start_offset</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">found_at</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                                <span class="k">break</span>
+
+                            <span class="c1"># Calculate line/column from offset</span>
+                            <span class="n">offset_line</span> <span class="o">=</span> <span class="n">line</span>
+                            <span class="n">offset_char</span> <span class="o">=</span> <span class="n">char</span>
+                            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">message</span><span class="p">[:</span><span class="n">found_at</span><span class="p">]:</span>
+                                <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
+                                    <span class="n">offset_line</span> <span class="o">+=</span> <span class="mi">1</span>
+                                    <span class="n">offset_char</span> <span class="o">=</span> <span class="mi">0</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">offset_char</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                            <span class="c1"># Construct index positions</span>
+                            <span class="n">start_pos</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">offset_line</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">offset_char</span><span class="si">}</span><span class="s2">&quot;</span>
+                            <span class="n">end_pos</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">offset_line</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">offset_char</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">tool_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                            <span class="c1"># Add tag to highlight the tool name</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">tag_add</span><span class="p">(</span><span class="s2">&quot;TOOL_NAME&quot;</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span>
+
+                            <span class="n">start_offset</span> <span class="o">=</span> <span class="n">found_at</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">tool_name</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># No tool names to highlight, just insert the message</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="n">message</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">log_level</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>
+
+                <span class="c1"># Auto-scroll to the bottom only if it was already at the bottom</span>
+                <span class="k">if</span> <span class="n">was_at_bottom</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">)</span>
+
+            <span class="c1"># Schedule to check the queue again</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_queue</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing message queue: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_queue</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GuiLogViewer.run_gui">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewer.run_gui">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_gui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the GUI&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Set app id (avoid app being lumped together with other Python-based apps in Windows taskbar)</span>
+            <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">:</span>
+                <span class="kn">import</span><span class="w"> </span><span class="nn">ctypes</span>
+
+                <span class="n">ctypes</span><span class="o">.</span><span class="n">windll</span><span class="o">.</span><span class="n">shell32</span><span class="o">.</span><span class="n">SetCurrentProcessExplicitAppUserModelID</span><span class="p">(</span><span class="s2">&quot;oraios.serena&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Make the window resizable</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># We now have two rows - one for logo and one for text</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Logo row</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Text content row</span>
+
+            <span class="n">dashboard_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SERENA_DASHBOARD_DIR</span><span class="p">)</span>
+
+            <span class="c1"># Load and display the logo image</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># construct path relative to path of this file</span>
+                <span class="n">image_path</span> <span class="o">=</span> <span class="n">dashboard_path</span> <span class="o">/</span> <span class="s2">&quot;serena-logs.png&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo_image</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">image_path</span><span class="p">)</span>
+
+                <span class="c1"># Create a label to display the logo</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logo_image</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logo_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;ew&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error loading logo image: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+
+            <span class="c1"># Create frame to hold text widget and scrollbars</span>
+            <span class="n">frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">frame</span><span class="o">.</span><span class="n">rowconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># Create horizontal scrollbar</span>
+            <span class="n">h_scrollbar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">)</span>
+            <span class="n">h_scrollbar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;ew&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create vertical scrollbar</span>
+            <span class="n">v_scrollbar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">VERTICAL</span><span class="p">)</span>
+            <span class="n">v_scrollbar</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;ns&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Create text widget with horizontal scrolling</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+                <span class="n">frame</span><span class="p">,</span> <span class="n">wrap</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="n">xscrollcommand</span><span class="o">=</span><span class="n">h_scrollbar</span><span class="o">.</span><span class="n">set</span><span class="p">,</span> <span class="n">yscrollcommand</span><span class="o">=</span><span class="n">v_scrollbar</span><span class="o">.</span><span class="n">set</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">state</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">)</span>  <span class="c1"># Make it read-only</span>
+
+            <span class="c1"># Configure scrollbars</span>
+            <span class="n">h_scrollbar</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">xview</span><span class="p">)</span>
+            <span class="n">v_scrollbar</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">yview</span><span class="p">)</span>
+
+            <span class="c1"># Configure tags for different log levels with appropriate colors</span>
+            <span class="k">for</span> <span class="n">level</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_colors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span><span class="n">level</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">foreground</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+            <span class="c1"># Configure tag for tool names</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">text_widget</span><span class="o">.</span><span class="n">tag_configure</span><span class="p">(</span><span class="s2">&quot;TOOL_NAME&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;#ffff00&quot;</span><span class="p">)</span>
+
+            <span class="c1"># Set up the queue processing</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_queue</span><span class="p">)</span>
+
+            <span class="c1"># Handle window close event depending on mode</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;dashboard&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconify</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">protocol</span><span class="p">(</span><span class="s2">&quot;WM_DELETE_WINDOW&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span>
+
+            <span class="c1"># Create menu bar</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;dashboard&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">menubar</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+                <span class="n">server_menu</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="p">,</span> <span class="n">tearoff</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">server_menu</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Shutdown&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_shutdown_server</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="o">.</span><span class="n">add_cascade</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Server&quot;</span><span class="p">,</span> <span class="n">menu</span><span class="o">=</span><span class="n">server_menu</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">menu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">menubar</span><span class="p">)</span>
+
+            <span class="c1"># Configure icons</span>
+            <span class="n">icon_16</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">dashboard_path</span> <span class="o">/</span> <span class="s2">&quot;serena-icon-16.png&quot;</span><span class="p">)</span>
+            <span class="n">icon_32</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">dashboard_path</span> <span class="o">/</span> <span class="s2">&quot;serena-icon-32.png&quot;</span><span class="p">)</span>
+            <span class="n">icon_48</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">dashboard_path</span> <span class="o">/</span> <span class="s2">&quot;serena-icon-48.png&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">iconphoto</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">icon_48</span><span class="p">,</span> <span class="n">icon_32</span><span class="p">,</span> <span class="n">icon_16</span><span class="p">)</span>
+
+            <span class="c1"># Start the Tkinter event loop</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in GUI thread: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">running</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_shutdown_server</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_handler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shutdown_handler</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="GuiLogViewerHandler">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewerHandler">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GuiLogViewerHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A logging handler that sends log records to a ThreadedLogViewer instance.</span>
+<span class="sd">    This handler can be integrated with Python&#39;s standard logging module</span>
+<span class="sd">    to direct log entries to a GUI log viewer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_viewer</span><span class="p">:</span> <span class="n">GuiLogViewer</span><span class="p">,</span>
+        <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">,</span>
+        <span class="n">format_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%(levelname)-5s</span><span class="s2"> </span><span class="si">%(asctime)-15s</span><span class="s2"> </span><span class="si">%(name)s</span><span class="s2">:</span><span class="si">%(funcName)s</span><span class="s2">:</span><span class="si">%(lineno)d</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the handler with a ThreadedLogViewer instance.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            log_viewer: A ThreadedLogViewer instance that will display the logs</span>
+<span class="sd">            level: The logging level (default: NOTSET which captures all logs)</span>
+<span class="sd">            format_string: the format string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span> <span class="o">=</span> <span class="n">log_viewer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">formatter</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="n">format_string</span><span class="p">)</span>
+
+        <span class="c1"># Start the log viewer if it&#39;s not already running</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_instance_registered</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">logging</span><span class="o">.</span><span class="n">Logger</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">handlers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="GuiLogViewerHandler.emit">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewerHandler.emit">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Emit a log record to the ThreadedLogViewer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            record: The log record to emit</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Format the record according to the formatter</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+            <span class="c1"># Convert the level name to a standard format for the viewer</span>
+            <span class="n">level_prefix</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">levelname</span>
+
+            <span class="c1"># Add the appropriate prefix if it&#39;s not already there</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">msg</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">level_prefix</span><span class="p">):</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">level_prefix</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span><span class="o">.</span><span class="n">add_log</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handleError</span><span class="p">(</span><span class="n">record</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GuiLogViewerHandler.close">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewerHandler.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the handler and optionally stop the log viewer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># We don&#39;t automatically stop the log viewer here as it might</span>
+        <span class="c1"># be used by other handlers or directly by the application</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="GuiLogViewerHandler.stop_viewer">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.GuiLogViewerHandler.stop_viewer">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">stop_viewer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Explicitly stop the associated log viewer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span><span class="o">.</span><span class="n">running</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">log_viewer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="show_fatal_exception">
+<a class="viewcode-back" href="../../06-contributing/code-reference/gui_log_viewer.html#serena.gui_log_viewer.show_fatal_exception">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">show_fatal_exception</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Makes sure the given exception is shown in the GUI log viewer,</span>
+<span class="sd">    either an existing instance or a new one.</span>
+
+<span class="sd">    :param e: the exception to display</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># show in new window in main thread (user must close it)</span>
+    <span class="n">log_viewer</span> <span class="o">=</span> <span class="n">GuiLogViewer</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">)</span>
+    <span class="n">exc_info</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exception</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="n">e</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">))</span>
+    <span class="n">log_viewer</span><span class="o">.</span><span class="n">add_log</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ERROR Fatal exception: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">exc_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">log_viewer</span><span class="o">.</span><span class="n">run_gui</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

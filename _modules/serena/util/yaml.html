@@ -1,0 +1,796 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.util.yaml &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/util/yaml';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/util/yaml.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.util.yaml</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">ruamel.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">YAML</span><span class="p">,</span> <span class="n">CommentedSeq</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">,</span> <span class="n">StreamMark</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ruamel.yaml.comments</span><span class="w"> </span><span class="kn">import</span> <span class="n">CommentedMap</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">SERENA_FILE_ENCODING</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_yaml</span><span class="p">(</span><span class="n">preserve_comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">YAML</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a YAML that can load/save with comments if preserve_comments is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typ</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">preserve_comments</span> <span class="k">else</span> <span class="s2">&quot;safe&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">(</span><span class="n">typ</span><span class="o">=</span><span class="n">typ</span><span class="p">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">preserve_quotes</span> <span class="o">=</span> <span class="n">preserve_comments</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<div class="viewcode-block" id="YamlCommentNormalisation">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/yaml.html#serena.util.yaml.YamlCommentNormalisation">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">YamlCommentNormalisation</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Defines a normalisation to be applied to the comment representation in a ruamel CommentedMap.</span>
+
+<span class="sd">    Note that even though a YAML document may seem to consistently contain, for example, leading comments</span>
+<span class="sd">    before a key only, ruamel may still parse some comments as trailing comments of the previous key</span>
+<span class="sd">    or as document-level comments.</span>
+<span class="sd">    The normalisations define ways to adjust the comment representation accordingly, clearly associating</span>
+<span class="sd">    comments with the keys they belong to.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NONE</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    No comment normalisation is performed.</span>
+<span class="sd">    Comments are kept as parsed by ruamel.yaml.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">LEADING</span> <span class="o">=</span> <span class="s2">&quot;leading&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Document is assumed to have leading comments only, i.e. comments before keys, only full-line comments.</span>
+<span class="sd">    This normalisation achieves that comments are properly associated with keys as leading comments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">LEADING_WITH_CONVERSION_FROM_TRAILING</span> <span class="o">=</span> <span class="s2">&quot;leading_with_conversion_from_trailing&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Document is assumed to have a mixture of leading comments (before keys) and trailing comments (after values), only full-line comments.</span>
+<span class="sd">    This normalisation achieves that all comments are converted to leading comments and properly associated with keys.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+    <span class="c1"># NOTE: Normalisation for trailing comments was attempted but is extremely hard, because</span>
+    <span class="c1">#  it is difficult to position the comments properly after values, especially for complex values.</span>
+
+
+<span class="n">DOC_COMMENT_INDEX_POST</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">DOC_COMMENT_INDEX_PRE</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="c1"># item comment indices: (post key, pre key, post value, pre value)</span>
+<span class="n">ITEM_COMMENT_INDEX_BEFORE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># (pre-key; must be a list of CommentToken at this index)</span>
+<span class="n">ITEM_COMMENT_INDEX_AFTER</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># (post-value; must be an instance of CommentToken at this index)</span>
+
+
+<div class="viewcode-block" id="load_yaml">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/yaml.html#serena.util.yaml.load_yaml">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_yaml</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">comment_normalisation</span><span class="p">:</span> <span class="n">YamlCommentNormalisation</span> <span class="o">=</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CommentedMap</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param path: the path to the YAML file to load</span>
+<span class="sd">    :param comment_normalisation: the comment normalisation to apply after loading</span>
+<span class="sd">    :return: the loaded commented map</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">SERENA_FILE_ENCODING</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">yaml</span> <span class="o">=</span> <span class="n">_create_yaml</span><span class="p">(</span><span class="n">preserve_comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">commented_map</span><span class="p">:</span> <span class="n">CommentedMap</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">&quot;undefined alias&quot;</span> <span class="ow">in</span> <span class="n">msg</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Invalid YAML in </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">: values that start with `*` must be quoted. &quot;</span>
+                    <span class="s2">&quot;This often happens in `ignored_paths` when using gitignore-style globs like &quot;</span>
+                    <span class="s1">&#39;`&quot;**/bin/**&quot;` or `&quot;**/obj/**&quot;`.&#39;</span>
+                <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+            <span class="k">raise</span>
+    <span class="k">if</span> <span class="n">commented_map</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># ruamel returns None for empty documents, but we want an empty CommentedMap</span>
+        <span class="n">commented_map</span> <span class="o">=</span> <span class="n">CommentedMap</span><span class="p">()</span>
+    <span class="n">normalise_yaml_comments</span><span class="p">(</span><span class="n">commented_map</span><span class="p">,</span> <span class="n">comment_normalisation</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">commented_map</span></div>
+
+
+
+<div class="viewcode-block" id="normalise_yaml_comments">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/yaml.html#serena.util.yaml.normalise_yaml_comments">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">normalise_yaml_comments</span><span class="p">(</span><span class="n">commented_map</span><span class="p">:</span> <span class="n">CommentedMap</span><span class="p">,</span> <span class="n">comment_normalisation</span><span class="p">:</span> <span class="n">YamlCommentNormalisation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Applies the given comment normalisation to the given commented map in-place.</span>
+
+<span class="sd">    :param commented_map: the commented map whose comments are to be normalised</span>
+<span class="sd">    :param comment_normalisation: the comment normalisation to apply</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_list</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">comment_entry</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">comment_entry</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_unit</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts a list-valued comment entry into a single comment entry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">comment_entry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">comment_entry</span><span class="p">):</span>
+                    <span class="n">start_mark</span> <span class="o">=</span> <span class="n">StreamMark</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">comment_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">comment_entry</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">comment_str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                        <span class="n">comment_str</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">comment_str</span>
+                    <span class="k">return</span> <span class="n">CommentToken</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">comment_str</span><span class="p">,</span> <span class="n">start_mark</span><span class="o">=</span><span class="n">start_mark</span><span class="p">,</span> <span class="n">end_mark</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">types</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">comment_entry</span><span class="p">)</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Unhandled types in list-valued comment entry: </span><span class="si">%s</span><span class="s2">; not updating entry&quot;</span><span class="p">,</span> <span class="n">types</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">comment_entry</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">trailing_to_leading</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">comment_entry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">token_list</span> <span class="o">=</span> <span class="n">make_list</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">)</span>
+        <span class="n">first_token</span> <span class="o">=</span> <span class="n">token_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_token</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">):</span>
+            <span class="c1"># remove leading newline if present</span>
+            <span class="k">if</span> <span class="n">first_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                <span class="n">first_token</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">first_token</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">token_list</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_nested_comments</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes nested comments, particularly of sequences, which incorrectly capture comments</span>
+<span class="sd">        that are actually intended for top-level keys.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">commented_map</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="n">commented_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">entry</span><span class="p">,</span> <span class="n">CommentedSeq</span><span class="p">):</span>
+                <span class="n">items</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="n">items_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items_keys</span><span class="p">:</span>
+                        <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+
+    <span class="k">match</span> <span class="n">comment_normalisation</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">case</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">LEADING</span> <span class="o">|</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">LEADING_WITH_CONVERSION_FROM_TRAILING</span><span class="p">:</span>
+            <span class="c1"># Comments are supposed to be leading comments (i.e., before a key and associated with the key).</span>
+            <span class="c1"># When ruamel parses a YAML, however, comments belonging to a key may be stored as trailing</span>
+            <span class="c1"># comments of the previous key or as a document-level comment.</span>
+            <span class="c1"># Move them accordingly.</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">commented_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">comment_items</span> <span class="o">=</span> <span class="n">commented_map</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span>
+            <span class="n">doc_comment</span> <span class="o">=</span> <span class="n">commented_map</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">comment</span>
+            <span class="n">preceding_comment</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+                <span class="n">current_comment</span> <span class="o">=</span> <span class="n">comment_items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+                <span class="n">comment_items</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_comment</span>
+                <span class="k">if</span> <span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">doc_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">doc_comment</span><span class="p">[</span><span class="n">DOC_COMMENT_INDEX_PRE</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="c1"># move document pre-comment to leading comment of first key</span>
+                        <span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_list</span><span class="p">(</span><span class="n">doc_comment</span><span class="p">[</span><span class="n">DOC_COMMENT_INDEX_PRE</span><span class="p">])</span>
+                        <span class="n">doc_comment</span><span class="p">[</span><span class="n">DOC_COMMENT_INDEX_PRE</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="k">elif</span> <span class="n">preceding_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">preceding_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_AFTER</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="c1"># move trailing comment of preceding key to leading comment of current key</span>
+                        <span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="o">=</span> <span class="n">trailing_to_leading</span><span class="p">(</span><span class="n">preceding_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_AFTER</span><span class="p">])</span>
+                        <span class="n">preceding_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_AFTER</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="n">preceding_comment</span> <span class="o">=</span> <span class="n">current_comment</span>
+
+            <span class="k">if</span> <span class="n">comment_normalisation</span> <span class="o">==</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">LEADING_WITH_CONVERSION_FROM_TRAILING</span><span class="p">:</span>
+                <span class="c1"># Second pass: conversion of trailing comments</span>
+                <span class="c1"># If a leading comment ends with &quot;\n\n&quot;, i.e. it has an empty line between the comment and the key,</span>
+                <span class="c1"># it was actually intended as a trailing comment for the preceding key, so we associate it with</span>
+                <span class="c1"># the preceding key instead (if the preceding key has no leading comment already).</span>
+                <span class="n">preceding_comment</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                    <span class="n">current_comment</span> <span class="o">=</span> <span class="n">comment_items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">token_list</span> <span class="o">=</span> <span class="n">make_list</span><span class="p">(</span><span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">])</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">last_token</span> <span class="o">=</span> <span class="n">token_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">last_token</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">)</span> <span class="ow">and</span> <span class="n">last_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                                <span class="c1"># move comment to preceding key, removing the empty line,</span>
+                                <span class="c1"># and adding an empty line at the beginning instead</span>
+                                <span class="k">if</span> <span class="n">preceding_comment</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">yaml_comment_entry_is_empty</span><span class="p">(</span>
+                                    <span class="n">preceding_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span>
+                                <span class="p">):</span>
+                                    <span class="n">last_token</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">last_token</span><span class="o">.</span><span class="n">value</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                                    <span class="n">first_token</span> <span class="o">=</span> <span class="n">token_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">first_token</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">):</span>
+                                        <span class="k">if</span> <span class="ow">not</span> <span class="n">first_token</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">):</span>
+                                            <span class="n">first_token</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">first_token</span><span class="o">.</span><span class="n">value</span>
+
+                                    <span class="n">preceding_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="o">=</span> <span class="n">token_list</span>
+                                    <span class="n">current_comment</span><span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="n">preceding_comment</span> <span class="o">=</span> <span class="n">current_comment</span>
+
+            <span class="c1"># remove nested comments, as we assume that only top-level keys are supposed to be commented</span>
+            <span class="n">remove_nested_comments</span><span class="p">()</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unhandled comment normalisation: </span><span class="si">{</span><span class="n">comment_normalisation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_yaml</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="n">CommentedMap</span><span class="p">,</span> <span class="n">preserve_comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">yaml</span> <span class="o">=</span> <span class="n">_create_yaml</span><span class="p">(</span><span class="n">preserve_comments</span><span class="p">)</span>
+    <span class="n">target_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Atomic write: dump to a temp file in the SAME directory, then os.replace onto the target.</span>
+    <span class="c1"># A plain truncate-and-write (open(path, &quot;w&quot;)) is NOT atomic: a concurrent writer (e.g. a second</span>
+    <span class="c1"># Serena process updating the auto-managed registered-projects list) or an interrupted write can</span>
+    <span class="c1"># leave the file half-overwritten — writing a shorter value over a longer one leaves a stale tail,</span>
+    <span class="c1"># which corrupts the YAML so it no longer parses and every later load fails. temp + os.replace makes</span>
+    <span class="c1"># each write all-or-nothing (last-writer-wins, never a corrupt interleave).</span>
+    <span class="n">fd</span><span class="p">,</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;.tmp&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">SERENA_FILE_ENCODING</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">_replace_with_retry</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">unlink</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">OSError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">raise</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_replace_with_retry</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dst</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">delay_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;``os.replace(src, dst)`` with a short retry on a Windows sharing violation.</span>
+
+<span class="sd">    On Windows the atomic rename fails with ``PermissionError`` (WinError 5/32) if another process</span>
+<span class="sd">    momentarily holds ``dst`` open — e.g. a second Serena process reading or replacing the same</span>
+<span class="sd">    config. A brief bounded retry rides out that contention; the temp file is still complete, so we</span>
+<span class="sd">    never fall back to a non-atomic write.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">attempt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">attempts</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">attempt</span> <span class="o">==</span> <span class="n">attempts</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">delay_s</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">yaml_comment_entry_is_empty</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">comment_entry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">comment_entry</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">comment_entry</span><span class="p">,</span> <span class="n">CommentToken</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">comment_entry</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<div class="viewcode-block" id="transfer_yaml_comments_by_index">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/yaml.html#serena.util.yaml.transfer_yaml_comments_by_index">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">transfer_yaml_comments_by_index</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">CommentedMap</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">CommentedMap</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">forced_update_keys</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">force_update_all</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :param source: the source, from which to transfer missing comments</span>
+<span class="sd">    :param target: the target map, whose comments will be updated</span>
+<span class="sd">    :param indices: list of comment indices to transfer</span>
+<span class="sd">    :param forced_update_keys: keys for which comments are always transferred, even if present in target</span>
+<span class="sd">    :param force_update_all: if True, comments are transferred for all keys, even if present in target</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">target</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">source</span><span class="p">:</span>
+            <span class="n">source_comment</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">source_comment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">target_comment</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="c1"># initialise target comment if needed</span>
+            <span class="k">if</span> <span class="n">target_comment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">target_comment</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span>
+                <span class="n">target</span><span class="o">.</span><span class="n">ca</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_comment</span>
+            <span class="c1"># transfer comments at specified indices</span>
+            <span class="n">is_forced_update</span> <span class="o">=</span> <span class="n">force_update_all</span> <span class="ow">or</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">forced_update_keys</span>
+            <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">is_forced_update</span> <span class="ow">or</span> <span class="n">yaml_comment_entry_is_empty</span><span class="p">(</span><span class="n">target_comment</span><span class="p">[</span><span class="n">index</span><span class="p">]):</span>
+                    <span class="n">target_comment</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">source_comment</span><span class="p">[</span><span class="n">index</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="transfer_yaml_comments">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/yaml.html#serena.util.yaml.transfer_yaml_comments">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">transfer_yaml_comments</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">CommentedMap</span><span class="p">,</span>
+    <span class="n">target</span><span class="p">:</span> <span class="n">CommentedMap</span><span class="p">,</span>
+    <span class="n">comment_normalisation</span><span class="p">:</span> <span class="n">YamlCommentNormalisation</span><span class="p">,</span>
+    <span class="n">forced_update_keys</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(),</span>
+    <span class="n">force_update_all</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transfers missing comments from source to target YAML.</span>
+
+<span class="sd">    :param source: the source, from which to transfer missing comments</span>
+<span class="sd">    :param target: the target map, whose comments will be updated.</span>
+<span class="sd">    :param comment_normalisation: the comment normalisation to assume; if NONE, no comments are transferred</span>
+<span class="sd">    :param forced_update_keys: keys for which comments are always transferred, even if present in target</span>
+<span class="sd">    :param force_update_all: if True, comments are transferred for all keys, even if present in target</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">match</span> <span class="n">comment_normalisation</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">NONE</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">case</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">LEADING</span> <span class="o">|</span> <span class="n">YamlCommentNormalisation</span><span class="o">.</span><span class="n">LEADING_WITH_CONVERSION_FROM_TRAILING</span><span class="p">:</span>
+            <span class="n">transfer_yaml_comments_by_index</span><span class="p">(</span>
+                <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="p">[</span><span class="n">ITEM_COMMENT_INDEX_BEFORE</span><span class="p">],</span> <span class="n">forced_update_keys</span><span class="o">=</span><span class="n">forced_update_keys</span><span class="p">,</span> <span class="n">force_update_all</span><span class="o">=</span><span class="n">force_update_all</span>
+            <span class="p">)</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unhandled comment normalisation: </span><span class="si">{</span><span class="n">comment_normalisation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

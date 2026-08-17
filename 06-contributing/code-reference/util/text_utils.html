@@ -1,0 +1,1117 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>serena.util.text_utils &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-contributing/code-reference/util/text_utils';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/06-contributing/code-reference/util/text_utils.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="serena.util.thread" href="thread.html" />
+    <link rel="prev" title="serena.util.shell" href="shell.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../000_contributing-intro.html">Contributing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../000_code-reference-intro.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">util</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="shell.html">serena.util.shell</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/06-contributing/code-reference/util/text_utils.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>serena.util.text_utils</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.LineType"><code class="docutils literal notranslate"><span class="pre">LineType</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.LineType.MATCH"><code class="docutils literal notranslate"><span class="pre">LineType.MATCH</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.LineType.BEFORE_MATCH"><code class="docutils literal notranslate"><span class="pre">LineType.BEFORE_MATCH</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.LineType.AFTER_MATCH"><code class="docutils literal notranslate"><span class="pre">LineType.AFTER_MATCH</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextLine"><code class="docutils literal notranslate"><span class="pre">TextLine</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextLine.match_type"><code class="docutils literal notranslate"><span class="pre">TextLine.match_type</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextLine.get_display_prefix"><code class="docutils literal notranslate"><span class="pre">TextLine.get_display_prefix()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextLine.format_line"><code class="docutils literal notranslate"><span class="pre">TextLine.format_line()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MatchedConsecutiveLines"><code class="docutils literal notranslate"><span class="pre">MatchedConsecutiveLines</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MatchedConsecutiveLines.lines"><code class="docutils literal notranslate"><span class="pre">MatchedConsecutiveLines.lines</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MatchedConsecutiveLines.source_file_path"><code class="docutils literal notranslate"><span class="pre">MatchedConsecutiveLines.source_file_path</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.search_text"><code class="docutils literal notranslate"><span class="pre">search_text()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.GlobMatcher"><code class="docutils literal notranslate"><span class="pre">GlobMatcher</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.search_files"><code class="docutils literal notranslate"><span class="pre">search_files()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.render_html"><code class="docutils literal notranslate"><span class="pre">render_html()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ContentReplacer"><code class="docutils literal notranslate"><span class="pre">ContentReplacer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ContentReplacer.replace"><code class="docutils literal notranslate"><span class="pre">ContentReplacer.replace()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.occurrence_id"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.occurrence_id</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.index_in_file"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.index_in_file</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.start"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.start</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.end"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.end</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.replacement"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.replacement</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.start_line"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.start_line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.end_line"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.end_line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.ReplacementOccurrence.is_ambiguous"><code class="docutils literal notranslate"><span class="pre">ReplacementOccurrence.is_ambiguous</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MultiFileContentReplacer"><code class="docutils literal notranslate"><span class="pre">MultiFileContentReplacer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MultiFileContentReplacer.find_occurrences"><code class="docutils literal notranslate"><span class="pre">MultiFileContentReplacer.find_occurrences()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MultiFileContentReplacer.apply_to_content"><code class="docutils literal notranslate"><span class="pre">MultiFileContentReplacer.apply_to_content()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.MultiFileContentReplacer.render_occurrence_diff"><code class="docutils literal notranslate"><span class="pre">MultiFileContentReplacer.render_occurrence_diff()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextCoords"><code class="docutils literal notranslate"><span class="pre">TextCoords</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextCoords.line"><code class="docutils literal notranslate"><span class="pre">TextCoords.line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.TextCoords.col"><code class="docutils literal notranslate"><span class="pre">TextCoords.col</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.util.text_utils.find_text_coordinates"><code class="docutils literal notranslate"><span class="pre">find_text_coordinates()</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-serena.util.text_utils">
+<span id="serena-util-text-utils"></span><h1>serena.util.text_utils<a class="headerlink" href="#module-serena.util.text_utils" title="Link to this heading">#</a></h1>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../../../_modules/serena/util/text_utils.html#serena/util/text_utils.py"><span>serena/util/text_utils.py</span></a></p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.LineType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LineType</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#LineType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.LineType" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StrEnum</span></code></p>
+<p>Enum for different types of lines in search results.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.LineType.MATCH">
+<span class="sig-name descname"><span class="pre">MATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'match'</span></em><a class="headerlink" href="#serena.util.text_utils.LineType.MATCH" title="Link to this definition">#</a></dt>
+<dd><p>Part of the matched lines</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.LineType.BEFORE_MATCH">
+<span class="sig-name descname"><span class="pre">BEFORE_MATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'prefix'</span></em><a class="headerlink" href="#serena.util.text_utils.LineType.BEFORE_MATCH" title="Link to this definition">#</a></dt>
+<dd><p>Lines before the match</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.LineType.AFTER_MATCH">
+<span class="sig-name descname"><span class="pre">AFTER_MATCH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'postfix'</span></em><a class="headerlink" href="#serena.util.text_utils.LineType.AFTER_MATCH" title="Link to this definition">#</a></dt>
+<dd><p>Lines after the match</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextLine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TextLine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_number</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#TextLine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.TextLine" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a line of text with information on how it relates to the match.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line_number</strong> (<em>int</em>)</p></li>
+<li><p><strong>line_content</strong> (<em>str</em>)</p></li>
+<li><p><strong>match_type</strong> (<a class="reference internal" href="#serena.util.text_utils.LineType" title="serena.util.text_utils.LineType"><em>LineType</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextLine.match_type">
+<span class="sig-name descname"><span class="pre">match_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#serena.util.text_utils.LineType" title="serena.util.text_utils.LineType"><span class="pre">LineType</span></a></em><a class="headerlink" href="#serena.util.text_utils.TextLine.match_type" title="Link to this definition">#</a></dt>
+<dd><p>Represents the type of line (match, prefix, postfix)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextLine.get_display_prefix">
+<span class="sig-name descname"><span class="pre">get_display_prefix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#TextLine.get_display_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.TextLine.get_display_prefix" title="Link to this definition">#</a></dt>
+<dd><p>Get the display prefix for this line based on the match type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextLine.format_line">
+<span class="sig-name descname"><span class="pre">format_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">include_line_numbers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#TextLine.format_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.TextLine.format_line" title="Link to this definition">#</a></dt>
+<dd><p>Format the line for display (e.g.,for logging or passing to an LLM).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>include_line_numbers</strong> (<em>bool</em>) – Whether to include the line number in the result.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.MatchedConsecutiveLines">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MatchedConsecutiveLines</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">lines</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">source_file_path=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">lines_before_matched=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">matched_lines=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">lines_after_matched=&lt;factory&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#MatchedConsecutiveLines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.MatchedConsecutiveLines" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a collection of consecutive lines found through some criterion in a text file or a string.
+May include lines before, after, and matched.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lines</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.util.text_utils.TextLine" title="serena.util.text_utils.TextLine"><em>TextLine</em></a><em>]</em>)</p></li>
+<li><p><strong>source_file_path</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>lines_before_matched</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.util.text_utils.TextLine" title="serena.util.text_utils.TextLine"><em>TextLine</em></a><em>]</em>)</p></li>
+<li><p><strong>matched_lines</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.util.text_utils.TextLine" title="serena.util.text_utils.TextLine"><em>TextLine</em></a><em>]</em>)</p></li>
+<li><p><strong>lines_after_matched</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.util.text_utils.TextLine" title="serena.util.text_utils.TextLine"><em>TextLine</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.MatchedConsecutiveLines.lines">
+<span class="sig-name descname"><span class="pre">lines</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#serena.util.text_utils.TextLine" title="serena.util.text_utils.TextLine"><span class="pre">TextLine</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.util.text_utils.MatchedConsecutiveLines.lines" title="Link to this definition">#</a></dt>
+<dd><p>All lines in the context of the match. At least one of them is of <cite>match_type</cite> <cite>MATCH</cite>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.MatchedConsecutiveLines.source_file_path">
+<span class="sig-name descname"><span class="pre">source_file_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.util.text_utils.MatchedConsecutiveLines.source_file_path" title="Link to this definition">#</a></dt>
+<dd><p>Path to the file where the match was found (Metadata).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.util.text_utils.search_text">
+<span class="sig-name descname"><span class="pre">search_text</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">source_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_before</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_after</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">multiline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#search_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.search_text" title="Link to this definition">#</a></dt>
+<dd><p>Search for a pattern in text content. Supports both regex and glob-like patterns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pattern</strong> (<em>str</em>) – Pattern to search for (regex or glob-like pattern)</p></li>
+<li><p><strong>content</strong> (<em>str</em><em> | </em><em>None</em>) – The text content to search. May be None if source_file_path is provided.</p></li>
+<li><p><strong>source_file_path</strong> (<em>str</em><em> | </em><em>None</em>) – Optional path to the source file. If content is None,
+this has to be passed and the file will be read.</p></li>
+<li><p><strong>context_lines_before</strong> (<em>int</em>) – Number of context lines to include before matches</p></li>
+<li><p><strong>context_lines_after</strong> (<em>int</em>) – Number of context lines to include after matches</p></li>
+<li><p><strong>multiline</strong> (<em>bool</em>) – whether to apply multi-line matching, enabling the flags re.DOTALL and re.MULTILINE</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of <cite>TextSearchMatch</cite> objects</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ValueError if the pattern is not valid</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>list</em>[<a class="reference internal" href="#serena.util.text_utils.MatchedConsecutiveLines" title="serena.util.text_utils.MatchedConsecutiveLines"><em>MatchedConsecutiveLines</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.GlobMatcher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GlobMatcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#GlobMatcher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.GlobMatcher" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<p>Supports matching a file path against a glob pattern.</p>
+<p>Supports standard glob patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">*</span></code> matches any number of characters except /</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">**</span></code> matches any number of directories (zero or more)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">?</span></code> matches a single character except /</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[seq]</span></code> matches any character in seq</p></li>
+</ul>
+<p>Supports brace expansion:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">{a,b,c}</span></code> expands to multiple patterns (including nesting)</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>expr</strong> (<em>str</em>) – a glob pattern which may make use of brace expansion (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;src/**/*.{js,jsx,ts,tsx}&quot;</span></code>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.util.text_utils.search_files">
+<span class="sig-name descname"><span class="pre">search_files</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">file_collection</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">pattern</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_before</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_after</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_include_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_exclude_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">multiline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#search_files"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.search_files" title="Link to this definition">#</a></dt>
+<dd><p>Search for a pattern in a list of files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_collection</strong> (<em>FileCollection</em>) – the collection of files to search (will be optionally filtered by glob patterns)</p></li>
+<li><p><strong>pattern</strong> (<em>str</em>) – pattern to search for</p></li>
+<li><p><strong>context_lines_before</strong> (<em>int</em>) – number of context lines to include before matches</p></li>
+<li><p><strong>context_lines_after</strong> (<em>int</em>) – number of context lines to include after matches</p></li>
+<li><p><strong>paths_include_glob</strong> (<em>str</em><em> | </em><em>None</em>) – optional glob pattern to include files from the list</p></li>
+<li><p><strong>paths_exclude_glob</strong> (<em>str</em><em> | </em><em>None</em>) – optional glob pattern to exclude files from the list</p></li>
+<li><p><strong>multiline</strong> (<em>bool</em>) – whether to apply multi-line matching, enabling the flags re.DOTALL and re.MULTILINE (default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of MatchedConsecutiveLines objects</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em>[<a class="reference internal" href="#serena.util.text_utils.MatchedConsecutiveLines" title="serena.util.text_utils.MatchedConsecutiveLines"><em>MatchedConsecutiveLines</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.util.text_utils.render_html">
+<span class="sig-name descname"><span class="pre">render_html</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">html</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#render_html"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.render_html" title="Link to this definition">#</a></dt>
+<dd><p>Remove HTML tags and decode HTML entities from text while preserving the actual content.
+This keeps type information and structure but removes all formatting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>html</strong> (<em>str</em>) – HTML text to clean</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Plain text without HTML tags and with decoded entities</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.ContentReplacer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ContentReplacer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_multiple_occurrences</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_multiline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#ContentReplacer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.ContentReplacer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This is an LLM-optimised content replacer, which elegantly circumvents escaping and which
+provides dual modes for maximum flexibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>'literal'</em><em>, </em><em>'regex'</em><em>]</em>) – the mode indicating whether to the needle in replacements corresponds to a regular expression
+(mode “regex”) or to a literal string (mode “literal”)</p></li>
+<li><p><strong>allow_multiple_occurrences</strong> (<em>bool</em>) – whether it is allowed that the search expression matches multiple occurrences.
+If False, an error will be raised if more than one match is found.</p></li>
+<li><p><strong>regex_multiline</strong> (<em>bool</em>) – whether to apply multi-line regex matching, enabling the flags re.DOTALL and re.MULTILINE</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.ContentReplacer.replace">
+<span class="sig-name descname"><span class="pre">replace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#ContentReplacer.replace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.ContentReplacer.replace" title="Link to this definition">#</a></dt>
+<dd><p>Performs the replacement.</p>
+<p>Raises ValueError if no match is found, or if multiple matches are found while allow_multiple_occurrences is False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – the content in which to perform the replacement</p></li>
+<li><p><strong>needle</strong> (<em>str</em>) – the search expression, which is either a literal string or a regular expression, depending on the mode</p></li>
+<li><p><strong>repl</strong> (<em>str</em>) – the replacement string, which, in regex mode, may contain backreferences in the form of $!1, $!2, etc. to
+refer to matched groups in the search expression</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the updated content after performing the replacement</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReplacementOccurrence</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">occurrence_id</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">index_in_file</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">end</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">matched_text</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">replacement</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start_line</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">end_line</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">is_ambiguous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#ReplacementOccurrence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A single prospective replacement of a pattern match within one file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>occurrence_id</strong> (<em>str</em>)</p></li>
+<li><p><strong>relative_path</strong> (<em>str</em>)</p></li>
+<li><p><strong>index_in_file</strong> (<em>int</em>)</p></li>
+<li><p><strong>start</strong> (<em>int</em>)</p></li>
+<li><p><strong>end</strong> (<em>int</em>)</p></li>
+<li><p><strong>matched_text</strong> (<em>str</em>)</p></li>
+<li><p><strong>replacement</strong> (<em>str</em>)</p></li>
+<li><p><strong>start_line</strong> (<em>int</em>)</p></li>
+<li><p><strong>end_line</strong> (<em>int</em>)</p></li>
+<li><p><strong>is_ambiguous</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.occurrence_id">
+<span class="sig-name descname"><span class="pre">occurrence_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.occurrence_id" title="Link to this definition">#</a></dt>
+<dd><p>stable, content-anchored identifier: ‘&lt;relative_path&gt;:&lt;index_in_file&gt;&#64;&lt;digest&gt;’</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.index_in_file">
+<span class="sig-name descname"><span class="pre">index_in_file</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.index_in_file" title="Link to this definition">#</a></dt>
+<dd><p>0-based index of this match among the matches within its file (in position order)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.start">
+<span class="sig-name descname"><span class="pre">start</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.start" title="Link to this definition">#</a></dt>
+<dd><p>character offset of the match start within the file content</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.end">
+<span class="sig-name descname"><span class="pre">end</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.end" title="Link to this definition">#</a></dt>
+<dd><p>character offset of the match end within the file content</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.replacement">
+<span class="sig-name descname"><span class="pre">replacement</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.replacement" title="Link to this definition">#</a></dt>
+<dd><p>the fully expanded replacement text (backreferences already resolved)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.start_line">
+<span class="sig-name descname"><span class="pre">start_line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.start_line" title="Link to this definition">#</a></dt>
+<dd><p>0-based line number of the match start</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.end_line">
+<span class="sig-name descname"><span class="pre">end_line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.end_line" title="Link to this definition">#</a></dt>
+<dd><p>0-based line number of the match end</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.ReplacementOccurrence.is_ambiguous">
+<span class="sig-name descname"><span class="pre">is_ambiguous</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#serena.util.text_utils.ReplacementOccurrence.is_ambiguous" title="Link to this definition">#</a></dt>
+<dd><p>whether the pattern matches again within the matched text (possible over-match)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.MultiFileContentReplacer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MultiFileContentReplacer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex_multiline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#MultiFileContentReplacer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.MultiFileContentReplacer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Occurrence-level counterpart of <a class="reference internal" href="#serena.util.text_utils.ContentReplacer" title="serena.util.text_utils.ContentReplacer"><code class="xref py py-class docutils literal notranslate"><span class="pre">ContentReplacer</span></code></a> operating on multiple files:
+finds every match of a pattern across a set of file contents, assigns each occurrence a
+stable content-anchored id, renders minimal line diffs for previewing, and computes the
+updated content of a file for a selected subset of occurrences.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>'literal'</em><em>, </em><em>'regex'</em><em>]</em>) – whether the needle is a literal string (“literal”) or a regular expression (“regex”)</p></li>
+<li><p><strong>regex_multiline</strong> (<em>bool</em>) – whether to apply multi-line regex matching, enabling the flags re.DOTALL and re.MULTILINE</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.MultiFileContentReplacer.find_occurrences">
+<span class="sig-name descname"><span class="pre">find_occurrences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">needle</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#MultiFileContentReplacer.find_occurrences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.MultiFileContentReplacer.find_occurrences" title="Link to this definition">#</a></dt>
+<dd><p>Finds all matches of the needle in the given files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>files</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – (relative_path, content) pairs; processed in the given order</p></li>
+<li><p><strong>needle</strong> (<em>str</em>) – the search expression (literal string or regex, depending on the mode)</p></li>
+<li><p><strong>repl</strong> (<em>str</em>) – the replacement template (may contain $!N backreferences in regex mode)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>occurrences in deterministic order (file order, then position within the file)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em>[<a class="reference internal" href="#serena.util.text_utils.ReplacementOccurrence" title="serena.util.text_utils.ReplacementOccurrence"><em>ReplacementOccurrence</em></a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.MultiFileContentReplacer.apply_to_content">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply_to_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">occurrences</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#MultiFileContentReplacer.apply_to_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.MultiFileContentReplacer.apply_to_content" title="Link to this definition">#</a></dt>
+<dd><p>Applies the given occurrences (which must have been derived from exactly this content)
+and returns the updated content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>)</p></li>
+<li><p><strong>occurrences</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.util.text_utils.ReplacementOccurrence" title="serena.util.text_utils.ReplacementOccurrence"><em>ReplacementOccurrence</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.util.text_utils.MultiFileContentReplacer.render_occurrence_diff">
+<span class="sig-name descname"><span class="pre">render_occurrence_diff</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">occ</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_lines_per_side</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_line_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#MultiFileContentReplacer.render_occurrence_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.MultiFileContentReplacer.render_occurrence_diff" title="Link to this definition">#</a></dt>
+<dd><p>Renders a minimal line diff for the occurrence: the full lines spanned by the match,
+before and after the replacement.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>occ</strong> (<a class="reference internal" href="#serena.util.text_utils.ReplacementOccurrence" title="serena.util.text_utils.ReplacementOccurrence"><em>ReplacementOccurrence</em></a>) – the occurrence (must have been derived from exactly this content)</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – the file content the occurrence was found in</p></li>
+<li><p><strong>max_lines_per_side</strong> (<em>int</em>) – cap on the number of displayed lines per diff side</p></li>
+<li><p><strong>max_line_chars</strong> (<em>int</em>) – cap on the number of displayed characters per line</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the rendered diff</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextCoords">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TextCoords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#TextCoords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.TextCoords" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>int</em>)</p></li>
+<li><p><strong>col</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextCoords.line">
+<span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.TextCoords.line" title="Link to this definition">#</a></dt>
+<dd><p>0-based line number</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.util.text_utils.TextCoords.col">
+<span class="sig-name descname"><span class="pre">col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.util.text_utils.TextCoords.col" title="Link to this definition">#</a></dt>
+<dd><p>0-based column number</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.util.text_utils.find_text_coordinates">
+<span class="sig-name descname"><span class="pre">find_text_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">require_unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/util/text_utils.html#find_text_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.util.text_utils.find_text_coordinates" title="Link to this definition">#</a></dt>
+<dd><p>Finds the line and column number of the first match of a regex pattern in the given content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – the text content to search through</p></li>
+<li><p><strong>regex</strong> (<em>str</em>) – the regular expression pattern to search for; it must match part of a single line,
+and contain exactly one group that captures the position of interest (e.g., the exact variable name to find the coordinates of)</p></li>
+<li><p><strong>require_unique</strong> (<em>bool</em>) – if True, raises an error if not exactly one match is found;
+if False, returns None if no match is found, and returns the coordinates of the first match if multiple matches are found</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the coordinates of the match or None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.util.text_utils.TextCoords" title="serena.util.text_utils.TextCoords"><em>TextCoords</em></a> | <em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06-contributing/code-reference/util"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="shell.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">serena.util.shell</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="thread.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">serena.util.thread</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1143 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.project &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/project';</script>
+    <script src="../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/project.html" />
+    <link rel="icon" href="../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.project</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathspec</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogTime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util.string</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextBuilder</span><span class="p">,</span> <span class="n">ToStringMixin</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.config.serena_config</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">LanguageBackend</span><span class="p">,</span>
+    <span class="n">ProjectConfig</span><span class="p">,</span>
+    <span class="n">ProjectConfigAutoGenerationMode</span><span class="p">,</span>
+    <span class="n">SerenaConfig</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.ls_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerFactory</span><span class="p">,</span> <span class="n">LanguageServerManager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.memories.memory_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryManager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.file_proxy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileCollection</span><span class="p">,</span> <span class="n">FileProxy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.file_system</span><span class="w"> </span><span class="kn">import</span> <span class="n">GitignoreParser</span><span class="p">,</span> <span class="n">match_path</span><span class="p">,</span> <span class="n">scan_directory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.text_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">MatchedConsecutiveLines</span><span class="p">,</span> <span class="n">search_files</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">solidlsp</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolidLanguageServer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">solidlsp.ls_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerId</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">serena.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerenaAgent</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Project">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Project</span><span class="p">(</span><span class="n">ToStringMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a project Serena operates on: the project root and its configuration, file access</span>
+<span class="sd">    with gitignore-aware ignore handling, and the connection to the language-server backend that</span>
+<span class="sd">    powers the symbolic operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">project_root</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">project_config</span><span class="p">:</span> <span class="n">ProjectConfig</span><span class="p">,</span>
+        <span class="n">serena_config</span><span class="p">:</span> <span class="n">SerenaConfig</span><span class="p">,</span>
+        <span class="n">is_newly_created</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">assert</span> <span class="n">serena_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">=</span> <span class="n">project_root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span> <span class="o">=</span> <span class="n">project_config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span> <span class="o">=</span> <span class="n">serena_config</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span> <span class="o">=</span> <span class="n">serena_config</span><span class="o">.</span><span class="n">get_project_serena_folder</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Serena project data folder: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span><span class="p">)</span>
+
+        <span class="n">read_only_memory_patterns</span> <span class="o">=</span> <span class="n">serena_config</span><span class="o">.</span><span class="n">read_only_memory_patterns</span> <span class="o">+</span> <span class="n">project_config</span><span class="o">.</span><span class="n">read_only_memory_patterns</span>
+        <span class="n">ignored_memory_patterns</span> <span class="o">=</span> <span class="n">serena_config</span><span class="o">.</span><span class="n">ignored_memory_patterns</span> <span class="o">+</span> <span class="n">project_config</span><span class="o">.</span><span class="n">ignored_memory_patterns</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_manager</span> <span class="o">=</span> <span class="n">MemoryManager</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span><span class="p">,</span>
+            <span class="n">read_only_memory_patterns</span><span class="o">=</span><span class="n">read_only_memory_patterns</span><span class="p">,</span>
+            <span class="n">ignored_memory_patterns</span><span class="o">=</span><span class="n">ignored_memory_patterns</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># resolve line ending (project -&gt; global)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">line_ending</span> <span class="o">=</span> <span class="n">project_config</span><span class="o">.</span><span class="n">line_ending</span> <span class="ow">or</span> <span class="n">serena_config</span><span class="o">.</span><span class="n">line_ending</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="p">:</span> <span class="n">LanguageServerManager</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span><span class="p">:</span> <span class="ne">Exception</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_newly_created</span> <span class="o">=</span> <span class="n">is_newly_created</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;SerenaAgent&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># create .gitignore file in the project&#39;s Serena data folder if not yet present</span>
+        <span class="n">serena_data_gitignore_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span><span class="p">,</span> <span class="s2">&quot;.gitignore&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">serena_data_gitignore_path</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">serena_data_gitignore_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating .gitignore file in </span><span class="si">{</span><span class="n">serena_data_gitignore_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">serena_data_gitignore_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">SolidLanguageServer</span><span class="o">.</span><span class="n">CACHE_FOLDER_NAME</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">ProjectConfig</span><span class="o">.</span><span class="n">SERENA_LOCAL_PROJECT_FILE</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># prepare ignore spec asynchronously, ensuring immediate project activation.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ignored_patterns</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__ignore_spec</span><span class="p">:</span> <span class="n">pathspec</span><span class="o">.</span><span class="n">PathSpec</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;gather-ignorespec[</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_gather_ignorespec</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_gather_ignorespec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">LogTime</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gathering ignore spec for project </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">log</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># gather ignored paths from the global configuration, project configuration, and gitignore files</span>
+                <span class="n">global_ignored_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">ignored_paths</span>
+                <span class="n">ignored_patterns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">global_ignored_paths</span><span class="p">)</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ignored_paths</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">global_ignored_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">global_ignored_paths</span><span class="p">)</span><span class="si">}</span><span class="s2"> ignored paths from the global configuration.&quot;</span><span class="p">)</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Global ignored paths: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">global_ignored_paths</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ignored_paths</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ignored_paths</span><span class="p">)</span><span class="si">}</span><span class="s2"> ignored paths from the project configuration.&quot;</span><span class="p">)</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project ignored paths: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ignored_paths</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Combined ignored patterns: </span><span class="si">{</span><span class="n">ignored_patterns</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ignore_all_files_in_gitignore</span><span class="p">:</span>
+                    <span class="n">gitignore_parser</span> <span class="o">=</span> <span class="n">GitignoreParser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">gitignore_parser</span><span class="o">.</span><span class="n">get_ignore_specs</span><span class="p">():</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Adding </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">patterns</span><span class="p">)</span><span class="si">}</span><span class="s2"> patterns from </span><span class="si">{</span><span class="n">spec</span><span class="o">.</span><span class="n">file_path</span><span class="si">}</span><span class="s2"> to the ignored paths.&quot;</span><span class="p">)</span>
+                        <span class="n">ignored_patterns</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">spec</span><span class="o">.</span><span class="n">patterns</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ignored_patterns</span> <span class="o">=</span> <span class="n">ignored_patterns</span>
+
+                <span class="c1"># Set up the pathspec matcher for the ignored paths</span>
+                <span class="c1"># for all absolute paths in ignored_paths, convert them to relative paths</span>
+                <span class="n">processed_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">ignored_patterns</span><span class="p">:</span>
+                    <span class="c1"># Normalize separators (pathspec expects forward slashes)</span>
+                    <span class="n">pattern</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+                    <span class="n">processed_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">processed_patterns</span><span class="p">)</span><span class="si">}</span><span class="s2"> ignored paths&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__ignore_spec</span> <span class="o">=</span> <span class="n">pathspec</span><span class="o">.</span><span class="n">PathSpec</span><span class="o">.</span><span class="n">from_lines</span><span class="p">(</span><span class="n">pathspec</span><span class="o">.</span><span class="n">patterns</span><span class="o">.</span><span class="n">GitWildMatchPattern</span><span class="p">,</span> <span class="n">processed_patterns</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error while gathering ignore spec for project </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">project_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_tostring_includes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_tostring_additional_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_name</span><span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_agent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="s2">&quot;SerenaAgent&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="o">=</span> <span class="n">agent</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">project_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">project_name</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">language_backend</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LanguageBackend</span><span class="p">:</span>
+        <span class="c1"># The backend configuration is fundamentally owned by the agent, so it takes</span>
+        <span class="c1"># precedence. (Note: The agent does not necessary honour the project&#39;s choice,</span>
+        <span class="c1"># as it may be invalid.)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span><span class="o">.</span><span class="n">get_language_backend</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">determine_language_backend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">project_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">serena_config</span><span class="p">:</span> <span class="s2">&quot;SerenaConfig&quot;</span><span class="p">,</span>
+        <span class="n">autogen</span><span class="p">:</span> <span class="n">ProjectConfigAutoGenerationMode</span> <span class="o">=</span> <span class="n">ProjectConfigAutoGenerationMode</span><span class="o">.</span><span class="n">SYNCHRONOUS</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Project&quot;</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">serena_config</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">project_root</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">project_root</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">project_root</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Project root not found: </span><span class="si">{</span><span class="n">project_root</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">project_config</span> <span class="o">=</span> <span class="n">ProjectConfig</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">project_root</span><span class="p">,</span> <span class="n">serena_config</span><span class="o">=</span><span class="n">serena_config</span><span class="p">,</span> <span class="n">autogen</span><span class="o">=</span><span class="n">autogen</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Project</span><span class="p">(</span><span class="n">project_root</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">project_root</span><span class="p">),</span> <span class="n">project_config</span><span class="o">=</span><span class="n">project_config</span><span class="p">,</span> <span class="n">serena_config</span><span class="o">=</span><span class="n">serena_config</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Project.save_config">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.save_config">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Saves the current project configuration to disk.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path_to_project_yml</span><span class="p">())</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">path_to_serena_data_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">path_to_project_yml</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">get_project_yml_location</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Project.is_trusted">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.is_trusted">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_trusted</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the project is trusted, based on the global configuration.</span>
+
+<span class="sd">        :return: True if the project is trusted, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">is_trusted_project_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.read_file">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.read_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads a project file.</span>
+
+<span class="sd">        :param relative_path: the path to the file relative to the project root or an external</span>
+<span class="sd">            path token like &quot;&lt;ext:FileUtil.class|472e0a13&gt;&quot;</span>
+<span class="sd">        :return: the content of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FileProxy</span><span class="o">.</span><span class="n">from_project_relative_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span><span class="o">.</span><span class="n">get_contents</span><span class="p">()</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ignore_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathspec</span><span class="o">.</span><span class="n">PathSpec</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the pathspec matcher for the paths that were configured to be ignored,</span>
+<span class="sd">            either explicitly or implicitly through .gitignore files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Waiting for ignore spec to become available ...&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignore_spec</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Ignore spec is now available for project; proceeding&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignore_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The ignore spec could not be computed; please check the log for errors and report here: https://github.com/oraios/serena/issues&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignore_spec</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_ignored_patterns</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of ignored path patterns</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span><span class="o">.</span><span class="n">is_set</span><span class="p">():</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Waiting for ignored patterns to become available ...&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec_available</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignored_patterns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Ignored patterns are now available for project; proceeding&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignored_patterns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;The ignored patterns could not be computed; please check the log for errors and report here: https://github.com/oraios/serena/issues&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ignored_patterns</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_ignored_relative_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">ignore_non_source_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Determine whether a path should be ignored based on file type and ignore patterns.</span>
+<span class="sd">        Returns False for non-existent paths since they cannot be matched by ignore patterns.</span>
+
+<span class="sd">        :param relative_path: Relative path to check</span>
+<span class="sd">        :param ignore_non_source_files: whether files that are not source files (according to the file masks</span>
+<span class="sd">            determined by the project&#39;s programming language) shall be ignored</span>
+
+<span class="sd">        :return: whether the path should be ignored</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># special case, never ignore the project root itself</span>
+        <span class="c1"># If the user ignores hidden files, &quot;.&quot; might match against the corresponding PathSpec pattern.</span>
+        <span class="c1"># The empty string also points to the project root and should never be ignored.</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="n">abs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path </span><span class="si">{</span><span class="n">abs_path</span><span class="si">}</span><span class="s2"> does not exist, skipping ignore check&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># check code file restriction (depending on backend)</span>
+        <span class="k">if</span> <span class="n">ignore_non_source_files</span><span class="p">:</span>
+            <span class="c1"># apply restriction only for LSP backend, which enumerates known languages</span>
+            <span class="c1"># and therefore can determine whether a file is a source file or not</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_backend</span><span class="o">.</span><span class="n">is_lsp</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+                    <span class="n">is_file_in_supported_language</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">for</span> <span class="n">language</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="p">:</span>
+                        <span class="n">fn_matcher</span> <span class="o">=</span> <span class="n">language</span><span class="o">.</span><span class="n">get_source_fn_matcher</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">fn_matcher</span><span class="o">.</span><span class="n">is_relevant_filename</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+                            <span class="n">is_file_in_supported_language</span> <span class="o">=</span> <span class="kc">True</span>
+                            <span class="k">break</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_file_in_supported_language</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="c1"># Create normalized path for consistent handling</span>
+        <span class="n">rel_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+
+        <span class="c1"># always ignore paths inside .git</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rel_path</span><span class="o">.</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="s2">&quot;.git&quot;</span> <span class="ow">in</span> <span class="n">rel_path</span><span class="o">.</span><span class="n">parts</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="n">match_path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_path</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ignore_spec</span><span class="p">,</span> <span class="n">root_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Project.is_ignored_path">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.is_ignored_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_ignored_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">,</span> <span class="n">ignore_non_source_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the given path is ignored</span>
+
+<span class="sd">        :param path: the path to check, can be absolute or relative</span>
+<span class="sd">        :param ignore_non_source_files: whether to ignore files that are not source files</span>
+<span class="sd">            (according to the file masks determined by the project&#39;s programming language)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">relative_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="c1"># If the path is not relative to the project root, we consider it as an absolute path outside the project</span>
+                <span class="c1"># (which we ignore)</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> is not relative to the project root </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="si">}</span><span class="s2"> and was therefore ignored&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">relative_path</span> <span class="o">=</span> <span class="n">path</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ignored_relative_path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">relative_path</span><span class="p">),</span> <span class="n">ignore_non_source_files</span><span class="o">=</span><span class="n">ignore_non_source_files</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.get_is_ignored_path_fn">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.get_is_ignored_path_fn">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_is_ignored_path_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">skip_ignored_paths</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a function for checking whether a path should be ignored during a traversal of the given base path.</span>
+
+<span class="sd">        :param base_path: the relative base path representing the starting point of the traversal.</span>
+<span class="sd">            If the path is itself ignored, then the returned function will not consider ignored paths.</span>
+<span class="sd">        :param skip_ignored_paths: whether to skip ignored (sub-)paths</span>
+<span class="sd">        :return: a function that takes a path and returns True if the path should be ignored, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">skip_ignored_paths</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ignored_path</span><span class="p">(</span><span class="n">base_path</span><span class="p">):</span>
+            <span class="k">return</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ignored_path</span></div>
+
+
+<div class="viewcode-block" id="Project.is_path_in_project">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.is_path_in_project">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_path_in_project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the given (absolute or relative) path is inside the project directory.</span>
+
+<span class="sd">        Note: This is intended to catch cases where &quot;..&quot; segments would lead outside of the project directory,</span>
+<span class="sd">        but we intentionally allow symlinks, as the assumption is that they point to relevant project files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="c1"># collapse any &quot;..&quot; or &quot;.&quot; segments (purely lexically)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">commonpath</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">path</span><span class="p">])</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># occurs, in particular, if paths are on different drives on Windows</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Project.relative_path_exists">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.relative_path_exists">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">relative_path_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">require_file</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks if the given relative path exists in the project directory.</span>
+
+<span class="sd">        :param relative_path: the path to check, relative to the project root</span>
+<span class="sd">        :param require_file: whether to return True only if the path exists and is a file</span>
+<span class="sd">        :return: True if the path exists, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">abs_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span> <span class="o">/</span> <span class="n">relative_path</span>
+        <span class="n">exists</span> <span class="o">=</span> <span class="n">abs_path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">require_file</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">exists</span> <span class="ow">and</span> <span class="n">abs_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">exists</span></div>
+
+
+<div class="viewcode-block" id="Project.validate_relative_path">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.validate_relative_path">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate_relative_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">require_not_ignored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates that the given relative path is within the project directory</span>
+<span class="sd">        (and, optionally, not ignored according to the project&#39;s ignore settings),</span>
+<span class="sd">        raising a ValueError if the validation fails.</span>
+
+<span class="sd">        :param relative_path: the path to validate, relative to the project root</span>
+<span class="sd">        :param require_not_ignored: if True, the path must not be ignored according to the project&#39;s ignore settings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">FileProxy</span><span class="o">.</span><span class="n">is_external_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_path_in_project</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">relative_path</span><span class="si">=}</span><span class="s2"> points outside the project root (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">require_not_ignored</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ignored_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Path </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2"> is ignored&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.gather_source_files">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.gather_source_files">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gather_source_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves relative paths of all source files, optionally limited to the given path</span>
+
+<span class="sd">        :param relative_path: if provided, restrict search to this path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rel_file_paths</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">start_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">start_path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative path </span><span class="si">{</span><span class="n">start_path</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">start_path</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">relative_path</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">start_path</span><span class="p">,</span> <span class="n">followlinks</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="c1"># prevent recursion into ignored directories</span>
+                <span class="n">dirs</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ignored_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">d</span><span class="p">))]</span>
+
+                <span class="c1"># collect non-ignored files</span>
+                <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                    <span class="n">abs_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_ignored_path</span><span class="p">(</span><span class="n">abs_file_path</span><span class="p">,</span> <span class="n">ignore_non_source_files</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                            <span class="k">try</span><span class="p">:</span>
+                                <span class="n">rel_file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">abs_file_path</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+                            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                                <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                                    <span class="s2">&quot;Ignoring path &#39;</span><span class="si">%s</span><span class="s2">&#39; because it appears to be outside of the project root (</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span>
+                                    <span class="n">abs_file_path</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span>
+                                <span class="p">)</span>
+                                <span class="k">continue</span>
+                            <span class="n">rel_file_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rel_file_path</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                            <span class="sa">f</span><span class="s2">&quot;File </span><span class="si">{</span><span class="n">abs_file_path</span><span class="si">}</span><span class="s2"> not found (possibly due it being a symlink), skipping it in request_parsed_files&quot;</span><span class="p">,</span>
+                        <span class="p">)</span>
+            <span class="k">return</span> <span class="n">rel_file_paths</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_file_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">code_files_only</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">skip_ignored_files</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileCollection</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the file collection for the given relative path.</span>
+
+<span class="sd">        :param relative_path: the relative path to create the file collection for, relative to the project root</span>
+<span class="sd">        :param code_files_only: whether to include only (non-ignored) code files</span>
+<span class="sd">        :param skip_ignored_files: whether to skip ignored files; has no effect if `code_files_only` is True</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">FileProxy</span><span class="o">.</span><span class="n">is_external_path</span><span class="p">(</span><span class="n">relative_path</span><span class="p">):</span>
+            <span class="c1"># single external path: create appropriate proxy</span>
+            <span class="n">file_collection</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="p">([</span><span class="n">FileProxy</span><span class="o">.</span><span class="n">from_project_relative_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># path is a local project path</span>
+            <span class="n">abs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relative path </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">code_files_only</span><span class="p">:</span>
+                <span class="n">relative_file_paths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gather_source_files</span><span class="p">(</span><span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">)</span>
+                <span class="n">file_collection</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="o">.</span><span class="n">from_local_project_paths</span><span class="p">(</span><span class="n">relative_file_paths</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">abs_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">abs_path</span><span class="p">):</span>
+                    <span class="n">rel_paths_to_search</span> <span class="o">=</span> <span class="p">[</span><span class="n">relative_path</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">is_ignored_path_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_is_ignored_path_fn</span><span class="p">(</span><span class="n">base_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">skip_ignored_paths</span><span class="o">=</span><span class="n">skip_ignored_files</span><span class="p">)</span>
+                    <span class="n">_dirs</span><span class="p">,</span> <span class="n">rel_paths_to_search</span> <span class="o">=</span> <span class="n">scan_directory</span><span class="p">(</span>
+                        <span class="n">path</span><span class="o">=</span><span class="n">abs_path</span><span class="p">,</span>
+                        <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">is_ignored_dir</span><span class="o">=</span><span class="n">is_ignored_path_fn</span><span class="p">,</span>
+                        <span class="n">is_ignored_file</span><span class="o">=</span><span class="n">is_ignored_path_fn</span><span class="p">,</span>
+                        <span class="n">relative_to</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="n">file_collection</span> <span class="o">=</span> <span class="n">FileCollection</span><span class="o">.</span><span class="n">from_local_project_paths</span><span class="p">(</span><span class="n">rel_paths_to_search</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">file_collection</span>
+
+<div class="viewcode-block" id="Project.search_project_files_for_pattern">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.search_project_files_for_pattern">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">search_project_files_for_pattern</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">context_lines_before</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">context_lines_after</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">paths_include_glob</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">paths_exclude_glob</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">multiline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">code_files_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">skip_ignored_files</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">MatchedConsecutiveLines</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Search for a pattern across all (non-ignored) source files</span>
+
+<span class="sd">        :param pattern: regular expression pattern to search for, either as a compiled Pattern or string</span>
+<span class="sd">        :param relative_path: the relative path to search in, relative to the project root; if empty, search in the entire project</span>
+<span class="sd">        :param context_lines_before: number of lines of context to include before each match</span>
+<span class="sd">        :param context_lines_after: number of lines of context to include after each match</span>
+<span class="sd">        :param paths_include_glob: glob pattern to filter which files to include in the search</span>
+<span class="sd">        :param paths_exclude_glob: glob pattern to filter which files to exclude from the search. Takes precedence over paths_include_glob.</span>
+<span class="sd">        :param multiline: whether to compile the regex with the DOTALL flag (`.` matches newlines).</span>
+<span class="sd">        :param code_files_only: whether to include only (non-ignored) code files</span>
+<span class="sd">        :param skip_ignored_files: whether to skip ignored files; has no effect if `code_files_only` is True</span>
+<span class="sd">        :return: list of matches</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_collection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_file_collection</span><span class="p">(</span>
+            <span class="n">relative_path</span><span class="p">,</span> <span class="n">code_files_only</span><span class="o">=</span><span class="n">code_files_only</span><span class="p">,</span> <span class="n">skip_ignored_files</span><span class="o">=</span><span class="n">skip_ignored_files</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">search_files</span><span class="p">(</span>
+            <span class="n">file_collection</span><span class="p">,</span>
+            <span class="n">pattern</span><span class="p">,</span>
+            <span class="n">context_lines_before</span><span class="o">=</span><span class="n">context_lines_before</span><span class="p">,</span>
+            <span class="n">context_lines_after</span><span class="o">=</span><span class="n">context_lines_after</span><span class="p">,</span>
+            <span class="n">paths_include_glob</span><span class="o">=</span><span class="n">paths_include_glob</span><span class="p">,</span>
+            <span class="n">paths_exclude_glob</span><span class="o">=</span><span class="n">paths_exclude_glob</span><span class="p">,</span>
+            <span class="n">multiline</span><span class="o">=</span><span class="n">multiline</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">search_files</span><span class="p">(</span>
+            <span class="n">file_collection</span><span class="p">,</span>
+            <span class="n">pattern</span><span class="p">,</span>
+            <span class="n">context_lines_before</span><span class="o">=</span><span class="n">context_lines_before</span><span class="p">,</span>
+            <span class="n">context_lines_after</span><span class="o">=</span><span class="n">context_lines_after</span><span class="p">,</span>
+            <span class="n">paths_include_glob</span><span class="o">=</span><span class="n">paths_include_glob</span><span class="p">,</span>
+            <span class="n">paths_exclude_glob</span><span class="o">=</span><span class="n">paths_exclude_glob</span><span class="p">,</span>
+            <span class="n">multiline</span><span class="o">=</span><span class="n">multiline</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.retrieve_content_around_line">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.retrieve_content_around_line">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_content_around_line</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">relative_file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">context_lines_before</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">context_lines_after</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MatchedConsecutiveLines</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the content of the given file around the given line.</span>
+
+<span class="sd">        :param relative_file_path: The relative path of the file to retrieve the content from</span>
+<span class="sd">        :param line: The line number to retrieve the content around</span>
+<span class="sd">        :param context_lines_before: The number of lines to retrieve before the given line</span>
+<span class="sd">        :param context_lines_after: The number of lines to retrieve after the given line</span>
+
+<span class="sd">        :return MatchedConsecutiveLines: A container with the desired lines.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_contents</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">relative_file_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">MatchedConsecutiveLines</span><span class="o">.</span><span class="n">from_file_contents</span><span class="p">(</span>
+            <span class="n">file_contents</span><span class="p">,</span>
+            <span class="n">line</span><span class="o">=</span><span class="n">line</span><span class="p">,</span>
+            <span class="n">context_lines_before</span><span class="o">=</span><span class="n">context_lines_before</span><span class="p">,</span>
+            <span class="n">context_lines_after</span><span class="o">=</span><span class="n">context_lines_after</span><span class="p">,</span>
+            <span class="n">source_file_path</span><span class="o">=</span><span class="n">relative_file_path</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.create_language_server_manager">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.create_language_server_manager">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_language_server_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LanguageServerManager</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates the language server manager for the project, starting one language server per configured programming language.</span>
+
+<span class="sd">        :return: the language server manager, which is also stored in the project instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># ensure that the project configuration, particularly the list of languages is complete,</span>
+            <span class="c1"># despite asynchronous first-time project configuration generation (which may not have completed yet)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">await_asynchronous_completion</span><span class="p">()</span>
+
+            <span class="c1"># determine timeout to use for LS calls</span>
+            <span class="n">tool_timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">tool_timeout</span>
+            <span class="k">if</span> <span class="n">tool_timeout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">tool_timeout</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ls_timeout</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tool_timeout</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool timeout must be at least 10 seconds, but is </span><span class="si">{</span><span class="n">tool_timeout</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">)</span>
+                <span class="n">ls_timeout</span> <span class="o">=</span> <span class="n">tool_timeout</span> <span class="o">-</span> <span class="mi">5</span>  <span class="c1"># the LS timeout is for a single call, it should be smaller than the tool timeout</span>
+
+            <span class="c1"># if there is an existing instance, stop its language servers first</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Stopping existing language server manager ...&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="o">.</span><span class="n">stop_all</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="o">=</span> <span class="kc">None</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating language server manager for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">ls_specific_settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">ls_specific_settings</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ls_specific_settings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_trusted</span><span class="p">():</span>
+                    <span class="n">ls_specific_settings</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">ls_specific_settings</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Project path </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="si">}</span><span class="s2"> is not trusted, ignoring LS-specific settings from project configuration. &quot;</span>
+                        <span class="s2">&quot;To trust the project, modify the trusted path patterns in the global configuration.&quot;</span>
+                    <span class="p">)</span>
+            <span class="n">factory</span> <span class="o">=</span> <span class="n">LanguageServerFactory</span><span class="p">(</span>
+                <span class="n">project_root</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">,</span>
+                <span class="n">project_config</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="p">,</span>
+                <span class="n">project_data_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_serena_data_folder</span><span class="p">,</span>
+                <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+                <span class="n">ignored_patterns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ignored_patterns</span><span class="p">,</span>
+                <span class="n">ls_timeout</span><span class="o">=</span><span class="n">ls_timeout</span><span class="p">,</span>
+                <span class="n">ls_specific_settings</span><span class="o">=</span><span class="n">ls_specific_settings</span><span class="p">,</span>
+                <span class="n">trace_lsp_communication</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">trace_lsp_communication</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="o">=</span> <span class="n">LanguageServerManager</span><span class="o">.</span><span class="n">from_languages</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="p">,</span> <span class="n">factory</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="k">raise</span></div>
+
+
+<div class="viewcode-block" id="Project.get_language_server_manager_status">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.get_language_server_manager_status">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_language_server_manager_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: a status string describing the state of the language server manager; if its initialisation resulted in an</span>
+<span class="sd">            error, the error message is included in the status string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;error (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;not initialized&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;ready&quot;</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_language_server_manager_or_raise</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LanguageServerManager</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">TextBuilder</span><span class="p">(</span><span class="s2">&quot;The language server manager is not initialized, indicating a problem during project initialisation.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">with_text</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_language_server_manager_init_error</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">with_text</span><span class="p">(</span><span class="s2">&quot;For details, please check the logs. &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_agent</span><span class="o">.</span><span class="n">get_log_inspection_instructions</span><span class="p">())</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">with_text</span><span class="p">(</span>
+                <span class="s2">&quot;IMPORTANT: Stop, do not attempt workarounds. Inform the user and wait for further instructions before you continue!&quot;</span>
+            <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">build</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span>
+
+<div class="viewcode-block" id="Project.add_language_server">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.add_language_server">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_language_server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls_id</span><span class="p">:</span> <span class="n">LanguageServerId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Adds a new language server to the project configuration, starting the corresponding</span>
+<span class="sd">        server instance if the LS manager is active.</span>
+<span class="sd">        The project configuration is saved to disk after adding the language.</span>
+
+<span class="sd">        :param ls_id: the language server to add</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ls_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Language server </span><span class="si">{</span><span class="n">ls_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> is already present in the project configuration.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="c1"># start the language server (if the LS manager is active)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Language server manager is not active; skipping language server startup for the new language.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Adding and starting the language server &#39;</span><span class="si">%s</span><span class="s2">&#39; ...&quot;</span><span class="p">,</span> <span class="n">ls_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="o">.</span><span class="n">add_language_server</span><span class="p">(</span><span class="n">ls_id</span><span class="p">)</span>
+
+        <span class="c1"># update the project configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ls_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Project.remove_language_server">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.remove_language_server">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remove_language_server</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ls_id</span><span class="p">:</span> <span class="n">LanguageServerId</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Removes a language server from the project configuration, stopping the corresponding</span>
+<span class="sd">        server instance if the LS manager is active.</span>
+<span class="sd">        The project configuration is saved to disk after removing the language.</span>
+
+<span class="sd">        :param ls_id: the language server to remove</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ls_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Language </span><span class="si">{</span><span class="n">ls_id</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not present in the project configuration.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="c1"># update the project configuration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_config</span><span class="o">.</span><span class="n">language_servers</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">ls_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">save_config</span><span class="p">()</span>
+
+        <span class="c1"># stop the language server (if the LS manager is active)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Language server manager is not active; skipping language server shutdown for the removed language.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Removing and stopping the language server for language </span><span class="si">%s</span><span class="s2"> ...&quot;</span><span class="p">,</span> <span class="n">ls_id</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="o">.</span><span class="n">remove_language_server</span><span class="p">(</span><span class="n">ls_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Project.ls_sync_file_system_changes">
+<a class="viewcode-back" href="../../06-contributing/code-reference/project.html#serena.project.Project.ls_sync_file_system_changes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ls_sync_file_system_changes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Synchronizes file system changes with the project&#39;s associated language server(s), if applicable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="o">.</span><span class="n">sync_file_system_changes</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">shutdown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span><span class="o">.</span><span class="n">stop_all</span><span class="p">(</span><span class="n">save_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">language_server_manager</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

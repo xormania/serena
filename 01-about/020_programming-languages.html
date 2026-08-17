@@ -1,0 +1,964 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Language Support &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '01-about/020_programming-languages';</script>
+    <script src="../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/01-about/020_programming-languages.html" />
+    <link rel="icon" href="../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Features" href="025_features.html" />
+    <link rel="prev" title="About Serena" href="000_intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="000_intro.html">About Serena</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/01-about/020_programming-languages.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Language Support</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#language-servers">Language Servers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ada-spark">Ada / SPARK</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#al">AL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#angular">Angular</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ansible">Ansible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bash">Bash</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bsl-1c-enterprise-onescript">BSL (1C:Enterprise / OneScript)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c">C#</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-c">C/C++</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clojure">Clojure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#crystal">Crystal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cue">CUE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dart">Dart</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elixir">Elixir</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#elm">Elm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#erlang">Erlang</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f">F#</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fortran">Fortran</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gdscript-godot-engine">GDScript (Godot Engine)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gleam">Gleam</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#go">Go</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#groovy">Groovy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haskell">Haskell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#haxe">Haxe</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hlsl-glsl-wgsl">HLSL / GLSL / WGSL</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#html">HTML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#java">Java</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#javascript">JavaScript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#julia">Julia</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kotlin">Kotlin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latex">LaTeX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lean-4">Lean 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lua">Lua</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#luau">Luau</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#markdown">Markdown</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matlab">MATLAB</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#msl-mirc-scripting-language">mSL (mIRC Scripting Language)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nextflow">Nextflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nix">Nix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ocaml">OCaml</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pascal">Pascal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#perl">Perl</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#php">PHP</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#powershell">PowerShell</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qml">QML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#r">R</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rego">Rego</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ruby">Ruby</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rust">Rust</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scala">Scala</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scss-sass-css">SCSS / Sass / CSS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solidity">Solidity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#svelte">Svelte</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#swift">Swift</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#systemverilog">SystemVerilog</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#terraform">Terraform</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#toml">TOML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#typescript">TypeScript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deno">Deno</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vue">Vue</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wolfram-language">Wolfram Language</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#yaml">YAML</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#zig">Zig</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-serena-jetbrains-plugin">The Serena JetBrains Plugin</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="language-support">
+<h1>Language Support<a class="headerlink" href="#language-support" title="Link to this heading">#</a></h1>
+<p>Serena provides a set of versatile code querying and editing functionalities
+based on symbolic understanding of the code across a wide range of programming languages.
+Equipped with these capabilities, Serena discovers and edits code just like a seasoned developer
+making use of an IDE’s capabilities would.
+Serena can efficiently find the right context and do the right thing even in very large and
+complex projects!</p>
+<p>There are two alternative technologies powering these capabilities:</p>
+<ul class="simple">
+<li><p><strong>Language servers</strong> implementing the language server Protocol (LSP) — the free/open-source alternative.</p></li>
+<li><p><strong>The Serena JetBrains Plugin</strong>, which leverages the powerful code analysis and editing
+capabilities of your JetBrains IDE.</p></li>
+</ul>
+<p>See the <a class="reference internal" href="025_features.html"><span class="doc std std-doc">Features</span></a> section for a detailed comparison of the capabilities provided by the JetBrains Plugin vs. language servers.</p>
+<section id="language-servers">
+<span id="id1"></span><h2>Language Servers<a class="headerlink" href="#language-servers" title="Link to this heading">#</a></h2>
+<p>Serena incorporates a powerful abstraction layer for the integration of language servers
+that implement the language server protocol (LSP).
+It even supports multiple language servers in parallel to support polyglot projects.</p>
+<p>The language servers themselves are typically open-source projects (like Serena)
+or at least freely available for use.</p>
+<p>We currently provide direct, out-of-the-box support for the programming languages listed below.
+Some languages require additional installations or setup steps, as noted.</p>
+<section id="ada-spark">
+<h3>Ada / SPARK<a class="headerlink" href="#ada-spark" title="Link to this heading">#</a></h3>
+<p>(uses AdaCore’s <a class="reference external" href="https://github.com/AdaCore/ada_language_server">Ada Language Server (ALS)</a>,
+automatically downloaded; supports <code class="docutils literal notranslate"><span class="pre">.ads</span></code>, <code class="docutils literal notranslate"><span class="pre">.adb</span></code>, and <code class="docutils literal notranslate"><span class="pre">.ada</span></code> files;
+works best with a <code class="docutils literal notranslate"><span class="pre">.gpr</span></code> GNAT project file at the repository root;
+SPARK is handled by the same server transparently — set language <code class="docutils literal notranslate"><span class="pre">ada</span></code> for both.
+To use a pre-installed ALS (e.g. from Alire, GNAT Studio, or the VS Code Ada extension),
+set <code class="docutils literal notranslate"><span class="pre">ls_specific_settings.ada.ls_path</span></code>.)</p>
+</section>
+<section id="al">
+<h3>AL<a class="headerlink" href="#al" title="Link to this heading">#</a></h3>
+<p>(uses the AL Language Server from Microsoft’s <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=ms-dynamics-smb.al">AL extension for VS Code</a> (<code class="docutils literal notranslate"><span class="pre">ms-dynamics-smb.al</span></code>), automatically downloaded from the VS Code Marketplace)</p>
+</section>
+<section id="angular">
+<h3>Angular<a class="headerlink" href="#angular" title="Link to this heading">#</a></h3>
+<p>(experimental; uses the official <a class="reference external" href="https://github.com/angular/angular/tree/main/vscode-ng-language-service">&#64;angular/language-server</a> (ngserver), automatically installed via npm; requires Node.js + npm, plus <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span></code> having been run in the project root so that <code class="docutils literal notranslate"><span class="pre">&#64;angular/core</span></code>
+is resolvable — without it, template-aware features silently return empty;
+subsumes <code class="docutils literal notranslate"><span class="pre">typescript</span></code> and <code class="docutils literal notranslate"><span class="pre">html</span></code> for <code class="docutils literal notranslate"><span class="pre">.ts</span></code>/<code class="docutils literal notranslate"><span class="pre">.html</span></code> files, so do not also list those)</p>
+</section>
+<section id="ansible">
+<h3>Ansible<a class="headerlink" href="#ansible" title="Link to this heading">#</a></h3>
+<p>(experimental; requires Node.js and npm; automatically installs <a class="reference external" href="https://github.com/ansible/vscode-ansible"><code class="docutils literal notranslate"><span class="pre">&#64;ansible/ansible-language-server</span></code></a>;
+must be explicitly specified in the <code class="docutils literal notranslate"><span class="pre">languages</span></code> entry in the <code class="docutils literal notranslate"><span class="pre">project.yml</span></code>; requires <code class="docutils literal notranslate"><span class="pre">ansible</span></code> in PATH for full functionality)
+the upstream <code class="docutils literal notranslate"><span class="pre">&#64;ansible/ansible-language-server&#64;1.2.3</span></code> supports hover, completion, definition,
+semantic tokens, and validation; document symbols, workspace symbols, references, and rename
+are not supported by this version)</p>
+</section>
+<section id="bash">
+<h3>Bash<a class="headerlink" href="#bash" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/bash-lsp/bash-language-server">bash-language-server</a>, automatically installed via npm; requires Node.js and npm on PATH; a pinned ShellCheck binary is downloaded automatically)</p>
+</section>
+<section id="bsl-1c-enterprise-onescript">
+<h3>BSL (1C:Enterprise / OneScript)<a class="headerlink" href="#bsl-1c-enterprise-onescript" title="Link to this heading">#</a></h3>
+<p>(requires Java 21+ on PATH; uses <a class="reference external" href="https://github.com/1c-syntax/bsl-language-server">bsl-language-server</a> by 1c-syntax; the JAR is auto-downloaded and SHA-256-verified for the bundled default version; supports <code class="docutils literal notranslate"><span class="pre">.bsl</span></code> and <code class="docutils literal notranslate"><span class="pre">.os</span></code> files; configure optional <code class="docutils literal notranslate"><span class="pre">ls_path</span></code> or <code class="docutils literal notranslate"><span class="pre">bsl_ls_version</span></code> under <code class="docutils literal notranslate"><span class="pre">ls_specific_settings.bsl</span></code>)</p>
+</section>
+<section id="c">
+<h3>C#<a class="headerlink" href="#c" title="Link to this heading">#</a></h3>
+<p>(by default, uses the <a class="reference external" href="https://www.nuget.org/packages/roslyn-language-server">Roslyn language server</a> (language <code class="docutils literal notranslate"><span class="pre">csharp</span></code>), requiring <a class="reference external" href="https://dotnet.microsoft.com/en-us/download/dotnet">.NET v10+</a> and, on Windows, <code class="docutils literal notranslate"><span class="pre">pwsh</span></code> (<a class="reference external" href="https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows?view=powershell-7.5">PowerShell 7+</a>);
+set language to <code class="docutils literal notranslate"><span class="pre">csharp_omnisharp</span></code> to use OmiSharp instead)</p>
+</section>
+<section id="c-c">
+<h3>C/C++<a class="headerlink" href="#c-c" title="Link to this heading">#</a></h3>
+<p>(by default, uses the <a class="reference external" href="https://clangd.llvm.org/">clangd</a> language server (language <code class="docutils literal notranslate"><span class="pre">cpp</span></code>) but we also support <a class="reference external" href="https://github.com/MaskRay/ccls">ccls</a> (language <code class="docutils literal notranslate"><span class="pre">cpp_ccls</span></code>);
+for best results, provide a <code class="docutils literal notranslate"><span class="pre">compile_commands.json</span></code> at the repository root;
+see the <a class="reference internal" href="../03-special-guides/cpp_setup.html"><span class="doc std std-doc">C/C++ Setup Guide</span></a> for details;
+for Unreal Engine 5 projects, see the <a class="reference internal" href="../03-special-guides/unreal_engine_setup_guide_for_serena.html"><span class="doc std std-doc">Unreal Engine Setup Guide</span></a>.)</p>
+</section>
+<section id="clojure">
+<h3>Clojure<a class="headerlink" href="#clojure" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/clojure-lsp/clojure-lsp">clojure-lsp</a>, automatically downloaded; requires the <a class="reference external" href="https://clojure.org/guides/getting_started">Clojure CLI</a> to be installed)</p>
+</section>
+<section id="crystal">
+<h3>Crystal<a class="headerlink" href="#crystal" title="Link to this heading">#</a></h3>
+<p>(requires <a class="reference external" href="https://github.com/elbywan/crystalline">Crystalline</a> language server to be installed and available on PATH;
+note: Crystalline has limited go-to-definition support and does not support find-references)</p>
+</section>
+<section id="cue">
+<h3>CUE<a class="headerlink" href="#cue" title="Link to this heading">#</a></h3>
+<p>(uses <code class="docutils literal notranslate"><span class="pre">cue</span> <span class="pre">lsp</span></code> from the official <a class="reference external" href="https://github.com/cue-lang/cue">cue</a> binary, automatically downloaded)</p>
+</section>
+<section id="dart">
+<h3>Dart<a class="headerlink" href="#dart" title="Link to this heading">#</a></h3>
+<p>(uses the <a class="reference external" href="https://dart.dev">Dart SDK</a>’s built-in language server (<code class="docutils literal notranslate"><span class="pre">dart</span> <span class="pre">language-server</span></code>); the SDK is downloaded automatically)</p>
+</section>
+<section id="elixir">
+<h3>Elixir<a class="headerlink" href="#elixir" title="Link to this heading">#</a></h3>
+<p>(requires Elixir installation; <a class="reference external" href="https://github.com/elixir-lang/expert">Expert</a> language server is downloaded automatically)</p>
+</section>
+<section id="elm">
+<h3>Elm<a class="headerlink" href="#elm" title="Link to this heading">#</a></h3>
+<p>(requires Elm compiler; uses <a class="reference external" href="https://github.com/elm-tooling/elm-language-server">elm-language-server</a>, installed automatically via npm)</p>
+</section>
+<section id="erlang">
+<h3>Erlang<a class="headerlink" href="#erlang" title="Link to this heading">#</a></h3>
+<p>(requires installation of beam and <a class="reference external" href="https://github.com/erlang-ls/erlang_ls">erlang_ls</a>; experimental, might be slow or hang;
+note that functions are addressed as <code class="docutils literal notranslate"><span class="pre">name#arity</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">create_user#4</span></code>, because <code class="docutils literal notranslate"><span class="pre">/</span></code> is reserved as the name path separator)</p>
+</section>
+<section id="f">
+<h3>F#<a class="headerlink" href="#f" title="Link to this heading">#</a></h3>
+<p>(requires <a class="reference external" href="https://dotnet.microsoft.com/en-us/download/dotnet">.NET v8.0+</a>; uses <a class="reference external" href="https://github.com/ionide/FsAutoComplete">FsAutoComplete</a>/Ionide, which is auto-installed; for Homebrew .NET on macOS, set DOTNET_ROOT in your environment)</p>
+</section>
+<section id="fortran">
+<h3>Fortran<a class="headerlink" href="#fortran" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/fortran-lang/fortls">fortls</a>, run automatically via <code class="docutils literal notranslate"><span class="pre">uvx</span></code>; requires <code class="docutils literal notranslate"><span class="pre">uv</span></code>/<code class="docutils literal notranslate"><span class="pre">uvx</span></code> in PATH)</p>
+</section>
+<section id="gdscript-godot-engine">
+<h3>GDScript (Godot Engine)<a class="headerlink" href="#gdscript-godot-engine" title="Link to this heading">#</a></h3>
+<p>(requires the <a class="reference external" href="https://godotengine.org">Godot</a> editor to be running with its built-in LSP enabled — default on port 6008;
+Serena connects over TCP and does not launch Godot itself;
+see the <a class="reference internal" href="../03-special-guides/godot_gdscript_setup_guide_for_serena.html"><span class="doc std std-doc">GDScript Setup Guide</span></a> for details)</p>
+</section>
+<section id="gleam">
+<h3>Gleam<a class="headerlink" href="#gleam" title="Link to this heading">#</a></h3>
+<p>(requires the <a class="reference external" href="https://gleam.run">Gleam compiler</a> on PATH; the language server is bundled with the compiler and started via <code class="docutils literal notranslate"><span class="pre">gleam</span> <span class="pre">lsp</span></code>)</p>
+</section>
+<section id="go">
+<h3>Go<a class="headerlink" href="#go" title="Link to this heading">#</a></h3>
+<p>(requires installation of <a class="reference external" href="https://pkg.go.dev/golang.org/x/tools/gopls"><code class="docutils literal notranslate"><span class="pre">gopls</span></code></a>)</p>
+</section>
+<section id="groovy">
+<h3>Groovy<a class="headerlink" href="#groovy" title="Link to this heading">#</a></h3>
+<p>(requires local <a class="reference external" href="https://github.com/GroovyLanguageServer/groovy-language-server">groovy-language-server.jar</a> setup via <code class="docutils literal notranslate"><span class="pre">GROOVY_LS_JAR_PATH</span></code> or configuration)</p>
+</section>
+<section id="haskell">
+<h3>Haskell<a class="headerlink" href="#haskell" title="Link to this heading">#</a></h3>
+<p>(automatically locates <a class="reference external" href="https://github.com/haskell/haskell-language-server">HLS</a> via ghcup, stack, or system PATH; supports Stack and Cabal projects)</p>
+</section>
+<section id="haxe">
+<h3>Haxe<a class="headerlink" href="#haxe" title="Link to this heading">#</a></h3>
+<p>(requires Haxe compiler 3.4.0+ and Node.js; uses the <a class="reference external" href="https://github.com/vshaxe/haxe-language-server">vshaxe language server</a>;
+automatically downloaded from Open VSX, or discovered from the vshaxe VSCode extension)</p>
+</section>
+<section id="hlsl-glsl-wgsl">
+<h3>HLSL / GLSL / WGSL<a class="headerlink" href="#hlsl-glsl-wgsl" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/antaalt/shader-sense">shader-language-server</a> (language <code class="docutils literal notranslate"><span class="pre">hlsl</span></code>); automatically downloaded;
+on macOS, requires Rust toolchain for building from source;
+note: reference search is not supported by this language server)</p>
+</section>
+<section id="html">
+<h3>HTML<a class="headerlink" href="#html" title="Link to this heading">#</a></h3>
+<p>(experimental; requires Node.js + npm; automatically installs <a class="reference external" href="https://github.com/hrsh7th/vscode-langservers-extracted">vscode-html-language-server</a> via the <code class="docutils literal notranslate"><span class="pre">vscode-langservers-extracted</span></code> npm package)</p>
+</section>
+<section id="java">
+<h3>Java<a class="headerlink" href="#java" title="Link to this heading">#</a></h3>
+<p>(uses Eclipse JDT LS via the <a class="reference external" href="https://github.com/redhat-developer/vscode-java">vscode-java</a> extension bundle, automatically downloaded with a bundled JRE)</p>
+</section>
+<section id="javascript">
+<h3>JavaScript<a class="headerlink" href="#javascript" title="Link to this heading">#</a></h3>
+<p>(supported via the <a class="reference external" href="https://github.com/typescript-language-server/typescript-language-server">TypeScript language server</a>, i.e. use language <code class="docutils literal notranslate"><span class="pre">typescript</span></code> for both JavaScript and TypeScript)</p>
+</section>
+<section id="julia">
+<h3>Julia<a class="headerlink" href="#julia" title="Link to this heading">#</a></h3>
+<p>(requires a Julia installation; uses <a class="reference external" href="https://github.com/julia-vscode/LanguageServer.jl">LanguageServer.jl</a>, automatically installed via Pkg if missing)</p>
+</section>
+<section id="kotlin">
+<h3>Kotlin<a class="headerlink" href="#kotlin" title="Link to this heading">#</a></h3>
+<p>(uses the pre-alpha <a class="reference external" href="https://github.com/Kotlin/kotlin-lsp">official kotlin LS</a>, some issues may appear)</p>
+</section>
+<section id="latex">
+<h3>LaTeX<a class="headerlink" href="#latex" title="Link to this heading">#</a></h3>
+<p>(experimental; must be explicitly enabled via language <code class="docutils literal notranslate"><span class="pre">latex</span></code>; uses <a class="reference external" href="https://github.com/latex-lsp/texlab">texlab</a>,
+auto-downloaded as a SHA-256-verified prebuilt binary; supports <code class="docutils literal notranslate"><span class="pre">.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">.bib</span></code>, <code class="docutils literal notranslate"><span class="pre">.sty</span></code>, and <code class="docutils literal notranslate"><span class="pre">.cls</span></code> files; texlab is
+GPL-3.0 and runs as a separate downloaded process)</p>
+</section>
+<section id="lean-4">
+<h3>Lean 4<a class="headerlink" href="#lean-4" title="Link to this heading">#</a></h3>
+<p>(requires <code class="docutils literal notranslate"><span class="pre">lean</span></code> and <code class="docutils literal notranslate"><span class="pre">lake</span></code> installed via <a class="reference external" href="https://github.com/leanprover/elan">elan</a>; uses the built-in Lean 4 LSP;
+the project must be a Lake project with <code class="docutils literal notranslate"><span class="pre">lake</span> <span class="pre">build</span></code> run before use)</p>
+</section>
+<section id="lua">
+<h3>Lua<a class="headerlink" href="#lua" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/LuaLS/lua-language-server">lua-language-server</a>, taken from PATH if present, otherwise downloaded automatically)</p>
+</section>
+<section id="luau">
+<h3>Luau<a class="headerlink" href="#luau" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/JohnnyMorganz/luau-lsp">luau-lsp</a>, taken from PATH or automatically downloaded)</p>
+</section>
+<section id="markdown">
+<h3>Markdown<a class="headerlink" href="#markdown" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/artempyanykh/marksman">Marksman</a>, automatically downloaded; must explicitly enable language <code class="docutils literal notranslate"><span class="pre">markdown</span></code>, primarily useful for documentation-heavy projects)</p>
+</section>
+<section id="matlab">
+<h3>MATLAB<a class="headerlink" href="#matlab" title="Link to this heading">#</a></h3>
+<p>(requires Node.js and a licensed local MATLAB installation, R2021b or later; Serena automatically downloads version 1.3.9 of the VS Code MATLAB extension, which bundles the <a class="reference external" href="https://github.com/mathworks/MATLAB-language-server">MATLAB language server</a>)</p>
+</section>
+<section id="msl-mirc-scripting-language">
+<h3>mSL (mIRC Scripting Language)<a class="headerlink" href="#msl-mirc-scripting-language" title="Link to this heading">#</a></h3>
+<p>(auto-installed; no external dependencies required — uses a custom pygls-based LSP server shipped with Serena;
+supports document symbols, workspace symbols, references, and go-to-definition for aliases, events, menus, dialogs, and CTCP handlers in <code class="docutils literal notranslate"><span class="pre">.mrc</span></code> files)</p>
+</section>
+<section id="nextflow">
+<h3>Nextflow<a class="headerlink" href="#nextflow" title="Link to this heading">#</a></h3>
+<p>(uses the official <a class="reference external" href="https://github.com/nextflow-io/language-server">Nextflow language server</a>, which is automatically
+downloaded; requires a Java 17+ runtime, discovered via <code class="docutils literal notranslate"><span class="pre">ls_specific_settings.nextflow.java_home</span></code>, <code class="docutils literal notranslate"><span class="pre">JAVA_HOME</span></code> or <code class="docutils literal notranslate"><span class="pre">java</span></code> on PATH;
+covers <code class="docutils literal notranslate"><span class="pre">.nf</span></code> scripts — Nextflow <code class="docutils literal notranslate"><span class="pre">.config</span></code> files are not treated as source files, since the language server reports no symbols for them;
+processes, workflows and functions are reported under their declared name, e.g. <code class="docutils literal notranslate"><span class="pre">GREET</span></code> for <code class="docutils literal notranslate"><span class="pre">process</span> <span class="pre">GREET</span></code>)</p>
+</section>
+<section id="nix">
+<h3>Nix<a class="headerlink" href="#nix" title="Link to this heading">#</a></h3>
+<p>(requires <a class="reference external" href="https://github.com/nix-community/nixd">nixd</a> installation)</p>
+</section>
+<section id="ocaml">
+<h3>OCaml<a class="headerlink" href="#ocaml" title="Link to this heading">#</a></h3>
+<p>(requires opam and <a class="reference external" href="https://github.com/ocaml/ocaml-lsp">ocaml-lsp-server</a> to be installed manually; see the <a class="reference internal" href="../03-special-guides/ocaml_setup_guide_for_serena.html"><span class="std std-doc">OCaml Setup Guide</span></a>)</p>
+</section>
+<section id="pascal">
+<h3>Pascal<a class="headerlink" href="#pascal" title="Link to this heading">#</a></h3>
+<p>(uses the <a class="reference external" href="https://github.com/zen010101/pascal-language-server">Pascal/Lazarus language server (pasls)</a>, which is automatically downloaded; set <code class="docutils literal notranslate"><span class="pre">PP</span></code> and <code class="docutils literal notranslate"><span class="pre">FPCDIR</span></code> environment variables for source navigation)</p>
+</section>
+<section id="perl">
+<h3>Perl<a class="headerlink" href="#perl" title="Link to this heading">#</a></h3>
+<p>(requires installation of <a class="reference external" href="https://metacpan.org/pod/Perl::LanguageServer">Perl::LanguageServer</a>)</p>
+</section>
+<section id="php">
+<h3>PHP<a class="headerlink" href="#php" title="Link to this heading">#</a></h3>
+<p>(by default, uses the <a class="reference external" href="https://intelephense.com">Intelephense</a> language server (language <code class="docutils literal notranslate"><span class="pre">php</span></code>), set <code class="docutils literal notranslate"><span class="pre">INTELEPHENSE_LICENSE_KEY</span></code> environment variable for premium features;
+we also support <a class="reference external" href="https://github.com/phpactor/phpactor">Phpactor</a> (language <code class="docutils literal notranslate"><span class="pre">php_phpactor</span></code>), which requires PHP 8.1+;
+and the experimental <a class="reference external" href="https://github.com/PHPantom-dev/phpantom_lsp">PHPantom</a> backend (language <code class="docutils literal notranslate"><span class="pre">php_phpantom</span></code>)</p>
+</section>
+<section id="powershell">
+<h3>PowerShell<a class="headerlink" href="#powershell" title="Link to this heading">#</a></h3>
+<p>(requires PowerShell 7+ (<code class="docutils literal notranslate"><span class="pre">pwsh</span></code>) on PATH or in a standard install location; Serena automatically downloads <a class="reference external" href="https://github.com/PowerShell/PowerShellEditorServices">PowerShell Editor Services</a> 4.4.0 and installs PSScriptAnalyzer 1.25.0 via <code class="docutils literal notranslate"><span class="pre">Save-Module</span></code> from your configured PowerShell repository)</p>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h3>
+<p>(by default, uses <a class="reference external" href="https://github.com/microsoft/pyright">Pyright</a> (language <code class="docutils literal notranslate"><span class="pre">python</span></code>);
+alternatives: <a class="reference external" href="https://github.com/DetachHead/basedpyright">BasedPyright</a> (language <code class="docutils literal notranslate"><span class="pre">python_basedpyright</span></code>),
+<a class="reference external" href="https://github.com/astral-sh/ty">ty</a> (language <code class="docutils literal notranslate"><span class="pre">python_ty</span></code>),
+<a class="reference external" href="https://github.com/facebook/pyrefly">pyrefly</a> (language <code class="docutils literal notranslate"><span class="pre">python_pyrefly</span></code>),
+<a class="reference external" href="https://github.com/pappasam/jedi-language-server">Jedi</a> (language <code class="docutils literal notranslate"><span class="pre">python_jedi</span></code>);
+Pyright, BasedPyright, ty, and pyrefly require <code class="docutils literal notranslate"><span class="pre">uv</span></code>/<code class="docutils literal notranslate"><span class="pre">uvx</span></code> in PATH)</p>
+</section>
+<section id="qml">
+<h3>QML<a class="headerlink" href="#qml" title="Link to this heading">#</a></h3>
+<p>(requires Qt 6, provides <code class="docutils literal notranslate"><span class="pre">qmlls</span></code> or <code class="docutils literal notranslate"><span class="pre">qmlls6</span></code> on PATH; see the <a class="reference external" href="https://doc.qt.io/qt-6/qtqml-tooling-qmlls.html">Qt qmlls documentation</a>)</p>
+</section>
+<section id="r">
+<h3>R<a class="headerlink" href="#r" title="Link to this heading">#</a></h3>
+<p>(requires installation of the <a class="reference external" href="https://github.com/REditorSupport/languageserver"><code class="docutils literal notranslate"><span class="pre">languageserver</span></code></a> R package)</p>
+</section>
+<section id="rego">
+<h3>Rego<a class="headerlink" href="#rego" title="Link to this heading">#</a></h3>
+<p>(requires the <a class="reference external" href="https://github.com/open-policy-agent/regal">Regal</a> language server on PATH)</p>
+</section>
+<section id="ruby">
+<h3>Ruby<a class="headerlink" href="#ruby" title="Link to this heading">#</a></h3>
+<p>(by default, uses <a class="reference external" href="https://github.com/Shopify/ruby-lsp">ruby-lsp</a> (language <code class="docutils literal notranslate"><span class="pre">ruby</span></code>); use language <code class="docutils literal notranslate"><span class="pre">ruby_solargraph</span></code> to use Solargraph instead.)</p>
+</section>
+<section id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Link to this heading">#</a></h3>
+<p>(requires <a class="reference external" href="https://rustup.rs/">rustup</a> - uses <a class="reference external" href="https://github.com/rust-lang/rust-analyzer">rust-analyzer</a> from your toolchain)</p>
+</section>
+<section id="scala">
+<h3>Scala<a class="headerlink" href="#scala" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://scalameta.org/metals/">Metals</a> LSP, which imports the build on first use — see the <a class="reference internal" href="../03-special-guides/scala_setup_guide_for_serena.html"><span class="doc std std-doc">setup guide</span></a>)</p>
+</section>
+<section id="scss-sass-css">
+<h3>SCSS / Sass / CSS<a class="headerlink" href="#scss-sass-css" title="Link to this heading">#</a></h3>
+<p>(experimental; requires Node.js + npm; uses <a class="reference external" href="https://github.com/wkillerud/some-sass">some-sass-language-server</a> to handle
+<code class="docutils literal notranslate"><span class="pre">.scss</span></code>, <code class="docutils literal notranslate"><span class="pre">.sass</span></code>, and <code class="docutils literal notranslate"><span class="pre">.css</span></code>)</p>
+</section>
+<section id="solidity">
+<h3>Solidity<a class="headerlink" href="#solidity" title="Link to this heading">#</a></h3>
+<p>(experimental; requires Node.js and npm; automatically installs <a class="reference external" href="https://github.com/NomicFoundation/hardhat-vscode"><code class="docutils literal notranslate"><span class="pre">&#64;nomicfoundation/solidity-language-server</span></code></a>;
+works best with a <code class="docutils literal notranslate"><span class="pre">foundry.toml</span></code> or <code class="docutils literal notranslate"><span class="pre">hardhat.config.js</span></code> in the project root)</p>
+</section>
+<section id="svelte">
+<h3>Svelte<a class="headerlink" href="#svelte" title="Link to this heading">#</a></h3>
+<p>(requires Node.js v18+ and npm; supports <code class="docutils literal notranslate"><span class="pre">.svelte</span></code> Single File Components plus TypeScript/JavaScript files via <a class="reference external" href="https://github.com/sveltejs/language-tools"><code class="docutils literal notranslate"><span class="pre">svelte-language-server</span></code></a>; a companion <code class="docutils literal notranslate"><span class="pre">typescript-language-server</span></code> + <code class="docutils literal notranslate"><span class="pre">typescript-svelte-plugin</span></code> is spawned automatically for cross-file rename, go-to-definition, and references across <code class="docutils literal notranslate"><span class="pre">.ts</span></code>/<code class="docutils literal notranslate"><span class="pre">.js</span></code> and <code class="docutils literal notranslate"><span class="pre">.svelte</span></code> files; use language <code class="docutils literal notranslate"><span class="pre">svelte</span></code> for Svelte projects instead of also enabling <code class="docutils literal notranslate"><span class="pre">typescript</span></code>)</p>
+</section>
+<section id="swift">
+<h3>Swift<a class="headerlink" href="#swift" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/apple/sourcekit-lsp">sourcekit-lsp</a>, which must be installed and available on your PATH)</p>
+</section>
+<section id="systemverilog">
+<h3>SystemVerilog<a class="headerlink" href="#systemverilog" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/chipsalliance/verible"><code class="docutils literal notranslate"><span class="pre">verible-verilog-ls</span></code></a>, taken from PATH if present, otherwise version <code class="docutils literal notranslate"><span class="pre">v0.0-4051-g9fdb4057</span></code> is downloaded automatically)</p>
+</section>
+<section id="terraform">
+<h3>Terraform<a class="headerlink" href="#terraform" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/hashicorp/terraform-ls"><code class="docutils literal notranslate"><span class="pre">terraform-ls</span></code></a> 0.36.5, which Serena downloads automatically; requires Terraform on PATH)</p>
+</section>
+<section id="toml">
+<h3>TOML<a class="headerlink" href="#toml" title="Link to this heading">#</a></h3>
+<p>(experimental; uses <a class="reference external" href="https://github.com/tamasfe/taplo">Taplo</a> 0.10.0, taken from PATH if present, otherwise downloaded automatically)</p>
+</section>
+<section id="typescript">
+<h3>TypeScript<a class="headerlink" href="#typescript" title="Link to this heading">#</a></h3>
+<p>(uses <a class="reference external" href="https://github.com/typescript-language-server/typescript-language-server">typescript-language-server</a> together with the <code class="docutils literal notranslate"><span class="pre">typescript</span></code> package, both installed automatically via npm; requires Node.js and npm)</p>
+</section>
+<section id="deno">
+<h3>Deno<a class="headerlink" href="#deno" title="Link to this heading">#</a></h3>
+<p>(experimental; requires the <a class="reference external" href="https://docs.deno.com/runtime/getting_started/installation/"><code class="docutils literal notranslate"><span class="pre">deno</span></code> CLI</a> on PATH — it bundles the language server used here;
+serves Deno TypeScript/JavaScript and understands <code class="docutils literal notranslate"><span class="pre">npm:</span></code> / <code class="docutils literal notranslate"><span class="pre">jsr:</span></code> / <code class="docutils literal notranslate"><span class="pre">https:</span></code> imports and the <code class="docutils literal notranslate"><span class="pre">Deno.*</span></code>
+globals, which the plain TypeScript language server does not; overlaps <code class="docutils literal notranslate"><span class="pre">typescript</span></code> on file extensions,
+so it is not auto-detected and must be set as the language explicitly — do not also enable <code class="docutils literal notranslate"><span class="pre">typescript</span></code>
+for the same files)</p>
+</section>
+<section id="vue">
+<h3>Vue<a class="headerlink" href="#vue" title="Link to this heading">#</a></h3>
+<p>(3.x with TypeScript; uses <a class="reference external" href="https://github.com/vuejs/language-tools"><code class="docutils literal notranslate"><span class="pre">&#64;vue/language-server</span></code></a> (Volar), installed automatically via npm; requires Node.js v18+ and npm; supports .vue Single File Components with monorepo detection)</p>
+</section>
+<section id="wolfram-language">
+<h3>Wolfram Language<a class="headerlink" href="#wolfram-language" title="Link to this heading">#</a></h3>
+<p>(requires Wolfram Mathematica 13.0+ or Wolfram Engine 12.1+; uses the official <a class="reference external" href="https://github.com/WolframResearch/LSPServer">WolframResearch LSPServer</a> paclet; supports .wl and .wls files; references are within-file only)</p>
+</section>
+<section id="yaml">
+<h3>YAML<a class="headerlink" href="#yaml" title="Link to this heading">#</a></h3>
+<p>(experimental; uses <a class="reference external" href="https://github.com/redhat-developer/yaml-language-server">yaml-language-server</a> (Red Hat), installed automatically via npm; requires Node.js and npm)</p>
+</section>
+<section id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Link to this heading">#</a></h3>
+<p>(experimental; uses <code class="docutils literal notranslate"><span class="pre">vscode-json-languageserver</span></code> (Microsoft), installed automatically via npm; must be explicitly added to the languages list; requires Node.js and npm)</p>
+</section>
+<section id="zig">
+<h3>Zig<a class="headerlink" href="#zig" title="Link to this heading">#</a></h3>
+<p>(requires installation of <a class="reference external" href="https://github.com/zigtools/zls">ZLS</a> - Zig Language Server)</p>
+<p>Support for further languages can easily be added by providing a shallow adapter for a new language server implementation,
+see Serena’s <a class="reference external" href="https://github.com/oraios/serena/blob/main/.serena/memories/adding_new_language_support_guide.md">memory on that</a>.</p>
+</section>
+</section>
+<section id="the-serena-jetbrains-plugin">
+<h2>The Serena JetBrains Plugin<a class="headerlink" href="#the-serena-jetbrains-plugin" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://plugins.jetbrains.com/plugin/28946-serena/">Serena JetBrains Plugin</a> leverages the powerful code analysis capabilities of JetBrains IDEs.
+The plugin naturally supports all programming languages and frameworks that are supported by JetBrains IDEs.</p>
+<p>When using the plugin, Serena connects to an instance of your JetBrains IDE via the plugin. For users who already
+work in a JetBrains IDE, this means Serena seamlessly integrates with the IDE instance you typically have open anyway,
+requiring no additional setup or configuration beyond the plugin itself.</p>
+<ul class="simple">
+<li><p>See the <a class="reference internal" href="../02-usage/025_jetbrains_plugin.html"><span class="doc std std-doc">JetBrains Plugin documentation</span></a> for a high-level overview of its benefits and usage details.</p></li>
+<li><p>See the <a class="reference internal" href="025_features.html"><span class="doc std std-doc">Features</span></a> section for a detailed comparison of the capabilities provided by the JetBrains Plugin vs. language servers.</p></li>
+</ul>
+<p>
+<a href="https://plugins.jetbrains.com/plugin/28946-serena/">
+<img style="background-color:transparent;" src="../_static/images/jetbrains-marketplace-button.png">
+</a>
+</p></section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./01-about"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="000_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">About Serena</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="025_features.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Features</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

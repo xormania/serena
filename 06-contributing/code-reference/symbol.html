@@ -1,0 +1,1136 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>serena.symbol &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-contributing/code-reference/symbol';</script>
+    <script src="../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/06-contributing/code-reference/symbol.html" />
+    <link rel="icon" href="../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="config" href="config/index.html" />
+    <link rel="prev" title="serena.prompt_factory" href="prompt_factory.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../000_contributing-intro.html">Contributing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="000_code-reference-intro.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/06-contributing/code-reference/symbol.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>serena.symbol</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbolLocation"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbolLocation</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbolLocation.relative_path"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbolLocation.relative_path</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbolLocation.line"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbolLocation.line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbolLocation.column"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbolLocation.column</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.PositionInFile"><code class="docutils literal notranslate"><span class="pre">PositionInFile</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.PositionInFile.line"><code class="docutils literal notranslate"><span class="pre">PositionInFile.line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.PositionInFile.col"><code class="docutils literal notranslate"><span class="pre">PositionInFile.col</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.PositionInFile.to_lsp_position"><code class="docutils literal notranslate"><span class="pre">PositionInFile.to_lsp_position()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.Symbol"><code class="docutils literal notranslate"><span class="pre">Symbol</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.Symbol.get_body_start_position_or_raise"><code class="docutils literal notranslate"><span class="pre">Symbol.get_body_start_position_or_raise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.Symbol.get_body_end_position_or_raise"><code class="docutils literal notranslate"><span class="pre">Symbol.get_body_end_position_or_raise()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.Symbol.is_neighbouring_definition_separated_by_empty_line"><code class="docutils literal notranslate"><span class="pre">Symbol.is_neighbouring_definition_separated_by_empty_line()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.NamePathMatcher"><code class="docutils literal notranslate"><span class="pre">NamePathMatcher</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.symbol_kind_name"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.symbol_kind_name</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.is_low_level"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.is_low_level()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.is_neighbouring_definition_separated_by_empty_line"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.is_neighbouring_definition_separated_by_empty_line()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.location"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.location</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.line"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.get_name_path"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.get_name_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.iter_ancestors"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.iter_ancestors()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.find"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.find()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.OutputDict"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.OutputDict</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.OutputDict.kind"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.OutputDict.kind</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.OutputDict.content_around_reference"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.OutputDict.content_around_reference</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.OutputDict.reference_line"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.OutputDict.reference_line</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbol.to_dict"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbol.to_dict()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.ReferenceInLanguageServerSymbol"><code class="docutils literal notranslate"><span class="pre">ReferenceInLanguageServerSymbol</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.ReferenceInLanguageServerSymbol.symbol"><code class="docutils literal notranslate"><span class="pre">ReferenceInLanguageServerSymbol.symbol</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.ReferenceInLanguageServerSymbol.line"><code class="docutils literal notranslate"><span class="pre">ReferenceInLanguageServerSymbol.line</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.ReferenceInLanguageServerSymbol.character"><code class="docutils literal notranslate"><span class="pre">ReferenceInLanguageServerSymbol.character</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.JetBrainsSymbol"><code class="docutils literal notranslate"><span class="pre">JetBrainsSymbol</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.JetBrainsSymbol.is_neighbouring_definition_separated_by_empty_line"><code class="docutils literal notranslate"><span class="pre">JetBrainsSymbol.is_neighbouring_definition_separated_by_empty_line()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.SymbolDictGrouper"><code class="docutils literal notranslate"><span class="pre">SymbolDictGrouper</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.SymbolDictGrouper.group"><code class="docutils literal notranslate"><span class="pre">SymbolDictGrouper.group()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.SymbolDictGrouper.disabled_context"><code class="docutils literal notranslate"><span class="pre">SymbolDictGrouper.disabled_context()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.LanguageServerSymbolDictGrouper"><code class="docutils literal notranslate"><span class="pre">LanguageServerSymbolDictGrouper</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.symbol.JetBrainsSymbolDictGrouper"><code class="docutils literal notranslate"><span class="pre">JetBrainsSymbolDictGrouper</span></code></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-serena.symbol">
+<span id="serena-symbol"></span><h1>serena.symbol<a class="headerlink" href="#module-serena.symbol" title="Link to this heading">#</a></h1>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../../_modules/serena/symbol.html#serena/symbol.py"><span>serena/symbol.py</span></a></p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbolLocation">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LanguageServerSymbolLocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbolLocation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbolLocation" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the (start) location of a symbol identifier, which, within Serena, uniquely identifies the symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>line</strong> (<em>int</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>column</strong> (<em>int</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbolLocation.relative_path">
+<span class="sig-name descname"><span class="pre">relative_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbolLocation.relative_path" title="Link to this definition">#</a></dt>
+<dd><p>the relative path of the file containing the symbol; if None, the symbol is defined outside of the project’s scope</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbolLocation.line">
+<span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbolLocation.line" title="Link to this definition">#</a></dt>
+<dd><p>the line number in which the symbol identifier is defined (if the symbol is a function, class, etc.);
+may be None for some types of symbols (e.g. SymbolKind.File)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbolLocation.column">
+<span class="sig-name descname"><span class="pre">column</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbolLocation.column" title="Link to this definition">#</a></dt>
+<dd><p>the column number in which the symbol identifier is defined (if the symbol is a function, class, etc.);
+may be None for some types of symbols (e.g. SymbolKind.File)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.PositionInFile">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PositionInFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#PositionInFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.PositionInFile" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a character position within a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>line</strong> (<em>int</em>)</p></li>
+<li><p><strong>col</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.PositionInFile.line">
+<span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.symbol.PositionInFile.line" title="Link to this definition">#</a></dt>
+<dd><p>the 0-based line number in the file</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.PositionInFile.col">
+<span class="sig-name descname"><span class="pre">col</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.symbol.PositionInFile.col" title="Link to this definition">#</a></dt>
+<dd><p>the 0-based column</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.PositionInFile.to_lsp_position">
+<span class="sig-name descname"><span class="pre">to_lsp_position</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#PositionInFile.to_lsp_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.PositionInFile.to_lsp_position" title="Link to this definition">#</a></dt>
+<dd><p>Convert to LSP Position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Position</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.Symbol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Symbol</span></span><a class="reference internal" href="../../_modules/serena/symbol.html#Symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.Symbol" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.Symbol.get_body_start_position_or_raise">
+<span class="sig-name descname"><span class="pre">get_body_start_position_or_raise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#Symbol.get_body_start_position_or_raise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.Symbol.get_body_start_position_or_raise" title="Link to this definition">#</a></dt>
+<dd><p>Get the start position of the symbol body, raising an error if it is not defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.symbol.PositionInFile" title="serena.symbol.PositionInFile"><em>PositionInFile</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.Symbol.get_body_end_position_or_raise">
+<span class="sig-name descname"><span class="pre">get_body_end_position_or_raise</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#Symbol.get_body_end_position_or_raise"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.Symbol.get_body_end_position_or_raise" title="Link to this definition">#</a></dt>
+<dd><p>Get the end position of the symbol body, raising an error if it is not defined.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.symbol.PositionInFile" title="serena.symbol.PositionInFile"><em>PositionInFile</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.Symbol.is_neighbouring_definition_separated_by_empty_line">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_neighbouring_definition_separated_by_empty_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#Symbol.is_neighbouring_definition_separated_by_empty_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.Symbol.is_neighbouring_definition_separated_by_empty_line" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>whether a symbol definition of this symbol’s kind is usually separated from the
+previous/next definition by at least one empty line.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.NamePathMatcher">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NamePathMatcher</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name_path_pattern</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">substring_matching</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#NamePathMatcher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.NamePathMatcher" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<p>Matches name paths of symbols against search patterns.</p>
+<p>A name path is a path in the symbol tree <em>within a source file</em>.
+For example, the method <cite>my_method</cite> defined in class <cite>MyClass</cite> would have the name path <cite>MyClass/my_method</cite>.
+If a symbol is overloaded (e.g., in Java), a 0-based index is appended (e.g. “MyClass/my_method[0]”) to
+uniquely identify it.</p>
+<p>A matching pattern can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>a simple name (e.g. “method”), which will match any symbol with that name</p></li>
+<li><p>a relative path like “class/method”, which will match any symbol with that name path suffix</p></li>
+<li><p>an absolute name path “/class/method” (absolute name path), which requires an exact match of the full name path within the source file.</p></li>
+</ul>
+</div></blockquote>
+<p>Append an index <cite>[i]</cite> to match a specific overload only, e.g. “MyClass/my_method[1]”.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_path_pattern</strong> (<em>str</em>) – the name path expression to match against</p></li>
+<li><p><strong>substring_matching</strong> (<em>bool</em>) – whether to use substring matching for the last segment</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LanguageServerSymbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol_root_from_ls</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.symbol.Symbol" title="serena.symbol.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">Symbol</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbol_root_from_ls</strong> (<em>UnifiedSymbolInformation</em>)</p>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.symbol_kind_name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbol_kind_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.symbol_kind_name" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>string representation of the symbol kind (name attribute of the <cite>SymbolKind</cite> enum item)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.is_low_level">
+<span class="sig-name descname"><span class="pre">is_low_level</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.is_low_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.is_low_level" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>whether the symbol is a low-level symbol (variable, constant, etc.), which typically represents data
+rather than structure and therefore is not relevant in a high-level overview of the code.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.is_neighbouring_definition_separated_by_empty_line">
+<span class="sig-name descname"><span class="pre">is_neighbouring_definition_separated_by_empty_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.is_neighbouring_definition_separated_by_empty_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.is_neighbouring_definition_separated_by_empty_line" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>whether a symbol definition of this symbol’s kind is usually separated from the
+previous/next definition by at least one empty line.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.location">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#serena.symbol.LanguageServerSymbolLocation" title="serena.symbol.LanguageServerSymbolLocation"><span class="pre">LanguageServerSymbolLocation</span></a></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.location" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the start location of the actual symbol identifier</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.line">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.line" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the line in which the symbol identifier is defined.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.get_name_path">
+<span class="sig-name descname"><span class="pre">get_name_path</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.get_name_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.get_name_path" title="Link to this definition">#</a></dt>
+<dd><p>Get the name path of the symbol, e.g. “class/method/inner_function” or
+“class/method[1]” (overloaded method with identifying index).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.iter_ancestors">
+<span class="sig-name descname"><span class="pre">iter_ancestors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">up_to_symbol_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.iter_ancestors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.iter_ancestors" title="Link to this definition">#</a></dt>
+<dd><p>Iterate over all ancestors of the symbol, starting with the parent and going up to the root or
+the given symbol kind.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>up_to_symbol_kind</strong> (<em>SymbolKind</em><em> | </em><em>None</em>) – if provided, iteration will stop <em>before</em> the first ancestor of the given kind.
+A typical use case is to pass <cite>SymbolKind.File</cite> or <cite>SymbolKind.Package</cite>.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Iterator</em>[<em>Self</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.find">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">name_path_pattern</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">substring_matching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_kinds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">exclude_kinds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.find" title="Link to this definition">#</a></dt>
+<dd><p>Find all symbols within the symbol’s subtree that match the given name path pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_path_pattern</strong> (<em>str</em>) – the name path pattern to match against (see class <a class="reference internal" href="#serena.symbol.NamePathMatcher" title="serena.symbol.NamePathMatcher"><code class="xref py py-class docutils literal notranslate"><span class="pre">NamePathMatcher</span></code></a> for details)</p></li>
+<li><p><strong>substring_matching</strong> (<em>bool</em>) – whether to use substring matching (as opposed to exact matching)
+of the last segment of <cite>name_path</cite> against the symbol name.</p></li>
+<li><p><strong>include_kinds</strong> (<em>Sequence</em><em>[</em><em>SymbolKind</em><em>] </em><em>| </em><em>None</em>) – an optional sequence of ints representing the LSP symbol kind.
+If provided, only symbols of the given kinds will be included in the result.</p></li>
+<li><p><strong>exclude_kinds</strong> (<em>Sequence</em><em>[</em><em>SymbolKind</em><em>] </em><em>| </em><em>None</em>) – If provided, symbols of the given kinds will be excluded from the result.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>list</em>[<em>Self</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.OutputDict">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">OutputDict</span></span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.OutputDict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.OutputDict" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.OutputDict.kind">
+<span class="sig-name descname"><span class="pre">kind</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.OutputDict.kind" title="Link to this definition">#</a></dt>
+<dd><p>string representation of the symbol kind (name attribute of the <cite>SymbolKind</cite> enum item)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.OutputDict.content_around_reference">
+<span class="sig-name descname"><span class="pre">content_around_reference</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.OutputDict.content_around_reference" title="Link to this definition">#</a></dt>
+<dd><p>set by <code class="xref py py-class docutils literal notranslate"><span class="pre">FindReferencingSymbolsTool</span></code> when including surrounding code lines</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.OutputDict.reference_line">
+<span class="sig-name descname"><span class="pre">reference_line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">NotRequired</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.OutputDict.reference_line" title="Link to this definition">#</a></dt>
+<dd><p>line number of the reference, set by <code class="xref py py-class docutils literal notranslate"><span class="pre">FindReferencingSymbolsTool</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbol.to_dict">
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">name_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">body_location</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">children_body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">children_name_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">children_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">child_inclusion_predicate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbol.to_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbol.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>Converts the symbol to a dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name_path</strong> (<em>bool</em>) – whether to include the name path of the symbol</p></li>
+<li><p><strong>name</strong> (<em>bool</em>) – whether to include the name of the symbol</p></li>
+<li><p><strong>kind</strong> (<em>bool</em>) – whether to include the kind of the symbol</p></li>
+<li><p><strong>location</strong> (<em>bool</em>) – whether to include the location of the symbol</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – the depth up to which to include child symbols (0 = do not include children)</p></li>
+<li><p><strong>body</strong> (<em>bool</em>) – whether to include the body of the top-level symbol.</p></li>
+<li><p><strong>children_body</strong> (<em>bool</em>) – whether to also include the body of the children.
+Note that the body of the children is part of the body of the parent symbol,
+so there is usually no need to set this to True unless you want process the output
+and pass the children without passing the parent body to the LM.</p></li>
+<li><p><strong>children_name_path</strong> (<em>bool</em><em> | </em><em>None</em>) – whether to include the name path of the children; if None, defaults to the value of <cite>name_path</cite></p></li>
+<li><p><strong>children_name</strong> (<em>bool</em><em> | </em><em>None</em>) – whether to include the name of the children; if None, defaults to the value of <cite>name</cite></p></li>
+<li><p><strong>relative_path</strong> (<em>bool</em>) – whether to include the relative path of the symbol.
+If <cite>location</cite> is True, this defines whether to include the path in the location entry.
+If <cite>location</cite> is False, this defines whether to include the relative path as a top-level entry.
+Relative paths of the symbol’s children are always excluded.</p></li>
+<li><p><strong>child_inclusion_predicate</strong> (<em>Callable</em><em>[</em><em>[</em><em>Self</em><em>]</em><em>, </em><em>bool</em><em>] </em><em>| </em><em>None</em>) – an optional predicate that decides whether a child symbol
+should be included.</p></li>
+<li><p><strong>body_location</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a dictionary representation of the symbol</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.symbol.LanguageServerSymbol.OutputDict" title="serena.symbol.LanguageServerSymbol.OutputDict"><em>OutputDict</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.ReferenceInLanguageServerSymbol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReferenceInLanguageServerSymbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">character</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#ReferenceInLanguageServerSymbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.ReferenceInLanguageServerSymbol" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<p>Represents the location of a reference to another symbol within a symbol/file.</p>
+<p>The contained symbol is the symbol within which the reference is located,
+not the symbol that is referenced.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol</strong> (<a class="reference internal" href="#serena.symbol.LanguageServerSymbol" title="serena.symbol.LanguageServerSymbol"><em>LanguageServerSymbol</em></a>)</p></li>
+<li><p><strong>line</strong> (<em>int</em>)</p></li>
+<li><p><strong>character</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.ReferenceInLanguageServerSymbol.symbol">
+<span class="sig-name descname"><span class="pre">symbol</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#serena.symbol.LanguageServerSymbol" title="serena.symbol.LanguageServerSymbol"><span class="pre">LanguageServerSymbol</span></a></em><a class="headerlink" href="#serena.symbol.ReferenceInLanguageServerSymbol.symbol" title="Link to this definition">#</a></dt>
+<dd><p>the symbol within which the reference is located</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.ReferenceInLanguageServerSymbol.line">
+<span class="sig-name descname"><span class="pre">line</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.symbol.ReferenceInLanguageServerSymbol.line" title="Link to this definition">#</a></dt>
+<dd><p>the line number in which the reference is located (0-based)</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.symbol.ReferenceInLanguageServerSymbol.character">
+<span class="sig-name descname"><span class="pre">character</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#serena.symbol.ReferenceInLanguageServerSymbol.character" title="Link to this definition">#</a></dt>
+<dd><p>the column number in which the reference is located (0-based)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.JetBrainsSymbol">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JetBrainsSymbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbol_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#JetBrainsSymbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.JetBrainsSymbol" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.symbol.Symbol" title="serena.symbol.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">Symbol</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol_dict</strong> (<a class="reference internal" href="jetbrains/jetbrains_types.html#serena.jetbrains.jetbrains_types.SymbolDTO" title="serena.jetbrains.jetbrains_types.SymbolDTO"><em>SymbolDTO</em></a>) – dictionary as returned by the JetBrains plugin client.</p></li>
+<li><p><strong>project</strong> (<a class="reference internal" href="project.html#serena.project.Project" title="serena.project.Project"><em>Project</em></a>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.JetBrainsSymbol.is_neighbouring_definition_separated_by_empty_line">
+<span class="sig-name descname"><span class="pre">is_neighbouring_definition_separated_by_empty_line</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#JetBrainsSymbol.is_neighbouring_definition_separated_by_empty_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.JetBrainsSymbol.is_neighbouring_definition_separated_by_empty_line" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>whether a symbol definition of this symbol’s kind is usually separated from the
+previous/next definition by at least one empty line.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.SymbolDictGrouper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SymbolDictGrouper</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">symbol_dict_type</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">children_key</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_children_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">collapse_singleton</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#SymbolDictGrouper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.SymbolDictGrouper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">TSymbolDict</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>A utility class for grouping a list of symbol dictionaries by one or more specified keys.</p>
+<p>If an instance is statically initialised (upon module import), then this establishes a guarantee
+that the specified keys are defined in the symbol dictionary type, ensuring at least basic type safety.
+The respective ValueError will immediately be apparent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol_dict_type</strong> (<em>type</em><em>[</em><em>TSymbolDict</em><em>]</em>) – the TypedDict type that represents the type of the symbol dictionaries to be grouped</p></li>
+<li><p><strong>children_key</strong> (<em>Any</em>) – the key in the symbol dictionaries that contains the list of child symbols (for recursive grouping).</p></li>
+<li><p><strong>group_keys</strong> (<em>list</em><em>[</em><em>Any</em><em>]</em>) – keys by which to group the symbol dictionaries. Must be a subset of the keys of <cite>symbol_dict_type</cite>.</p></li>
+<li><p><strong>group_children_keys</strong> (<em>list</em><em>[</em><em>Any</em><em>]</em>) – keys by which to group the child symbol dictionaries. Must be a subset of the keys of <cite>symbol_dict_type</cite>.</p></li>
+<li><p><strong>collapse_singleton</strong> (<em>bool</em>) – whether to collapse dictionaries containing a single entry after regrouping to just the entry’s value</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.SymbolDictGrouper.group">
+<span class="sig-name descname"><span class="pre">group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#SymbolDictGrouper.group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.SymbolDictGrouper.group" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>symbols</strong> (<em>list</em><em>[</em><em>TSymbolDict</em><em>]</em>) – the symbols to group</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>dictionary with the symbols grouped as defined at construction if at least one key was used for grouping,
+otherwise the list of symbols (potentially transformed)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>dict</em>[<em>str</em>, <em>list</em>[<em>dict</em>] | <em>dict</em>[<em>str</em>, <em>dict</em>]] | <em>list</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.symbol.SymbolDictGrouper.disabled_context">
+<span class="sig-name descname"><span class="pre">disabled_context</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#SymbolDictGrouper.disabled_context"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.SymbolDictGrouper.disabled_context" title="Link to this definition">#</a></dt>
+<dd><p>A context manager that temporarily disables grouping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[<em>None</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.LanguageServerSymbolDictGrouper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LanguageServerSymbolDictGrouper</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_children_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">collapse_singleton</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#LanguageServerSymbolDictGrouper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.LanguageServerSymbolDictGrouper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.symbol.SymbolDictGrouper" title="serena.symbol.SymbolDictGrouper"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymbolDictGrouper</span></code></a>[<a class="reference internal" href="#serena.symbol.LanguageServerSymbol.OutputDict" title="serena.symbol.LanguageServerSymbol.OutputDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutputDict</span></code></a>]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>symbol_dict_type</strong> – the TypedDict type that represents the type of the symbol dictionaries to be grouped</p></li>
+<li><p><strong>children_key</strong> – the key in the symbol dictionaries that contains the list of child symbols (for recursive grouping).</p></li>
+<li><p><strong>group_keys</strong> (<em>list</em><em>[</em><em>Literal</em><em>[</em><em>'name'</em><em>, </em><em>'name_path'</em><em>, </em><em>'relative_path'</em><em>, </em><em>'location'</em><em>, </em><em>'body_location'</em><em>, </em><em>'body'</em><em>, </em><em>'kind'</em><em>, </em><em>'children'</em><em>, </em><em>'content_around_reference'</em><em>, </em><em>'reference_line'</em><em>]</em><em>]</em>) – keys by which to group the symbol dictionaries. Must be a subset of the keys of <cite>symbol_dict_type</cite>.</p></li>
+<li><p><strong>group_children_keys</strong> (<em>list</em><em>[</em><em>Literal</em><em>[</em><em>'name'</em><em>, </em><em>'name_path'</em><em>, </em><em>'relative_path'</em><em>, </em><em>'location'</em><em>, </em><em>'body_location'</em><em>, </em><em>'body'</em><em>, </em><em>'kind'</em><em>, </em><em>'children'</em><em>, </em><em>'content_around_reference'</em><em>, </em><em>'reference_line'</em><em>]</em><em>]</em>) – keys by which to group the child symbol dictionaries. Must be a subset of the keys of <cite>symbol_dict_type</cite>.</p></li>
+<li><p><strong>collapse_singleton</strong> (<em>bool</em>) – whether to collapse dictionaries containing a single entry after regrouping to just the entry’s value</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.symbol.JetBrainsSymbolDictGrouper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">JetBrainsSymbolDictGrouper</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">group_children_keys</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">collapse_singleton</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">map_name_path_to_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../_modules/serena/symbol.html#JetBrainsSymbolDictGrouper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.symbol.JetBrainsSymbolDictGrouper" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.symbol.SymbolDictGrouper" title="serena.symbol.SymbolDictGrouper"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymbolDictGrouper</span></code></a>[<a class="reference internal" href="jetbrains/jetbrains_types.html#serena.jetbrains.jetbrains_types.SymbolDTO" title="serena.jetbrains.jetbrains_types.SymbolDTO"><code class="xref py py-class docutils literal notranslate"><span class="pre">SymbolDTO</span></code></a>]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_keys</strong> (<em>list</em><em>[</em><em>Literal</em><em>[</em><em>'name_path'</em><em>, </em><em>'relative_path'</em><em>, </em><em>'type'</em><em>, </em><em>'body'</em><em>, </em><em>'quick_info'</em><em>, </em><em>'documentation'</em><em>, </em><em>'text_range'</em><em>, </em><em>'children'</em><em>, </em><em>'num_usages'</em><em>, </em><em>'reference_line_no'</em><em>, </em><em>'context'</em><em>]</em><em>]</em>) – keys to group main symbols by</p></li>
+<li><p><strong>group_children_keys</strong> (<em>list</em><em>[</em><em>Literal</em><em>[</em><em>'name_path'</em><em>, </em><em>'relative_path'</em><em>, </em><em>'type'</em><em>, </em><em>'body'</em><em>, </em><em>'quick_info'</em><em>, </em><em>'documentation'</em><em>, </em><em>'text_range'</em><em>, </em><em>'children'</em><em>, </em><em>'num_usages'</em><em>, </em><em>'reference_line_no'</em><em>, </em><em>'context'</em><em>]</em><em>]</em>) – keys to group child symbols by</p></li>
+<li><p><strong>collapse_singleton</strong> (<em>bool</em>) – whether to collapse singleton symbol dictionaries</p></li>
+<li><p><strong>map_name_path_to_name</strong> (<em>bool</em>) – whether to transform the “name_path” key of child symbols to the bare “name”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06-contributing/code-reference"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="prompt_factory.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">serena.prompt_factory</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="config/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">config</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

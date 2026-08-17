@@ -1,0 +1,1244 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.tools.jetbrains_tools &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/tools/jetbrains_tools';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/tools/jetbrains_tools.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.tools.jetbrains_tools</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">serena.jetbrains.jetbrains_types</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.code_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">JetBrainsCodeEditor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.jetbrains.jetbrains_plugin_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">JetBrainsPluginClient</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.jetbrains.jetbrains_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SymbolDTO</span><span class="p">,</span> <span class="n">SymbolDTOUtil</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.symbol</span><span class="w"> </span><span class="kn">import</span> <span class="n">JetBrainsSymbolDictGrouper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.text_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">find_text_coordinates</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="JetBrainsFindSymbolTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindSymbolTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsFindSymbolTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs a global (or local) search for symbols using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># groups top-level symbols only; children are grouped separately by _group_children_by_type</span>
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">JetBrainsSymbolDictGrouper</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;relative_path&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">map_name_path_to_name</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+<div class="viewcode-block" id="JetBrainsFindSymbolTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindSymbolTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_deps</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">max_matches</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds symbols and code entities (classes, methods, etc.) based on the given name path pattern.</span>
+<span class="sd">        The returned symbol information can be used for edits or further queries.</span>
+<span class="sd">        Specify `depth &gt; 0` to retrieve children (e.g., methods of a class).</span>
+<span class="sd">        Important: through `search_deps=True` dependencies can be searched, which</span>
+<span class="sd">        should be preferred to web search or other less sophisticated approaches to analyzing dependencies.</span>
+<span class="sd">        You will always receive at least quick info for returned symbols (even if `include_info=False`).</span>
+
+<span class="sd">        A name path is a path in the symbol tree *within a source file*.</span>
+<span class="sd">        For example, the method `my_method` defined in class `MyClass` would have the name path `MyClass/my_method`.</span>
+<span class="sd">        If a symbol is overloaded (e.g., in Java), a 0-based index is appended (e.g. &quot;MyClass/my_method[0]&quot;) to</span>
+<span class="sd">        uniquely identify it.</span>
+
+<span class="sd">        To search for a symbol, you provide a name path pattern that is used to match against name paths.</span>
+<span class="sd">        It can be</span>
+
+<span class="sd">         * a simple name (e.g. &quot;method&quot;), which will match any symbol with that name</span>
+<span class="sd">         * a relative path like &quot;class/method&quot;, which will match any symbol with that name path suffix</span>
+<span class="sd">         * an absolute name path &quot;/class/method&quot; (absolute name path), which requires an exact match of the full name path within the source file.</span>
+
+<span class="sd">        Append an index `[i]` to match a specific overload only, e.g. &quot;MyClass/my_method[1]&quot;.</span>
+<span class="sd">        In any path component, using ``*`` will match any sequence of characters (excluding /), e.g. ``&quot;Class/*substring*&quot;`` matches a member substring.</span>
+<span class="sd">        A pattern must not contain only wildcards (e.g. ``&quot;*&quot;`` or ``&quot;/*&quot;``).</span>
+
+<span class="sd">        :param name_path_pattern: the name path matching pattern (see above)</span>
+<span class="sd">        :param depth: depth up to which descendants shall be retrieved (e.g. use 1 to also retrieve immediate children;</span>
+<span class="sd">            for the case where the symbol is a class, this will return its methods).</span>
+<span class="sd">            Ignored if `include_body=True`. Default 0.</span>
+<span class="sd">        :param relative_path: Optional. Restrict search to this file or directory. If not specified, searches entire codebase.</span>
+<span class="sd">            Note: for external dependencies, this must be an identifier starting with `&lt;ext` that you have received</span>
+<span class="sd">            earlier (don&#39;t try to guess!).</span>
+<span class="sd">        :param include_body: If True, include the symbol&#39;s full source code.</span>
+<span class="sd">        :param include_info: whether to include additional info (hover-like, typically including docstring and signature),</span>
+<span class="sd">            about the symbol.</span>
+<span class="sd">            Default False; info is never included for child symbols or if include_body is True.</span>
+<span class="sd">        :param search_deps: If True, also search in project dependencies (e.g., libraries).</span>
+<span class="sd">        :param max_matches: Maximum number of permitted matches. If exceeded, a shortened result is returned</span>
+<span class="sd">             which allows refining the search. -1 (default) means no limit. Set to 1 if you search for a single symbol.</span>
+<span class="sd">        :param max_answer_chars: max characters for the result (-1 for default). If exceeded, no content/a shortened result is returned.</span>
+<span class="sd">        :return: symbols matching the name.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check input</span>
+        <span class="c1"># - pattern with only wildcards is invalid, but in some cases we delegate to the overview tool</span>
+        <span class="k">if</span> <span class="n">name_path_pattern</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">relative_path</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">relative_path_exists</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">require_file</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                    <span class="n">overview_tool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="n">JetBrainsGetSymbolsOverviewTool</span><span class="p">)</span>
+                    <span class="n">overview_response</span> <span class="o">=</span> <span class="n">overview_tool</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wrapped_tool_response</span><span class="p">(</span>
+                        <span class="n">overview_response</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Wildcard-only pattern not admitted; used </span><span class="si">{</span><span class="n">overview_tool</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2"> instead&quot;</span>
+                    <span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;name_path_pattern must not be empty or contain only wildcards; consider using the overview tool&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">include_body</span><span class="p">:</span>
+            <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># ignore user-specified depth if body is requested</span>
+
+        <span class="n">name_path_pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">name_path_pattern</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">relative_path</span><span class="p">:</span>
+            <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">relative_path</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
+            <span class="n">relative_path</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">relative_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">relative_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">JB_EXTERNAL_FILE_PREFIX</span><span class="p">):</span>
+            <span class="n">search_deps</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">include_body</span><span class="p">:</span>
+                <span class="n">include_quick_info</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">include_documentation</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">include_info</span><span class="p">:</span>
+                    <span class="n">include_documentation</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="n">include_quick_info</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># If no additional information is requested, we still include the quick info (type signature)</span>
+                    <span class="n">include_documentation</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">include_quick_info</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">symbol_collection_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">find_symbol</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path_pattern</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+                <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span><span class="p">,</span>
+                <span class="n">include_documentation</span><span class="o">=</span><span class="n">include_documentation</span><span class="p">,</span>
+                <span class="n">include_quick_info</span><span class="o">=</span><span class="n">include_quick_info</span><span class="p">,</span>
+                <span class="n">search_deps</span><span class="o">=</span><span class="n">search_deps</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="n">symbol_collection_response</span><span class="p">[</span><span class="s2">&quot;symbols&quot;</span><span class="p">]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_shortened_result</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Shortened results containing symbol types and identifiers (path + name_path) only, without children&quot;&quot;&quot;</span>
+            <span class="n">dicts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">SymbolDTO</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">{</span><span class="s2">&quot;name_path&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;name_path&quot;</span><span class="p">],</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="s2">&quot;relative_path&quot;</span><span class="p">:</span> <span class="n">s</span><span class="p">[</span><span class="s2">&quot;relative_path&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span>
+            <span class="p">]</span>
+            <span class="n">grouped</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">dicts</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Names with paths:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">n_matches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">max_matches</span> <span class="o">&lt;</span> <span class="n">n_matches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Matched </span><span class="si">{</span><span class="n">n_matches</span><span class="si">}</span><span class="s2">&gt;</span><span class="si">{</span><span class="n">max_matches</span><span class="si">=}</span><span class="s2"> symbols.</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">create_shortened_result</span><span class="p">()</span>
+
+        <span class="n">grouped_symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped_symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">,</span> <span class="n">shortened_result_factories</span><span class="o">=</span><span class="p">[</span><span class="n">create_shortened_result</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsFindSymbolTool.get_param_aliases">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindSymbolTool.get_param_aliases">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_param_aliases</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;name_path&quot;</span><span class="p">:</span> <span class="s2">&quot;name_path_pattern&quot;</span><span class="p">}</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsMoveTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsMoveTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsMoveTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Moves a symbol, file or directory to a new location using the JetBrains backend, updating all references</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsMoveTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsMoveTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_parent_name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Moves a symbol, file or directory to a different location and automatically update all references to affected symbols.</span>
+<span class="sd">        **Important**: this tool should always be preferred to naive moving (e.g. via file system operations or edits)</span>
+<span class="sd">        as it is much more reliable and efficient. It is always safe to use this tool. For some symbols, moving may not be applicable,</span>
+<span class="sd">        and will result in no edits and a suitable error message.</span>
+<span class="sd">        The target location is the new parent of the symbol,</span>
+<span class="sd">        i.e. the moved entity is never renamed by the operation, only moved.</span>
+
+
+<span class="sd">        Valid moves:</span>
+
+<span class="sd">        - Symbol:</span>
+
+<span class="sd">           * (relative_path, name_path) -&gt; new parent symbol (target_relative_path, target_parent_name_path)</span>
+<span class="sd">           * (relative_path, name_path) -&gt; top level of target file or directory (target_relative_path).</span>
+<span class="sd">             Always consider the concrete language-specific semantics!</span>
+
+<span class="sd">             - target is a file: valid for languages like Python, where files are modules</span>
+<span class="sd">             - target is a directory: valid for languages like Java, where directories are packages and can contain classes</span>
+
+<span class="sd">        - File or directory:</span>
+
+<span class="sd">           * relative_path -&gt; new parent directory (target_relative_path)</span>
+
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol to move.</span>
+<span class="sd">        :param name_path: the name path of the symbol to move (empty for moving file or dir).</span>
+<span class="sd">        :param target_relative_path: the relative path of the target directory or file.</span>
+<span class="sd">        :param target_parent_name_path: the name path of the target parent symbol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">name_path</span> <span class="o">=</span> <span class="n">name_path</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">target_relative_path</span> <span class="o">=</span> <span class="n">target_relative_path</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">target_parent_name_path</span> <span class="o">=</span> <span class="n">target_parent_name_path</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">move</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">target_parent_name_path</span><span class="o">=</span><span class="n">target_parent_name_path</span><span class="p">,</span>
+                <span class="n">target_relative_path</span><span class="o">=</span><span class="n">target_relative_path</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">response_dict</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsSafeDeleteTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsSafeDeleteTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsSafeDeleteTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Safely deletes a symbol using the JetBrains backend, checking for remaining usages first</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsSafeDeleteTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsSafeDeleteTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">delete_even_if_used</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">propagate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Safely deletes a symbol, file, or directory, checking for usages first and propagating deletion, if desired.</span>
+<span class="sd">        Propagation means it is possible to request deleting of usages and cleaning up of unused code.</span>
+<span class="sd">        Propagation is powerful for cleaning up code but should be used with care, and only when you are sure that</span>
+<span class="sd">        **Important**: this tool should always be preferred to naive deleting (e.g. via file system operations or edits).</span>
+<span class="sd">        When using it, you don&#39;t have to search for usages first, as the tool will do it for you.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol to delete.</span>
+<span class="sd">        :param name_path: the name path of the symbol to delete.</span>
+<span class="sd">            A name path identifies a symbol within a source file, e.g. &quot;MyClass/my_method&quot;.</span>
+<span class="sd">            Omit for deleting a file or directory.</span>
+<span class="sd">        :param delete_even_if_used: whether to force deletion even if the symbol still has usages.</span>
+<span class="sd">            Default is False (safe mode: will report usages instead of deleting).</span>
+<span class="sd">        :param propagate: whether to propagate the deletion to usages of the symbol and also</span>
+<span class="sd">            remove symbols that become unused after the deletion. Default is False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="n">name_path</span> <span class="o">=</span> <span class="n">name_path</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">safe_delete</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">delete_even_if_used</span><span class="o">=</span><span class="n">delete_even_if_used</span><span class="p">,</span>
+                <span class="n">propagate</span><span class="o">=</span><span class="n">propagate</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">response_dict</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsInlineSymbol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsInlineSymbol">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsInlineSymbol</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inlines a symbol using the JetBrains backend, replacing all call sites with the symbol&#39;s body</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsInlineSymbol.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsInlineSymbol.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">keep_definition</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inlines a symbol (usually a method/function, but also classes may be amenable to inlining,</span>
+<span class="sd">        which turns invocation into anonymous class creation),</span>
+<span class="sd">        replacing all call sites with the symbol&#39;s body.</span>
+<span class="sd">        **Important**: this tool should always be preferred to naive inlining (e.g. via searching for references and</span>
+<span class="sd">        editing them).</span>
+
+<span class="sd">        :param name_path: the name path of the symbol to inline.</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol to inline.</span>
+<span class="sd">        :param keep_definition: whether to keep the original method definition after inlining all call sites.</span>
+<span class="sd">            May be ignored in some cases (e.g. when inlining a class).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">inline_symbol</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">keep_definition</span><span class="o">=</span><span class="n">keep_definition</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">response_dict</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsFindReferencingSymbolsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindReferencingSymbolsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsFindReferencingSymbolsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds symbols that reference the given symbol using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">JetBrainsSymbolDictGrouper</span><span class="p">([</span><span class="s2">&quot;relative_path&quot;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JetBrainsFindReferencingSymbolsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindReferencingSymbolsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds all symbols that reference the given symbol — its callers / usages / dependents, i.e. the</span>
+<span class="sd">        symbols whose own definition (e.g. a method body) contains a reference to it. For each, returns its</span>
+<span class="sd">        name path, file, and the surrounding line of code.</span>
+
+<span class="sd">        :param name_path: name path of the symbol for which to find references</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol (must be a file, not a directory)</span>
+<span class="sd">            Note: for external dependencies, this must be an identifier starting with `&lt;ext` that you have received</span>
+<span class="sd">            earlier (don&#39;t try to guess!).</span>
+<span class="sd">        :param max_answer_chars: max characters for the result (-1 for default). If exceeded, no content/a shortened result is returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">find_references</span><span class="p">(</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">include_quick_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">symbol_dicts</span> <span class="o">=</span> <span class="n">response_dict</span><span class="p">[</span><span class="s2">&quot;symbols&quot;</span><span class="p">]</span>
+
+        <span class="c1"># replace reference line number (if present) by actual line/context</span>
+        <span class="k">for</span> <span class="n">symbol_dict</span> <span class="ow">in</span> <span class="n">symbol_dicts</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">&quot;reference_line_no&quot;</span> <span class="ow">in</span> <span class="n">symbol_dict</span><span class="p">:</span>
+                <span class="n">ref_line</span> <span class="o">=</span> <span class="n">symbol_dict</span><span class="p">[</span><span class="s2">&quot;reference_line_no&quot;</span><span class="p">]</span>
+                <span class="n">ref_relative_path</span> <span class="o">=</span> <span class="n">symbol_dict</span><span class="p">[</span><span class="s2">&quot;relative_path&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">SymbolDTOUtil</span><span class="o">.</span><span class="n">is_external_symbol</span><span class="p">(</span><span class="n">symbol_dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ref_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ref_line</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">content_around_ref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">retrieve_content_around_line</span><span class="p">(</span>
+                        <span class="n">relative_file_path</span><span class="o">=</span><span class="n">ref_relative_path</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="n">ref_line</span><span class="p">,</span> <span class="n">context_lines_before</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">context_lines_after</span><span class="o">=</span><span class="mi">1</span>
+                    <span class="p">)</span>
+                    <span class="n">symbol_dict</span><span class="p">[</span><span class="s2">&quot;context&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">content_around_ref</span><span class="o">.</span><span class="n">to_display_string</span><span class="p">()</span>
+                    <span class="k">del</span> <span class="n">symbol_dict</span><span class="p">[</span><span class="s2">&quot;reference_line_no&quot;</span><span class="p">]</span>
+
+        <span class="c1"># capture file paths before grouping</span>
+        <span class="n">ref_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;relative_path&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbol_dicts</span><span class="p">]</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">symbol_dicts</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_shortened_result_counts_per_file</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Reference counts per file:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">ref_paths</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">create_shortened_result_num_results</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">ref_paths</span><span class="p">)</span><span class="si">}</span><span class="s2"> references.&quot;</span>
+
+        <span class="n">result_json</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span>
+            <span class="n">result_json</span><span class="p">,</span>
+            <span class="n">max_answer_chars</span><span class="p">,</span>
+            <span class="n">shortened_result_factories</span><span class="o">=</span><span class="p">[</span><span class="n">create_shortened_result_counts_per_file</span><span class="p">,</span> <span class="n">create_shortened_result_num_results</span><span class="p">],</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsGetSymbolsOverviewTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsGetSymbolsOverviewTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsGetSymbolsOverviewTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves an overview of the top-level symbols within a specified file using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">USE_COMPACT_FORMAT</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">symbol_dict_grouper</span> <span class="o">=</span> <span class="n">JetBrainsSymbolDictGrouper</span><span class="p">([</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="n">collapse_singleton</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">map_name_path_to_name</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JetBrainsGetSymbolsOverviewTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsGetSymbolsOverviewTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">include_file_documentation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets an overview of the top-level symbols defined in the given file (classes, methods, fields) — its</span>
+<span class="sd">        STRUCTURE, without their bodies. This is the cheap, structure-first way to learn what a file</span>
+<span class="sd">        contains: it costs far less context than reading the whole file.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file to get the overview of</span>
+<span class="sd">        :param depth: depth up to which descendants shall be retrieved.</span>
+<span class="sd">            Default (-1) results in a language specific choice: 1 for java and kotlin and 0 for other languages</span>
+<span class="sd">        :param max_answer_chars: max characters for the result (-1 for default). If exceeded, no content/a shortened result is returned.</span>
+<span class="sd">        :param include_file_documentation: whether to include the file&#39;s docstring. Default False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">depth</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">relative_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s2">&quot;.java&quot;</span><span class="p">,</span> <span class="s2">&quot;.kt&quot;</span><span class="p">)):</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">depth</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">symbol_overview</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_symbols_overview</span><span class="p">(</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span> <span class="n">include_file_documentation</span><span class="o">=</span><span class="n">include_file_documentation</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">USE_COMPACT_FORMAT</span><span class="p">:</span>
+            <span class="n">symbols</span> <span class="o">=</span> <span class="n">symbol_overview</span><span class="p">[</span><span class="s2">&quot;symbols&quot;</span><span class="p">]</span>
+
+            <span class="n">grouped_symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+
+            <span class="n">shortened_result_factories</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># create full result</span>
+            <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;symbols&quot;</span><span class="p">:</span> <span class="n">grouped_symbols</span><span class="p">}</span>
+            <span class="n">documentation</span> <span class="o">=</span> <span class="n">symbol_overview</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;documentation&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">documentation</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">&quot;docstring&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">documentation</span>
+                <span class="n">shortened_result_factories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">grouped_symbols</span><span class="p">))</span>  <span class="c1"># shortened result without docstring</span>
+            <span class="n">json_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+
+                <span class="k">def</span><span class="w"> </span><span class="nf">create_short_result_depth_0</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                    <span class="n">depth_0_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">depth_0_symbols</span><span class="p">:</span>
+                        <span class="n">d</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="n">compact_depth_0_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbol_dict_grouper</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">depth_0_symbols</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="s2">&quot;Depth 0 overview:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">compact_depth_0_result</span><span class="p">)</span>
+
+                <span class="n">shortened_result_factories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">create_short_result_depth_0</span><span class="p">)</span>
+
+            <span class="k">def</span><span class="w"> </span><span class="nf">create_short_result_type_counts</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">type_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;unknown&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">]</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Symbol counts by type:</span><span class="se">\n</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">type_names</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="n">shortened_result_factories</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">create_short_result_type_counts</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># this path is currently abandoned, consider introducing shortened results if ever needed</span>
+            <span class="n">shortened_result_factories</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">json_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">symbol_overview</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">json_result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">,</span> <span class="n">shortened_result_factories</span><span class="o">=</span><span class="n">shortened_result_factories</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsTypeHierarchyTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsTypeHierarchyTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsTypeHierarchyTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the type hierarchy (supertypes and/or subtypes) of a symbol using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_transform_hierarchy_nodes</span><span class="p">(</span><span class="n">nodes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">jb</span><span class="o">.</span><span class="n">TypeHierarchyNodeDTO</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transform a list of TypeHierarchyNode into a file-grouped compact format.</span>
+
+<span class="sd">        Returns a dict where keys are relative_paths and values are lists of either:</span>
+<span class="sd">        - &quot;SymbolNamePath&quot; (leaf node)</span>
+<span class="sd">        - {&quot;SymbolNamePath&quot;: {nested_file_grouped_children}} (node with children)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+            <span class="n">symbol</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;symbol&quot;</span><span class="p">]</span>
+            <span class="n">name_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">[</span><span class="s2">&quot;name_path&quot;</span><span class="p">]</span>
+            <span class="n">rel_path</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">[</span><span class="s2">&quot;relative_path&quot;</span><span class="p">]</span>
+            <span class="n">children</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;children&quot;</span><span class="p">,</span> <span class="p">[])</span>
+
+            <span class="k">if</span> <span class="n">rel_path</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">rel_path</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+                <span class="c1"># Node with children - recurse</span>
+                <span class="n">nested</span> <span class="o">=</span> <span class="n">JetBrainsTypeHierarchyTool</span><span class="o">.</span><span class="n">_transform_hierarchy_nodes</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">rel_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">name_path</span><span class="p">:</span> <span class="n">nested</span><span class="p">})</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Leaf node</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">rel_path</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name_path</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="JetBrainsTypeHierarchyTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsTypeHierarchyTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">hierarchy_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;super&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;both&quot;</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the type hierarchy of a symbol (supertypes, subtypes, or both).</span>
+
+<span class="sd">        :param name_path: name path of the symbol for which to get the type hierarchy.</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol.</span>
+<span class="sd">        :param hierarchy_type: which hierarchy to retrieve: &quot;super&quot; for parent classes/interfaces,</span>
+<span class="sd">            &quot;sub&quot; for subclasses/implementations, or &quot;both&quot; for both directions. Default is &quot;sub&quot;.</span>
+<span class="sd">        :param depth: depth limit for hierarchy traversal (None or 0 for unlimited). Default is 1.</span>
+<span class="sd">        :param max_answer_chars: max characters for the JSON result. If exceeded, no content is returned.</span>
+<span class="sd">            -1 means the default value from the config will be used.</span>
+<span class="sd">        :return: Compact JSON with file-grouped hierarchy. Error string if not applicable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">subtypes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">supertypes</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">levels_not_included</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">if</span> <span class="n">hierarchy_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;super&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">):</span>
+                <span class="n">supertypes_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_supertypes</span><span class="p">(</span>
+                    <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                    <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                    <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;num_levels_not_included&quot;</span> <span class="ow">in</span> <span class="n">supertypes_response</span><span class="p">:</span>
+                    <span class="n">levels_not_included</span><span class="p">[</span><span class="s2">&quot;supertypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">supertypes_response</span><span class="p">[</span><span class="s2">&quot;num_levels_not_included&quot;</span><span class="p">]</span>
+                <span class="n">supertypes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_hierarchy_nodes</span><span class="p">(</span><span class="n">supertypes_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hierarchy&quot;</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">hierarchy_type</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;both&quot;</span><span class="p">):</span>
+                <span class="n">subtypes_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_subtypes</span><span class="p">(</span>
+                    <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                    <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                    <span class="n">depth</span><span class="o">=</span><span class="n">depth</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;num_levels_not_included&quot;</span> <span class="ow">in</span> <span class="n">subtypes_response</span><span class="p">:</span>
+                    <span class="n">levels_not_included</span><span class="p">[</span><span class="s2">&quot;subtypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtypes_response</span><span class="p">[</span><span class="s2">&quot;num_levels_not_included&quot;</span><span class="p">]</span>
+                <span class="n">subtypes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_hierarchy_nodes</span><span class="p">(</span><span class="n">subtypes_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hierarchy&quot;</span><span class="p">))</span>
+
+            <span class="n">result_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">supertypes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;supertypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">supertypes</span>
+            <span class="k">if</span> <span class="n">subtypes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;subtypes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subtypes</span>
+            <span class="k">if</span> <span class="n">levels_not_included</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="s2">&quot;levels_not_included&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">levels_not_included</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsFindDeclarationTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindDeclarationTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsFindDeclarationTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the declaration of a symbol using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsFindDeclarationTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindDeclarationTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the declaration of a symbol.</span>
+
+<span class="sd">        :param relative_path: the relative path to the source file containing the symbol for which to find the declaration.</span>
+<span class="sd">        :param regex: a regular expression with one group, where the group matches the symbol for which to perform the lookup.</span>
+<span class="sd">            For example, to find the declaration of the `process` method in a call like `obj.process()`,</span>
+<span class="sd">            pass an expression like &quot;obj\.(process)\(process_input_arg=37\)&quot;.</span>
+<span class="sd">            Prefer regexes with sufficiently large context around the group to render the match unambiguous.</span>
+<span class="sd">            Uses Python syntax with MULTILINE and DOTALL flags enabled.</span>
+<span class="sd">        :param include_body: whether to include the symbol&#39;s body in the result. Default False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="n">regex</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_input_param</span><span class="p">(</span><span class="n">regex</span><span class="p">)</span>
+
+        <span class="n">editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_code_editor</span><span class="p">()</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">relative_path</span><span class="p">)</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">find_text_coordinates</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">regex</span><span class="p">,</span> <span class="n">require_unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">coords</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">find_declaration</span><span class="p">(</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="n">coords</span><span class="o">.</span><span class="n">line</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">coords</span><span class="o">.</span><span class="n">col</span><span class="p">,</span> <span class="n">include_quick_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_body</span><span class="o">=</span><span class="n">include_body</span>
+            <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsFindImplementationsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindImplementationsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsFindImplementationsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the implementations of a symbol using the JetBrains backend</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsFindImplementationsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsFindImplementationsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the implementations of a symbol.</span>
+
+<span class="sd">        :param relative_path: the relative path to the source file containing the symbol for which to find implementations.</span>
+<span class="sd">        :param name_path: name path of the symbol for which to find implementations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">find_implementations</span><span class="p">(</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+                <span class="n">include_quick_info</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsRenameTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsRenameTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsRenameTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renames a symbol, file or directory throughout the codebase using the JetBrains backend.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsRenameTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsRenameTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">rename_in_comments</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">rename_in_text_occurrences</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames a symbol, file or directory throughout the codebase.</span>
+<span class="sd">        Note: renaming in comments/text is on a best-effort basis by the IDE; if the symbol name is non-unique, further</span>
+<span class="sd">        verification is recommended.</span>
+
+<span class="sd">        :param relative_path: if `name_path` is passed, the relative path of the file containing the symbol.</span>
+<span class="sd">            Otherwise, the path to the directory or file to rename.</span>
+<span class="sd">        :param new_name: the new name</span>
+<span class="sd">        :param name_path: the name path of the symbol to rename or None if renaming a file or directory.</span>
+<span class="sd">        :param rename_in_comments: whether to also rename occurrences in comments. Default True.</span>
+<span class="sd">        :param rename_in_text_occurrences: whether to also rename occurrences in text. Default True.</span>
+<span class="sd">        :return: a status message</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">code_editor</span> <span class="o">=</span> <span class="n">JetBrainsCodeEditor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">code_editor</span><span class="o">.</span><span class="n">rename_symbol</span><span class="p">(</span>
+            <span class="n">name_path</span><span class="o">=</span><span class="n">name_path</span><span class="p">,</span>
+            <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+            <span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">,</span>
+            <span class="n">rename_in_comments</span><span class="o">=</span><span class="n">rename_in_comments</span><span class="p">,</span>
+            <span class="n">rename_in_text_occurrences</span><span class="o">=</span><span class="n">rename_in_text_occurrences</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsDebugTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsDebugTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsDebugTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides debugging functionality (run configs, breakpoints, stepping, inspection, and evaluation)</span>
+<span class="sd">    via a persistent debug REPL connected to the JetBrains IDE.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsDebugTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsDebugTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">repl_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Debug code by evaluating Groovy/Java expressions in a persistent REPL attached to the IDE&#39;s</span>
+<span class="sd">        debugger (run configs, breakpoints, stepping, inspection of live state).</span>
+
+<span class="sd">        Use the `serena_info` tool with topic `jet_brains_debug_repl` for usage information.</span>
+
+<span class="sd">        :param expression: a Groovy/Java expression/statement to evaluate in the REPL.</span>
+<span class="sd">            If empty/null, closes the REPL with the given key.</span>
+<span class="sd">        :param repl_key: identifier for the REPL instance. State persists across calls with the same key.</span>
+<span class="sd">        :return: string representation of the result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">expression</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">debug_eval</span><span class="p">(</span><span class="n">repl_key</span><span class="o">=</span><span class="n">repl_key</span><span class="p">,</span> <span class="n">expression</span><span class="o">=</span><span class="n">expression</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">debug_close</span><span class="p">(</span><span class="n">repl_key</span><span class="o">=</span><span class="n">repl_key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsRunInspectionsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsRunInspectionsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsRunInspectionsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs JetBrains IDE inspections on a file and returns the results.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsRunInspectionsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsRunInspectionsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">min_severity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">inspection_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs IDE inspections (code analysis) on the given file and returns the problems found.</span>
+<span class="sd">        This leverages the full power of JetBrains&#39; static analysis engine, including language-specific</span>
+<span class="sd">        inspections, type checking, potential bugs, code style issues, and more.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file to inspect.</span>
+<span class="sd">        :param min_severity: minimum severity level to include in results (e.g. &quot;ERROR&quot;, &quot;WARNING&quot;, &quot;WEAK_WARNING&quot;, &quot;INFO&quot;).</span>
+<span class="sd">            If not specified, all severities are returned.</span>
+<span class="sd">        :param inspection_names: optional list of specific inspection names to run (e.g. [&quot;UnusedImport&quot;, &quot;TypeMismatch&quot;]).</span>
+<span class="sd">            If not specified, all applicable inspections are run.</span>
+<span class="sd">        :param start_line: optional 1-based start line to restrict the inspection range.</span>
+<span class="sd">        :param end_line: optional 1-based end line to restrict the inspection range.</span>
+<span class="sd">        :param max_answer_chars: max characters for the JSON result. If exceeded, no content is returned.</span>
+<span class="sd">            -1 means the default value from the config will be used.</span>
+<span class="sd">        :return: JSON string with inspection results including severity, message, and location.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">run_inspections</span><span class="p">(</span>
+                <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">min_severity</span><span class="o">=</span><span class="n">min_severity</span><span class="p">,</span>
+                <span class="n">inspection_names</span><span class="o">=</span><span class="n">inspection_names</span><span class="p">,</span>
+                <span class="n">start_line</span><span class="o">=</span><span class="n">start_line</span><span class="p">,</span>
+                <span class="n">end_line</span><span class="o">=</span><span class="n">end_line</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">response_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="JetBrainsListInspectionsTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsListInspectionsTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsListInspectionsTool</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Lists available JetBrains IDE inspections, optionally filtered by language or group.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="JetBrainsListInspectionsTool.apply">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html#serena.tools.jetbrains_tools.JetBrainsListInspectionsTool.apply">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_path_contains</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists the available IDE inspections. Use this to discover which inspections can be passed</span>
+<span class="sd">        to the run_inspections tool&#39;s `inspection_names` parameter.</span>
+
+<span class="sd">        :param language: optional language to filter by (e.g. &quot;Java&quot;, &quot;Python&quot;, &quot;Kotlin&quot;).</span>
+<span class="sd">        :param group_path_contains: optional substring to match against the inspection group path</span>
+<span class="sd">            (e.g. &quot;probable bugs&quot;, &quot;code style&quot;).</span>
+<span class="sd">        :param max_answer_chars: max characters for the JSON result. If exceeded, no content is returned.</span>
+<span class="sd">            -1 means the default value from the config will be used.</span>
+<span class="sd">        :return: JSON string with the list of available inspections including name, group path, and language.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">from_project</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+            <span class="n">response_dict</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">list_inspections</span><span class="p">(</span>
+                <span class="n">language</span><span class="o">=</span><span class="n">language</span><span class="p">,</span>
+                <span class="n">group_path_contains</span><span class="o">=</span><span class="n">group_path_contains</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">response_dict</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_limit_length</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">max_answer_chars</span><span class="p">)</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

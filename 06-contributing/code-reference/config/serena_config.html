@@ -1,0 +1,1572 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>serena.config.serena_config &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-contributing/code-reference/config/serena_config';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/06-contributing/code-reference/config/serena_config.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="generated" href="../generated/index.html" />
+    <link rel="prev" title="serena.config.context_mode" href="context_mode.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../000_contributing-intro.html">Contributing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../000_code-reference-intro.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">config</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/06-contributing/code-reference/config/serena_config.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>serena.config.serena_config</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ToolInclusionDefinition"><code class="docutils literal notranslate"><span class="pre">ToolInclusionDefinition</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ToolInclusionDefinition.excluded_tools"><code class="docutils literal notranslate"><span class="pre">ToolInclusionDefinition.excluded_tools</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ToolInclusionDefinition.included_optional_tools"><code class="docutils literal notranslate"><span class="pre">ToolInclusionDefinition.included_optional_tools</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ToolInclusionDefinition.fixed_tools"><code class="docutils literal notranslate"><span class="pre">ToolInclusionDefinition.fixed_tools</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.NamedToolInclusionDefinition"><code class="docutils literal notranslate"><span class="pre">NamedToolInclusionDefinition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ModeSelectionDefinition"><code class="docutils literal notranslate"><span class="pre">ModeSelectionDefinition</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ModeSelectionDefinitionWithBaseModes"><code class="docutils literal notranslate"><span class="pre">ModeSelectionDefinitionWithBaseModes</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ModeSelectionDefinitionWithBaseModes.base_modes"><code class="docutils literal notranslate"><span class="pre">ModeSelectionDefinitionWithBaseModes.base_modes</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ModeSelectionDefinitionWithAddedModes"><code class="docutils literal notranslate"><span class="pre">ModeSelectionDefinitionWithAddedModes</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LanguageBackend"><code class="docutils literal notranslate"><span class="pre">LanguageBackend</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LanguageBackend.LSP"><code class="docutils literal notranslate"><span class="pre">LanguageBackend.LSP</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LanguageBackend.JETBRAINS"><code class="docutils literal notranslate"><span class="pre">LanguageBackend.JETBRAINS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LanguageBackend.get_lsp_tool_class_replacements"><code class="docutils literal notranslate"><span class="pre">LanguageBackend.get_lsp_tool_class_replacements()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LineEnding"><code class="docutils literal notranslate"><span class="pre">LineEnding</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LineEnding.newline_str"><code class="docutils literal notranslate"><span class="pre">LineEnding.newline_str</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.LineEnding.from_str"><code class="docutils literal notranslate"><span class="pre">LineEnding.from_str()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SharedConfig"><code class="docutils literal notranslate"><span class="pre">SharedConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SharedConfig.ls_specific_settings"><code class="docutils literal notranslate"><span class="pre">SharedConfig.ls_specific_settings</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfigError"><code class="docutils literal notranslate"><span class="pre">SerenaConfigError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.DEFAULT_PROJECT_SERENA_FOLDER_LOCATION"><code class="docutils literal notranslate"><span class="pre">DEFAULT_PROJECT_SERENA_FOLDER_LOCATION</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode"><code class="docutils literal notranslate"><span class="pre">ProjectConfigAutoGenerationMode</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.NONE"><code class="docutils literal notranslate"><span class="pre">ProjectConfigAutoGenerationMode.NONE</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.SYNCHRONOUS"><code class="docutils literal notranslate"><span class="pre">ProjectConfigAutoGenerationMode.SYNCHRONOUS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.ASYNCHRONOUS"><code class="docutils literal notranslate"><span class="pre">ProjectConfigAutoGenerationMode.ASYNCHRONOUS</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig"><code class="docutils literal notranslate"><span class="pre">ProjectConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.YAML_COMMENT_NORMALISATION"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.YAML_COMMENT_NORMALISATION</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.autogenerate"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.autogenerate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.await_asynchronous_completion"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.await_asynchronous_completion()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.default_project_yml_path"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.default_project_yml_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.load"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.load()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.ProjectConfig.save"><code class="docutils literal notranslate"><span class="pre">ProjectConfig.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.RegisteredProject"><code class="docutils literal notranslate"><span class="pre">RegisteredProject</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.RegisteredProject.from_project_root"><code class="docutils literal notranslate"><span class="pre">RegisteredProject.from_project_root()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.RegisteredProject.matches_root_path"><code class="docutils literal notranslate"><span class="pre">RegisteredProject.matches_root_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.RegisteredProject.get_project_instance"><code class="docutils literal notranslate"><span class="pre">RegisteredProject.get_project_instance()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig"><code class="docutils literal notranslate"><span class="pre">SerenaConfig</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.jetbrains_launch_command"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.jetbrains_launch_command</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.tool_timeout"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.tool_timeout</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.token_count_estimator"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.token_count_estimator</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.default_max_tool_answer_chars"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.default_max_tool_answer_chars</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.ignored_paths"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.ignored_paths</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.project_serena_folder_location"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.project_serena_folder_location</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.trusted_project_path_patterns"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.trusted_project_path_patterns</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.ls_priorities"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.ls_priorities</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.language_backend"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.language_backend</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.symbol_info_budget"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.symbol_info_budget</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_config_file_creation_date"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_config_file_creation_date()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.from_config_file"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.from_config_file()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.init"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.init()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.with_headless_mode_overrides"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.with_headless_mode_overrides()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_registered_project"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_registered_project()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.add_registered_project"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.add_registered_project()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.add_project_from_path"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.add_project_from_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_configured_project_serena_folder"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_configured_project_serena_folder()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_project_serena_folder"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_project_serena_folder()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_project_yml_location"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_project_yml_location()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.propagate_settings"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.propagate_settings()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.is_trusted_project_path"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.is_trusted_project_path()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.config.serena_config.SerenaConfig.get_ls_priority"><code class="docutils literal notranslate"><span class="pre">SerenaConfig.get_ls_priority()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-serena.config.serena_config">
+<span id="serena-config-serena-config"></span><h1>serena.config.serena_config<a class="headerlink" href="#module-serena.config.serena_config" title="Link to this heading">#</a></h1>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../../../_modules/serena/config/serena_config.html#serena/config/serena_config.py"><span>serena/config/serena_config.py</span></a></p>
+<hr class="docutils" />
+<p>The Serena Model Context Protocol (MCP) Server</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ToolInclusionDefinition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ToolInclusionDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">excluded_tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">included_optional_tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fixed_tools</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ToolInclusionDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ToolInclusionDefinition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Defines which tools to include/exclude in Serena’s operation.
+This can mean either</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>defining exclusions/inclusions to apply to an existing set of tools [incremental mode], or</p></li>
+<li><p>defining a fixed set of tools to use [fixed mode].</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>excluded_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>included_optional_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>fixed_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ToolInclusionDefinition.excluded_tools">
+<span class="sig-name descname"><span class="pre">excluded_tools</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#serena.config.serena_config.ToolInclusionDefinition.excluded_tools" title="Link to this definition">#</a></dt>
+<dd><p>the names of tools to exclude from use [incremental mode]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ToolInclusionDefinition.included_optional_tools">
+<span class="sig-name descname"><span class="pre">included_optional_tools</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#serena.config.serena_config.ToolInclusionDefinition.included_optional_tools" title="Link to this definition">#</a></dt>
+<dd><p>the names of optional tools to include [incremental mode]</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ToolInclusionDefinition.fixed_tools">
+<span class="sig-name descname"><span class="pre">fixed_tools</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">()</span></em><a class="headerlink" href="#serena.config.serena_config.ToolInclusionDefinition.fixed_tools" title="Link to this definition">#</a></dt>
+<dd><p>the names of tools to use as a fixed set of tools [fixed mode]</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.NamedToolInclusionDefinition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NamedToolInclusionDefinition</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">excluded_tools</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">included_optional_tools</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">fixed_tools</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#NamedToolInclusionDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.NamedToolInclusionDefinition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.ToolInclusionDefinition" title="serena.config.serena_config.ToolInclusionDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToolInclusionDefinition</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>excluded_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>included_optional_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>fixed_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>name</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ModeSelectionDefinition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModeSelectionDefinition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ModeSelectionDefinition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ModeSelectionDefinition" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>default_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ModeSelectionDefinitionWithBaseModes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModeSelectionDefinitionWithBaseModes</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">default_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">base_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">('interactive',</span> <span class="pre">'editing')</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ModeSelectionDefinitionWithBaseModes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ModeSelectionDefinitionWithBaseModes" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.ModeSelectionDefinition" title="serena.config.serena_config.ModeSelectionDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSelectionDefinition</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>base_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ModeSelectionDefinitionWithBaseModes.base_modes">
+<span class="sig-name descname"><span class="pre">base_modes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('interactive',</span> <span class="pre">'editing')</span></em><a class="headerlink" href="#serena.config.serena_config.ModeSelectionDefinitionWithBaseModes.base_modes" title="Link to this definition">#</a></dt>
+<dd><p>the base modes to use, which are always guaranteed to be included</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ModeSelectionDefinitionWithAddedModes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ModeSelectionDefinitionWithAddedModes</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">default_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">added_modes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ModeSelectionDefinitionWithAddedModes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ModeSelectionDefinitionWithAddedModes" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.ModeSelectionDefinition" title="serena.config.serena_config.ModeSelectionDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSelectionDefinition</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>added_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.LanguageBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LanguageBackend</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#LanguageBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.LanguageBackend" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.LanguageBackend.LSP">
+<span class="sig-name descname"><span class="pre">LSP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LSP'</span></em><a class="headerlink" href="#serena.config.serena_config.LanguageBackend.LSP" title="Link to this definition">#</a></dt>
+<dd><p>Use the language server protocol (LSP), spawning freely available language servers
+via the SolidLSP library that is part of Serena</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.LanguageBackend.JETBRAINS">
+<span class="sig-name descname"><span class="pre">JETBRAINS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'JetBrains'</span></em><a class="headerlink" href="#serena.config.serena_config.LanguageBackend.JETBRAINS" title="Link to this definition">#</a></dt>
+<dd><p>Use the Serena plugin in your JetBrains IDE.
+(requires the plugin to be installed and the project being worked on to be open in your IDE)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.LanguageBackend.get_lsp_tool_class_replacements">
+<span class="sig-name descname"><span class="pre">get_lsp_tool_class_replacements</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#LanguageBackend.get_lsp_tool_class_replacements"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.LanguageBackend.get_lsp_tool_class_replacements" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>mapping from LSP tool classes to replacement tool classes (functional replacements)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>dict</em>[<em>type</em>[<a class="reference internal" href="../tools/tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><em>Tool</em></a>], <em>type</em>[<a class="reference internal" href="../tools/tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><em>Tool</em></a>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.LineEnding">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LineEnding</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#LineEnding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.LineEnding" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Line ending convention for file writes.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="serena.config.serena_config.LineEnding.newline_str">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">newline_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.config.serena_config.LineEnding.newline_str" title="Link to this definition">#</a></dt>
+<dd><p>The newline parameter value for <code class="xref py py-func docutils literal notranslate"><span class="pre">open()</span></code> and <code class="xref py py-meth docutils literal notranslate"><span class="pre">Path.write_text()</span></code>.</p>
+<p>Returns <code class="docutils literal notranslate"><span class="pre">None</span></code> for native mode (platform default).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.LineEnding.from_str">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#LineEnding.from_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.LineEnding.from_str" title="Link to this definition">#</a></dt>
+<dd><p>Parse a string value into a <a class="reference internal" href="#serena.config.serena_config.LineEnding" title="serena.config.serena_config.LineEnding"><code class="xref py py-class docutils literal notranslate"><span class="pre">LineEnding</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#serena.config.serena_config.LineEnding" title="serena.config.serena_config.LineEnding"><em>LineEnding</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.SharedConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SharedConfig</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">excluded_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">included_optional_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">fixed_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">symbol_info_budget=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">language_backend=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">line_ending=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">read_only_memory_patterns=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ignored_memory_patterns=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ls_specific_settings=&lt;factory&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SharedConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SharedConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.ToolInclusionDefinition" title="serena.config.serena_config.ToolInclusionDefinition"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToolInclusionDefinition</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<p>Shared between SerenaConfig and ProjectConfig, the latter used to override values in the form
+(same as in ModeSelectionDefinition).
+The defaults here shall be none and should be set to the global default values in SerenaConfig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>excluded_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>included_optional_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>fixed_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>symbol_info_budget</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>language_backend</strong> (<a class="reference internal" href="#serena.config.serena_config.LanguageBackend" title="serena.config.serena_config.LanguageBackend"><em>LanguageBackend</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>line_ending</strong> (<a class="reference internal" href="#serena.config.serena_config.LineEnding" title="serena.config.serena_config.LineEnding"><em>LineEnding</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>read_only_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ignored_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_specific_settings</strong> (<em>dict</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SharedConfig.ls_specific_settings">
+<span class="sig-name descname"><span class="pre">ls_specific_settings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#serena.config.serena_config.SharedConfig.ls_specific_settings" title="Link to this definition">#</a></dt>
+<dd><p>Advanced configuration option allowing to configure language server implementation specific options, see SolidLSPSettings for more info.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfigError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SerenaConfigError</span></span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfigError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfigError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.config.serena_config.DEFAULT_PROJECT_SERENA_FOLDER_LOCATION">
+<span class="sig-name descname"><span class="pre">DEFAULT_PROJECT_SERENA_FOLDER_LOCATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'$projectDir/.serena'</span></em><a class="headerlink" href="#serena.config.serena_config.DEFAULT_PROJECT_SERENA_FOLDER_LOCATION" title="Link to this definition">#</a></dt>
+<dd><p>The default template for the project Serena folder location.
+Uses $projectDir and $projectFolderName as placeholders.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfigAutoGenerationMode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProjectConfigAutoGenerationMode</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">names=&lt;not</span> <span class="pre">given&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*values</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">module=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">qualname=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">type=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">start=1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">boundary=None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfigAutoGenerationMode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfigAutoGenerationMode.NONE">
+<span class="sig-name descname"><span class="pre">NONE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'none'</span></em><a class="headerlink" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.NONE" title="Link to this definition">#</a></dt>
+<dd><p>no auto-generation</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfigAutoGenerationMode.SYNCHRONOUS">
+<span class="sig-name descname"><span class="pre">SYNCHRONOUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sync'</span></em><a class="headerlink" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.SYNCHRONOUS" title="Link to this definition">#</a></dt>
+<dd><p>synchronous auto-generation, i.e. the configuration is fully generated before returning from the function call</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfigAutoGenerationMode.ASYNCHRONOUS">
+<span class="sig-name descname"><span class="pre">ASYNCHRONOUS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'async'</span></em><a class="headerlink" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode.ASYNCHRONOUS" title="Link to this definition">#</a></dt>
+<dd><p>asynchronous auto-generation, where time-consuming configuration parts (currently only the 
+list of programming languages) are determined in a background thread and initialised as empty</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProjectConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">default_modes:</span> <span class="pre">collections.abc.Sequence[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">added_modes:</span> <span class="pre">collections.abc.Sequence[str]</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">excluded_tools:</span> <span class="pre">collections.abc.Sequence[str]</span> <span class="pre">=</span> <span class="pre">(),</span> <span class="pre">included_optional_tools:</span> <span class="pre">collections.abc.Sequence[str]</span> <span class="pre">=</span> <span class="pre">(),</span> <span class="pre">fixed_tools:</span> <span class="pre">collections.abc.Sequence[str]</span> <span class="pre">=</span> <span class="pre">(),</span> <span class="pre">symbol_info_budget:</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">language_backend:</span> <span class="pre">serena.config.serena_config.LanguageBackend</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">line_ending:</span> <span class="pre">serena.config.serena_config.LineEnding</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">read_only_memory_patterns:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">ignored_memory_patterns:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">ls_specific_settings:</span> <span class="pre">dict</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">*,</span> <span class="pre">project_name:</span> <span class="pre">str,</span> <span class="pre">language_servers:</span> <span class="pre">list[solidlsp.ls_config.LanguageServerId],</span> <span class="pre">ignored_paths:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">ls_workspace_folders:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">ls_additional_workspace_folders:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;,</span> <span class="pre">read_only:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False,</span> <span class="pre">ignore_all_files_in_gitignore:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True,</span> <span class="pre">initial_prompt:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'',</span> <span class="pre">encoding:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'utf-8',</span> <span class="pre">activation_command:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None,</span> <span class="pre">activation_command_timeout:</span> <span class="pre">float</span> <span class="pre">=</span> <span class="pre">180.0,</span> <span class="pre">_local_override_keys:</span> <span class="pre">list[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.SharedConfig" title="serena.config.serena_config.SharedConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SharedConfig</span></code></a>, <a class="reference internal" href="#serena.config.serena_config.ModeSelectionDefinitionWithAddedModes" title="serena.config.serena_config.ModeSelectionDefinitionWithAddedModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSelectionDefinitionWithAddedModes</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>added_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>excluded_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>included_optional_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>fixed_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>symbol_info_budget</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>language_backend</strong> (<a class="reference internal" href="#serena.config.serena_config.LanguageBackend" title="serena.config.serena_config.LanguageBackend"><em>LanguageBackend</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>line_ending</strong> (<a class="reference internal" href="#serena.config.serena_config.LineEnding" title="serena.config.serena_config.LineEnding"><em>LineEnding</em></a><em> | </em><em>None</em>)</p></li>
+<li><p><strong>read_only_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ignored_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_specific_settings</strong> (<em>dict</em>)</p></li>
+<li><p><strong>project_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>language_servers</strong> (<em>list</em><em>[</em><em>LanguageServerId</em><em>]</em>)</p></li>
+<li><p><strong>ignored_paths</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_workspace_folders</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_additional_workspace_folders</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>read_only</strong> (<em>bool</em>)</p></li>
+<li><p><strong>ignore_all_files_in_gitignore</strong> (<em>bool</em>)</p></li>
+<li><p><strong>initial_prompt</strong> (<em>str</em>)</p></li>
+<li><p><strong>encoding</strong> (<em>str</em>)</p></li>
+<li><p><strong>activation_command</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>activation_command_timeout</strong> (<em>float</em>)</p></li>
+<li><p><strong>_local_override_keys</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.YAML_COMMENT_NORMALISATION">
+<span class="sig-name descname"><span class="pre">YAML_COMMENT_NORMALISATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'leading'</span></em><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.YAML_COMMENT_NORMALISATION" title="Link to this definition">#</a></dt>
+<dd><p>the comment normalisation strategy to use when loading/saving project configuration files.
+The template file must match this configuration (i.e. it must use leading comments if this is set to LEADING).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.autogenerate">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">autogenerate</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">serena_config</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">project_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">languages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">save_to_disk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">asynchronous</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig.autogenerate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.autogenerate" title="Link to this definition">#</a></dt>
+<dd><p>Autogenerate a project configuration for a given project root.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – the path to the project root</p></li>
+<li><p><strong>serena_config</strong> (<a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a>) – the global Serena configuration</p></li>
+<li><p><strong>project_name</strong> (<em>str</em><em> | </em><em>None</em>) – the name of the project; if None, the name of the project will be the name of the directory
+containing the project</p></li>
+<li><p><strong>languages</strong> (<em>list</em><em>[</em><em>LanguageServerId</em><em>] </em><em>| </em><em>None</em>) – the languages of the project; if None, they will be determined automatically</p></li>
+<li><p><strong>save_to_disk</strong> (<em>bool</em>) – whether to save the project configuration to disk</p></li>
+<li><p><strong>interactive</strong> (<em>bool</em>) – whether to run in interactive CLI mode, asking the user for input where appropriate</p></li>
+<li><p><strong>asynchronous</strong> (<em>bool</em>) – whether to run in asynchronous mode, where time-consuming configuration parts (currently only the
+determination of the list of programming languages) are determined in a background thread and initialised as empty</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the project configuration</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Self</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.await_asynchronous_completion">
+<span class="sig-name descname"><span class="pre">await_asynchronous_completion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig.await_asynchronous_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.await_asynchronous_completion" title="Link to this definition">#</a></dt>
+<dd><p>Wait for the asynchronous auto-generation of the configuration to complete (if applicable), ensuring
+that, in particular, the list of programming languages is complete, which may be determined asynchronously
+when first creating the project configuration.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.default_project_yml_path">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">default_project_yml_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig.default_project_yml_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.default_project_yml_path" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the default path to the project.yml file (inside <code class="docutils literal notranslate"><span class="pre">$projectDir/.serena/</span></code>).
+This is suitable as a fallback when no <code class="docutils literal notranslate"><span class="pre">SerenaConfig</span></code> is available to resolve
+a potentially customised location.</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">serena_config</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">autogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ProjectConfigAutoGenerationMode.NONE</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.load" title="Link to this definition">#</a></dt>
+<dd><p>Load a ProjectConfig instance from the path to the project root.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root</strong> (<em>Path</em><em> | </em><em>str</em>) – the path to the project root</p></li>
+<li><p><strong>serena_config</strong> (<a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a>) – the global Serena configuration</p></li>
+<li><p><strong>autogen</strong> (<a class="reference internal" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode" title="serena.config.serena_config.ProjectConfigAutoGenerationMode"><em>ProjectConfigAutoGenerationMode</em></a>) – the auto-generation mode to apply if the project configuration does not yet exist</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Self</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.ProjectConfig.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_yml_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_project_local_yml</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#ProjectConfig.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.ProjectConfig.save" title="Link to this definition">#</a></dt>
+<dd><p>Saves the project configuration to disk, updating both the project.yml file and, optionally,
+the project.local.yml file to reflect overridden keys.</p>
+<p>Keys that are overridden by project.local.yml are not updated in project.yml.
+Only keys that are overridden are updated in project.local.yml.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_yml_path</strong> (<em>str</em>) – the path to the project.yml file</p></li>
+<li><p><strong>save_project_local_yml</strong> (<em>bool</em>) – whether to also update the project.local.yml file to reflect overridden keys</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.RegisteredProject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RegisteredProject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">project_instance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#RegisteredProject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.RegisteredProject" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ToStringMixin</span></code></p>
+<p>Represents a registered project in the Serena configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root</strong> (<em>str</em>) – the root directory of the project</p></li>
+<li><p><strong>project_config</strong> (<a class="reference internal" href="#serena.config.serena_config.ProjectConfig" title="serena.config.serena_config.ProjectConfig"><em>ProjectConfig</em></a>) – the configuration of the project</p></li>
+<li><p><strong>project_instance</strong> (<a class="reference internal" href="../project.html#serena.project.Project" title="serena.project.Project"><em>Project</em></a><em> | </em><em>None</em>) – an existing project instance (if already loaded)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.RegisteredProject.from_project_root">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_project_root</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">serena_config</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">autogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">ProjectConfigAutoGenerationMode.NONE</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#RegisteredProject.from_project_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.RegisteredProject.from_project_root" title="Link to this definition">#</a></dt>
+<dd><p>Creates a RegisteredProject instance from a project root path, which must exist on disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – path to an existing directory</p></li>
+<li><p><strong>serena_config</strong> (<a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a>) – the Serena configuration</p></li>
+<li><p><strong>autogen</strong> (<a class="reference internal" href="#serena.config.serena_config.ProjectConfigAutoGenerationMode" title="serena.config.serena_config.ProjectConfigAutoGenerationMode"><em>ProjectConfigAutoGenerationMode</em></a>) – the auto-generation mode to use for the project configuration if it does not yet exist</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the RegisteredProject instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.config.serena_config.RegisteredProject" title="serena.config.serena_config.RegisteredProject"><em>RegisteredProject</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.RegisteredProject.matches_root_path">
+<span class="sig-name descname"><span class="pre">matches_root_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#RegisteredProject.matches_root_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.RegisteredProject.matches_root_path" title="Link to this definition">#</a></dt>
+<dd><p>Check if the given path matches the project root path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<em>str</em><em> | </em><em>Path</em>) – the path to check</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the path matches the project root, False otherwise (including the case
+where this project’s root directory no longer exists, e.g. a removed git worktree)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.RegisteredProject.get_project_instance">
+<span class="sig-name descname"><span class="pre">get_project_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serena_config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#RegisteredProject.get_project_instance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.RegisteredProject.get_project_instance" title="Link to this definition">#</a></dt>
+<dd><p>Returns the project instance for this registered project, loading it if necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>serena_config</strong> (<a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="../project.html#serena.project.Project" title="serena.project.Project"><em>Project</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SerenaConfig</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">default_modes=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">base_modes=('interactive'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">'editing')</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">excluded_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">included_optional_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">fixed_tools=()</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">read_only_memory_patterns=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ignored_memory_patterns=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ls_specific_settings=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">*</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">symbol_info_budget=10.0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">language_backend=LanguageBackend.LSP</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">line_ending=LineEnding.NATIVE</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">projects=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">gui_log_window=False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">log_level=20</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">trace_lsp_communication=False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">web_dashboard=True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">web_dashboard_open_on_launch=True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">web_dashboard_interface=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">web_dashboard_listen_address='127.0.0.1'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">web_dashboard_trusted_hosts=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">jetbrains_plugin_server_address='127.0.0.1'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">jetbrains_launch_command=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">tool_timeout=240</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">token_count_estimator='CHAR_COUNT'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">default_max_tool_answer_chars=150000</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ignored_paths=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">project_serena_folder_location='$projectDir/.serena'</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">trusted_project_path_patterns=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">ls_priorities=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">_loaded_commented_yaml=None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">_config_file_path=None</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#serena.config.serena_config.SharedConfig" title="serena.config.serena_config.SharedConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">SharedConfig</span></code></a>, <a class="reference internal" href="#serena.config.serena_config.ModeSelectionDefinitionWithBaseModes" title="serena.config.serena_config.ModeSelectionDefinitionWithBaseModes"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModeSelectionDefinitionWithBaseModes</span></code></a></p>
+<p>Holds the Serena agent configuration, which is typically loaded from a YAML configuration file
+(when instantiated via <a class="reference internal" href="#serena.config.serena_config.SerenaConfig.from_config_file" title="serena.config.serena_config.SerenaConfig.from_config_file"><code class="xref py py-meth docutils literal notranslate"><span class="pre">from_config_file()</span></code></a>), which is updated when projects are added or removed.
+For testing purposes, it can also be instantiated directly with the desired parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>default_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>base_modes</strong> (<em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>excluded_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>included_optional_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>fixed_tools</strong> (<em>Sequence</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>read_only_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ignored_memory_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_specific_settings</strong> (<em>dict</em>)</p></li>
+<li><p><strong>symbol_info_budget</strong> (<em>float</em>)</p></li>
+<li><p><strong>language_backend</strong> (<a class="reference internal" href="#serena.config.serena_config.LanguageBackend" title="serena.config.serena_config.LanguageBackend"><em>LanguageBackend</em></a>)</p></li>
+<li><p><strong>line_ending</strong> (<a class="reference internal" href="#serena.config.serena_config.LineEnding" title="serena.config.serena_config.LineEnding"><em>LineEnding</em></a>)</p></li>
+<li><p><strong>projects</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.config.serena_config.RegisteredProject" title="serena.config.serena_config.RegisteredProject"><em>RegisteredProject</em></a><em>]</em>)</p></li>
+<li><p><strong>gui_log_window</strong> (<em>bool</em>)</p></li>
+<li><p><strong>log_level</strong> (<em>int</em>)</p></li>
+<li><p><strong>trace_lsp_communication</strong> (<em>bool</em>)</p></li>
+<li><p><strong>web_dashboard</strong> (<em>bool</em>)</p></li>
+<li><p><strong>web_dashboard_open_on_launch</strong> (<em>bool</em>)</p></li>
+<li><p><strong>web_dashboard_interface</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>web_dashboard_listen_address</strong> (<em>str</em>)</p></li>
+<li><p><strong>web_dashboard_trusted_hosts</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>jetbrains_plugin_server_address</strong> (<em>str</em>)</p></li>
+<li><p><strong>jetbrains_launch_command</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>tool_timeout</strong> (<em>float</em>)</p></li>
+<li><p><strong>token_count_estimator</strong> (<em>str</em>)</p></li>
+<li><p><strong>default_max_tool_answer_chars</strong> (<em>int</em>)</p></li>
+<li><p><strong>ignored_paths</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>project_serena_folder_location</strong> (<em>str</em>)</p></li>
+<li><p><strong>trusted_project_path_patterns</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>ls_priorities</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>_loaded_commented_yaml</strong> (<em>CommentedMap</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>_config_file_path</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.jetbrains_launch_command">
+<span class="sig-name descname"><span class="pre">jetbrains_launch_command</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.jetbrains_launch_command" title="Link to this definition">#</a></dt>
+<dd><p>JetBrains IDE launch command, which can be used to auto-start an IDE instance on demand.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.tool_timeout">
+<span class="sig-name descname"><span class="pre">tool_timeout</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">240</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.tool_timeout" title="Link to this definition">#</a></dt>
+<dd><p>timeout for tool calls in seconds; if a tool takes longer than this, it is aborted and an error is returned.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.token_count_estimator">
+<span class="sig-name descname"><span class="pre">token_count_estimator</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CHAR_COUNT'</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.token_count_estimator" title="Link to this definition">#</a></dt>
+<dd><p>Only relevant if <cite>record_tool_usage</cite> is True; the name of the token count estimator to use for tool usage statistics.
+See the <cite>RegisteredTokenCountEstimator</cite> enum for available options.</p>
+<p>Note: some token estimators (like tiktoken) may require downloading data files
+on the first run, which can take some time and require internet access. Others, like the Anthropic ones, may require an API key
+and rate limits may apply.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.default_max_tool_answer_chars">
+<span class="sig-name descname"><span class="pre">default_max_tool_answer_chars</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">150000</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.default_max_tool_answer_chars" title="Link to this definition">#</a></dt>
+<dd><p>Used as default for tools where the apply method has a default maximal answer length.
+Even though the value of the max_answer_chars can be changed when calling the tool, it may make sense to adjust this default 
+through the global configuration.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.ignored_paths">
+<span class="sig-name descname"><span class="pre">ignored_paths</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.ignored_paths" title="Link to this definition">#</a></dt>
+<dd><p>List of paths to ignore across all projects. Same syntax as gitignore, so you can use <code class="docutils literal notranslate"><span class="pre">*</span></code> and <code class="docutils literal notranslate"><span class="pre">**</span></code>.
+These patterns are merged additively with each project’s own ignored_paths.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.project_serena_folder_location">
+<span class="sig-name descname"><span class="pre">project_serena_folder_location</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'$projectDir/.serena'</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.project_serena_folder_location" title="Link to this definition">#</a></dt>
+<dd><p>Template for the location of the per-project .serena data folder (memories, caches, etc.).
+Supports the following placeholders:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>$projectDir: the absolute path to the project root directory</p></li>
+<li><p>$projectFolderName: the name of the project folder</p></li>
+</ul>
+</div></blockquote>
+<p>Examples:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“$projectDir/.serena” (default, stores data inside the project)</p></li>
+<li><p>“/projects-metadata/$projectFolderName/.serena” (stores data in a central location)</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.trusted_project_path_patterns">
+<span class="sig-name descname"><span class="pre">trusted_project_path_patterns</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.trusted_project_path_patterns" title="Link to this definition">#</a></dt>
+<dd><p>list of glob patterns for project root directories that are considered trusted.
+The default “**” considers all project roots as trusted, which is necessary for backward compatibility.
+The default will apply if a user does not yet have the setting, while new users will get the value
+defined in the configuration template file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.ls_priorities">
+<span class="sig-name descname"><span class="pre">ls_priorities</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.ls_priorities" title="Link to this definition">#</a></dt>
+<dd><p>mapping from language server keys to their priority (higher number = higher priority).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.language_backend">
+<span class="sig-name descname"><span class="pre">language_backend</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#serena.config.serena_config.LanguageBackend" title="serena.config.serena_config.LanguageBackend"><span class="pre">LanguageBackend</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LSP'</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.language_backend" title="Link to this definition">#</a></dt>
+<dd><p>the language backend to use for code understanding features</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.symbol_info_budget">
+<span class="sig-name descname"><span class="pre">symbol_info_budget</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10.0</span></em><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.symbol_info_budget" title="Link to this definition">#</a></dt>
+<dd><p>Time budget (seconds) for requests when tools request include_info (currently
+only supported for LSP-based tools).</p>
+<p>If the budget is exceeded, Serena stops issuing further requests and returns partial info results.
+0 disables the budget (no early stopping). Negative values are invalid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_config_file_creation_date">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_config_file_creation_date</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_config_file_creation_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_config_file_creation_date" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the creation date of the configuration file, or None if the configuration file does not exist</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>datetime</em> | <em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.from_config_file">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_config_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">generate_if_missing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.from_config_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.from_config_file" title="Link to this definition">#</a></dt>
+<dd><p>Static constructor to create SerenaConfig from the configuration file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>generate_if_missing</strong> (<em>bool</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.init">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">language_backend</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.init"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.init" title="Link to this definition">#</a></dt>
+<dd><p>Supports the config initialisation CLI command, allowing the user to configure fundamental settings before
+the first launch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>language_backend</strong> (<a class="reference internal" href="#serena.config.serena_config.LanguageBackend" title="serena.config.serena_config.LanguageBackend"><em>LanguageBackend</em></a>) – the language backend to use</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the created SerenaConfig instance</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.with_headless_mode_overrides">
+<span class="sig-name descname"><span class="pre">with_headless_mode_overrides</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.with_headless_mode_overrides"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.with_headless_mode_overrides" title="Link to this definition">#</a></dt>
+<dd><p>Modifies this instance to apply overrides for headless mode, where any GUI/user interaction-based features are disabled.
+This is intended to be applied for cases where a <cite>SerenaConfig</cite> instance is needed to instantiate a <cite>SerenaAgent</cite> instance
+while the user is not expected to interact with the system (e.g. a CLI command or a test).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the instance with overrides applied for headless mode</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#serena.config.serena_config.SerenaConfig" title="serena.config.serena_config.SerenaConfig"><em>SerenaConfig</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_registered_project">
+<span class="sig-name descname"><span class="pre">get_registered_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root_or_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoregister</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_registered_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_registered_project" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root_or_name</strong> (<em>str</em>) – path to the project root or the name of the project</p></li>
+<li><p><strong>autoregister</strong> (<em>bool</em>) – whether to auto-register projects that are not yet registered in Serena’s global configuration
+but have an existing project configuration file. Project configuration files are never auto-generated.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the registered project, or None if not found</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.config.serena_config.RegisteredProject" title="serena.config.serena_config.RegisteredProject"><em>RegisteredProject</em></a> | <em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.add_registered_project">
+<span class="sig-name descname"><span class="pre">add_registered_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">registered_project</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.add_registered_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.add_registered_project" title="Link to this definition">#</a></dt>
+<dd><p>Adds a registered project, persisting the updated project list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registered_project</strong> (<a class="reference internal" href="#serena.config.serena_config.RegisteredProject" title="serena.config.serena_config.RegisteredProject"><em>RegisteredProject</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.add_project_from_path">
+<span class="sig-name descname"><span class="pre">add_project_from_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asynchronous_autogen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.add_project_from_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.add_project_from_path" title="Link to this definition">#</a></dt>
+<dd><p>Adds a new project to the Serena configuration from a given path, auto-generating the project
+with defaults if it does not exist.
+Will raise a FileExistsError if a project already exists at the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project_root</strong> (<em>Path</em><em> | </em><em>str</em>) – the path to the project to add</p></li>
+<li><p><strong>asynchronous_autogen</strong> (<em>bool</em>) – whether to use asynchronous auto-generation for the project configuration</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the project that was added</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="../project.html#serena.project.Project" title="serena.project.Project"><em>Project</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_configured_project_serena_folder">
+<span class="sig-name descname"><span class="pre">get_configured_project_serena_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_configured_project_serena_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_configured_project_serena_folder" title="Link to this definition">#</a></dt>
+<dd><p>Returns the resolved absolute path to the .serena data folder for a project,
+applying placeholder substitution to <code class="docutils literal notranslate"><span class="pre">project_serena_folder_location</span></code>
+without any fallback logic.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – the absolute path to the project root directory</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the resolved absolute path to the project’s .serena folder</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.config.serena_config.SerenaConfigError" title="serena.config.serena_config.SerenaConfigError"><strong>SerenaConfigError</strong></a> – if the template contains an unknown placeholder</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_project_serena_folder">
+<span class="sig-name descname"><span class="pre">get_project_serena_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_project_serena_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_project_serena_folder" title="Link to this definition">#</a></dt>
+<dd><p>Resolves the location of the project’s .serena data folder using fallback logic:</p>
+<ol class="arabic simple">
+<li><p>If the folder exists at the configured path (<code class="docutils literal notranslate"><span class="pre">project_serena_folder_location</span></code>), use it.</p></li>
+<li><p>Otherwise, if it exists at the default location inside the project root, use that.</p></li>
+<li><p>If neither exists, return the configured path (for creation).</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – the absolute path to the project root directory</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the resolved absolute path to the .serena data folder</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.config.serena_config.SerenaConfigError" title="serena.config.serena_config.SerenaConfigError"><strong>SerenaConfigError</strong></a> – if the configured template contains an unknown placeholder</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_project_yml_location">
+<span class="sig-name descname"><span class="pre">get_project_yml_location</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_project_yml_location"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_project_yml_location" title="Link to this definition">#</a></dt>
+<dd><p>Returns the resolved absolute path to the project.yml configuration file,
+based on the resolved .serena data folder (with fallback logic).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – the absolute path to the project root directory</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the resolved absolute path to the project’s project.yml file</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.propagate_settings">
+<span class="sig-name descname"><span class="pre">propagate_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.propagate_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.propagate_settings" title="Link to this definition">#</a></dt>
+<dd><p>Propagate settings from this configuration to individual components that are statically configured</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>None</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.is_trusted_project_path">
+<span class="sig-name descname"><span class="pre">is_trusted_project_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.is_trusted_project_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.is_trusted_project_path" title="Link to this definition">#</a></dt>
+<dd><p>Checks if the given project root path matches any of the trusted project root patterns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>project_root</strong> (<em>str</em><em> | </em><em>Path</em>) – the path to the project root directory</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the project root is trusted, False otherwise</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.config.serena_config.SerenaConfig.get_ls_priority">
+<span class="sig-name descname"><span class="pre">get_ls_priority</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ls_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/config/serena_config.html#SerenaConfig.get_ls_priority"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.config.serena_config.SerenaConfig.get_ls_priority" title="Link to this definition">#</a></dt>
+<dd><p>Gets the priority value associated with a language server</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ls_id</strong> (<em>LanguageServerId</em>) – identifies the language server</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the integer priority</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06-contributing/code-reference/config"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="context_mode.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">serena.config.context_mode</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../generated/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">generated</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

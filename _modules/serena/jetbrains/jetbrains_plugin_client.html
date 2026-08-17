@@ -1,0 +1,1283 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.jetbrains.jetbrains_plugin_client &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/jetbrains/jetbrains_plugin_client';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/jetbrains/jetbrains_plugin_client.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.jetbrains.jetbrains_plugin_client</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Client for the Serena JetBrains Plugin</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">concurrent</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures.thread</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">requests</span><span class="w"> </span><span class="kn">import</span> <span class="n">Response</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util.string</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToStringMixin</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">serena.jetbrains.jetbrains_types</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jb</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.config.serena_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">RegisteredProject</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerenaPorts</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.jetbrains.jetbrains_types</span><span class="w"> </span><span class="kn">import</span> <span class="n">PluginStatusDTO</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.class_decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">singleton</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.text_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">render_html</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.version</span><span class="w"> </span><span class="kn">import</span> <span class="n">Version</span>
+
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="SerenaClientError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.SerenaClientError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerenaClientError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base exception for Serena client errors.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ConnectionError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.ConnectionError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ConnectionError</span><span class="p">(</span><span class="n">SerenaClientError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when connection to the service fails.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="APIError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.APIError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">APIError</span><span class="p">(</span><span class="n">SerenaClientError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the API returns an error response that shall be reported on the caller/LLM.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Response</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">error_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">error_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="PluginServerError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.PluginServerError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PluginServerError</span><span class="p">(</span><span class="n">SerenaClientError</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the plugin&#39;s service encounters an internal error (which may need to be reported).&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">unrecoverable_error_prefix</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;The request failed due to an error on the Serena JetBrains plugin side. This may be caused &quot;</span>
+            <span class="s2">&quot;by a bug or an incompatibility in the plugin. In that case, please report the error below together with &quot;</span>
+            <span class="s2">&quot;your setup (IDE + version, Serena plugin version, programming language) at https://github.com/oraios/serena/issues &quot;</span>
+            <span class="s2">&quot;(if you are an LLM, tell the user about this). The Oraios team will then provide support on this.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">unrecoverable_error_prefix</span> <span class="o">+</span> <span class="n">message</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ServerNotFoundError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.ServerNotFoundError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ServerNotFoundError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Raised when the plugin&#39;s service is not found.&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="MatchedClient">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.MatchedClient">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MatchedClient</span><span class="p">:</span>
+    <span class="n">client</span><span class="p">:</span> <span class="s2">&quot;JetBrainsPluginClient&quot;</span>
+    <span class="n">registered_project</span><span class="p">:</span> <span class="n">RegisteredProject</span></div>
+
+
+
+<span class="nd">@singleton</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsPluginClientManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manager for JetBrainsPluginClient instances, responsible for scanning ports to find available plugin instances</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">NUM_PORTS_TO_SCAN</span> <span class="o">=</span> <span class="mi">20</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clients</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matched_clients</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">MatchedClient</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_submit_scan</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">concurrent</span><span class="o">.</span><span class="n">futures</span><span class="o">.</span><span class="n">Future</span><span class="p">[</span><span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs a port scan to find available plugin instances in parallel.</span>
+
+<span class="sd">        :return: futures that will resolve to plugin clients for every port</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">scan_port</span><span class="p">(</span><span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JetBrainsPluginClient</span><span class="p">:</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">JetBrainsPluginClient</span><span class="p">(</span><span class="n">port</span><span class="p">)</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lock</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_clients</span><span class="p">[</span><span class="n">port</span><span class="p">]</span> <span class="o">=</span> <span class="n">client</span>
+            <span class="k">return</span> <span class="n">client</span>
+
+        <span class="n">futures</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_PORTS_TO_SCAN</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NUM_PORTS_TO_SCAN</span><span class="p">):</span>
+                <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">scan_port</span><span class="p">,</span> <span class="n">JetBrainsPluginClient</span><span class="o">.</span><span class="n">BASE_PORT</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">futures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">futures</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_root</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">log_warning</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param project_root: the project root path to find a plugin instance for</span>
+<span class="sd">        :param log_warning: whether to log a warning if no matching plugin instance is found</span>
+<span class="sd">        :return: the instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">plugin_paths_found</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_submit_scan</span><span class="p">():</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">project_root</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">client</span>
+            <span class="k">elif</span> <span class="n">client</span><span class="o">.</span><span class="n">project_root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">plugin_paths_found</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">log_warning</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;Searched for Serena JetBrains plugin service for project at </span><span class="si">%s</span><span class="s2"> but found no matching service. &quot;</span>
+                <span class="s2">&quot;Found plugin instances for the following project paths: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+                <span class="n">project_root</span><span class="p">,</span>
+                <span class="n">plugin_paths_found</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ServerNotFoundError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Found no Serena service in a JetBrains IDE instance for the project at </span><span class="si">{</span><span class="n">project_root</span><span class="si">}</span><span class="s2">. &quot;</span>
+            <span class="s2">&quot;STOP. Do not attempt any other tools or workarounds. Ask the user to open this folder as a project in a JetBrains IDE &quot;</span>
+            <span class="s2">&quot;with the Serena plugin installed and running!&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">match_clients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">registered_projects</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">RegisteredProject</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">MatchedClient</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Scans for plugin instances and matches them against the given registered projects.</span>
+
+<span class="sd">        :param registered_projects: the list of registered projects to match plugin instances against</span>
+<span class="sd">        :return: the list of matched clients with their corresponding registered project</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">matched_clients</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_submit_scan</span><span class="p">():</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="n">project_root</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">rp</span> <span class="ow">in</span> <span class="n">registered_projects</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">project_root</span><span class="p">)):</span>
+                        <span class="n">matched_clients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MatchedClient</span><span class="p">(</span><span class="n">client</span><span class="p">,</span> <span class="n">rp</span><span class="p">))</span>
+                        <span class="k">break</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matched_clients</span> <span class="o">=</span> <span class="n">matched_clients</span>
+        <span class="k">return</span> <span class="n">matched_clients</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_matched_client</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">registered_project</span><span class="p">:</span> <span class="n">RegisteredProject</span><span class="p">,</span> <span class="n">registered_projects</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">RegisteredProject</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the matched client for a given registered project, if any.</span>
+
+<span class="sd">        :param registered_project: the registered project to get the matched client for</span>
+<span class="sd">        :param registered_projects: the list of all registered projects (used to perform matching of all clients</span>
+<span class="sd">            if no match is found for the given project)</span>
+<span class="sd">        :return: the matched client or None if no match is found</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">find_match</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">matched_client</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matched_clients</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">matched_client</span><span class="o">.</span><span class="n">registered_project</span><span class="o">.</span><span class="n">project_root</span> <span class="o">==</span> <span class="n">registered_project</span><span class="o">.</span><span class="n">project_root</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">matched_client</span><span class="o">.</span><span class="n">client</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">find_match</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">match_clients</span><span class="p">(</span><span class="n">registered_projects</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">find_match</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">JetBrainsPluginClient</span><span class="p">(</span><span class="n">ToStringMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Python client for the Serena Backend Service.</span>
+
+<span class="sd">    Provides simple methods to interact with all available endpoints.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">BASE_PORT</span> <span class="o">=</span> <span class="n">SerenaPorts</span><span class="o">.</span><span class="n">JETBRAINS_PLUGIN_SERVER_BASE_PORT</span>
+    <span class="n">PLUGIN_REQUEST_TIMEOUT</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the timeout used for request handling within the plugin (a constant in the plugin)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_last_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the last port that was successfully used to connect to a plugin instance in the current session</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_server_address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the server address where to connect to the plugin service</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">PLUGIN_REQUEST_TIMEOUT</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">port</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span> <span class="o">=</span> <span class="n">timeout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span> <span class="s2">&quot;Accept&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">})</span>
+
+        <span class="c1"># connect and obtain status</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_version</span><span class="p">:</span> <span class="n">Version</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">status_response</span><span class="p">:</span> <span class="n">PluginStatusDTO</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">PluginStatusDTO</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;/status&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="o">=</span> <span class="n">status_response</span><span class="p">[</span><span class="s2">&quot;project_root&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_version</span> <span class="o">=</span> <span class="n">Version</span><span class="p">(</span><span class="n">status_response</span><span class="p">[</span><span class="s2">&quot;plugin_version&quot;</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ConnectionError</span><span class="p">:</span>  <span class="c1"># expected if no server is running at the port</span>
+            <span class="k">pass</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Failed to obtain status from JetBrains plugin service at port </span><span class="si">%d</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_base_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;http://</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_server_address</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_port</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_server_address</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_server_address</span> <span class="o">=</span> <span class="n">address</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_tostring_includes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;_port&quot;</span><span class="p">,</span> <span class="s2">&quot;project_root&quot;</span><span class="p">,</span> <span class="s2">&quot;_plugin_version&quot;</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_project</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">project</span><span class="p">:</span> <span class="n">Project</span><span class="p">,</span> <span class="n">log_warning</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;JetBrainsPluginClient&quot;</span><span class="p">:</span>
+        <span class="n">resolved_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">project</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_last_port</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">client</span> <span class="o">=</span> <span class="n">JetBrainsPluginClient</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_last_port</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">client</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">resolved_path</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">client</span>
+
+        <span class="n">client</span> <span class="o">=</span> <span class="n">JetBrainsPluginClientManager</span><span class="p">()</span><span class="o">.</span><span class="n">find_client</span><span class="p">(</span><span class="n">resolved_path</span><span class="p">,</span> <span class="n">log_warning</span><span class="o">=</span><span class="n">log_warning</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_last_port</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">_port</span>
+        <span class="k">return</span> <span class="n">client</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_paths_match</span><span class="p">(</span><span class="n">resolved_serena_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">plugin_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether the resolved Serena path matches the plugin path, accounting for possible prefixes</span>
+<span class="sd">        in the plugin path, different file system perspectives, and case sensitivity.</span>
+
+<span class="sd">        Concrete aspects considered:</span>
+<span class="sd">        - The plugin path may contain prefixes:</span>
+<span class="sd">          - The plugin path may be a WSL UNC path, e.g. `//wsl.localhost/Ubuntu-24.04/home/user/project`</span>
+<span class="sd">            or `//wsl$/Ubuntu/home/user/project` while Serena will just have `/home/user/project`</span>
+<span class="sd">          - Other prefixes like `/workspaces/serena/C:/Users/user/projects/my-app`</span>
+<span class="sd">        - One path may use a different file system perspective (particularly WSL vs Windows-native) but still</span>
+<span class="sd">          point to the same location, e.g. `/mnt/c/` vs `C:/`</span>
+<span class="sd">        - Case sensitivity</span>
+
+<span class="sd">        :param resolved_serena_path: The resolved project root path from Serena&#39;s perspective</span>
+<span class="sd">        :param plugin_path: The project root path reported by the plugin (which may be a WSL UNC path)</span>
+<span class="sd">        :return: True if the paths match, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># try to resolve the plugin path, checking for a direct match</span>
+        <span class="c1"># (this is robust against symlinks as long as there are no prefixes)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">resolved_plugin_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="n">plugin_path</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">resolved_plugin_path</span> <span class="o">==</span> <span class="n">resolved_serena_path</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">normalise_wsl_mnt</span><span class="p">(</span><span class="n">path_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="c1"># normalise WSL /mnt/c/ to c:/ for comparison</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/mnt/([a-z])/&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1:/&quot;</span><span class="p">,</span> <span class="n">path_str</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+        <span class="c1"># standardise paths for comparison: normalise WSL /mnt/ to Windows paths and ignore case</span>
+        <span class="n">std_serena_path</span> <span class="o">=</span> <span class="n">normalise_wsl_mnt</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resolved_serena_path</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="n">std_plugin_path</span> <span class="o">=</span> <span class="n">normalise_wsl_mnt</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">plugin_path</span><span class="p">))</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="c1"># At this point, the plugin path may still contain prefixes, so we check if the Serena path is a suffix of the plugin path</span>
+        <span class="k">return</span> <span class="n">std_plugin_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">std_serena_path</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JetBrainsPluginClient.matches">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.matches">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolved_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param resolved_path: the resolved project root path from Serena&#39;s perspective</span>
+<span class="sd">        :return: whether this client instance matches the given project path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_paths_match</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resolved_path</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">project_root</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_version_at_least</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">version_parts</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plugin_version</span><span class="o">.</span><span class="n">is_at_least</span><span class="p">(</span><span class="o">*</span><span class="n">version_parts</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_require_version_at_least</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">version_parts</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Ensures that the plugin version is at least the given version and raises an error otherwise.</span>
+
+<span class="sd">        :param version_parts: the minimum required version parts (major, minor, patch)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_version_at_least</span><span class="p">(</span><span class="o">*</span><span class="n">version_parts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">SerenaClientError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;This operation requires Serena JetBrains plugin version &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="w"> </span><span class="n">version_parts</span><span class="p">))</span><span class="si">}</span><span class="s2"> or higher, but the installed version is &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_plugin_version</span><span class="si">}</span><span class="s2">. Ask the user to update the plugin!&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_make_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">pythonify</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param method: the HTTP method to use (&quot;GET&quot; or &quot;POST&quot;)</span>
+<span class="sd">        :param endpoint: the endpoint to call (e.g., &quot;/findSymbol&quot;)</span>
+<span class="sd">        :param data: the data to send in the request body (for POST requests)</span>
+<span class="sd">        :param pythonify: whether to recursively &quot;pythonify&quot; the response object, converting all keys to snake_case.</span>
+<span class="sd">            This must not be enabled if *any* key contains variable data rather (and therefore isn&#39;t a well-defined DTO structure).</span>
+<span class="sd">        :return: the response as a dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_base_url</span><span class="si">}{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span>
+
+        <span class="n">response</span><span class="p">:</span> <span class="n">Response</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;GET&quot;</span><span class="p">:</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+                <span class="n">data_dict</span> <span class="o">=</span> <span class="n">data</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data_dict</span><span class="p">),</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_timeout</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported HTTP method: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+
+            <span class="c1"># Try to parse JSON response</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">response_json</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">pythonify</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pythonify_response</span><span class="p">(</span><span class="n">response_json</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">response_json</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="c1"># If response is not JSON, return raw text</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">}</span>
+
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">ConnectionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to connect to Serena service at </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">Timeout</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request to </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s2"> timed out: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># check for recoverable error (i.e. errors where the problem can be resolved by the caller or</span>
+                <span class="c1"># other errors where the error text shall simply be passed on to the LLM).</span>
+                <span class="c1"># The plugin returns 400 for such errors (typically illegal arguments, e.g. non-unique name path)</span>
+                <span class="c1"># but only since version 2023.2.6</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>
+                    <span class="n">is_recoverable_error</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">is_recoverable_error</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># assume recoverable for older versions (mix of errors)</span>
+                <span class="k">if</span> <span class="n">is_recoverable_error</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">APIError</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">PluginServerError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;API request failed with status </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">PluginServerError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;API request failed with HTTP error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SerenaClientError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Request failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_pythonify_response</span><span class="p">(</span><span class="n">response</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts dictionary keys from camelCase to snake_case recursively.</span>
+
+<span class="sd">        :response: the response in which to convert keys (dictionary or list)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">to_snake_case</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">else</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">s</span><span class="p">])</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">{</span><span class="n">to_snake_case</span><span class="p">(</span><span class="n">k</span><span class="p">):</span> <span class="n">convert</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">convert</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">x</span>
+
+        <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_dict</span><span class="p">:</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Postprocesses a symbol collection response in-place, converting HTML documentation to plain text.</span>
+
+<span class="sd">        :param response_dict: the response dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">convert_html</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;documentation&quot;</span><span class="p">,</span> <span class="s2">&quot;quick_info&quot;</span><span class="p">],</span> <span class="n">symbol</span><span class="p">:</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolDTO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">symbol</span><span class="p">:</span>
+                <span class="n">doc_html</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">symbol</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                <span class="n">doc_text</span> <span class="o">=</span> <span class="n">render_html</span><span class="p">(</span><span class="n">doc_html</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">doc_text</span><span class="p">:</span>
+                    <span class="n">symbol</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">doc_text</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">del</span> <span class="n">symbol</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">convert_symbol_list</span><span class="p">(</span><span class="n">l</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
+                <span class="n">convert_html</span><span class="p">(</span><span class="s2">&quot;documentation&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+                <span class="n">convert_html</span><span class="p">(</span><span class="s2">&quot;quick_info&quot;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s2">&quot;children&quot;</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                    <span class="n">convert_symbol_list</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="s2">&quot;children&quot;</span><span class="p">])</span>
+
+        <span class="n">convert_symbol_list</span><span class="p">(</span><span class="n">response_dict</span><span class="p">[</span><span class="s2">&quot;symbols&quot;</span><span class="p">])</span>
+
+<div class="viewcode-block" id="JetBrainsPluginClient.find_symbol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.find_symbol">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_symbol</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_quick_info</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_documentation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">include_num_usages</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">include_location</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">search_deps</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds symbols by name.</span>
+
+<span class="sd">        :param name_path: the name path to match</span>
+<span class="sd">        :param relative_path: the relative path to which to restrict the search</span>
+<span class="sd">        :param include_body: whether to include symbol body content (should typically not be combined with `include_quick_info`</span>
+<span class="sd">            or `include_documentation` because the body includes everything)</span>
+<span class="sd">        :param include_quick_info: whether to include quick info (typically the signature)</span>
+<span class="sd">        :param include_documentation: whether to include documentation; note that this includes the quick info, so one should</span>
+<span class="sd">            not pass both `include_quick_info` and this</span>
+<span class="sd">        :param include_num_usages: whether to include the number of usages</span>
+<span class="sd">        :param depth: depth up to which to include children (0 = no children)</span>
+<span class="sd">        :param include_location: whether to include symbol location information</span>
+<span class="sd">        :param search_deps: whether to also search in dependencies</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;*&quot;</span> <span class="ow">in</span> <span class="n">name_path</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;includeBody&quot;</span><span class="p">:</span> <span class="n">include_body</span><span class="p">,</span>
+            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="n">depth</span><span class="p">,</span>
+            <span class="s2">&quot;includeLocation&quot;</span><span class="p">:</span> <span class="n">include_location</span><span class="p">,</span>
+            <span class="s2">&quot;searchDeps&quot;</span><span class="p">:</span> <span class="n">search_deps</span><span class="p">,</span>
+            <span class="s2">&quot;includeQuickInfo&quot;</span><span class="p">:</span> <span class="n">include_quick_info</span><span class="p">,</span>
+            <span class="s2">&quot;includeDocumentation&quot;</span><span class="p">:</span> <span class="n">include_documentation</span><span class="p">,</span>
+            <span class="s2">&quot;includeNumUsages&quot;</span><span class="p">:</span> <span class="n">include_num_usages</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/findSymbol&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_collection</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_parent_name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">target_relative_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;targetParentNamePath&quot;</span><span class="p">:</span> <span class="n">target_parent_name_path</span><span class="p">,</span>
+            <span class="s2">&quot;targetRelativePath&quot;</span><span class="p">:</span> <span class="n">target_relative_path</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/moveSymbol&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span>
+
+<div class="viewcode-block" id="JetBrainsPluginClient.find_references">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.find_references">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">include_quick_info</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds references to a symbol.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol</span>
+<span class="sd">        :param relative_path: the relative path</span>
+<span class="sd">        :param include_quick_info: whether to include quick info about references</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span> <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span> <span class="s2">&quot;includeQuickInfo&quot;</span><span class="p">:</span> <span class="n">include_quick_info</span><span class="p">}</span>
+        <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/findReferences&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_collection</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.get_symbols_overview">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.get_symbols_overview">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_symbols_overview</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">include_file_documentation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">GetSymbolsOverviewResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param relative_path: the relative path to a source file</span>
+<span class="sd">        :param depth: the depth of children to include (0 = no children)</span>
+<span class="sd">        :param include_file_documentation: whether to include the file&#39;s documentation string (if any)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span> <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="n">depth</span><span class="p">,</span> <span class="s2">&quot;includeFileDocumentation&quot;</span><span class="p">:</span> <span class="n">include_file_documentation</span><span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">GetSymbolsOverviewResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/getSymbolsOverview&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="c1"># process file documentation</span>
+        <span class="k">if</span> <span class="s2">&quot;documentation&quot;</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+            <span class="n">response</span><span class="p">[</span><span class="s2">&quot;documentation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">render_html</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s2">&quot;documentation&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">response</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.get_supertypes">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.get_supertypes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_supertypes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit_children</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">TypeHierarchyResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the supertypes (parent classes/interfaces) of a symbol.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param depth: depth limit for hierarchy traversal (None or 0 for unlimited)</span>
+<span class="sd">        :param limit_children: optional limit on children per level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="n">depth</span><span class="p">,</span>
+            <span class="s2">&quot;limitChildren&quot;</span><span class="p">:</span> <span class="n">limit_children</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">TypeHierarchyResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/getSupertypes&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.get_subtypes">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.get_subtypes">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_subtypes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">limit_children</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">TypeHierarchyResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gets the subtypes (subclasses/implementations) of a symbol.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param depth: depth limit for hierarchy traversal (None or 0 for unlimited)</span>
+<span class="sd">        :param limit_children: optional limit on children per level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="n">depth</span><span class="p">,</span>
+            <span class="s2">&quot;limitChildren&quot;</span><span class="p">:</span> <span class="n">limit_children</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">TypeHierarchyResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/getSubtypes&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.safe_delete">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.safe_delete">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">safe_delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delete_even_if_used</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">propagate</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Safely deletes a symbol, checking for usages first.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol to delete</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param delete_even_if_used: if True, delete the symbol even if it has usages</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;deleteEvenIfUsed&quot;</span><span class="p">:</span> <span class="n">delete_even_if_used</span><span class="p">,</span>
+            <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="n">propagate</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/safeDelete&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.inline_symbol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.inline_symbol">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inline_symbol</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">keep_definition</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inlines a method, replacing all call sites with the method body.</span>
+
+<span class="sd">        :param name_path: the name path of the method to inline</span>
+<span class="sd">        :param relative_path: the relative path to the file containing the method</span>
+<span class="sd">        :param keep_definition: if True, keep the original method definition after inlining</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;keepDefinition&quot;</span><span class="p">:</span> <span class="n">keep_definition</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/inlineSymbol&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.rename_symbol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.rename_symbol">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rename_symbol</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">rename_in_comments</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">rename_in_text_occurrences</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renames a symbol.</span>
+
+<span class="sd">        :param name_path: the name path of the symbol</span>
+<span class="sd">        :param relative_path: the relative path</span>
+<span class="sd">        :param new_name: the new name for the symbol</span>
+<span class="sd">        :param rename_in_comments: whether to rename in comments</span>
+<span class="sd">        :param rename_in_text_occurrences: whether to rename in text occurrences</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;newName&quot;</span><span class="p">:</span> <span class="n">new_name</span><span class="p">,</span>
+            <span class="s2">&quot;renameInComments&quot;</span><span class="p">:</span> <span class="n">rename_in_comments</span><span class="p">,</span>
+            <span class="s2">&quot;renameInTextOccurrences&quot;</span><span class="p">:</span> <span class="n">rename_in_text_occurrences</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/renameSymbol&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.refresh_file">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.refresh_file">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">refresh_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Triggers a refresh of the given file in the IDE.</span>
+
+<span class="sd">        :param relative_path: the relative path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/refreshFile&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.find_declaration">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.find_declaration">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_declaration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">col</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">include_body</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">include_quick_info</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the declaration of the symbol at the given location.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file</span>
+<span class="sd">        :param line: the line number (0-based)</span>
+<span class="sd">        :param col: the column number (0-based)</span>
+<span class="sd">        :param include_body: whether to include the symbol body</span>
+<span class="sd">        :param include_quick_info: whether to include quick info about the symbol</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="n">line</span><span class="p">,</span>
+            <span class="s2">&quot;col&quot;</span><span class="p">:</span> <span class="n">col</span><span class="p">,</span>
+            <span class="s2">&quot;includeBody&quot;</span><span class="p">:</span> <span class="n">include_body</span><span class="p">,</span>
+            <span class="s2">&quot;includeQuickInfo&quot;</span><span class="p">:</span> <span class="n">include_quick_info</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/findDeclaration&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_collection</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.find_implementations">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.find_implementations">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_implementations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">include_quick_info</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds the implementations of a symbol.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file containing the symbol</span>
+<span class="sd">        :param name_path: the name path of the symbol</span>
+<span class="sd">        :param include_quick_info: whether to include quick info about the symbol</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+            <span class="s2">&quot;namePath&quot;</span><span class="p">:</span> <span class="n">name_path</span><span class="p">,</span>
+            <span class="s2">&quot;includeQuickInfo&quot;</span><span class="p">:</span> <span class="n">include_quick_info</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">symbol_collection</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">SymbolCollectionResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/findImplementations&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_postprocess_symbol_collection_response</span><span class="p">(</span><span class="n">symbol_collection</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">symbol_collection</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.debug_eval">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.debug_eval">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">debug_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repl_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expression</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluates a Groovy expression in the persistent debug REPL.</span>
+
+<span class="sd">        :param repl_key: the session key identifying the REPL instance</span>
+<span class="sd">        :param expression: the Groovy expression to evaluate</span>
+<span class="sd">        :return: the response containing REPL key and result</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;replKey&quot;</span><span class="p">:</span> <span class="n">repl_key</span><span class="p">,</span>
+            <span class="s2">&quot;expression&quot;</span><span class="p">:</span> <span class="n">expression</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/debugReplEval&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.debug_close">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.debug_close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">debug_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repl_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the debug REPL for the given session key, clearing all state.</span>
+
+<span class="sd">        :param repl_key: the key identifying the REPL instance to close</span>
+<span class="sd">        :return: the status response</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;replKey&quot;</span><span class="p">:</span> <span class="n">repl_key</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/debugReplClose&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.run_inspections">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.run_inspections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_inspections</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">min_severity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">inspection_names</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs IDE inspections on the given file and returns the results.</span>
+
+<span class="sd">        :param relative_path: the relative path to the file to inspect</span>
+<span class="sd">        :param min_severity: minimum severity level to include (e.g. &quot;WARNING&quot;, &quot;ERROR&quot;)</span>
+<span class="sd">        :param inspection_names: optional list of specific inspection names to run</span>
+<span class="sd">        :param start_line: optional start line to restrict the inspection range</span>
+<span class="sd">        :param end_line: optional end line to restrict the inspection range</span>
+<span class="sd">        :return: the inspection results as a dictionary.</span>
+<span class="sd">            NOTE: The response is currently *not* a well-defined DTO, because it stores variable data in keys.</span>
+<span class="sd">            Consequently, the `pythonify` option is disabled for this request, and the response is returned as-is.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">min_severity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;minSeverity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">min_severity</span>
+        <span class="k">if</span> <span class="n">inspection_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;inspectionNames&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inspection_names</span>
+        <span class="k">if</span> <span class="n">start_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;startLine&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">start_line</span>
+        <span class="k">if</span> <span class="n">end_line</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;endLine&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">end_line</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/runInspectionsOnFile&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">,</span> <span class="n">pythonify</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JetBrainsPluginClient.list_inspections">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html#serena.jetbrains.jetbrains_plugin_client.JetBrainsPluginClient.list_inspections">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_inspections</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">group_path_contains</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">jb</span><span class="o">.</span><span class="n">ListInspectionsResponse</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Lists available IDE inspections, optionally filtered by language and/or group path.</span>
+
+<span class="sd">        :param language: optional language to filter inspections by (e.g. &quot;Java&quot;, &quot;Python&quot;)</span>
+<span class="sd">        :param group_path_contains: optional substring to filter inspection group paths</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+        <span class="n">request_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">if</span> <span class="n">language</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;language&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">language</span>
+        <span class="k">if</span> <span class="n">group_path_contains</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">request_data</span><span class="p">[</span><span class="s2">&quot;groupPathContains&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_path_contains</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">jb</span><span class="o">.</span><span class="n">ListInspectionsResponse</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/listInspections&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">))</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_require_version_at_least</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">request_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;relativePath&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;/readFile&quot;</span><span class="p">,</span> <span class="n">request_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;content&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PluginServerError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unexpected response from readFile: </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

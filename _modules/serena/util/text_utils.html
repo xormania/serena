@@ -1,0 +1,1192 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.util.text_utils &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/util/text_utils';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/util/text_utils.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.util.text_utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrEnum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Self</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">joblib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util.string</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToStringMixin</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.file_proxy</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileCollection</span><span class="p">,</span> <span class="n">FileProxy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">solidlsp.ls_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">TextUtils</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="LineType">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.LineType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">LineType</span><span class="p">(</span><span class="n">StrEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum for different types of lines in search results.&quot;&quot;&quot;</span>
+
+    <span class="n">MATCH</span> <span class="o">=</span> <span class="s2">&quot;match&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Part of the matched lines&quot;&quot;&quot;</span>
+    <span class="n">BEFORE_MATCH</span> <span class="o">=</span> <span class="s2">&quot;prefix&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lines before the match&quot;&quot;&quot;</span>
+    <span class="n">AFTER_MATCH</span> <span class="o">=</span> <span class="s2">&quot;postfix&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lines after the match&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="TextLine">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.TextLine">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TextLine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a line of text with information on how it relates to the match.&quot;&quot;&quot;</span>
+
+    <span class="n">line_number</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">line_content</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">match_type</span><span class="p">:</span> <span class="n">LineType</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of line (match, prefix, postfix)&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TextLine.get_display_prefix">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.TextLine.get_display_prefix">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_display_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the display prefix for this line based on the match type.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_type</span> <span class="o">==</span> <span class="n">LineType</span><span class="o">.</span><span class="n">MATCH</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;  &gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">&quot;...&quot;</span></div>
+
+
+<div class="viewcode-block" id="TextLine.format_line">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.TextLine.format_line">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">format_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_line_numbers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format the line for display (e.g.,for logging or passing to an LLM).</span>
+
+<span class="sd">        :param include_line_numbers: Whether to include the line number in the result.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_display_prefix</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">include_line_numbers</span><span class="p">:</span>
+            <span class="n">line_num</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line_number</span><span class="p">)</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">line_num</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">line_content</span><span class="si">}</span><span class="s2">&quot;</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MatchedConsecutiveLines">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.MatchedConsecutiveLines">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MatchedConsecutiveLines</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a collection of consecutive lines found through some criterion in a text file or a string.</span>
+<span class="sd">    May include lines before, after, and matched.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TextLine</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;All lines in the context of the match. At least one of them is of `match_type` `MATCH`.&quot;&quot;&quot;</span>
+    <span class="n">source_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Path to the file where the match was found (Metadata).&quot;&quot;&quot;</span>
+
+    <span class="c1"># set in post-init</span>
+    <span class="n">lines_before_matched</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TextLine</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">matched_lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TextLine</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+    <span class="n">lines_after_matched</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TextLine</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">match_type</span> <span class="o">==</span> <span class="n">LineType</span><span class="o">.</span><span class="n">BEFORE_MATCH</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lines_before_matched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">match_type</span> <span class="o">==</span> <span class="n">LineType</span><span class="o">.</span><span class="n">MATCH</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">matched_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">line</span><span class="o">.</span><span class="n">match_type</span> <span class="o">==</span> <span class="n">LineType</span><span class="o">.</span><span class="n">AFTER_MATCH</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">lines_after_matched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matched_lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;At least one matched line is required&quot;</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">start_line</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">line_number</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">end_line</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">line_number</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">num_matched_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matched_lines</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_display_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_line_numbers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">line</span><span class="o">.</span><span class="n">format_line</span><span class="p">(</span><span class="n">include_line_numbers</span><span class="p">)</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">])</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_file_contents</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">context_lines_before</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">context_lines_after</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">source_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+        <span class="n">line_contents</span> <span class="o">=</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">split_lines</span><span class="p">(</span><span class="n">file_contents</span><span class="p">)</span>
+        <span class="n">start_lineno</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">line</span> <span class="o">-</span> <span class="n">context_lines_before</span><span class="p">)</span>
+        <span class="n">end_lineno</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">line_contents</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">line</span> <span class="o">+</span> <span class="n">context_lines_after</span><span class="p">)</span>
+        <span class="n">text_lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">TextLine</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># before the line</span>
+        <span class="k">for</span> <span class="n">lineno</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_lineno</span><span class="p">,</span> <span class="n">line</span><span class="p">):</span>
+            <span class="n">text_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TextLine</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="n">lineno</span><span class="p">,</span> <span class="n">line_content</span><span class="o">=</span><span class="n">line_contents</span><span class="p">[</span><span class="n">lineno</span><span class="p">],</span> <span class="n">match_type</span><span class="o">=</span><span class="n">LineType</span><span class="o">.</span><span class="n">BEFORE_MATCH</span><span class="p">))</span>
+        <span class="c1"># the line</span>
+        <span class="n">text_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TextLine</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="n">line</span><span class="p">,</span> <span class="n">line_content</span><span class="o">=</span><span class="n">line_contents</span><span class="p">[</span><span class="n">line</span><span class="p">],</span> <span class="n">match_type</span><span class="o">=</span><span class="n">LineType</span><span class="o">.</span><span class="n">MATCH</span><span class="p">))</span>
+        <span class="c1"># after the line</span>
+        <span class="k">for</span> <span class="n">lineno</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">line</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end_lineno</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">text_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TextLine</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="n">lineno</span><span class="p">,</span> <span class="n">line_content</span><span class="o">=</span><span class="n">line_contents</span><span class="p">[</span><span class="n">lineno</span><span class="p">],</span> <span class="n">match_type</span><span class="o">=</span><span class="n">LineType</span><span class="o">.</span><span class="n">AFTER_MATCH</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">lines</span><span class="o">=</span><span class="n">text_lines</span><span class="p">,</span> <span class="n">source_file_path</span><span class="o">=</span><span class="n">source_file_path</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="search_text">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.search_text">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_text</span><span class="p">(</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">source_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">context_lines_before</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">context_lines_after</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">multiline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">MatchedConsecutiveLines</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search for a pattern in text content. Supports both regex and glob-like patterns.</span>
+
+<span class="sd">    :param pattern: Pattern to search for (regex or glob-like pattern)</span>
+<span class="sd">    :param content: The text content to search. May be None if source_file_path is provided.</span>
+<span class="sd">    :param source_file_path: Optional path to the source file. If content is None,</span>
+<span class="sd">        this has to be passed and the file will be read.</span>
+<span class="sd">    :param context_lines_before: Number of context lines to include before matches</span>
+<span class="sd">    :param context_lines_after: Number of context lines to include after matches</span>
+<span class="sd">    :param multiline: whether to apply multi-line matching, enabling the flags re.DOTALL and re.MULTILINE</span>
+<span class="sd">    :return: List of `TextSearchMatch` objects</span>
+<span class="sd">    :raises: ValueError if the pattern is not valid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">source_file_path</span> <span class="ow">and</span> <span class="n">content</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">source_file_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Pass either content or source_file_path&quot;</span><span class="p">)</span>
+
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">split_lines</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">total_lines</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+
+    <span class="c1"># For multiline matches, optionally use DOTALL so &#39;.&#39; matches newlines</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span> <span class="k">if</span> <span class="n">multiline</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">compiled_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+    <span class="c1"># Search across the entire content as a single string</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">compiled_pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+        <span class="n">start_pos</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="n">end_pos</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+
+        <span class="c1"># Find the line numbers for the start and end positions</span>
+        <span class="n">start_line_num</span> <span class="o">=</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">get_line_from_index</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
+        <span class="n">end_line_num</span> <span class="o">=</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">get_line_from_index</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">end_line_num</span> <span class="o">&gt;</span> <span class="n">start_line_num</span> <span class="ow">and</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">get_line_col_from_index</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># `end_pos` is exclusive, so if it is at the start of a line, the match ends with the</span>
+            <span class="c1"># preceding line&#39;s newline and does not extend into the line that `end_pos` points to</span>
+            <span class="n">end_line_num</span> <span class="o">-=</span> <span class="mi">1</span>
+
+        <span class="c1"># Calculate the range of lines to include in the context</span>
+        <span class="n">context_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">start_line_num</span> <span class="o">-</span> <span class="n">context_lines_before</span><span class="p">)</span>
+        <span class="n">context_end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">total_lines</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">end_line_num</span> <span class="o">+</span> <span class="n">context_lines_after</span><span class="p">)</span>
+
+        <span class="c1"># Create TextLine objects for the context</span>
+        <span class="n">context_lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line_num</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">context_start</span><span class="p">,</span> <span class="n">context_end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">context_start</span> <span class="o">&lt;=</span> <span class="n">line_num</span> <span class="o">&lt;</span> <span class="n">start_line_num</span><span class="p">:</span>
+                <span class="n">match_type</span> <span class="o">=</span> <span class="n">LineType</span><span class="o">.</span><span class="n">BEFORE_MATCH</span>
+            <span class="k">elif</span> <span class="n">end_line_num</span> <span class="o">&lt;</span> <span class="n">line_num</span> <span class="o">&lt;=</span> <span class="n">context_end</span><span class="p">:</span>
+                <span class="n">match_type</span> <span class="o">=</span> <span class="n">LineType</span><span class="o">.</span><span class="n">AFTER_MATCH</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">match_type</span> <span class="o">=</span> <span class="n">LineType</span><span class="o">.</span><span class="n">MATCH</span>
+
+            <span class="n">context_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">TextLine</span><span class="p">(</span><span class="n">line_number</span><span class="o">=</span><span class="n">line_num</span><span class="p">,</span> <span class="n">line_content</span><span class="o">=</span><span class="n">lines</span><span class="p">[</span><span class="n">line_num</span><span class="p">],</span> <span class="n">match_type</span><span class="o">=</span><span class="n">match_type</span><span class="p">))</span>
+
+        <span class="n">matches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MatchedConsecutiveLines</span><span class="p">(</span><span class="n">lines</span><span class="o">=</span><span class="n">context_lines</span><span class="p">,</span> <span class="n">source_file_path</span><span class="o">=</span><span class="n">source_file_path</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">matches</span></div>
+
+
+
+<div class="viewcode-block" id="GlobMatcher">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.GlobMatcher">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GlobMatcher</span><span class="p">(</span><span class="n">ToStringMixin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Supports matching a file path against a glob pattern.</span>
+
+<span class="sd">    Supports standard glob patterns:</span>
+
+<span class="sd">    - ``*`` matches any number of characters except /</span>
+<span class="sd">    - ``**`` matches any number of directories (zero or more)</span>
+<span class="sd">    - ``?`` matches a single character except /</span>
+<span class="sd">    - ``[seq]`` matches any character in seq</span>
+
+<span class="sd">    Supports brace expansion:</span>
+
+<span class="sd">    - ``{a,b,c}`` expands to multiple patterns (including nesting)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param expr: a glob pattern which may make use of brace expansion (e.g., ``&quot;src/**/*.{js,jsx,ts,tsx}&quot;``)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>  <span class="c1"># normalise backslashes to forward slashes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_glob_expr</span> <span class="o">=</span> <span class="n">expr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_glob_patterns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_braces</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_regex_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_translate_glob_to_regex</span><span class="p">(</span><span class="n">p</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_glob_patterns</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_tostring_includes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;_glob_expr&quot;</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_expand_braces</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Expands brace patterns in a glob string.</span>
+<span class="sd">        For example, &quot;**/*.{js,jsx,ts,tsx}&quot; becomes [&quot;**/*.js&quot;, &quot;**/*.jsx&quot;, &quot;**/*.ts&quot;, &quot;**/*.tsx&quot;].</span>
+<span class="sd">        Handles multiple brace sets as well.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="n">pattern</span><span class="p">]</span>
+        <span class="k">while</span> <span class="nb">any</span><span class="p">(</span><span class="s2">&quot;{&quot;</span> <span class="ow">in</span> <span class="n">p</span> <span class="ow">or</span> <span class="s2">&quot;}&quot;</span> <span class="ow">in</span> <span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">):</span>
+            <span class="n">new_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+                <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\{([^</span><span class="si">{}</span><span class="s2">]*)\}&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                    <span class="n">options_expr</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">options_expr</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid glob brace expression in </span><span class="si">{</span><span class="n">pattern</span><span class="si">!r}</span><span class="s2">: empty braces are not allowed&quot;</span><span class="p">)</span>
+
+                    <span class="n">prefix</span> <span class="o">=</span> <span class="n">p</span><span class="p">[:</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()]</span>
+                    <span class="n">suffix</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="p">:]</span>
+                    <span class="n">options</span> <span class="o">=</span> <span class="n">options_expr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+                        <span class="n">new_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">option</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid glob brace expression in </span><span class="si">{</span><span class="n">pattern</span><span class="si">!r}</span><span class="s2">: unmatched brace&quot;</span><span class="p">)</span>
+            <span class="n">patterns</span> <span class="o">=</span> <span class="n">new_patterns</span>
+        <span class="k">return</span> <span class="n">patterns</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_translate_glob_to_regex</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;*&quot;</span><span class="p">:</span>  <span class="c1"># **</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">pattern</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>  <span class="c1"># **/</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">res</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;/&quot;</span><span class="p">:</span>  <span class="c1"># /**/</span>
+                            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;(?:/|/.*/)&quot;</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">res</span><span class="p">:</span>  <span class="c1"># c**/ (with c != &#39;/&#39;)</span>
+                            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;.*/&quot;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>  <span class="c1"># **/ at the start of the pattern</span>
+                            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;(?:.*/)?&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>  <span class="c1"># c**d  (with c, d != &#39;/&#39;)</span>
+                        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;.*&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>  <span class="c1"># single *</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">res</span> <span class="ow">or</span> <span class="n">res</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;[^/]*&quot;</span><span class="p">:</span>
+                        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[^/]*&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;?&quot;</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;[^/]&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;[&quot;</span><span class="p">:</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;]&quot;</span><span class="p">:</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">pattern</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;]&quot;</span><span class="p">:</span>
+                    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">stuff</span> <span class="o">=</span> <span class="n">pattern</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">stuff</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;!&quot;</span><span class="p">):</span>
+                        <span class="n">stuff</span> <span class="o">=</span> <span class="s2">&quot;^&quot;</span> <span class="o">+</span> <span class="n">stuff</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                    <span class="k">elif</span> <span class="n">stuff</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;^&quot;</span><span class="p">):</span>
+                        <span class="n">stuff</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\^&quot;</span> <span class="o">+</span> <span class="n">stuff</span>
+                    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">stuff</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+        <span class="n">inner</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;(?s:</span><span class="si">{</span><span class="n">inner</span><span class="si">}</span><span class="s2">)</span><span class="se">\\</span><span class="s2">Z&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>  <span class="c1"># normalise backslashes to forward slashes</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">regex</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_regex_patterns</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="search_files">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.search_files">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">search_files</span><span class="p">(</span>
+    <span class="n">file_collection</span><span class="p">:</span> <span class="n">FileCollection</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">context_lines_before</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">context_lines_after</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">paths_include_glob</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">paths_exclude_glob</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">multiline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">MatchedConsecutiveLines</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Search for a pattern in a list of files.</span>
+
+<span class="sd">    :param file_collection: the collection of files to search (will be optionally filtered by glob patterns)</span>
+<span class="sd">    :param pattern: pattern to search for</span>
+<span class="sd">    :param context_lines_before: number of context lines to include before matches</span>
+<span class="sd">    :param context_lines_after: number of context lines to include after matches</span>
+<span class="sd">    :param paths_include_glob: optional glob pattern to include files from the list</span>
+<span class="sd">    :param paths_exclude_glob: optional glob pattern to exclude files from the list</span>
+<span class="sd">    :param multiline: whether to apply multi-line matching, enabling the flags re.DOTALL and re.MULTILINE (default: True)</span>
+<span class="sd">    :return: list of MatchedConsecutiveLines objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># apply glob filter</span>
+    <span class="n">file_collection</span> <span class="o">=</span> <span class="n">file_collection</span><span class="o">.</span><span class="n">filter_glob</span><span class="p">(</span><span class="n">paths_include_glob</span><span class="o">=</span><span class="n">paths_include_glob</span><span class="p">,</span> <span class="n">paths_exclude_glob</span><span class="o">=</span><span class="n">paths_exclude_glob</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_collection</span><span class="p">)</span><span class="si">}</span><span class="s2"> files.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">process_single_file</span><span class="p">(</span><span class="n">file_proxy</span><span class="p">:</span> <span class="n">FileProxy</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Process a single file - this function will be parallelized.&quot;&quot;&quot;</span>
+        <span class="n">relative_path</span> <span class="o">=</span> <span class="n">file_proxy</span><span class="o">.</span><span class="n">get_relative_path</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file_content</span> <span class="o">=</span> <span class="n">file_proxy</span><span class="o">.</span><span class="n">get_contents</span><span class="p">()</span>
+            <span class="n">search_results</span> <span class="o">=</span> <span class="n">search_text</span><span class="p">(</span>
+                <span class="n">pattern</span><span class="p">,</span>
+                <span class="n">content</span><span class="o">=</span><span class="n">file_content</span><span class="p">,</span>
+                <span class="n">source_file_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                <span class="n">context_lines_before</span><span class="o">=</span><span class="n">context_lines_before</span><span class="p">,</span>
+                <span class="n">context_lines_after</span><span class="o">=</span><span class="n">context_lines_after</span><span class="p">,</span>
+                <span class="n">multiline</span><span class="o">=</span><span class="n">multiline</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">search_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches in </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="n">search_results</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error processing </span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">relative_path</span><span class="p">,</span> <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+    <span class="c1"># Execute in parallel using joblib</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span>
+        <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;threading&quot;</span><span class="p">,</span>
+    <span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">process_single_file</span><span class="p">)(</span><span class="n">file_proxy</span><span class="p">)</span> <span class="k">for</span> <span class="n">file_proxy</span> <span class="ow">in</span> <span class="n">file_collection</span><span class="p">)</span>
+
+    <span class="c1"># Collect results and errors</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">skipped_file_error_tuples</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]:</span>
+            <span class="n">skipped_file_error_tuples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;error&quot;</span><span class="p">]))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">matches</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;results&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">skipped_file_error_tuples</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">skipped_file_error_tuples</span><span class="p">)</span><span class="si">}</span><span class="s2"> files: </span><span class="si">{</span><span class="n">skipped_file_error_tuples</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> total matches across </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">file_collection</span><span class="p">)</span><span class="si">}</span><span class="s2"> files&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">matches</span></div>
+
+
+
+<div class="viewcode-block" id="render_html">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.render_html">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">render_html</span><span class="p">(</span><span class="n">html</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Remove HTML tags and decode HTML entities from text while preserving the actual content.</span>
+<span class="sd">    This keeps type information and structure but removes all formatting.</span>
+
+<span class="sd">    :param html: HTML text to clean</span>
+<span class="sd">    :return: Plain text without HTML tags and with decoded entities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+    <span class="c1"># join text with spaces to avoid concatenation of words</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">get_text</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">strip</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># normalize non-breaking spaces</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\xa0</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="ContentReplacer">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.ContentReplacer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ContentReplacer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is an LLM-optimised content replacer, which elegantly circumvents escaping and which</span>
+<span class="sd">    provides dual modes for maximum flexibility.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;literal&quot;</span><span class="p">,</span> <span class="s2">&quot;regex&quot;</span><span class="p">],</span> <span class="n">allow_multiple_occurrences</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">regex_multiline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param mode: the mode indicating whether to the needle in replacements corresponds to a regular expression</span>
+<span class="sd">            (mode &quot;regex&quot;) or to a literal string (mode &quot;literal&quot;)</span>
+<span class="sd">        :param allow_multiple_occurrences: whether it is allowed that the search expression matches multiple occurrences.</span>
+<span class="sd">            If False, an error will be raised if more than one match is found.</span>
+<span class="sd">        :param regex_multiline: whether to apply multi-line regex matching, enabling the flags re.DOTALL and re.MULTILINE</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_multiple_occurrences</span> <span class="o">=</span> <span class="n">allow_multiple_occurrences</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">regex_multiline</span> <span class="o">=</span> <span class="n">regex_multiline</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_replacement_function</span><span class="p">(</span><span class="n">regex_pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repl_template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">regex_flags</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">],</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates a replacement function that validates for ambiguity and handles backreferences.</span>
+
+<span class="sd">        :param regex_pattern: The regex pattern being used for matching</span>
+<span class="sd">        :param repl_template: The replacement template with $!1, $!2, etc. for backreferences</span>
+<span class="sd">        :param regex_flags: The flags to use when searching (e.g., re.DOTALL | re.MULTILINE)</span>
+<span class="sd">        :return: A function suitable for use with re.sub() or re.subn()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">validate_and_replace</span><span class="p">(</span><span class="n">match</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">matched_text</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># For multi-line match, check if the same pattern matches again within the already-matched text,</span>
+            <span class="c1"># rendering the match ambiguous. Typical pattern in the code:</span>
+            <span class="c1">#    &lt;start&gt;&lt;other-stuff&gt;&lt;start&gt;&lt;stuff&gt;&lt;end&gt;</span>
+            <span class="c1"># When matching</span>
+            <span class="c1">#    &lt;start&gt;.*?&lt;end&gt;</span>
+            <span class="c1"># this will match the entire span above, while only the suffix may have been intended.</span>
+            <span class="c1"># (See test case for a practical example.)</span>
+            <span class="c1"># To detect this, we check if the same pattern matches again within the matched text,</span>
+            <span class="k">if</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">matched_text</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">regex_pattern</span><span class="p">,</span> <span class="n">matched_text</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">flags</span><span class="o">=</span><span class="n">regex_flags</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;Match is ambiguous: the search pattern matches multiple overlapping occurrences. &quot;</span>
+                    <span class="s2">&quot;Please revise the search pattern to be more specific to avoid ambiguity, &quot;</span>
+                    <span class="s2">&quot;e.g. by matching specific context after the match, or try using the literal mode.&quot;</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Handle backreferences: replace $!1, $!2, etc. with actual matched groups</span>
+            <span class="k">def</span><span class="w"> </span><span class="nf">expand_backreference</span><span class="p">(</span><span class="n">m</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="n">group_num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">group_value</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="n">group_num</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">group_value</span> <span class="k">if</span> <span class="n">group_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\$!(\d+)&quot;</span><span class="p">,</span> <span class="n">expand_backreference</span><span class="p">,</span> <span class="n">repl_template</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">validate_and_replace</span>
+
+<div class="viewcode-block" id="ContentReplacer.replace">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.ContentReplacer.replace">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">replace</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">needle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">repl</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Performs the replacement.</span>
+
+<span class="sd">        Raises ValueError if no match is found, or if multiple matches are found while allow_multiple_occurrences is False.</span>
+
+<span class="sd">        :param content: the content in which to perform the replacement</span>
+<span class="sd">        :param needle: the search expression, which is either a literal string or a regular expression, depending on the mode</span>
+<span class="sd">        :param repl: the replacement string, which, in regex mode, may contain backreferences in the form of $!1, $!2, etc. to</span>
+<span class="sd">            refer to matched groups in the search expression</span>
+<span class="sd">        :return: the updated content after performing the replacement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;literal&quot;</span><span class="p">:</span>
+            <span class="n">regex</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;regex&quot;</span><span class="p">:</span>
+            <span class="n">regex</span> <span class="o">=</span> <span class="n">needle</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39;, expected &#39;literal&#39; or &#39;regex&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="n">regex_flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex_multiline</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="c1"># create replacement function with validation and backreference handling</span>
+        <span class="n">repl_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_replacement_function</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">regex_flags</span><span class="o">=</span><span class="n">regex_flags</span><span class="p">)</span>
+
+        <span class="c1"># perform replacement</span>
+        <span class="n">updated_content</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">subn</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">repl_fn</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">regex_flags</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Error: No matches of search expression found.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">allow_multiple_occurrences</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Expression matches </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> occurrences. &quot;</span>
+                <span class="s2">&quot;Please revise the expression to be more specific or enable allow_multiple_occurrences if this is expected.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">updated_content</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="ReplacementOccurrence">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.ReplacementOccurrence">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ReplacementOccurrence</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A single prospective replacement of a pattern match within one file.&quot;&quot;&quot;</span>
+
+    <span class="n">occurrence_id</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;stable, content-anchored identifier: &#39;&lt;relative_path&gt;:&lt;index_in_file&gt;@&lt;digest&gt;&#39;&quot;&quot;&quot;</span>
+    <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">index_in_file</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;0-based index of this match among the matches within its file (in position order)&quot;&quot;&quot;</span>
+    <span class="n">start</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;character offset of the match start within the file content&quot;&quot;&quot;</span>
+    <span class="n">end</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;character offset of the match end within the file content&quot;&quot;&quot;</span>
+    <span class="n">matched_text</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">replacement</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;the fully expanded replacement text (backreferences already resolved)&quot;&quot;&quot;</span>
+    <span class="n">start_line</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;0-based line number of the match start&quot;&quot;&quot;</span>
+    <span class="n">end_line</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;0-based line number of the match end&quot;&quot;&quot;</span>
+    <span class="n">is_ambiguous</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;whether the pattern matches again within the matched text (possible over-match)&quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="MultiFileContentReplacer">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.MultiFileContentReplacer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MultiFileContentReplacer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Occurrence-level counterpart of :class:`ContentReplacer` operating on multiple files:</span>
+<span class="sd">    finds every match of a pattern across a set of file contents, assigns each occurrence a</span>
+<span class="sd">    stable content-anchored id, renders minimal line diffs for previewing, and computes the</span>
+<span class="sd">    updated content of a file for a selected subset of occurrences.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">OCCURRENCE_ID_REGEX</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(?P&lt;path&gt;.+):(?P&lt;index&gt;\d+)@(?P&lt;digest&gt;[0-9a-f]</span><span class="si">{6}</span><span class="s2">)$&quot;</span><span class="p">)</span>
+    <span class="n">_DIGEST_LEN</span> <span class="o">=</span> <span class="mi">6</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;literal&quot;</span><span class="p">,</span> <span class="s2">&quot;regex&quot;</span><span class="p">],</span> <span class="n">regex_multiline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param mode: whether the needle is a literal string (&quot;literal&quot;) or a regular expression (&quot;regex&quot;)</span>
+<span class="sd">        :param regex_multiline: whether to apply multi-line regex matching, enabling the flags re.DOTALL and re.MULTILINE</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;literal&quot;</span><span class="p">,</span> <span class="s2">&quot;regex&quot;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid mode: &#39;</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2">&#39;, expected &#39;literal&#39; or &#39;regex&#39;.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flags</span> <span class="o">=</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span> <span class="k">if</span> <span class="n">regex_multiline</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;literal&quot;</span> <span class="k">else</span> <span class="n">needle</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_flags</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_digest</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">matched_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha1</span><span class="p">(</span><span class="n">matched_text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_DIGEST_LEN</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_occurrence_id</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">index_in_file</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">matched_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">relative_path</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">index_in_file</span><span class="si">}</span><span class="s2">@</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">_digest</span><span class="p">(</span><span class="n">matched_text</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_expand_backreferences</span><span class="p">(</span><span class="n">match</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">,</span> <span class="n">repl_template</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Expands $!1, $!2, ... in the replacement template (same syntax as :class:`ContentReplacer`).&quot;&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">expand</span><span class="p">(</span><span class="n">m</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Match</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">group_value</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+            <span class="k">return</span> <span class="n">group_value</span> <span class="k">if</span> <span class="n">group_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\$!(\d+)&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="p">,</span> <span class="n">repl_template</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MultiFileContentReplacer.find_occurrences">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.MultiFileContentReplacer.find_occurrences">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_occurrences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">needle</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">repl</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ReplacementOccurrence</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Finds all matches of the needle in the given files.</span>
+
+<span class="sd">        :param files: (relative_path, content) pairs; processed in the given order</span>
+<span class="sd">        :param needle: the search expression (literal string or regex, depending on the mode)</span>
+<span class="sd">        :param repl: the replacement template (may contain $!N backreferences in regex mode)</span>
+<span class="sd">        :return: occurrences in deterministic order (file order, then position within the file)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compile</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span>
+        <span class="n">occurrences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ReplacementOccurrence</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">index_in_file</span><span class="p">,</span> <span class="n">match</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">content</span><span class="p">)):</span>
+                <span class="n">matched_text</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">replacement</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expand_backreferences</span><span class="p">(</span><span class="n">match</span><span class="p">,</span> <span class="n">repl</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;regex&quot;</span> <span class="k">else</span> <span class="n">repl</span>
+                <span class="c1"># same over-match heuristic as ContentReplacer: for a multi-line match, the pattern</span>
+                <span class="c1"># matching again within the matched text indicates the match may have swallowed</span>
+                <span class="c1"># more than intended</span>
+                <span class="n">is_ambiguous</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">matched_text</span> <span class="ow">and</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">matched_text</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="n">occurrences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">ReplacementOccurrence</span><span class="p">(</span>
+                        <span class="n">occurrence_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">make_occurrence_id</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">index_in_file</span><span class="p">,</span> <span class="n">matched_text</span><span class="p">),</span>
+                        <span class="n">relative_path</span><span class="o">=</span><span class="n">relative_path</span><span class="p">,</span>
+                        <span class="n">index_in_file</span><span class="o">=</span><span class="n">index_in_file</span><span class="p">,</span>
+                        <span class="n">start</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span>
+                        <span class="n">end</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">(),</span>
+                        <span class="n">matched_text</span><span class="o">=</span><span class="n">matched_text</span><span class="p">,</span>
+                        <span class="n">replacement</span><span class="o">=</span><span class="n">replacement</span><span class="p">,</span>
+                        <span class="n">start_line</span><span class="o">=</span><span class="n">content</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">()),</span>
+                        <span class="n">end_line</span><span class="o">=</span><span class="n">content</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">match</span><span class="o">.</span><span class="n">end</span><span class="p">()),</span>
+                        <span class="n">is_ambiguous</span><span class="o">=</span><span class="n">is_ambiguous</span><span class="p">,</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+        <span class="k">return</span> <span class="n">occurrences</span></div>
+
+
+<div class="viewcode-block" id="MultiFileContentReplacer.apply_to_content">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.MultiFileContentReplacer.apply_to_content">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_to_content</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">occurrences</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ReplacementOccurrence</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the given occurrences (which must have been derived from exactly this content)</span>
+<span class="sd">        and returns the updated content.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">occ</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">occurrences</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">o</span><span class="p">:</span> <span class="n">o</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">content</span><span class="p">[</span><span class="n">occ</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="n">occ</span><span class="o">.</span><span class="n">end</span><span class="p">]</span> <span class="o">==</span> <span class="n">occ</span><span class="o">.</span><span class="n">matched_text</span><span class="p">,</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Occurrence </span><span class="si">{</span><span class="n">occ</span><span class="o">.</span><span class="n">occurrence_id</span><span class="si">}</span><span class="s2"> does not match the content it is being applied to&quot;</span>
+            <span class="p">)</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">content</span><span class="p">[:</span> <span class="n">occ</span><span class="o">.</span><span class="n">start</span><span class="p">]</span> <span class="o">+</span> <span class="n">occ</span><span class="o">.</span><span class="n">replacement</span> <span class="o">+</span> <span class="n">content</span><span class="p">[</span><span class="n">occ</span><span class="o">.</span><span class="n">end</span> <span class="p">:]</span>
+        <span class="k">return</span> <span class="n">content</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_format_block</span><span class="p">(</span><span class="n">block</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_lines</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_line_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">block</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">shown</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="n">max_lines</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">shown</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_line_chars</span><span class="p">:</span>
+                <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="n">max_line_chars</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;… (+</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">max_line_chars</span><span class="si">}</span><span class="s2"> chars)&quot;</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_lines</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> … (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">max_lines</span><span class="si">}</span><span class="s2"> more lines)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="MultiFileContentReplacer.render_occurrence_diff">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.MultiFileContentReplacer.render_occurrence_diff">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">render_occurrence_diff</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">occ</span><span class="p">:</span> <span class="n">ReplacementOccurrence</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_lines_per_side</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">max_line_chars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders a minimal line diff for the occurrence: the full lines spanned by the match,</span>
+<span class="sd">        before and after the replacement.</span>
+
+<span class="sd">        :param occ: the occurrence (must have been derived from exactly this content)</span>
+<span class="sd">        :param content: the file content the occurrence was found in</span>
+<span class="sd">        :param max_lines_per_side: cap on the number of displayed lines per diff side</span>
+<span class="sd">        :param max_line_chars: cap on the number of displayed characters per line</span>
+<span class="sd">        :return: the rendered diff</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">line_start</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">occ</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">line_end</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">occ</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">line_end</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">line_end</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">old_block</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">line_start</span><span class="p">:</span><span class="n">line_end</span><span class="p">]</span>
+        <span class="n">new_block</span> <span class="o">=</span> <span class="n">content</span><span class="p">[</span><span class="n">line_start</span> <span class="p">:</span> <span class="n">occ</span><span class="o">.</span><span class="n">start</span><span class="p">]</span> <span class="o">+</span> <span class="n">occ</span><span class="o">.</span><span class="n">replacement</span> <span class="o">+</span> <span class="n">content</span><span class="p">[</span><span class="n">occ</span><span class="o">.</span><span class="n">end</span> <span class="p">:</span> <span class="n">line_end</span><span class="p">]</span>
+        <span class="n">location</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;line </span><span class="si">{</span><span class="n">occ</span><span class="o">.</span><span class="n">start_line</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">occ</span><span class="o">.</span><span class="n">start_line</span> <span class="o">==</span> <span class="n">occ</span><span class="o">.</span><span class="n">end_line</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;lines </span><span class="si">{</span><span class="n">occ</span><span class="o">.</span><span class="n">start_line</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">occ</span><span class="o">.</span><span class="n">end_line</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">occ</span><span class="o">.</span><span class="n">occurrence_id</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">location</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">if</span> <span class="n">occ</span><span class="o">.</span><span class="n">is_ambiguous</span><span class="p">:</span>
+            <span class="n">header</span> <span class="o">+=</span> <span class="s2">&quot;  (WARNING: the pattern matches again inside this match — possible over-match, verify the diff)&quot;</span>
+        <span class="n">diff_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">header</span><span class="p">]</span>
+        <span class="n">diff_lines</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_block</span><span class="p">(</span><span class="n">old_block</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">max_lines_per_side</span><span class="p">,</span> <span class="n">max_line_chars</span><span class="p">)</span>
+        <span class="n">diff_lines</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_format_block</span><span class="p">(</span><span class="n">new_block</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">max_lines_per_side</span><span class="p">,</span> <span class="n">max_line_chars</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">diff_lines</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TextCoords">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.TextCoords">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TextCoords</span><span class="p">:</span>
+    <span class="n">line</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    0-based line number</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">col</span><span class="p">:</span> <span class="nb">int</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    0-based column number</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="find_text_coordinates">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/util/text_utils.html#serena.util.text_utils.find_text_coordinates">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_text_coordinates</span><span class="p">(</span><span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">require_unique</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextCoords</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Finds the line and column number of the first match of a regex pattern in the given content.</span>
+
+<span class="sd">    :param content: the text content to search through</span>
+<span class="sd">    :param regex: the regular expression pattern to search for; it must match part of a single line,</span>
+<span class="sd">        and contain exactly one group that captures the position of interest (e.g., the exact variable name to find the coordinates of)</span>
+<span class="sd">    :param require_unique: if True, raises an error if not exactly one match is found;</span>
+<span class="sd">        if False, returns None if no match is found, and returns the coordinates of the first match if multiple matches are found</span>
+<span class="sd">    :return: the coordinates of the match or None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span> <span class="o">|</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">require_unique</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No match found for regex: </span><span class="si">{</span><span class="n">regex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">require_unique</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Match must be unique; found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches for regex: </span><span class="si">{</span><span class="n">regex</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Regex must contain exactly one group to capture the position, but found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">())</span><span class="si">}</span><span class="s2"> groups.&quot;</span><span class="p">)</span>
+        <span class="n">index_in_content</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">line</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">TextUtils</span><span class="o">.</span><span class="n">get_line_col_from_index</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">index_in_content</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TextCoords</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

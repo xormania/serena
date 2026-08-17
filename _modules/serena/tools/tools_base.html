@@ -1,0 +1,1225 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.tools.tools_base &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/tools/tools_base';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/tools/tools_base.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.tools.tools_base</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">cached_property</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">TracebackType</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Protocol</span><span class="p">,</span> <span class="n">Self</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">Implementation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">Context</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp.utilities.func_metadata</span><span class="w"> </span><span class="kn">import</span> <span class="n">FuncMetadata</span><span class="p">,</span> <span class="n">func_metadata</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util.string</span><span class="w"> </span><span class="kn">import</span> <span class="n">dict_string</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.config.serena_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageBackend</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.memories.memory_manager</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryManager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.project</span><span class="w"> </span><span class="kn">import</span> <span class="n">Project</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.prompt_factory</span><span class="w"> </span><span class="kn">import</span> <span class="n">PromptFactory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.class_decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">singleton</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">iter_subclasses</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.ls_diagnostics</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiagnosticsDiff</span><span class="p">,</span> <span class="n">EditedFilePath</span><span class="p">,</span> <span class="n">PublishedDiagnosticsSnapshot</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">solidlsp.ls_exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">SolidLSPException</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">serena.agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerenaAgent</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">serena.code_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">CodeEditor</span><span class="p">,</span> <span class="n">LanguageServerCodeEditor</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">serena.symbol</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerSymbolRetriever</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;T&quot;</span><span class="p">)</span>
+<span class="n">SUCCESS_RESULT</span> <span class="o">=</span> <span class="s2">&quot;OK&quot;</span>
+
+
+<div class="viewcode-block" id="Component">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Component">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Component</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="s2">&quot;SerenaAgent&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="n">agent</span>
+
+<div class="viewcode-block" id="Component.get_project_root">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Component.get_project_root">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_project_root</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the root directory of the active project, raises a ValueError if no active project configuration is set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">project_root</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">prompt_factory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PromptFactory</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">prompt_factory</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">memory_manager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MemoryManager&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">memory_manager</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_language_server_symbol_retriever</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;LanguageServerSymbolRetriever&quot;</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">serena.symbol</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerSymbolRetriever</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_language_backend</span><span class="p">()</span><span class="o">.</span><span class="n">is_lsp</span><span class="p">(),</span> <span class="s2">&quot;Language server symbol retriever can only be created for LSP language backend&quot;</span>
+        <span class="k">return</span> <span class="n">LanguageServerSymbolRetriever</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Project</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_active_project_or_raise</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_code_editor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;CodeEditor&quot;</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">..code_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">JetBrainsCodeEditor</span>
+
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_language_backend</span><span class="p">():</span>
+            <span class="k">case</span> <span class="n">LanguageBackend</span><span class="o">.</span><span class="n">LSP</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_ls_code_editor</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">LanguageBackend</span><span class="o">.</span><span class="n">JETBRAINS</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">JetBrainsCodeEditor</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_ls_code_editor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;LanguageServerCodeEditor&quot;</span><span class="p">:</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">..code_editor</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageServerCodeEditor</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">is_using_language_server</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;Cannot create LanguageServerCodeEditor; agent is not in language server mode.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">LanguageServerCodeEditor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarker">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarker">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarker</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for tool markers.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerCanEdit">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerCanEdit">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerCanEdit</span><span class="p">(</span><span class="n">ToolMarker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marker class for all tools that can perform editing operations on files.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerDoesNotRequireActiveProject">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerDoesNotRequireActiveProject">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerDoesNotRequireActiveProject</span><span class="p">(</span><span class="n">ToolMarker</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerOptional">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerOptional">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerOptional</span><span class="p">(</span><span class="n">ToolMarker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marker class for optional tools that are disabled by default.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerSymbolicRead">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerSymbolicRead">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerSymbolicRead</span><span class="p">(</span><span class="n">ToolMarker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marker class for tools that perform symbol read operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerSymbolicEdit">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerSymbolicEdit">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerSymbolicEdit</span><span class="p">(</span><span class="n">ToolMarkerCanEdit</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marker class for tools that perform symbolic edit operations.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ToolMarkerBeta">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolMarkerBeta">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolMarkerBeta</span><span class="p">(</span><span class="n">ToolMarker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Marker for tools that are considered beta features (may not be fully robust)</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="ApplyMethodProtocol">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ApplyMethodProtocol">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ApplyMethodProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callable protocol for the apply method of a tool.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="ToolCallError">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.ToolCallError">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolCallError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an error raised during a tool call execution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_message</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_error_message</span> <span class="o">=</span> <span class="n">error_message</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_error_message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error_message</span></div>
+
+
+
+<div class="viewcode-block" id="Tool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Tool</span><span class="p">(</span><span class="n">Component</span><span class="p">):</span>
+    <span class="c1"># NOTE: each tool should implement the apply method, which is then used in</span>
+    <span class="c1"># the central method of the Tool class `apply_ex`.</span>
+    <span class="c1"># Failure to do so will result in a RuntimeError at tool execution time.</span>
+    <span class="c1"># The apply method is not declared as part of the base Tool interface since we cannot</span>
+    <span class="c1"># know the signature of the (input parameters of the) method in advance.</span>
+    <span class="c1">#</span>
+    <span class="c1"># The docstring and types of the apply method are used to generate the tool description</span>
+    <span class="c1"># (which is use by the LLM, so a good description is important)</span>
+    <span class="c1"># and to validate the tool call arguments.</span>
+
+    <span class="n">SESSION_ID_PARAM_NAME</span> <span class="o">=</span> <span class="s2">&quot;session_id&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    parameter name to use in apply method for the client session ID.</span>
+<span class="sd">    This parameter will be ignored by the MCP interface but will be populated with the session ID of the current client session </span>
+<span class="sd">    when the tool is called, allowing tools to be session-aware if needed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_last_tool_call_client_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;We can only get the client info from within a tool call. Each tool call will update this variable.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">agent</span><span class="p">:</span> <span class="s2">&quot;SerenaAgent&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+
+    <span class="nd">@cached_property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_session_aware</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: whether the tool is session-aware, i.e. whether the apply method expects a session_id (str) parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check apply method for session_id arg</span>
+        <span class="n">apply_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_apply_fn</span><span class="p">()</span>
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">signature</span><span class="p">(</span><span class="n">apply_fn</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">sig</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SESSION_ID_PARAM_NAME</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sanitize_input_param</span><span class="p">(</span><span class="n">raw_param</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="c1"># some clients replace &lt; and &gt; with their escaped html versions, we need to counteract this</span>
+        <span class="k">return</span> <span class="n">raw_param</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;lt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&amp;gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_last_tool_call_client_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">client_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_last_tool_call_client_str</span> <span class="o">=</span> <span class="n">client_str</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_last_tool_call_client_str</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_last_tool_call_client_str</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_name_from_cls</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;Tool&quot;</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
+        <span class="c1"># convert to snake_case</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;_&quot;</span> <span class="o">+</span> <span class="n">c</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isupper</span><span class="p">()</span> <span class="k">else</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">name</span><span class="p">])</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name_from_cls</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_apply_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ApplyMethodProtocol</span><span class="p">:</span>
+        <span class="n">apply_fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;apply&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">apply_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;apply not defined in </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">. Did you forget to implement it?&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">apply_fn</span>
+
+<div class="viewcode-block" id="Tool.can_edit">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.can_edit">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_edit</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns whether this tool can perform editing operations on code.</span>
+
+<span class="sd">        :return: True if the tool can edit code, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ToolMarkerCanEdit</span><span class="p">)</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_description</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="n">docstring</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span>
+        <span class="k">if</span> <span class="n">docstring</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">docstring</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Tool.get_apply_docstring_from_cls">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.get_apply_docstring_from_cls">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_apply_docstring_from_cls</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the docstring for the apply method from the class (static metadata).</span>
+<span class="sd">        Needed for creating MCP tools in a separate process without running into serialization issues.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First try to get from __dict__ to handle dynamic docstring changes</span>
+        <span class="k">if</span> <span class="s2">&quot;apply&quot;</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">apply_fn</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s2">&quot;apply&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Fall back to getattr for inherited methods</span>
+            <span class="n">apply_fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">apply_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;apply method not defined in </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">. Did you forget to implement it?&quot;</span><span class="p">)</span>
+
+        <span class="n">docstring</span> <span class="o">=</span> <span class="n">apply_fn</span><span class="o">.</span><span class="vm">__doc__</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">docstring</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;apply method has no (or empty) docstring in </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">. Did you forget to implement it?&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">docstring</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tool.get_apply_docstring">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.get_apply_docstring">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_apply_docstring</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the docstring for the tool application, used by the MCP server.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_apply_docstring_from_cls</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Tool.get_apply_fn_metadata">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.get_apply_fn_metadata">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_apply_fn_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">structured_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncMetadata</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the metadata for the tool application function, used by the MCP server.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_apply_fn_metadata_from_cls</span><span class="p">(</span><span class="n">structured_output</span><span class="o">=</span><span class="n">structured_output</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Tool.get_apply_fn_metadata_from_cls">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.get_apply_fn_metadata_from_cls">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_apply_fn_metadata_from_cls</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">structured_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuncMetadata</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the metadata for the apply method from the class (static metadata).</span>
+<span class="sd">        Needed for creating MCP tools in a separate process without running into serialization issues.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># First try to get from __dict__ to handle dynamic docstring changes</span>
+        <span class="k">if</span> <span class="s2">&quot;apply&quot;</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
+            <span class="n">apply_fn</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s2">&quot;apply&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Fall back to getattr for inherited methods</span>
+            <span class="n">apply_fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s2">&quot;apply&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">apply_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;apply method not defined in </span><span class="si">{</span><span class="bp">cls</span><span class="si">}</span><span class="s2">. Did you forget to implement it?&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">func_metadata</span><span class="p">(</span><span class="n">apply_fn</span><span class="p">,</span> <span class="n">skip_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;cls&quot;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">SESSION_ID_PARAM_NAME</span><span class="p">],</span> <span class="n">structured_output</span><span class="o">=</span><span class="n">structured_output</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log_tool_application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">ignored_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;self&quot;</span><span class="p">,</span> <span class="s2">&quot;log_call&quot;</span><span class="p">,</span> <span class="s2">&quot;catch_exceptions&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">,</span> <span class="s2">&quot;apply_fn&quot;</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">ignored_params</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">param</span> <span class="o">==</span> <span class="s2">&quot;kwargs&quot;</span><span class="p">:</span>
+                <span class="n">params</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">params</span><span class="p">[</span><span class="n">param</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_name_from_cls</span><span class="p">()</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">dict_string</span><span class="p">(</span><span class="n">params</span><span class="p">)</span><span class="si">}</span><span class="s2">; session_id: </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_limit_length</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">result</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">max_answer_chars</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">shortened_result_factories</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Limit the length of the result string, optionally trying progressively shorter versions.</span>
+
+<span class="sd">        :param result: the full result string</span>
+<span class="sd">        :param max_answer_chars: maximum allowed characters. -1 means use the default from config.</span>
+<span class="sd">        :param shortened_result_factories: optional list of closures, each producing a progressively shorter</span>
+<span class="sd">            version of the result. They are tried in order until one fits within ``max_answer_chars``.</span>
+<span class="sd">        :return: the result string, potentially replaced by a shortened version</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">max_answer_chars</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">max_answer_chars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">default_max_tool_answer_chars</span>
+        <span class="k">if</span> <span class="n">max_answer_chars</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Must be positive or the default (-1), got: </span><span class="si">{</span><span class="n">max_answer_chars</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n_chars</span> <span class="o">:=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">max_answer_chars</span><span class="p">:</span>
+            <span class="n">too_long_msg</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The answer is too long (</span><span class="si">{</span><span class="n">n_chars</span><span class="si">}</span><span class="s2"> characters). &quot;</span> <span class="o">+</span> <span class="s2">&quot;You can adjust your query or raise the max_answer_chars parameter.&quot;</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">shortened_result_factories</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># try each shortening closure in order;</span>
+                <span class="k">for</span> <span class="n">make_shorter</span> <span class="ow">in</span> <span class="n">shortened_result_factories</span><span class="p">:</span>
+                    <span class="n">shortened</span> <span class="o">=</span> <span class="n">make_shorter</span><span class="p">()</span>
+                    <span class="n">candidate</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">too_long_msg</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">shortened</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">candidate</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_answer_chars</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">candidate</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">too_long_msg</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_active</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">tool_is_active</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_readonly</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">can_edit</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_symbolic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicRead</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">ToolMarkerSymbolicEdit</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Tool.get_param_aliases">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.get_param_aliases">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_param_aliases</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: a mapping of parameter aliases for the apply method, where the key is the alias and the value is the actual parameter name.</span>
+<span class="sd">            This can be used to define alternative parameter names for the same parameter.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="Tool.apply_ex">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.Tool.apply_ex">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_ex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_call</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">catch_exceptions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">mcp_ctx</span><span class="p">:</span> <span class="n">Context</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies the tool with logging and exception handling, using the given keyword arguments.</span>
+<span class="sd">        This method either returns a string result or raises a ToolCallError in case of an error during tool application</span>
+<span class="sd">        (but if ``catch_exceptions`` is enabled, it will return the error message as a string instead of raising the exception).</span>
+
+<span class="sd">        :param log_call: whether to log the tool call and its result</span>
+<span class="sd">        :param catch_exceptions: whether to catch exceptions and return their messages as strings, instead of raising a ToolCallError</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># obtain session ID and client info</span>
+        <span class="n">session_id</span> <span class="o">=</span> <span class="s2">&quot;global&quot;</span>
+        <span class="k">if</span> <span class="n">mcp_ctx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">session_id</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%x</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="n">mcp_ctx</span><span class="o">.</span><span class="n">session</span><span class="p">)</span>
+                <span class="n">client_params</span> <span class="o">=</span> <span class="n">mcp_ctx</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">client_params</span>
+                <span class="k">if</span> <span class="n">client_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">client_info</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Implementation</span><span class="p">,</span> <span class="n">client_params</span><span class="o">.</span><span class="n">clientInfo</span><span class="p">)</span>
+                    <span class="n">client_str</span> <span class="o">=</span> <span class="n">client_info</span><span class="o">.</span><span class="n">title</span> <span class="k">if</span> <span class="n">client_info</span><span class="o">.</span><span class="n">title</span> <span class="k">else</span> <span class="n">client_info</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">client_info</span><span class="o">.</span><span class="n">version</span>
+                    <span class="k">if</span> <span class="n">client_str</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_tool_call_client_str</span><span class="p">():</span>
+                        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updating client info: </span><span class="si">{</span><span class="n">client_info</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set_last_tool_call_client_str</span><span class="p">(</span><span class="n">client_str</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to get client info: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">task</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">apply_fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_apply_fn</span><span class="p">()</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_active</span><span class="p">():</span>
+                    <span class="k">raise</span> <span class="n">ToolCallError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Tool &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_name_from_cls</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39; is not active. Active tools: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_active_tool_names</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">log_call</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_log_tool_application</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">(),</span> <span class="n">session_id</span><span class="p">)</span>
+
+                <span class="c1"># check whether the tool requires an active project and language server</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ToolMarkerDoesNotRequireActiveProject</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_active_project</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="n">ToolCallError</span><span class="p">(</span>
+                            <span class="s2">&quot;No active project. Ask the user to provide the project path or to select a project from this list of known projects: &quot;</span>
+                            <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">project_names</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="p">)</span>
+
+                <span class="c1"># construct apply kwargs, adding session_id if the tool is session-aware</span>
+                <span class="n">apply_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_session_aware</span><span class="p">:</span>
+                    <span class="n">apply_kwargs</span><span class="p">[</span><span class="s2">&quot;session_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">session_id</span>
+
+                <span class="c1"># apply the actual tool</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">=</span> <span class="n">apply_fn</span><span class="p">(</span><span class="o">**</span><span class="n">apply_kwargs</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">SolidLSPException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_language_server_terminated</span><span class="p">():</span>
+                        <span class="n">affected_language</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get_affected_language</span><span class="p">()</span>
+                        <span class="k">if</span> <span class="n">affected_language</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                                <span class="sa">f</span><span class="s2">&quot;Language server terminated while executing tool (</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">). Restarting the language server and retrying ...&quot;</span>
+                            <span class="p">)</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_language_server_manager_or_raise</span><span class="p">()</span><span class="o">.</span><span class="n">restart_language_server</span><span class="p">(</span><span class="n">affected_language</span><span class="p">)</span>
+                            <span class="n">result</span> <span class="o">=</span> <span class="n">apply_fn</span><span class="p">(</span><span class="o">**</span><span class="n">apply_kwargs</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                                <span class="sa">f</span><span class="s2">&quot;Language server terminated while executing tool (</span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">), but affected language is unknown. Not retrying.&quot;</span>
+                            <span class="p">)</span>
+                            <span class="k">raise</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span>
+
+                <span class="c1"># record tool usage</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">record_tool_usage</span><span class="p">(</span><span class="n">apply_kwargs</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="n">ToolCallError</span><span class="p">:</span>
+                <span class="k">raise</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">exc_info</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">ToolCallError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">log_call</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Result: </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ls_manager</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_language_server_manager</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">ls_manager</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">ls_manager</span><span class="o">.</span><span class="n">save_all_caches</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving language server cache: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="c1"># execute the tool in the agent&#39;s task executor, with timeout</span>
+        <span class="c1"># (task timeout bounds task execution in the dispatcher once it runs, result timeout limits the time we wait)</span>
+        <span class="n">tool_call_error</span><span class="p">:</span> <span class="n">ToolCallError</span>
+        <span class="n">timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">serena_config</span><span class="o">.</span><span class="n">tool_timeout</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">task_exec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">issue_task</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">task_exec</span><span class="o">.</span><span class="n">result</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">ToolCallError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">tool_call_error</span> <span class="o">=</span> <span class="n">e</span>
+        <span class="k">except</span> <span class="ne">TimeoutError</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Tool execution timed out after </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s2"> seconds. &quot;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">tool_call_error</span> <span class="o">=</span> <span class="n">ToolCallError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1"># unexpected errors (exceptions in the task itself are caught and forwarded as ToolCallError)</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+            <span class="n">tool_call_error</span> <span class="o">=</span> <span class="n">ToolCallError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">catch_exceptions</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tool_call_error</span><span class="o">.</span><span class="n">get_error_message</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">tool_call_error</span></div>
+
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_to_json</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ensure_ascii</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_wrapped_tool_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wraps an existing tool response in an object with a message and the original response, i.e. returns</span>
+<span class="sd">        `{&quot;message&quot;: message, &quot;response&quot;: response}` stringified.</span>
+<span class="sd">        If the original response is a JSON string, it will be parsed and included as an object.</span>
+
+<span class="sd">        :param response: the original response (if it is a string, it will be parsed as JSON if possible)</span>
+<span class="sd">        :param message: the message to attach</span>
+<span class="sd">        :return: stringified JSON response with the message and the original response</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response_obj</span> <span class="o">=</span> <span class="n">response</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">response_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                <span class="k">pass</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_json</span><span class="p">({</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="n">response_obj</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="EditingToolWithDiagnostics">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EditingToolWithDiagnostics</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">ToolMarkerCanEdit</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Base class for editing tools that want to capture and report changes in LSP diagnostics before and after the edit.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ENABLE_DIAGNOSTICS</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Global flag to enable/disable diagnostics for LSP-based editing tools derived from this class.</span>
+<span class="sd">    The feature is currently disabled, because per-edit diagnostics are a questionable feature, since individual</span>
+<span class="sd">    edits often intentionally introduce diagnostics (e.g. function signature mismatches or even syntax errors) that </span>
+<span class="sd">    are then resolved in subsequent edits.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">DIAGNOSTICS_KEY</span> <span class="o">=</span> <span class="s2">&quot;diagnostics[warning-or-higher]&quot;</span>
+
+    <span class="k">class</span><span class="w"> </span><span class="nc">DiagnosticsContext</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool</span><span class="p">:</span> <span class="s2">&quot;EditingToolWithDiagnostics&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">edited_relative_paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tool</span> <span class="o">=</span> <span class="n">tool</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_is_diagnostics_enabled</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">ENABLE_DIAGNOSTICS</span> <span class="ow">and</span> <span class="n">tool</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">is_using_language_server</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_edited_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">EditedFilePath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">edited_relative_paths</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_before_edit_diagnostics_snapshot</span><span class="p">:</span> <span class="n">PublishedDiagnosticsSnapshot</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_symbol_retriever</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;LanguageServerSymbolRetriever&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_diagnostics_enabled</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_symbol_retriever</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">create_language_server_symbol_retriever</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_before_edit_diagnostics_snapshot</span> <span class="o">=</span> <span class="n">PublishedDiagnosticsSnapshot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_edited_files</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol_retriever</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+            <span class="k">pass</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">format_result</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">base_result</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_diagnostics_enabled</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">base_result</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_before_edit_diagnostics_snapshot</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">base_result</span>
+
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol_retriever</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="n">diagnostics_diff</span> <span class="o">=</span> <span class="n">DiagnosticsDiff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_before_edit_diagnostics_snapshot</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_files</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol_retriever</span><span class="p">)</span>
+            <span class="n">grouped_diagnostics</span> <span class="o">=</span> <span class="n">diagnostics_diff</span><span class="o">.</span><span class="n">get_grouped_diagnostics</span><span class="p">()</span><span class="o">.</span><span class="n">get_dict</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">grouped_diagnostics</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">base_result</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">base_result</span><span class="p">,</span>
+                    <span class="n">EditingToolWithDiagnostics</span><span class="o">.</span><span class="n">DIAGNOSTICS_KEY</span><span class="p">:</span> <span class="n">grouped_diagnostics</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool</span><span class="o">.</span><span class="n">_to_json</span><span class="p">(</span><span class="n">result_dict</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="EditedFileContext">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.EditedFileContext">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">EditedFileContext</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Context manager for file editing.</span>
+
+<span class="sd">    Create the context, then use `set_updated_content` to set the new content, the original content</span>
+<span class="sd">    being provided in `original_content`.</span>
+<span class="sd">    When exiting the context without an exception, the updated content will be written back to the file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">code_editor</span><span class="p">:</span> <span class="s2">&quot;CodeEditor&quot;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_relative_path</span> <span class="o">=</span> <span class="n">relative_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_code_editor</span> <span class="o">=</span> <span class="n">code_editor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span><span class="p">:</span> <span class="n">CodeEditor</span><span class="o">.</span><span class="n">EditedFile</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file_context</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_code_editor</span><span class="o">.</span><span class="n">edited_file_context</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_relative_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file_context</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<div class="viewcode-block" id="EditedFileContext.get_original_content">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.EditedFileContext.get_original_content">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_original_content</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the original content of the file before any modifications.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span><span class="o">.</span><span class="n">get_contents</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="EditedFileContext.set_updated_content">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.EditedFileContext.set_updated_content">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_updated_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets the updated content of the file, which will be written back to the file</span>
+<span class="sd">        when the context is exited without an exception.</span>
+
+<span class="sd">        :param content: the updated content of the file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file</span><span class="o">.</span><span class="n">set_contents</span><span class="p">(</span><span class="n">content</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="ne">BaseException</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">:</span> <span class="ne">BaseException</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">traceback</span><span class="p">:</span> <span class="n">TracebackType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file_context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_edited_file_context</span><span class="o">.</span><span class="fm">__exit__</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="RegisteredTool">
+<a class="viewcode-back" href="../../../06-contributing/code-reference/tools/tools_base.html#serena.tools.tools_base.RegisteredTool">[docs]</a>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">kw_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RegisteredTool</span><span class="p">:</span>
+    <span class="n">tool_class</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]</span>
+    <span class="n">is_optional</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">is_beta</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">class_docstring</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the tool description (high-level class docstring)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_class</span><span class="o">.</span><span class="n">get_tool_description</span><span class="p">()</span></div>
+
+
+
+<span class="n">tool_packages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;serena.tools&quot;</span><span class="p">]</span>
+
+
+<span class="nd">@singleton</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ToolRegistry</span><span class="p">:</span>
+    <span class="n">_deleted_tools</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;think_about_collected_information&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;prepare_for_new_conversation&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;summarize_changes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;think_about_whether_you_are_done&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;switch_modes&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;check_onboarding_performed&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">RegisteredTool</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">inclusion_predicate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="s2">&quot;apply&quot;</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="vm">__dict__</span>  <span class="c1"># include only concrete tool classes that implement apply</span>
+        <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">iter_subclasses</span><span class="p">(</span><span class="n">Tool</span><span class="p">,</span> <span class="n">inclusion_predicate</span><span class="o">=</span><span class="n">inclusion_predicate</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__module__</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">pkg</span><span class="p">)</span> <span class="k">for</span> <span class="n">pkg</span> <span class="ow">in</span> <span class="n">tool_packages</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">is_optional</span> <span class="o">=</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ToolMarkerOptional</span><span class="p">)</span>
+            <span class="n">is_beta</span> <span class="o">=</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ToolMarkerBeta</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_name_from_cls</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Duplicate tool name found: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">. Tool classes must have unique names.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">RegisteredTool</span><span class="p">(</span><span class="n">tool_class</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span> <span class="n">is_optional</span><span class="o">=</span><span class="n">is_optional</span><span class="p">,</span> <span class="n">tool_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">is_beta</span><span class="o">=</span><span class="n">is_beta</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_registered_tools_by_module</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">RegisteredTool</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the registered tools grouped by their module (ordered alphabetically by module and tool name)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">module_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="n">RegisteredTool</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">module</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">tool_class</span><span class="o">.</span><span class="vm">__module__</span>
+            <span class="k">if</span> <span class="n">module</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">module_dict</span><span class="p">:</span>
+                <span class="n">module_dict</span><span class="p">[</span><span class="n">module</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">module_dict</span><span class="p">[</span><span class="n">module</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tool</span><span class="p">)</span>
+        <span class="n">sorted_module_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">module</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">module_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">sorted_module_dict</span><span class="p">[</span><span class="n">module</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">module_dict</span><span class="p">[</span><span class="n">module</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">tool_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sorted_module_dict</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_class_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">tool_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool named &#39;</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">&#39; not found.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="p">[</span><span class="n">tool_name</span><span class="p">]</span><span class="o">.</span><span class="n">tool_class</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_all_tool_classes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]]:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">tool_class</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_classes_default_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of tool classes that are enabled by default (i.e. non-optional tools).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tool_class</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">is_optional</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_classes_optional</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of tool classes that are optional (i.e. disabled by default).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tool_class</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_optional</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_names_default_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of tool names that are enabled by default (i.e. non-optional tools).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tool_name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">is_optional</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_names_optional</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of tool names that are optional (i.e. disabled by default).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">tool_name</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">is_optional</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tool_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :return: the list of all tool names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">print_tool_overview</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">tools</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]</span> <span class="o">|</span> <span class="n">Tool</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">include_optional</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">only_optional</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print a summary of the tools. If no tools are passed, a summary of the selection of tools (all, default or only optional) is printed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">tools</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">only_optional</span><span class="p">:</span>
+                <span class="n">tools</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tool_classes_optional</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">include_optional</span><span class="p">:</span>
+                <span class="n">tools</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_tool_classes</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tools</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tool_classes_default_enabled</span><span class="p">()</span>
+
+        <span class="n">tool_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">[</span><span class="n">Tool</span><span class="p">]</span> <span class="o">|</span> <span class="n">Tool</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">tool_class</span> <span class="ow">in</span> <span class="n">tools</span><span class="p">:</span>
+            <span class="n">tool_dict</span><span class="p">[</span><span class="n">tool_class</span><span class="o">.</span><span class="n">get_name_from_cls</span><span class="p">()]</span> <span class="o">=</span> <span class="n">tool_class</span>
+        <span class="k">for</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tool_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">tool_class</span> <span class="o">=</span> <span class="n">tool_dict</span><span class="p">[</span><span class="n">tool_name</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; * `</span><span class="si">{</span><span class="n">tool_name</span><span class="si">}</span><span class="s2">`: </span><span class="si">{</span><span class="n">tool_class</span><span class="o">.</span><span class="n">get_tool_description</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_valid_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_dict</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">check_valid_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">caller_context_for_logging</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the tool name is valid, False if it is deleted, and raises ValueError if it is invalid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_deleted_tool_name</span><span class="p">(</span><span class="n">tool_name</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tool name is deleted: </span><span class="si">{</span><span class="n">tool_name</span><span class="si">}{</span><span class="n">caller_context_for_logging</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid_tool_name</span><span class="p">(</span><span class="n">tool_name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid tool name: </span><span class="si">{</span><span class="n">tool_name</span><span class="si">}{</span><span class="n">caller_context_for_logging</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_deleted_tool_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">tool_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_deleted_tools</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

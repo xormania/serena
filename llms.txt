@@ -1,0 +1,65 @@
+# Serena
+
+## About
+
+- [About Serena](01-about/000_intro.html): The IDE for Your Coding Agent
+- [Language Support](01-about/020_programming-languages.html): Serena provides a set of versatile code querying and editing functionalities
+- [Features](01-about/025_features.html): Serena provides a wide range of tools for efficient code retrieval, editing and refactoring, as well as
+- [Serena in Action](01-about/030_serena-in-action.html): A demonstration of Serena efficiently retrieving and editing code within Claude Code, thereby saving tokens and time. Efficient operations…
+- [Tools](01-about/035_tools.html): Find the full list of Serena's tools below.
+- [Acknowledgements](01-about/050_acknowledgements.html): We are very grateful to our sponsors, who help us drive Serena's development.
+
+## Usage
+
+- [Usage](02-usage/000_intro.html): Serena can be used in various ways and supports coding workflows through a project-based approach.
+- [Installation](02-usage/010_installation.html): Package Manager: uv
+- [Running Serena](02-usage/020_running.html): Serena is a command-line tool with a variety of sub-commands.
+- [The Serena JetBrains Plugin](02-usage/025_jetbrains_plugin.html): The JetBrains Plugin allows the Serena MCP server to
+- [Connecting Your MCP Client](02-usage/030_clients.html): In the following, we provide general instructions on how to connect Serena to your MCP-enabled client,
+- [For Agents](02-usage/035_for-agents.html): This page is addressed to you: the coding agent whose human just dropped this URL into the
+- [The Project Workflow](02-usage/040_workflow.html): Serena uses a project-based workflow.
+- [Memories & Onboarding](02-usage/045_memories.html): Serena provides the functionality of a fully featured agent, and a useful aspect of this is Serena's memory system.
+- [Configuration](02-usage/050_configuration.html): Serena is very flexible in terms of configuration. While for most users, the default configurations will work,
+- [The Dashboard and GUI Tool](02-usage/060_dashboard.html): Serena comes with built-in tools for monitoring and managing the current session:
+- [Logs](02-usage/065_logs.html): It can be vital to understand what is happening in Serena, especially when something goes wrong.
+- [Security Considerations](02-usage/070_security.html): Security is important to us, and we take this topic seriously.
+- [Additional Usage Pointers](02-usage/999_additional-usage.html): We found that it is often a good idea to spend some time conceptualizing and planning a task
+
+## Special Guides
+
+- [Special Guides](03-special-guides/000_intro.html): This section contains special guides for certain topics that require more in-depth explanations.
+- [C/C++ Setup Guide](03-special-guides/cpp_setup.html): This guide explains how to prepare a C/C++ project so that Serena can provide reliable code intelligence via clangd or ccls language…
+- [Custom Agents with Serena](03-special-guides/custom_agent.html): As a reference implementation, we provide an integration with the Agno agent framework.
+- [GDScript (Godot Engine) Setup Guide for Serena](03-special-guides/godot_gdscript_setup_guide_for_serena.html): This guide explains how to prepare a Godot project so that Serena can provide code intelligence for GDScript (.gd) files via Godot's…
+- [Groovy Setup Guide for Serena](03-special-guides/groovy_setup_guide_for_serena.html): The Groovy support in Serena is incomplete and requires the user to provide a functioning,
+- [OCaml Setup Guide for Serena](03-special-guides/ocaml_setup_guide_for_serena.html): This guide explains how to set up an OCaml project so that Serena can provide code intelligence via ocaml-lsp-server (ocamllsp).
+- [Scala Setup Guide for Serena](03-special-guides/scala_setup_guide_for_serena.html): This guide explains how to prepare a Scala project so that Serena can provide reliable code intelligence via Metals (Scala LSP) and how to…
+- [Connecting Serena MCP Server to ChatGPT via MCPO & Cloudflare Tunnel](03-special-guides/serena_on_chatgpt.html): This guide explains how to expose a locally running Serena MCP server (powered by MCPO) to the internet using Cloudflare Tunnel, and how to…
+- [Unreal Engine Setup Guide](03-special-guides/unreal_engine_setup_guide_for_serena.html): This guide explains how to prepare an Unreal Engine 5 C++ project so that Serena's
+
+## Evaluation
+
+- [Evaluation](04-evaluation/000_evaluation-intro.html): real code – especially symbol-aware navigation, cross-file refactors, and monorepo dependency jumps – while I still lean
+- [Methodology](04-evaluation/010_methodology.html): In this section we describe the methodology we applied in evaluating the performance of Serena's tools.
+- [Prompts](04-evaluation/020_prompts/000_prompts.html): Our evaluation uses two prompts, which are passed to the LLM in order to generate the evaluation results:
+- [Evaluation Prompt](04-evaluation/020_prompts/010_evaluation-prompt.html): We use the prompt below to evaluate the added value of Serena's tools against the
+- [Summary Prompt](04-evaluation/020_prompts/020_summary-prompt.html): We used the prompt below to summarize the evaluation of Serena.
+- [Results](04-evaluation/030_results/000_evaluation-results.html): This section presents the results of the evaluation.
+- [Claude Code (Opus 4.6, medium)](04-evaluation/030_results/010_cc_on_tianshou.html): Method: Hands-on, side-by-side execution of 20 tasks using both toolsets. All edits were applied to real files and verified via git diff,…
+- [Codex (GPT-5.4, high)](04-evaluation/030_results/020_codex_on_jbplugin.html): refactoring, which makes real code changes feel faster, safer, and far less blind.
+- [Copilot CLI (GPT-5.4, medium)](04-evaluation/030_results/030_copilot_cli_on_ente.html): real code—especially symbol-aware navigation, cross-file refactors, and monorepo dependency jumps—while I still lean
+- [Claude Code (GLM 5.1)](04-evaluation/030_results/040_glm_on_tianshou.html): measuring the delta across 20 tasks, I would ask any developer I work with to install it, not because it replaces my
+- [JetBrains Junie Plugin (Opus 4.6)](04-evaluation/030_results/050_junie_plugin_on_tianshou.html): ---
+
+## Contributing
+
+- [Contributing](06-contributing/000_contributing-intro.html): If you want to *use* Serena — connect it to a coding agent, configure languages, work with
+- [Getting Started](06-contributing/010_getting-started.html): Welcome — this page takes you from a fresh clone to a verified change. None of it assumes
+- [Serena for Serena](06-contributing/015_using-serena.html): The tightest loop for working on Serena is Serena itself: point your coding agent at your
+- [House Style](06-contributing/020_house-style.html): Every codebase has opinions; Serena writes its down where its agents can read them — as
+- [Adding Language Support](06-contributing/030_adding-a-language.html): Your language belongs here. Serena speaks some sixty languages because people kept walking
+- [Scripts](06-contributing/035_scripts.html): Everything under scripts/ runs the same way, from the repository root:
+- [FAQ](06-contributing/040_faq.html): Distilled from the issue tracker: the questions that keep arriving, answered the way the
+- [The CI Matrix](06-contributing/045_ci.html): Serena's CI has a problem most projects never meet: sixty-odd languages, each with its own
+- [SolidLSP](06-contributing/050_solidlsp.html): src/solidlsp is the library under everything: one interface over the Language Server
+- [Code Reference](06-contributing/code-reference/000_code-reference-intro.html): If you want to *use* Serena — connect it to your coding agent, configure languages, work with

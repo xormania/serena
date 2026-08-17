@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.mcp &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/mcp';</script>
+    <script src="../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/mcp.html" />
+    <link rel="icon" href="../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.mcp</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The Serena Model Context Protocol (MCP) Server</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">AsyncIterator</span><span class="p">,</span> <span class="n">Iterator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">asynccontextmanager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">docstring_parser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp</span><span class="w"> </span><span class="kn">import</span> <span class="n">server</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp.server</span><span class="w"> </span><span class="kn">import</span> <span class="n">Context</span><span class="p">,</span> <span class="n">FastMCP</span><span class="p">,</span> <span class="n">Settings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.fastmcp.tools.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tool</span> <span class="k">as</span> <span class="n">FastMCPTool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.server.session</span><span class="w"> </span><span class="kn">import</span> <span class="n">ServerSessionT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.shared.context</span><span class="w"> </span><span class="kn">import</span> <span class="n">LifespanContextT</span><span class="p">,</span> <span class="n">RequestT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mcp.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolAnnotations</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pydantic_settings</span><span class="w"> </span><span class="kn">import</span> <span class="n">SettingsConfigDict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sensai.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">logging</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.agent</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">SerenaAgent</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.config.context_mode</span><span class="w"> </span><span class="kn">import</span> <span class="n">SerenaAgentContext</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.config.serena_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageBackend</span><span class="p">,</span> <span class="n">ModeSelectionDefinition</span><span class="p">,</span> <span class="n">SerenaConfig</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_CONTEXT</span><span class="p">,</span> <span class="n">SERENA_LOG_FORMAT</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">ToolCallError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.exception</span><span class="w"> </span><span class="kn">import</span> <span class="n">show_fatal_exception_safe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryLogHandler</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">configure_logging</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># We only do something here if logging has not yet been configured.</span>
+    <span class="c1"># Normally, logging is configured in the MCP server startup script.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">logging</span><span class="o">.</span><span class="n">is_enabled</span><span class="p">():</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">SERENA_LOG_FORMAT</span><span class="p">)</span>
+
+
+<span class="c1"># patch the logging configuration function in fastmcp, because it&#39;s hard-coded and broken</span>
+<span class="n">server</span><span class="o">.</span><span class="n">configure_logging</span> <span class="o">=</span> <span class="n">configure_logging</span>  <span class="c1"># type: ignore</span>
+
+
+<div class="viewcode-block" id="SerenaMCPRequestContext">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaMCPRequestContext">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerenaMCPRequestContext</span><span class="p">:</span>
+    <span class="n">agent</span><span class="p">:</span> <span class="n">SerenaAgent</span></div>
+
+
+
+<div class="viewcode-block" id="SerenaFastMCPTool">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaFastMCPTool">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerenaFastMCPTool</span><span class="p">(</span><span class="n">FastMCPTool</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tool</span><span class="p">:</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">structured_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param tool: the Serena tool</span>
+<span class="sd">        :param openai_tool_compatible: whether to process the tool schema to be compatible with OpenAI tools</span>
+<span class="sd">            (doesn&#39;t accept integer, needs number instead, etc.). This allows using Serena MCP within Codex.</span>
+<span class="sd">        :param structured_output: whether to use structured output for the tool (None = auto)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">func_name</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+        <span class="n">func_doc</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">get_apply_docstring</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">func_arg_metadata</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">get_apply_fn_metadata</span><span class="p">(</span><span class="n">structured_output</span><span class="o">=</span><span class="n">structured_output</span><span class="p">)</span>
+        <span class="n">is_async</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="n">func_arg_metadata</span><span class="o">.</span><span class="n">arg_model</span><span class="o">.</span><span class="n">model_json_schema</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">openai_tool_compatible</span><span class="p">:</span>
+            <span class="n">parameters</span> <span class="o">=</span> <span class="n">SerenaMCPFactory</span><span class="o">.</span><span class="n">_sanitize_for_openai_tools</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+        <span class="n">docstring</span> <span class="o">=</span> <span class="n">docstring_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">func_doc</span><span class="p">)</span>
+
+        <span class="c1"># Mount the tool description as a combination of the docstring description and</span>
+        <span class="c1"># the return value description, if it exists.</span>
+        <span class="n">overridden_description</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">tool_description_overrides</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">func_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">overridden_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">func_doc</span> <span class="o">=</span> <span class="n">overridden_description</span>
+        <span class="k">elif</span> <span class="n">docstring</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+            <span class="n">func_doc</span> <span class="o">=</span> <span class="n">docstring</span><span class="o">.</span><span class="n">description</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">func_doc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">func_doc</span> <span class="o">=</span> <span class="n">func_doc</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">func_doc</span><span class="p">:</span>
+            <span class="n">func_doc</span> <span class="o">+=</span> <span class="s2">&quot;.&quot;</span>
+        <span class="k">if</span> <span class="n">docstring</span><span class="o">.</span><span class="n">returns</span> <span class="ow">and</span> <span class="p">(</span><span class="n">docstring_returns_descr</span> <span class="o">:=</span> <span class="n">docstring</span><span class="o">.</span><span class="n">returns</span><span class="o">.</span><span class="n">description</span><span class="p">):</span>
+            <span class="c1"># Only add a space before &quot;Returns&quot; if func_doc is not empty</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="k">if</span> <span class="n">func_doc</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">func_doc</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">func_doc</span><span class="si">}{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">Returns </span><span class="si">{</span><span class="n">docstring_returns_descr</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+
+        <span class="c1"># Parse the parameter descriptions from the docstring and add pass its description</span>
+        <span class="c1"># to the parameter schema.</span>
+        <span class="n">docstring_params</span> <span class="o">=</span> <span class="p">{</span><span class="n">param</span><span class="o">.</span><span class="n">arg_name</span><span class="p">:</span> <span class="n">param</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">docstring</span><span class="o">.</span><span class="n">params</span><span class="p">}</span>
+        <span class="n">parameters_properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">parameter</span><span class="p">,</span> <span class="n">properties</span> <span class="ow">in</span> <span class="n">parameters_properties</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">param_doc</span> <span class="o">:=</span> <span class="n">docstring_params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">parameter</span><span class="p">))</span> <span class="ow">and</span> <span class="n">param_doc</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>
+                <span class="n">param_desc</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_doc</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">properties</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_desc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">+</span> <span class="n">param_desc</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">execute_fn</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">tool</span><span class="o">.</span><span class="n">apply_ex</span><span class="p">(</span><span class="n">log_call</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">catch_exceptions</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">ToolCallError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ToolError</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">get_error_message</span><span class="p">())</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+
+        <span class="c1"># Generate human-readable title from snake_case tool name</span>
+        <span class="n">tool_title</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">func_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">))</span>
+
+        <span class="c1"># Create annotations with appropriate hints based on tool capabilities</span>
+        <span class="n">can_edit</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">can_edit</span><span class="p">()</span>
+        <span class="n">annotations</span> <span class="o">=</span> <span class="n">ToolAnnotations</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">tool_title</span><span class="p">,</span>
+            <span class="n">readOnlyHint</span><span class="o">=</span><span class="ow">not</span> <span class="n">can_edit</span><span class="p">,</span>
+            <span class="n">destructiveHint</span><span class="o">=</span><span class="n">can_edit</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">fn</span><span class="o">=</span><span class="n">execute_fn</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">func_name</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="n">func_doc</span><span class="p">,</span>
+            <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+            <span class="n">fn_metadata</span><span class="o">=</span><span class="n">func_arg_metadata</span><span class="p">,</span>
+            <span class="n">is_async</span><span class="o">=</span><span class="n">is_async</span><span class="p">,</span>
+            <span class="c1"># keep the value in sync with the kwarg name in Tool.apply_ex. The mcp sdk uses reflection to infer this</span>
+            <span class="c1"># when the tool is constructed via from_function (which is a bit crazy IMO, but well...)</span>
+            <span class="n">context_kwarg</span><span class="o">=</span><span class="s2">&quot;mcp_ctx&quot;</span><span class="p">,</span>
+            <span class="n">annotations</span><span class="o">=</span><span class="n">annotations</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">tool_title</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_param_aliases</span> <span class="o">=</span> <span class="n">tool</span><span class="o">.</span><span class="n">get_param_aliases</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SerenaFastMCPTool.run">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaFastMCPTool.run">[docs]</a>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">arguments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">[</span><span class="n">ServerSessionT</span><span class="p">,</span> <span class="n">LifespanContextT</span><span class="p">,</span> <span class="n">RequestT</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">convert_result</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="c1"># apply parameter aliases</span>
+        <span class="k">for</span> <span class="n">param_alias</span><span class="p">,</span> <span class="n">param_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_param_aliases</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">param_alias</span> <span class="ow">in</span> <span class="n">arguments</span> <span class="ow">and</span> <span class="n">param_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arguments</span><span class="p">:</span>
+                <span class="n">arguments</span><span class="p">[</span><span class="n">param_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">arguments</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">param_alias</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="k">await</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">arguments</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="SerenaMCPFactory">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaMCPFactory">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SerenaMCPFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Factory for the creation of the Serena MCP server with an associated SerenaAgent.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">transport</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;stdio&quot;</span><span class="p">,</span> <span class="s2">&quot;sse&quot;</span><span class="p">,</span> <span class="s2">&quot;streamable-http&quot;</span><span class="p">],</span>
+        <span class="n">context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">DEFAULT_CONTEXT</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">memory_log_handler</span><span class="p">:</span> <span class="n">MemoryLogHandler</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param transport: The transport to use for the MCP server.</span>
+<span class="sd">        :param context: The context name or path to context file</span>
+<span class="sd">        :param project: Either an absolute path to the project directory or a name of an already registered project.</span>
+<span class="sd">            If the project passed here hasn&#39;t been registered yet, it will be registered automatically and can be activated by its name</span>
+<span class="sd">            afterward.</span>
+<span class="sd">        :param memory_log_handler: the in-memory log handler to use for the agent&#39;s logging</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="n">transport</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">SerenaAgentContext</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="p">:</span> <span class="n">SerenaAgent</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">memory_log_handler</span> <span class="o">=</span> <span class="n">memory_log_handler</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_sanitize_for_openai_tools</span><span class="p">(</span><span class="n">schema</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method was written by GPT-5, I have not reviewed it in detail.</span>
+<span class="sd">        Only called when `openai_tool_compatible` is True.</span>
+
+<span class="sd">        Make a Pydantic/JSON Schema object compatible with OpenAI tool schema.</span>
+<span class="sd">        - &#39;integer&#39; -&gt; &#39;number&#39; (+ multipleOf: 1)</span>
+<span class="sd">        - remove &#39;null&#39; from union type arrays</span>
+<span class="sd">        - coerce integer-only enums to number</span>
+<span class="sd">        - best-effort simplify oneOf/anyOf when they only differ by integer/number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">walk</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="c1"># lists get handled by parent calls</span>
+                <span class="k">return</span> <span class="n">node</span>
+
+            <span class="c1"># ---- handle type ----</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="s2">&quot;integer&quot;</span><span class="p">:</span>
+                    <span class="n">node</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;number&quot;</span>
+                    <span class="c1"># preserve existing multipleOf but ensure it&#39;s integer-like</span>
+                    <span class="k">if</span> <span class="s2">&quot;multipleOf&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                        <span class="n">node</span><span class="p">[</span><span class="s2">&quot;multipleOf&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="c1"># remove &#39;null&#39; (OpenAI tools don&#39;t support nullables)</span>
+                <span class="n">t2</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s2">&quot;integer&quot;</span> <span class="k">else</span> <span class="s2">&quot;number&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span> <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="s2">&quot;null&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">t2</span><span class="p">:</span>
+                    <span class="c1"># fall back to object if it somehow becomes empty</span>
+                    <span class="n">t2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">]</span>
+                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">t2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">t2</span>
+                <span class="k">if</span> <span class="s2">&quot;integer&quot;</span> <span class="ow">in</span> <span class="n">t</span> <span class="ow">or</span> <span class="s2">&quot;number&quot;</span> <span class="ow">in</span> <span class="n">t2</span><span class="p">:</span>
+                    <span class="c1"># if integers were present, keep integer-like restriction</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;multipleOf&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># ---- enums of integers -&gt; number ----</span>
+            <span class="k">if</span> <span class="s2">&quot;enum&quot;</span> <span class="ow">in</span> <span class="n">node</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;enum&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">vals</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;enum&quot;</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">vals</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">):</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="s2">&quot;number&quot;</span><span class="p">)</span>
+                    <span class="c1"># keep them as ints; JSON &#39;number&#39; covers ints</span>
+                    <span class="n">node</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;multipleOf&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+            <span class="c1"># ---- simplify anyOf/oneOf if they only differ by integer/number ----</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;oneOf&quot;</span><span class="p">,</span> <span class="s2">&quot;anyOf&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">node</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="c1"># Special case: anyOf or oneOf with &quot;type X&quot; and &quot;null&quot;</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">sub</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span>
+                        <span class="k">if</span> <span class="s2">&quot;null&quot;</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
+                            <span class="n">non_null_type</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types</span> <span class="k">if</span> <span class="n">t</span> <span class="o">!=</span> <span class="s2">&quot;null&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">non_null_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">non_null_type</span>
+                                <span class="n">node</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                                <span class="k">continue</span>
+                    <span class="n">simplified</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">changed</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                        <span class="n">sub</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>  <span class="c1"># recurse</span>
+                        <span class="n">simplified</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sub</span><span class="p">)</span>
+                    <span class="c1"># If all subs are the same after integer→number, collapse</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+                        <span class="n">canon</span> <span class="o">=</span> <span class="p">[</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">simplified</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">canon</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="c1"># copy the single schema up</span>
+                            <span class="n">only</span> <span class="o">=</span> <span class="n">simplified</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                            <span class="n">node</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">only</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                                <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                                    <span class="n">node</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                            <span class="n">changed</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">changed</span><span class="p">:</span>
+                        <span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">simplified</span>
+
+            <span class="c1"># ---- recurse into known schema containers ----</span>
+            <span class="k">for</span> <span class="n">child_key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="s2">&quot;patternProperties&quot;</span><span class="p">,</span> <span class="s2">&quot;definitions&quot;</span><span class="p">,</span> <span class="s2">&quot;$defs&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">child_key</span> <span class="ow">in</span> <span class="n">node</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">child_key</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">child_key</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+                        <span class="n">node</span><span class="p">[</span><span class="n">child_key</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+            <span class="c1"># arrays/items</span>
+            <span class="k">if</span> <span class="s2">&quot;items&quot;</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;items&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;items&quot;</span><span class="p">])</span>
+
+            <span class="c1"># allOf/if/then/else - pass through with integer→number conversions applied inside</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;allOf&quot;</span><span class="p">,):</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">node</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">walk</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">node</span><span class="p">[</span><span class="n">key</span><span class="p">]]</span>
+
+            <span class="k">if</span> <span class="s2">&quot;if&quot;</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;if&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;if&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s2">&quot;then&quot;</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;then&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;then&quot;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s2">&quot;else&quot;</span> <span class="ow">in</span> <span class="n">node</span><span class="p">:</span>
+                <span class="n">node</span><span class="p">[</span><span class="s2">&quot;else&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">walk</span><span class="p">(</span><span class="n">node</span><span class="p">[</span><span class="s2">&quot;else&quot;</span><span class="p">])</span>
+
+            <span class="k">return</span> <span class="n">node</span>
+
+        <span class="k">return</span> <span class="n">walk</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SerenaMCPFactory.make_mcp_tool">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaMCPFactory.make_mcp_tool">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_mcp_tool</span><span class="p">(</span><span class="n">tool</span><span class="p">:</span> <span class="n">Tool</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">structured_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerenaFastMCPTool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an MCP tool from a Serena Tool instance.</span>
+
+<span class="sd">        :param tool: the Serena Tool instance to convert.</span>
+<span class="sd">        :param openai_tool_compatible: whether to process the tool schema to be compatible with OpenAI tools</span>
+<span class="sd">            (doesn&#39;t accept integer, needs number instead, etc.). This allows using Serena MCP within codex.</span>
+<span class="sd">        :param structured_output: whether to use structured output for the tool (None = auto)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SerenaFastMCPTool</span><span class="p">(</span><span class="n">tool</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="o">=</span><span class="n">openai_tool_compatible</span><span class="p">,</span> <span class="n">structured_output</span><span class="o">=</span><span class="n">structured_output</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_iter_tools</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tool</span><span class="p">]:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_exposed_tool_instances</span><span class="p">()</span>
+
+    <span class="c1"># noinspection PyProtectedMember</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_mcp_tools</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mcp</span><span class="p">:</span> <span class="n">FastMCP</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">structured_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the tools in the MCP server</span>
+
+<span class="sd">        :param mcp: The MCP server to update</span>
+<span class="sd">        :param openai_tool_compatible: whether to process the tool schema to be compatible with OpenAI tools</span>
+<span class="sd">        :param structured_output: whether to use structured output for the tools (None = auto)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mcp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mcp</span><span class="o">.</span><span class="n">_tool_manager</span><span class="o">.</span><span class="n">_tools</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">tool</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iter_tools</span><span class="p">():</span>
+                <span class="n">mcp_tool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_mcp_tool</span><span class="p">(</span><span class="n">tool</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="o">=</span><span class="n">openai_tool_compatible</span><span class="p">,</span> <span class="n">structured_output</span><span class="o">=</span><span class="n">structured_output</span><span class="p">)</span>
+                <span class="n">mcp</span><span class="o">.</span><span class="n">_tool_manager</span><span class="o">.</span><span class="n">_tools</span><span class="p">[</span><span class="n">tool</span><span class="o">.</span><span class="n">get_name</span><span class="p">()]</span> <span class="o">=</span> <span class="n">mcp_tool</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting MCP server with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mcp</span><span class="o">.</span><span class="n">_tool_manager</span><span class="o">.</span><span class="n">_tools</span><span class="p">)</span><span class="si">}</span><span class="s2"> tools: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">mcp</span><span class="o">.</span><span class="n">_tool_manager</span><span class="o">.</span><span class="n">_tools</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_create_serena_agent</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">serena_config</span><span class="p">:</span> <span class="n">SerenaConfig</span><span class="p">,</span> <span class="n">modes</span><span class="p">:</span> <span class="n">ModeSelectionDefinition</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">project_activation_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SerenaAgent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SerenaAgent</span><span class="p">(</span>
+            <span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>
+            <span class="n">serena_config</span><span class="o">=</span><span class="n">serena_config</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">modes</span><span class="o">=</span><span class="n">modes</span><span class="p">,</span>
+            <span class="n">memory_log_handler</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">memory_log_handler</span><span class="p">,</span>
+            <span class="n">project_activation_error</span><span class="o">=</span><span class="n">project_activation_error</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="SerenaMCPFactory.create_mcp_server">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaMCPFactory.create_mcp_server">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_mcp_server</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8000</span><span class="p">,</span>
+        <span class="n">mode_selection_def</span><span class="p">:</span> <span class="n">ModeSelectionDefinition</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">language_backend</span><span class="p">:</span> <span class="n">LanguageBackend</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enable_web_dashboard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">enable_gui_log_window</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">open_web_dashboard</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">log_level</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">trace_lsp_communication</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tool_timeout</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">project_activation_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FastMCP</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an MCP server with process-isolated SerenaAgent to prevent asyncio contamination.</span>
+
+<span class="sd">        :param host: The host to bind to</span>
+<span class="sd">        :param port: The port to bind to</span>
+<span class="sd">        :param mode_selection_def: the mode selection definition to apply</span>
+<span class="sd">        :param language_backend: the language backend to use, overriding the configuration setting.</span>
+<span class="sd">        :param enable_web_dashboard: Whether to enable the web dashboard. If not specified, will take the value from the serena configuration.</span>
+<span class="sd">        :param enable_gui_log_window: Whether to enable the GUI log window. It currently does not work on macOS, and setting this to True will be ignored then.</span>
+<span class="sd">            If not specified, will take the value from the serena configuration.</span>
+<span class="sd">        :param open_web_dashboard: Whether to open the web dashboard on launch.</span>
+<span class="sd">            If not specified, will take the value from the serena configuration.</span>
+<span class="sd">        :param log_level: Log level. If not specified, will take the value from the serena configuration.</span>
+<span class="sd">        :param trace_lsp_communication: Whether to trace the communication between Serena and the language servers.</span>
+<span class="sd">            This is useful for debugging language server issues.</span>
+<span class="sd">        :param tool_timeout: Timeout in seconds for tool execution. If not specified, will take the value from the serena configuration.</span>
+<span class="sd">        :param project_activation_error: an initial project activation error to report back to the client</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="n">SerenaConfig</span><span class="o">.</span><span class="n">from_config_file</span><span class="p">()</span>
+
+            <span class="c1"># update configuration with the provided parameters</span>
+            <span class="k">if</span> <span class="n">enable_web_dashboard</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">web_dashboard</span> <span class="o">=</span> <span class="n">enable_web_dashboard</span>
+            <span class="k">if</span> <span class="n">enable_gui_log_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">gui_log_window</span> <span class="o">=</span> <span class="n">enable_gui_log_window</span>
+            <span class="k">if</span> <span class="n">open_web_dashboard</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">web_dashboard_open_on_launch</span> <span class="o">=</span> <span class="n">open_web_dashboard</span>
+            <span class="k">if</span> <span class="n">log_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log_level</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span> <span class="s2">&quot;WARNING&quot;</span><span class="p">,</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">,</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">],</span> <span class="n">log_level</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLevelNamesMapping</span><span class="p">()[</span><span class="n">log_level</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">trace_lsp_communication</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">trace_lsp_communication</span> <span class="o">=</span> <span class="n">trace_lsp_communication</span>
+            <span class="k">if</span> <span class="n">tool_timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">tool_timeout</span> <span class="o">=</span> <span class="n">tool_timeout</span>
+            <span class="k">if</span> <span class="n">language_backend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">config</span><span class="o">.</span><span class="n">language_backend</span> <span class="o">=</span> <span class="n">language_backend</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_create_serena_agent</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">modes</span><span class="o">=</span><span class="n">mode_selection_def</span><span class="p">,</span> <span class="n">project_activation_error</span><span class="o">=</span><span class="n">project_activation_error</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">show_fatal_exception_safe</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+        <span class="c1"># Override model_config to disable the use of `.env` files for reading settings, because user projects are likely to contain</span>
+        <span class="c1"># `.env` files (e.g. containing LOG_LEVEL) that are not supposed to override the MCP settings;</span>
+        <span class="c1"># retain only FASTMCP_ prefix for already set environment variables.</span>
+        <span class="n">Settings</span><span class="o">.</span><span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span><span class="n">env_prefix</span><span class="o">=</span><span class="s2">&quot;FASTMCP_&quot;</span><span class="p">)</span>
+        <span class="n">instructions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_initial_instructions</span><span class="p">()</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MCP server initial instructions:</span><span class="se">\n</span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">instructions</span><span class="p">)</span>
+        <span class="n">mcp</span> <span class="o">=</span> <span class="n">FastMCP</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Serena&quot;</span><span class="p">,</span>
+            <span class="n">lifespan</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">server_lifespan</span><span class="p">,</span>
+            <span class="n">website_url</span><span class="o">=</span><span class="s2">&quot;https://oraios.github.io/serena&quot;</span><span class="p">,</span>
+            <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
+            <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
+            <span class="n">instructions</span><span class="o">=</span><span class="n">instructions</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">mcp</span></div>
+
+
+<div class="viewcode-block" id="SerenaMCPFactory.server_lifespan">
+<a class="viewcode-back" href="../../06-contributing/code-reference/mcp.html#serena.mcp.SerenaMCPFactory.server_lifespan">[docs]</a>
+    <span class="nd">@asynccontextmanager</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">server_lifespan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mcp_server</span><span class="p">:</span> <span class="n">FastMCP</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncIterator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Manages the lifespan of MCP server instances and performs necessary setup and teardown.</span>
+<span class="sd">        For stdio transport, there is a single server instance.</span>
+<span class="sd">        For other transports, this is called once per connection!</span>
+
+<span class="sd">        :param mcp_server: the MCP server instance to configure</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">openai_tool_compatible</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;chatgpt&quot;</span><span class="p">,</span> <span class="s2">&quot;codex&quot;</span><span class="p">,</span> <span class="s2">&quot;oaicompat-agent&quot;</span><span class="p">]</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_mcp_tools</span><span class="p">(</span><span class="n">mcp_server</span><span class="p">,</span> <span class="n">openai_tool_compatible</span><span class="o">=</span><span class="n">openai_tool_compatible</span><span class="p">,</span> <span class="n">structured_output</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">structured_tool_output</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MCP server lifetime setup complete&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Shut down the server if we are running in stdio mode.</span>
+            <span class="c1"># For other transports, we do nothing; the singleton agent instance remains active.</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span> <span class="o">==</span> <span class="s2">&quot;stdio&quot;</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;MCP server shutting down&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">on_shutdown</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Client disconnected&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_initial_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent</span><span class="o">.</span><span class="n">create_connection_prompt</span><span class="p">()</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

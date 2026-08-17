@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>serena.memories.memory_reference_analysis &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-contributing/code-reference/memories/memory_reference_analysis';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/06-contributing/code-reference/memories/memory_reference_analysis.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="tools" href="../tools/index.html" />
+    <link rel="prev" title="memories" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../000_contributing-intro.html">Contributing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../000_code-reference-intro.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">memories</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/06-contributing/code-reference/memories/memory_reference_analysis.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>serena.memories.memory_reference_analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.MEMORY_REF_PREFIX"><code class="docutils literal notranslate"><span class="pre">MEMORY_REF_PREFIX</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.NAME_SIMILARITY_THRESHOLD"><code class="docutils literal notranslate"><span class="pre">NAME_SIMILARITY_THRESHOLD</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH"><code class="docutils literal notranslate"><span class="pre">HIGH_CONFIDENCE_NAME_LENGTH</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.SHORT_NAME_FLOOR"><code class="docutils literal notranslate"><span class="pre">SHORT_NAME_FLOOR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.FUZZY_BARE_TOKEN_JACCARD_FLOOR"><code class="docutils literal notranslate"><span class="pre">FUZZY_BARE_TOKEN_JACCARD_FLOOR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.BASENAME_JACCARD_FLOOR"><code class="docutils literal notranslate"><span class="pre">BASENAME_JACCARD_FLOOR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.BASENAME_TYPO_SEQ_FLOOR"><code class="docutils literal notranslate"><span class="pre">BASENAME_TYPO_SEQ_FLOOR</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES"><code class="docutils literal notranslate"><span class="pre">MAX_STALE_REFERENCE_CANDIDATES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES"><code class="docutils literal notranslate"><span class="pre">WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.NAME_CHAR_CLASS"><code class="docutils literal notranslate"><span class="pre">NAME_CHAR_CLASS</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.normalize_for_similarity"><code class="docutils literal notranslate"><span class="pre">normalize_for_similarity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.tokenize_name"><code class="docutils literal notranslate"><span class="pre">tokenize_name()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.compute_name_similarity"><code class="docutils literal notranslate"><span class="pre">compute_name_similarity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.find_stale_reference_candidates"><code class="docutils literal notranslate"><span class="pre">find_stale_reference_candidates()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.iter_referenced_names_in_content"><code class="docutils literal notranslate"><span class="pre">iter_referenced_names_in_content()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.find_bare_occurrences"><code class="docutils literal notranslate"><span class="pre">find_bare_occurrences()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.add_bare_occurrences_prefix"><code class="docutils literal notranslate"><span class="pre">add_bare_occurrences_prefix()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.iter_long_bare_tokens"><code class="docutils literal notranslate"><span class="pre">iter_long_bare_tokens()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.is_self_reference"><code class="docutils literal notranslate"><span class="pre">is_self_reference()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.StaleReference"><code class="docutils literal notranslate"><span class="pre">StaleReference</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><code class="docutils literal notranslate"><span class="pre">UnmarkedReferenceWarning</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning.is_exact_match"><code class="docutils literal notranslate"><span class="pre">UnmarkedReferenceWarning.is_exact_match</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.AutofixedReference"><code class="docutils literal notranslate"><span class="pre">AutofixedReference</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport"><code class="docutils literal notranslate"><span class="pre">ReferentialIntegrityReport</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport.is_clean"><code class="docutils literal notranslate"><span class="pre">ReferentialIntegrityReport.is_clean()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport.format"><code class="docutils literal notranslate"><span class="pre">ReferentialIntegrityReport.format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.AutofixReport"><code class="docutils literal notranslate"><span class="pre">AutofixReport</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.AutofixReport.format"><code class="docutils literal notranslate"><span class="pre">AutofixReport.format()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer"><code class="docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity"><code class="docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer.validate_referential_integrity()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references"><code class="docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer.auto_prefix_bare_references()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-serena.memories.memory_reference_analysis">
+<span id="serena-memories-memory-reference-analysis"></span><h1>serena.memories.memory_reference_analysis<a class="headerlink" href="#module-serena.memories.memory_reference_analysis" title="Link to this heading">#</a></h1>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#serena/memories/memory_reference_analysis.py"><span>serena/memories/memory_reference_analysis.py</span></a></p>
+<hr class="docutils" />
+<p>Memory reference matching, similarity scoring, and integrity reporting.</p>
+<p>This module contains the pure helpers and data types used by
+<code class="xref py py-class docutils literal notranslate"><span class="pre">serena.project.MemoriesManager</span></code> to (a) detect and rank references
+between memories, and (b) report referential integrity issues. The
+<a class="reference internal" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer" title="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer"><code class="xref py py-class docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer</span></code></a> class drives the validation and autofix
+workflows against a live <code class="docutils literal notranslate"><span class="pre">MemoriesManager</span></code> instance.</p>
+<p>Kept separate from the manager so the matching heuristics can be evolved
+and tested in isolation from filesystem and lifecycle concerns.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.MEMORY_REF_PREFIX">
+<span class="sig-name descname"><span class="pre">MEMORY_REF_PREFIX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mem:'</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.MEMORY_REF_PREFIX" title="Link to this definition">#</a></dt>
+<dd><p>Reference prefix used inside memory bodies to point at another memory.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.NAME_SIMILARITY_THRESHOLD">
+<span class="sig-name descname"><span class="pre">NAME_SIMILARITY_THRESHOLD</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.55</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.NAME_SIMILARITY_THRESHOLD" title="Link to this definition">#</a></dt>
+<dd><p>Minimum <a class="reference internal" href="#serena.memories.memory_reference_analysis.compute_name_similarity" title="serena.memories.memory_reference_analysis.compute_name_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_name_similarity()</span></code></a> score for a candidate to be reported.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH">
+<span class="sig-name descname"><span class="pre">HIGH_CONFIDENCE_NAME_LENGTH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH" title="Link to this definition">#</a></dt>
+<dd><p>Length threshold above which a flat memory name is considered “name-shaped” (i.e.
+unlikely to coincide with ordinary prose).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.SHORT_NAME_FLOOR">
+<span class="sig-name descname"><span class="pre">SHORT_NAME_FLOOR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.SHORT_NAME_FLOOR" title="Link to this definition">#</a></dt>
+<dd><p>Below this basename length, only an exact token match keeps similarity above 0.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.FUZZY_BARE_TOKEN_JACCARD_FLOOR">
+<span class="sig-name descname"><span class="pre">FUZZY_BARE_TOKEN_JACCARD_FLOOR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.6</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.FUZZY_BARE_TOKEN_JACCARD_FLOOR" title="Link to this definition">#</a></dt>
+<dd><p>For fuzzy bare-text matching, the bare token and the candidate existing name must
+share at least this fraction of their tokenized name parts. Containment / SequenceMatcher
+signals alone over-match — e.g. a generic prose word like <code class="docutils literal notranslate"><span class="pre">repository</span></code> is a substring of
+<code class="docutils literal notranslate"><span class="pre">serena_repository_structure</span></code> but their token Jaccard is only 1/3, so we reject it at
+this floor.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.BASENAME_JACCARD_FLOOR">
+<span class="sig-name descname"><span class="pre">BASENAME_JACCARD_FLOOR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.34</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.BASENAME_JACCARD_FLOOR" title="Link to this definition">#</a></dt>
+<dd><p>In <a class="reference internal" href="#serena.memories.memory_reference_analysis.compute_name_similarity" title="serena.memories.memory_reference_analysis.compute_name_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_name_similarity()</span></code></a> case 2 (basenames differ), when the two names also
+carry <em>differing</em> topic prefixes, demand at least one strong basename signal: token
+Jaccard &gt;= this floor, basename containment, or typo-level seq ratio. Without this gate,
+names like <code class="docutils literal notranslate"><span class="pre">frontend/x-subtleties</span></code> and <code class="docutils literal notranslate"><span class="pre">backend/y-subtleties</span></code> get matched purely on the
+shared trailing token via the SequenceMatcher signal.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.BASENAME_TYPO_SEQ_FLOOR">
+<span class="sig-name descname"><span class="pre">BASENAME_TYPO_SEQ_FLOOR</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.75</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.BASENAME_TYPO_SEQ_FLOOR" title="Link to this definition">#</a></dt>
+<dd><p>Companion to <a class="reference internal" href="#serena.memories.memory_reference_analysis.BASENAME_JACCARD_FLOOR" title="serena.memories.memory_reference_analysis.BASENAME_JACCARD_FLOOR"><code class="xref py py-data docutils literal notranslate"><span class="pre">BASENAME_JACCARD_FLOOR</span></code></a>: a basename seq ratio above this is treated
+as typo-level edit distance and bypasses the Jaccard/containment requirement.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES">
+<span class="sig-name descname"><span class="pre">MAX_STALE_REFERENCE_CANDIDATES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES" title="Link to this definition">#</a></dt>
+<dd><p>Hard cap on candidates proposed per stale reference. Beyond a small number the list
+stops aiding disambiguation and becomes noise.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES">
+<span class="sig-name descname"><span class="pre">WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">frozenset</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">frozenset({'core'})</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES" title="Link to this definition">#</a></dt>
+<dd><p>Names that coincide with common English words and are filtered out of the unmarked-
+reference scan to avoid false positives.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.NAME_CHAR_CLASS">
+<span class="sig-name descname"><span class="pre">NAME_CHAR_CLASS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'[A-Za-z0-9_\\-/]'</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.NAME_CHAR_CLASS" title="Link to this definition">#</a></dt>
+<dd><p>Character class delimiting a memory name. Used to anchor regex matches so we never
+consume a partial name (kept in sync with the boundary rule in
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoriesManager.rename_references_to_memory()</span></code>).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.normalize_for_similarity">
+<span class="sig-name descname"><span class="pre">normalize_for_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#normalize_for_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.normalize_for_similarity" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – a memory name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a lowercased copy of <code class="docutils literal notranslate"><span class="pre">name</span></code> with version/legacy-style trailing suffixes stripped
+(e.g. <code class="docutils literal notranslate"><span class="pre">&quot;auth_v2&quot;</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">&quot;auth&quot;</span></code>); used as the canonical form for similarity scoring.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.tokenize_name">
+<span class="sig-name descname"><span class="pre">tokenize_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#tokenize_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.tokenize_name" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – a memory name</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the set of lowercase tokens extracted by splitting <code class="docutils literal notranslate"><span class="pre">name</span></code> on <code class="docutils literal notranslate"><span class="pre">/</span></code>, <code class="docutils literal notranslate"><span class="pre">_</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>
+and at camelCase boundaries; empty tokens are dropped.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>set</em>[<em>str</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.compute_name_similarity">
+<span class="sig-name descname"><span class="pre">compute_name_similarity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#compute_name_similarity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.compute_name_similarity" title="Link to this definition">#</a></dt>
+<dd><p>Computes a similarity score in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> between two memory names. Examples
+(with default threshold <code class="docutils literal notranslate"><span class="pre">0.55</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">auth</span><span class="o">/</span><span class="n">login</span>        <span class="o">==</span> <span class="n">auth</span><span class="o">/</span><span class="n">login</span>          <span class="o">-&gt;</span> <span class="mf">1.00</span>   <span class="p">(</span><span class="n">exact</span><span class="p">)</span>
+<span class="n">auth_v1</span>           <span class="o">~</span>  <span class="n">auth_v2</span>             <span class="o">-&gt;</span> <span class="mf">1.00</span>   <span class="p">(</span><span class="n">version</span> <span class="n">suffix</span> <span class="n">normalized</span><span class="p">)</span>
+<span class="n">login</span>             <span class="o">~</span>  <span class="n">auth</span><span class="o">/</span><span class="n">login</span>          <span class="o">-&gt;</span> <span class="mf">1.00</span>   <span class="p">(</span><span class="n">flat</span> <span class="o">&lt;-&gt;</span> <span class="n">topic</span> <span class="n">move</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">/</span><span class="n">login</span>        <span class="o">~</span>  <span class="n">auth</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span><span class="n">login</span>       <span class="o">-&gt;</span> <span class="mf">0.75</span>   <span class="p">(</span><span class="n">shared</span> <span class="n">prefix</span> <span class="n">token</span> <span class="o">+</span> <span class="n">basename</span><span class="p">)</span>
+<span class="n">auth</span><span class="o">/</span><span class="n">login</span>        <span class="o">~</span>  <span class="n">security</span><span class="o">/</span><span class="n">login</span>      <span class="o">-&gt;</span> <span class="mf">0.50</span>   <span class="p">(</span><span class="n">basename</span> <span class="n">only</span><span class="p">;</span> <span class="n">disjoint</span> <span class="n">topics</span><span class="p">)</span>
+<span class="n">auth</span>              <span class="o">~</span>  <span class="n">authentication</span>      <span class="o">-&gt;</span> <span class="mf">0.64</span>   <span class="p">(</span><span class="n">substring</span> <span class="n">containment</span><span class="p">)</span>
+<span class="n">foo</span>               <span class="o">~</span>  <span class="k">for</span>                 <span class="o">-&gt;</span> <span class="mf">0.00</span>   <span class="p">(</span><span class="n">short</span><span class="o">-</span><span class="n">name</span> <span class="n">floor</span><span class="p">)</span>
+<span class="n">frontend</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">subtleties</span> <span class="o">~</span> <span class="n">backend</span><span class="o">/</span><span class="n">y</span><span class="o">-</span><span class="n">subtleties</span> <span class="o">-&gt;</span> <span class="mf">0.00</span> <span class="p">(</span><span class="n">different</span> <span class="n">topics</span> <span class="o">+</span> <span class="n">only</span> <span class="n">a</span>
+                                                     <span class="n">shared</span> <span class="n">generic</span> <span class="n">trailing</span> <span class="n">token</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>str</em>) – first memory name</p></li>
+<li><p><strong>b</strong> (<em>str</em>) – second memory name</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the similarity score</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>float</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.find_stale_reference_candidates">
+<span class="sig-name descname"><span class="pre">find_stale_reference_candidates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">missing_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">existing_names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#find_stale_reference_candidates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.find_stale_reference_candidates" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>missing_name</strong> (<em>str</em>) – the unresolved reference target (without the <code class="docutils literal notranslate"><span class="pre">mem:</span></code> prefix).</p></li>
+<li><p><strong>existing_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – the names of all currently existing memories.</p></li>
+<li><p><strong>threshold</strong> (<em>float</em><em> | </em><em>None</em>) – optional override for the minimum similarity required; defaults to
+<a class="reference internal" href="#serena.memories.memory_reference_analysis.NAME_SIMILARITY_THRESHOLD" title="serena.memories.memory_reference_analysis.NAME_SIMILARITY_THRESHOLD"><code class="xref py py-data docutils literal notranslate"><span class="pre">NAME_SIMILARITY_THRESHOLD</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>existing memory names whose similarity to <code class="docutils literal notranslate"><span class="pre">missing_name</span></code> meets or exceeds
+<code class="docutils literal notranslate"><span class="pre">threshold</span></code>, sorted in descending order of similarity (ties broken alphabetically)
+and capped at <a class="reference internal" href="#serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES" title="serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES"><code class="xref py py-data docutils literal notranslate"><span class="pre">MAX_STALE_REFERENCE_CANDIDATES</span></code></a> entries to keep the output
+focused on the most plausible matches.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>list</em>[<em>str</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.iter_referenced_names_in_content">
+<span class="sig-name descname"><span class="pre">iter_referenced_names_in_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#iter_referenced_names_in_content"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.iter_referenced_names_in_content" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>str</em>) – arbitrary memory content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an iterator over the memory names appearing as <code class="docutils literal notranslate"><span class="pre">mem:NAME</span></code> references in
+<code class="docutils literal notranslate"><span class="pre">content</span></code>; duplicate occurrences are yielded once each.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[<em>str</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.find_bare_occurrences">
+<span class="sig-name descname"><span class="pre">find_bare_occurrences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#find_bare_occurrences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.find_bare_occurrences" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – arbitrary memory content</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – a memory name to look for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the count of bare (i.e. not already <code class="docutils literal notranslate"><span class="pre">mem:</span></code>-prefixed) word-boundary-anchored
+occurrences of <code class="docutils literal notranslate"><span class="pre">name</span></code> in <code class="docutils literal notranslate"><span class="pre">content</span></code>. The match must not be preceded by <code class="docutils literal notranslate"><span class="pre">mem:</span></code>
+and must not be embedded within a longer memory-name-like run of characters.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>int</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.add_bare_occurrences_prefix">
+<span class="sig-name descname"><span class="pre">add_bare_occurrences_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#add_bare_occurrences_prefix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.add_bare_occurrences_prefix" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>content</strong> (<em>str</em>) – arbitrary memory content</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – the memory name whose bare occurrences should be rewritten</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">(new_content,</span> <span class="pre">n_replacements)</span></code> after prefixing each bare occurrence of
+<code class="docutils literal notranslate"><span class="pre">name</span></code> with <code class="docutils literal notranslate"><span class="pre">mem:</span></code> (using the same boundary rule as <a class="reference internal" href="#serena.memories.memory_reference_analysis.find_bare_occurrences" title="serena.memories.memory_reference_analysis.find_bare_occurrences"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_bare_occurrences()</span></code></a>).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>tuple</em>[<em>str</em>, <em>int</em>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.iter_long_bare_tokens">
+<span class="sig-name descname"><span class="pre">iter_long_bare_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#iter_long_bare_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.iter_long_bare_tokens" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>content</strong> (<em>str</em>) – arbitrary memory content</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an iterator over <code class="docutils literal notranslate"><span class="pre">(token,</span> <span class="pre">count)</span></code> pairs for each distinct name-shaped
+token in <code class="docutils literal notranslate"><span class="pre">content</span></code> whose length meets <a class="reference internal" href="#serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH" title="serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH"><code class="xref py py-data docutils literal notranslate"><span class="pre">HIGH_CONFIDENCE_NAME_LENGTH</span></code></a>
+and which is not preceded by <code class="docutils literal notranslate"><span class="pre">mem:</span></code> (those are already valid references).
+The boundaries follow <a class="reference internal" href="#serena.memories.memory_reference_analysis.NAME_CHAR_CLASS" title="serena.memories.memory_reference_analysis.NAME_CHAR_CLASS"><code class="xref py py-data docutils literal notranslate"><span class="pre">NAME_CHAR_CLASS</span></code></a>, so embedded substrings of
+longer name-character runs are not matched.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>Iterator</em>[<em>tuple</em>[<em>str</em>, <em>int</em>]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.is_self_reference">
+<span class="sig-name descname"><span class="pre">is_self_reference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suspected_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#is_self_reference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.is_self_reference" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True iff <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> would refer to <code class="docutils literal notranslate"><span class="pre">source_memory</span></code> itself
+(including the case where <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> equals the basename of a topic-path
+source memory).</p>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>source_memory</strong> (<em>str</em>)</p></li>
+<li><p><strong>suspected_name</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.StaleReference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StaleReference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">referenced_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">candidates</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_is_read_only</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#StaleReference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.StaleReference" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A <code class="docutils literal notranslate"><span class="pre">mem:NAME</span></code> reference whose target memory does not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_memory</strong> – the name of the memory whose content contains the broken reference.</p></li>
+<li><p><strong>referenced_name</strong> – the name following <code class="docutils literal notranslate"><span class="pre">mem:</span></code> that did not resolve to an existing memory.</p></li>
+<li><p><strong>candidates</strong> – existing memory names proposed as likely intended targets, ranked by
+decreasing similarity. May be empty if no candidate exceeded the similarity threshold.</p></li>
+<li><p><strong>source_is_read_only</strong> – whether the source memory is read-only.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>source_memory</strong> (<em>str</em>)</p></li>
+<li><p><strong>referenced_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>candidates</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>source_is_read_only</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UnmarkedReferenceWarning</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">source_memory</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">suspected_name</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">occurrences</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">is_high_confidence</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">source_is_read_only</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">actual_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#UnmarkedReferenceWarning"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A bare occurrence in a memory’s content that looks like a forgotten reference to an
+existing memory.</p>
+<p>Two flavours of finding share this class:</p>
+<ul class="simple">
+<li><p><strong>exact match</strong> — the bare text equals an existing memory name verbatim
+(<code class="docutils literal notranslate"><span class="pre">actual_token</span></code> either equals <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> or is left empty).</p></li>
+<li><p><strong>fuzzy near-miss</strong> — the bare text does not equal any existing memory name, but
+a long, distinctive token in the body similarity-matches a high-confidence existing
+memory name (<code class="docutils literal notranslate"><span class="pre">actual_token</span></code> is the bare text actually found, distinct from
+<code class="docutils literal notranslate"><span class="pre">suspected_name</span></code>). Such findings are reported but <strong>not</strong> rewritten by
+<a class="reference internal" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references" title="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer.auto_prefix_bare_references()</span></code></a>, since they would
+require substring substitution rather than a prefix addition.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_memory</strong> – the name of the memory whose content contains the bare occurrence.</p></li>
+<li><p><strong>suspected_name</strong> – the existing memory name proposed as the intended target.</p></li>
+<li><p><strong>occurrences</strong> – the number of occurrences of <code class="docutils literal notranslate"><span class="pre">actual_token</span></code> in the source memory’s content.</p></li>
+<li><p><strong>is_high_confidence</strong> – True when <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> contains a <code class="docutils literal notranslate"><span class="pre">/</span></code> separator or
+exceeds the configured length threshold; such names are unlikely to coincide with
+ordinary prose. False otherwise (a low-confidence warning).</p></li>
+<li><p><strong>source_is_read_only</strong> – whether the source memory is read-only.</p></li>
+<li><p><strong>actual_token</strong> – the bare text actually found in the source memory’s content.
+Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>, which is taken to mean <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> (the exact-match case).
+When non-empty and different from <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code>, this is a fuzzy near-miss.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>source_memory</strong> (<em>str</em>)</p></li>
+<li><p><strong>suspected_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>occurrences</strong> (<em>int</em>)</p></li>
+<li><p><strong>is_high_confidence</strong> (<em>bool</em>)</p></li>
+<li><p><strong>source_is_read_only</strong> (<em>bool</em>)</p></li>
+<li><p><strong>actual_token</strong> (<em>str</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning.is_exact_match">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_exact_match</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="headerlink" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning.is_exact_match" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True iff the bare text in the body equals <code class="docutils literal notranslate"><span class="pre">suspected_name</span></code> (i.e. not a fuzzy near-miss).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.AutofixedReference">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AutofixedReference</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">referenced_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_replacements</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#AutofixedReference"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.AutofixedReference" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A bare occurrence rewritten to include the <code class="docutils literal notranslate"><span class="pre">mem:</span></code> prefix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_memory</strong> – the name of the memory whose content was modified.</p></li>
+<li><p><strong>referenced_name</strong> – the memory name whose bare occurrences were prefixed.</p></li>
+<li><p><strong>n_replacements</strong> – the number of bare occurrences replaced in the source memory.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>source_memory</strong> (<em>str</em>)</p></li>
+<li><p><strong>referenced_name</strong> (<em>str</em>)</p></li>
+<li><p><strong>n_replacements</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.ReferentialIntegrityReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReferentialIntegrityReport</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">stale_references=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">high_confidence_unmarked_memories=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">low_confidence_unmarked_memories=&lt;factory&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#ReferentialIntegrityReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Outcome of <a class="reference internal" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity" title="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer.validate_referential_integrity()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stale_references</strong> – <code class="docutils literal notranslate"><span class="pre">mem:NAME</span></code> references whose target memory does not exist.</p></li>
+<li><p><strong>high_confidence_unmarked_memories</strong> – bare references whose suspected target name is unlikely
+to be coincidental prose (topic-path or sufficiently long).</p></li>
+<li><p><strong>low_confidence_unmarked_memories</strong> – bare references whose suspected target name could plausibly
+appear in ordinary prose (short, flat names).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>stale_references</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.StaleReference" title="serena.memories.memory_reference_analysis.StaleReference"><em>StaleReference</em></a><em>]</em>)</p></li>
+<li><p><strong>high_confidence_unmarked_memories</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+<li><p><strong>low_confidence_unmarked_memories</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.ReferentialIntegrityReport.is_clean">
+<span class="sig-name descname"><span class="pre">is_clean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#ReferentialIntegrityReport.is_clean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport.is_clean" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True iff no stale references and no warnings of any confidence level were found.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>bool</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.ReferentialIntegrityReport.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#ReferentialIntegrityReport.format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport.format" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a human-readable rendering suitable for CLI display.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.AutofixReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AutofixReport</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">autofixed=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dry_run=False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skipped_read_only=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skipped_flat=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skipped_global=&lt;factory&gt;</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skipped_fuzzy=&lt;factory&gt;</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#AutofixReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.AutofixReport" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Outcome of <a class="reference internal" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references" title="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references"><code class="xref py py-meth docutils literal notranslate"><span class="pre">MemoryReferenceAnalyzer.auto_prefix_bare_references()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>autofixed</strong> – per-(source, target) records of bare references that were rewritten.
+When the call was a dry run, these records describe what <em>would</em> have been
+written; the files themselves are unchanged.</p></li>
+<li><p><strong>dry_run</strong> – True if the run was a preview that did not write any files.</p></li>
+<li><p><strong>skipped_read_only</strong> – warnings whose source memory was read-only and therefore not
+modified (only populated when <code class="docutils literal notranslate"><span class="pre">include_read_only</span></code> is False).</p></li>
+<li><p><strong>skipped_flat</strong> – warnings skipped because their suspected target had no <code class="docutils literal notranslate"><span class="pre">/</span></code>
+separator and was not long enough to be high-confidence (only populated when
+<code class="docutils literal notranslate"><span class="pre">include_flat_names</span></code> is False).</p></li>
+<li><p><strong>skipped_global</strong> – warnings skipped because their source memory was global and
+<code class="docutils literal notranslate"><span class="pre">include_global</span></code> was False.</p></li>
+<li><p><strong>skipped_fuzzy</strong> – warnings whose bare text in the source memory differs from the
+suspected target (fuzzy near-misses). These require substring substitution rather
+than a prefix addition and are never autofixed; surface them to the user for
+manual review instead.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Parameters<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>autofixed</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.AutofixedReference" title="serena.memories.memory_reference_analysis.AutofixedReference"><em>AutofixedReference</em></a><em>]</em>)</p></li>
+<li><p><strong>dry_run</strong> (<em>bool</em>)</p></li>
+<li><p><strong>skipped_read_only</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+<li><p><strong>skipped_flat</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+<li><p><strong>skipped_global</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+<li><p><strong>skipped_fuzzy</strong> (<em>list</em><em>[</em><a class="reference internal" href="#serena.memories.memory_reference_analysis.UnmarkedReferenceWarning" title="serena.memories.memory_reference_analysis.UnmarkedReferenceWarning"><em>UnmarkedReferenceWarning</em></a><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.AutofixReport.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#AutofixReport.format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.AutofixReport.format" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>a human-readable rendering suitable for CLI display.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MemoryReferenceAnalyzer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">manager</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#MemoryReferenceAnalyzer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Drives validation and autofix workflows against a <code class="xref py py-class docutils literal notranslate"><span class="pre">MemoriesManager</span></code>.</p>
+<p>Composition rather than inheritance — the analyzer only needs the manager’s
+memory enumeration, loading, saving, and is-global helpers, and is otherwise
+independent of project-management concerns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>manager</strong> (<em>MemoryManager</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity">
+<span class="sig-name descname"><span class="pre">validate_referential_integrity</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_unmarked</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_fuzzy_matching</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#MemoryReferenceAnalyzer.validate_referential_integrity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity" title="Link to this definition">#</a></dt>
+<dd><p>Scans every (non-ignored) memory’s content for referential integrity issues.</p>
+<p>The scan covers both project-local and global memories. Three kinds of finding are
+produced, each independently gated:</p>
+<ul class="simple">
+<li><p><strong>stale references</strong> — occurrences of <code class="docutils literal notranslate"><span class="pre">mem:NAME</span></code> where <code class="docutils literal notranslate"><span class="pre">NAME</span></code> does not resolve
+to an existing memory. For each, a list of similarly-named existing memories is
+proposed as candidate intended targets (see <a class="reference internal" href="#serena.memories.memory_reference_analysis.compute_name_similarity" title="serena.memories.memory_reference_analysis.compute_name_similarity"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_name_similarity()</span></code></a>),
+capped at <a class="reference internal" href="#serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES" title="serena.memories.memory_reference_analysis.MAX_STALE_REFERENCE_CANDIDATES"><code class="xref py py-data docutils literal notranslate"><span class="pre">MAX_STALE_REFERENCE_CANDIDATES</span></code></a>. Always reported.</p></li>
+<li><p><strong>exact unmarked-reference warnings</strong> — bare occurrences of an existing memory
+name that appear without the <code class="docutils literal notranslate"><span class="pre">mem:</span></code> prefix. Split into high-confidence (the
+suspected name contains a <code class="docutils literal notranslate"><span class="pre">/</span></code> or exceeds <a class="reference internal" href="#serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH" title="serena.memories.memory_reference_analysis.HIGH_CONFIDENCE_NAME_LENGTH"><code class="xref py py-data docutils literal notranslate"><span class="pre">HIGH_CONFIDENCE_NAME_LENGTH</span></code></a>)
+and low-confidence groups. Candidate names whose basename is in
+<a class="reference internal" href="#serena.memories.memory_reference_analysis.WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES" title="serena.memories.memory_reference_analysis.WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES"><code class="xref py py-data docutils literal notranslate"><span class="pre">WORDS_TO_IGNORE_AS_MEMORY_NAME_CANDIDATES</span></code></a> are skipped. Gated by
+<code class="docutils literal notranslate"><span class="pre">include_unmarked</span></code>.</p></li>
+<li><p><strong>fuzzy near-miss warnings</strong> — long, distinctive bare tokens in a memory body
+that <em>do not</em> match an existing name exactly but similarity-match a
+high-confidence existing name AND share at least
+<a class="reference internal" href="#serena.memories.memory_reference_analysis.FUZZY_BARE_TOKEN_JACCARD_FLOOR" title="serena.memories.memory_reference_analysis.FUZZY_BARE_TOKEN_JACCARD_FLOOR"><code class="xref py py-data docutils literal notranslate"><span class="pre">FUZZY_BARE_TOKEN_JACCARD_FLOOR</span></code></a> of their tokenized name parts. Always
+reported as high-confidence; the actual bare text is preserved on
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">UnmarkedReferenceWarning.actual_token</span></code>. Gated by <code class="docutils literal notranslate"><span class="pre">include_unmarked</span>
+<span class="pre">and</span> <span class="pre">include_fuzzy_matching</span></code> — fuzzy matches are noisy and only meaningful when
+unmarked-reference checking is enabled.</p></li>
+</ul>
+<p>Self-references (a memory’s content mentioning its own name or basename) and empty
+memories are skipped silently. This method has no side effects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>include_unmarked</strong> (<em>bool</em>) – if False, skip both the exact unmarked scan and the fuzzy
+near-miss scan; only stale references are reported.</p></li>
+<li><p><strong>include_fuzzy_matching</strong> (<em>bool</em>) – if False, skip the fuzzy near-miss scan even when
+unmarked-reference checking is otherwise enabled. Has no effect when
+<code class="docutils literal notranslate"><span class="pre">include_unmarked</span></code> is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a <a class="reference internal" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport" title="serena.memories.memory_reference_analysis.ReferentialIntegrityReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReferentialIntegrityReport</span></code></a> summarizing all findings.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.memories.memory_reference_analysis.ReferentialIntegrityReport" title="serena.memories.memory_reference_analysis.ReferentialIntegrityReport"><em>ReferentialIntegrityReport</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references">
+<span class="sig-name descname"><span class="pre">auto_prefix_bare_references</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_flat_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_read_only</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">include_global</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/memories/memory_reference_analysis.html#MemoryReferenceAnalyzer.auto_prefix_bare_references"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.auto_prefix_bare_references" title="Link to this definition">#</a></dt>
+<dd><p>Rewrites <em>exact</em> bare occurrences of existing memory names by adding the <code class="docutils literal notranslate"><span class="pre">mem:</span></code> prefix.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>This is a heuristic, file-mutating operation</strong> (unless <code class="docutils literal notranslate"><span class="pre">dry_run</span></code> is True). A
+bare word that happens to coincide with a memory name will be rewritten as a
+reference, even if it was intended as ordinary prose. Pass <code class="docutils literal notranslate"><span class="pre">dry_run=True</span></code> to
+preview the rewrites before applying them.</p>
+</div>
+<p>Scope is intentionally narrower than what <a class="reference internal" href="#serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity" title="serena.memories.memory_reference_analysis.MemoryReferenceAnalyzer.validate_referential_integrity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">validate_referential_integrity()</span></code></a>
+reports:</p>
+<ul class="simple">
+<li><p>Only <strong>exact</strong> bare occurrences are rewritten — i.e. the bare text in the source
+body must equal an existing memory name verbatim. Fuzzy near-miss findings
+(where the actual token differs from the suspected target) require substring
+substitution rather than a prefix addition and are routed into
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">AutofixReport.skipped_fuzzy</span></code> for manual review.</p></li>
+<li><p>By default the rewrite is restricted to <em>high-confidence</em> findings only — those
+whose suspected target name contains a <code class="docutils literal notranslate"><span class="pre">/</span></code> separator or exceeds the
+configured length threshold — and skips global memories and read-only memories.
+The defaults intentionally err toward false negatives over false positives.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>include_flat_names</strong> (<em>bool</em>) – if True, also rewrite low-confidence findings (flat,
+short memory names). Increases recall but markedly raises false-positive risk.</p></li>
+<li><p><strong>include_read_only</strong> (<em>bool</em>) – if True, also rewrite occurrences inside read-only
+memories. Use with care, as read-only memories are typically considered
+authoritative.</p></li>
+<li><p><strong>include_global</strong> (<em>bool</em>) – if True, also rewrite occurrences inside global memories.
+Modifying a global memory affects every project that consumes it.</p></li>
+<li><p><strong>dry_run</strong> (<em>bool</em>) – if True, the report describes the rewrites that <em>would</em> be applied
+but no files are modified.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>an <a class="reference internal" href="#serena.memories.memory_reference_analysis.AutofixReport" title="serena.memories.memory_reference_analysis.AutofixReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">AutofixReport</span></code></a> describing every replacement (made or planned)
+and every warning that was deliberately skipped.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#serena.memories.memory_reference_analysis.AutofixReport" title="serena.memories.memory_reference_analysis.AutofixReport"><em>AutofixReport</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06-contributing/code-reference/memories"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">memories</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tools/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">tools</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

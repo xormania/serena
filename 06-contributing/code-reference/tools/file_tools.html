@@ -1,0 +1,1040 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>serena.tools.file_tools &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06-contributing/code-reference/tools/file_tools';</script>
+    <script src="../../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/06-contributing/code-reference/tools/file_tools.html" />
+    <link rel="icon" href="../../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="serena.tools.jetbrains_tools" href="jetbrains_tools.html" />
+    <link rel="prev" title="serena.tools.config_tools" href="config_tools.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../000_contributing-intro.html">Contributing</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="../000_code-reference-intro.html">Code Reference</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 current active has-children"><a class="reference internal" href="index.html">tools</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4 current active"><a class="current reference internal" href="#">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/06-contributing/code-reference/tools/file_tools.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>serena.tools.file_tools</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReadFileTool"><code class="docutils literal notranslate"><span class="pre">ReadFileTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReadFileTool.apply"><code class="docutils literal notranslate"><span class="pre">ReadFileTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.CreateTextFileTool"><code class="docutils literal notranslate"><span class="pre">CreateTextFileTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.CreateTextFileTool.apply"><code class="docutils literal notranslate"><span class="pre">CreateTextFileTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ListDirTool"><code class="docutils literal notranslate"><span class="pre">ListDirTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ListDirTool.apply"><code class="docutils literal notranslate"><span class="pre">ListDirTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.FindFileTool"><code class="docutils literal notranslate"><span class="pre">FindFileTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.FindFileTool.apply"><code class="docutils literal notranslate"><span class="pre">FindFileTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceContentTool"><code class="docutils literal notranslate"><span class="pre">ReplaceContentTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceContentTool.apply"><code class="docutils literal notranslate"><span class="pre">ReplaceContentTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceInFilesTool"><code class="docutils literal notranslate"><span class="pre">ReplaceInFilesTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceInFilesTool.apply"><code class="docutils literal notranslate"><span class="pre">ReplaceInFilesTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.DeleteLinesTool"><code class="docutils literal notranslate"><span class="pre">DeleteLinesTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.DeleteLinesTool.apply"><code class="docutils literal notranslate"><span class="pre">DeleteLinesTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceLinesTool"><code class="docutils literal notranslate"><span class="pre">ReplaceLinesTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.ReplaceLinesTool.apply"><code class="docutils literal notranslate"><span class="pre">ReplaceLinesTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.InsertAtLineTool"><code class="docutils literal notranslate"><span class="pre">InsertAtLineTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.InsertAtLineTool.apply"><code class="docutils literal notranslate"><span class="pre">InsertAtLineTool.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.SearchForPatternTool"><code class="docutils literal notranslate"><span class="pre">SearchForPatternTool</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#serena.tools.file_tools.SearchForPatternTool.apply"><code class="docutils literal notranslate"><span class="pre">SearchForPatternTool.apply()</span></code></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="module-serena.tools.file_tools">
+<span id="serena-tools-file-tools"></span><h1>serena.tools.file_tools<a class="headerlink" href="#module-serena.tools.file_tools" title="Link to this heading">#</a></h1>
+<p class="source-link"><strong>Source code:</strong> <a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#serena/tools/file_tools.py"><span>serena/tools/file_tools.py</span></a></p>
+<hr class="docutils" />
+<dl class="simple">
+<dt>File and file system-related tools, specifically for</dt><dd><ul class="simple">
+<li><p>listing directory contents</p></li>
+<li><p>reading files</p></li>
+<li><p>creating files</p></li>
+<li><p>editing at the file level</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReadFileTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReadFileTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReadFileTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReadFileTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tool</span></code></a></p>
+<p>Reads a file within the project directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReadFileTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_answer_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReadFileTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReadFileTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Reads the given file or a chunk of it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file to read</p></li>
+<li><p><strong>start_line</strong> (<em>int</em>) – the 0-based index of the first line to be retrieved, negative values count from the end of the file.</p></li>
+<li><p><strong>end_line</strong> (<em>int</em><em> | </em><em>None</em>) – the 0-based index of the last line to be retrieved (inclusive). If None, read until the end of the file.</p></li>
+<li><p><strong>max_answer_chars</strong> (<em>int</em>) – if the file (chunk) is longer than this number of characters,
+no content will be returned. Don’t adjust unless there is really no other way to get the content
+required for the task.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the full text of the file at the given relative path</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.CreateTextFileTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CreateTextFileTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#CreateTextFileTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.CreateTextFileTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a></p>
+<p>Creates/overwrites a file in the project directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.CreateTextFileTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#CreateTextFileTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.CreateTextFileTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Write a new file or overwrite an existing file with the given content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file to create</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – the (appropriately encoded) content to write to the file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a message indicating success or failure</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ListDirTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ListDirTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ListDirTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ListDirTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tool</span></code></a></p>
+<p>Lists files and directories in the given directory (optionally with recursion).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ListDirTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">recursive</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skip_ignored_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_answer_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ListDirTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ListDirTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Lists files and directories in the given directory (optionally with recursion).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the directory to list; pass “.” to scan the project root</p></li>
+<li><p><strong>recursive</strong> (<em>bool</em>) – whether to scan subdirectories recursively</p></li>
+<li><p><strong>skip_ignored_files</strong> (<em>bool</em>) – whether to skip files and directories that are ignored</p></li>
+<li><p><strong>max_answer_chars</strong> (<em>int</em>) – if the output is longer than this number of characters,
+no content will be returned. -1 means the default value from the config will be used.
+Don’t adjust unless there is really no other way to get the content required for the task.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a JSON object with the names of directories and files within the given directory</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.FindFileTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">FindFileTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#FindFileTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.FindFileTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tool</span></code></a></p>
+<p>Finds files in the given relative paths</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.FindFileTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#FindFileTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.FindFileTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Finds files matching the given file mask within the given relative path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_mask</strong> (<em>str</em>) – the filename or file mask (using the wildcards * or ?) to search for</p></li>
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the directory to search in; pass “.” to scan the project root</p></li>
+<li><p><strong>skip_ignored_files</strong> – whether to skip ignored files/directories</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a JSON object with the list of matching files</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceContentTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReplaceContentTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceContentTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceContentTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a></p>
+<p>Replaces content in a file (optionally using regular expressions).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceContentTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">needle</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">repl</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">allow_multiple_occurrences</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceContentTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceContentTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Replaces one or more occurrences of a given pattern in a file with new content.</p>
+<p>VERY IMPORTANT: The “regex” mode allows very large sections of code to be replaced WITHOUT
+quoting them fully: use a needle of the form “beginning.*?end-of-text-to-be-replaced” with
+wildcards instead of pasting the exact original text — shorter, cheaper, and you cannot make
+mistakes, because an ambiguous match returns an error you can refine, so wildcards are safe.
+Prefer regex mode with suitable wildcards for long multi-line replacements; use the
+symbol-level editors when replacing a whole method/class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file</p></li>
+<li><p><strong>needle</strong> (<em>str</em>) – the string or regex pattern to search for.
+If <cite>mode</cite> is “literal”, this string will be matched exactly.
+If <cite>mode</cite> is “regex”, this string will be treated as a regular expression (syntax of Python’s <cite>re</cite> module,
+with flags DOTALL and MULTILINE enabled).</p></li>
+<li><p><strong>repl</strong> (<em>str</em>) – the replacement string (verbatim).
+If mode is “regex”, the string can contain backreferences to matched groups in the needle regex,
+specified using the syntax $!1, $!2, etc. for groups 1, 2, etc.</p></li>
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>'literal'</em><em>, </em><em>'regex'</em><em>]</em>) – either “literal” or “regex”, specifying how the <cite>needle</cite> parameter is to be interpreted.</p></li>
+<li><p><strong>allow_multiple_occurrences</strong> (<em>bool</em>) – whether to allow matching and replacing multiple occurrences.
+If false and multiple occurrences are found, an error will be returned</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceInFilesTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReplaceInFilesTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceInFilesTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceInFilesTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a></p>
+<p>Replaces occurrences of a pattern across multiple files, with dry-run preview and per-occurrence selection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceInFilesTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">needle</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">repl</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_include_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_exclude_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">occurrence_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">expected_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_answer_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceInFilesTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceInFilesTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Replaces occurrences of a pattern across multiple files in ONE call.</p>
+<p>This is the preferred tool for repeated small edits (renames, import swaps, annotation changes,
+path prefixes) spanning several files or many places in one file: one call with a SHORT pattern
+replaces many single-file replacements with long disambiguating needles.</p>
+<p>Recommended protocol whenever there is ANY risk of unintended replacements:</p>
+<ol class="arabic simple">
+<li><p>Call with dry_run=True: every prospective change is returned as a minimal line diff with an
+occurrence id; nothing is modified.</p></li>
+<li><p>Call again with dry_run=False, passing the ids you want in occurrence_ids (omit it to apply
+all). You pick the desired replacements from the list - no counting, no needle-crafting.</p></li>
+</ol>
+<p>For clearly unambiguous bulk replacements you may skip the dry run; pass expected_count as a
+guard. If the actual number of matches differs, NOTHING is changed and the diff list is
+returned, so a failed guard costs one call and gives you the dry-run output to select from.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>needle</strong> (<em>str</em>) – the string (mode “literal”) or regular expression (mode “regex”; Python <cite>re</cite>
+syntax with DOTALL and MULTILINE) to search for</p></li>
+<li><p><strong>repl</strong> (<em>str</em>) – the replacement string. In regex mode, backreferences to matched groups can be
+specified as $!1, $!2, etc.</p></li>
+<li><p><strong>mode</strong> (<em>Literal</em><em>[</em><em>'literal'</em><em>, </em><em>'regex'</em><em>]</em>) – either “literal” or “regex”, specifying how <cite>needle</cite> is to be interpreted</p></li>
+<li><p><strong>relative_path</strong> (<em>str</em>) – only consider this file or directory (default: the whole project)</p></li>
+<li><p><strong>paths_include_glob</strong> (<em>str</em>) – optional glob (relative to the project root, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;src/**/*.java&quot;</span></code>)
+restricting which files are considered</p></li>
+<li><p><strong>paths_exclude_glob</strong> (<em>str</em>) – optional glob of files to exclude; takes precedence over the include glob</p></li>
+<li><p><strong>dry_run</strong> (<em>bool</em>) – if True, do not modify anything; return the prospective changes as a list of
+diffs with occurrence ids</p></li>
+<li><p><strong>occurrence_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – optional list of occurrence ids (obtained from a dry run) to which the
+replacement is restricted; if any id is unknown or stale, NOTHING is changed. If omitted,
+all occurrences are replaced.</p></li>
+<li><p><strong>expected_count</strong> (<em>int</em>) – optional guard for calls without occurrence_ids: the number of
+occurrences you expect to be replaced. If the actual count differs, nothing is changed and
+the list of prospective changes is returned. -1 disables the guard.</p></li>
+<li><p><strong>max_answer_chars</strong> (<em>int</em>) – if the output exceeds this many characters, a shortened version is
+returned. -1 uses the configured default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>in a dry run, the prospective changes; otherwise a summary of the applied replacements</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.DeleteLinesTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DeleteLinesTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#DeleteLinesTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.DeleteLinesTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a>, <a class="reference internal" href="tools_base.html#serena.tools.tools_base.ToolMarkerOptional" title="serena.tools.tools_base.ToolMarkerOptional"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToolMarkerOptional</span></code></a></p>
+<p>Deletes a range of lines within a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.DeleteLinesTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_line</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#DeleteLinesTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.DeleteLinesTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Deletes the given lines in the file.
+Requires that the same range of lines was previously read using the <cite>read_file</cite> tool to verify correctness
+of the operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file</p></li>
+<li><p><strong>start_line</strong> (<em>int</em>) – the 0-based index of the first line to be deleted</p></li>
+<li><p><strong>end_line</strong> (<em>int</em>) – the 0-based index of the last line to be deleted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceLinesTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ReplaceLinesTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceLinesTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceLinesTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a>, <a class="reference internal" href="tools_base.html#serena.tools.tools_base.ToolMarkerOptional" title="serena.tools.tools_base.ToolMarkerOptional"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToolMarkerOptional</span></code></a></p>
+<p>Replaces a range of lines within a file with new content.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.ReplaceLinesTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#ReplaceLinesTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.ReplaceLinesTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Replaces the given range of lines in the given file.
+Requires that the same range of lines was previously read using the <cite>read_file</cite> tool to verify correctness
+of the operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file</p></li>
+<li><p><strong>start_line</strong> (<em>int</em>) – the 0-based index of the first line to be deleted</p></li>
+<li><p><strong>end_line</strong> (<em>int</em>) – the 0-based index of the last line to be deleted</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – the content to insert</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.InsertAtLineTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InsertAtLineTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#InsertAtLineTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.InsertAtLineTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.EditingToolWithDiagnostics" title="serena.tools.tools_base.EditingToolWithDiagnostics"><code class="xref py py-class docutils literal notranslate"><span class="pre">EditingToolWithDiagnostics</span></code></a>, <a class="reference internal" href="tools_base.html#serena.tools.tools_base.ToolMarkerOptional" title="serena.tools.tools_base.ToolMarkerOptional"><code class="xref py py-class docutils literal notranslate"><span class="pre">ToolMarkerOptional</span></code></a></p>
+<p>Inserts content at a given line in a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.InsertAtLineTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#InsertAtLineTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.InsertAtLineTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Inserts the given content at the given line in the file, pushing existing content of the line down.
+In general, symbolic insert operations like insert_after_symbol or insert_before_symbol should be preferred if you know which
+symbol you are looking for.
+However, this can also be useful for small targeted edits of the body of a longer symbol (without replacing the entire body).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>relative_path</strong> (<em>str</em>) – the relative path to the file</p></li>
+<li><p><strong>line</strong> (<em>int</em>) – the 0-based index of the line to insert content at</p></li>
+<li><p><strong>content</strong> (<em>str</em>) – the content to be inserted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="serena.tools.file_tools.SearchForPatternTool">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SearchForPatternTool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">agent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#SearchForPatternTool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.SearchForPatternTool" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools_base.html#serena.tools.tools_base.Tool" title="serena.tools.tools_base.Tool"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tool</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>agent</strong> (<em>SerenaAgent</em>)</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="serena.tools.file_tools.SearchForPatternTool.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span>
+
+<dl>
+<dd><em class="sig-param"><span class="n"><span class="pre">substring_pattern</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_before</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">context_lines_after</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_include_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">paths_exclude_glob</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">relative_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">restrict_search_to_code_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">skip_ignored_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">multiline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>,</dd>
+<dd><em class="sig-param"><span class="n"><span class="pre">max_answer_chars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>,</dd>
+</dl>
+
+<span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/serena/tools/file_tools.html#SearchForPatternTool.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#serena.tools.file_tools.SearchForPatternTool.apply" title="Link to this definition">#</a></dt>
+<dd><p>Searches for a regex pattern across project files, returning whole matched lines (plus optional context).
+Prefer symbolic operations if you know which symbols you are looking for!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>substring_pattern</strong> (<em>str</em>) – regular expression to search for.</p></li>
+<li><p><strong>context_lines_before</strong> (<em>int</em>) – number of context lines to include before each match.</p></li>
+<li><p><strong>context_lines_after</strong> (<em>int</em>) – number of context lines to include after each match.</p></li>
+<li><p><strong>paths_include_glob</strong> (<em>str</em>) – optional glob (relative to project root, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;src/**/*.ts&quot;</span></code>) restricting which files are searched.</p></li>
+<li><p><strong>paths_exclude_glob</strong> (<em>str</em>) – optional glob to exclude files; takes precedence over <cite>paths_include_glob</cite>.</p></li>
+<li><p><strong>relative_path</strong> (<em>str</em>) – restricts the search to this file or subdirectory of the project root</p></li>
+<li><p><strong>restrict_search_to_code_files</strong> (<em>bool</em>) – whether to search only (non-ignored) files containing analyzable code symbols
+(useful when looking for class/method definitions); otherwise also search non-code files.</p></li>
+<li><p><strong>skip_ignored_files</strong> (<em>bool</em>) – whether to skip ignored sub-paths (default: True)</p></li>
+<li><p><strong>multiline</strong> (<em>bool</em>) – whether to apply multi-line matching (default: True), enabling the flags re.DOTALL and re.MULTILINE</p></li>
+<li><p><strong>max_answer_chars</strong> (<em>int</em>) – if the output exceeds this many characters, a progressively shortened summary is returned instead.
+<code class="docutils literal notranslate"><span class="pre">-1</span></code> uses the configured default.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A mapping from file paths to matched consecutive lines (0-based line numbers).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>str</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./06-contributing/code-reference/tools"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="config_tools.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">serena.tools.config_tools</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="jetbrains_tools.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">serena.tools.jetbrains_tools</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

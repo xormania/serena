@@ -1,0 +1,1134 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>serena.hooks &#8212; Serena Documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/serena-docs.css?v=b6e8fb41" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx-toolbox.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/code-reference.css?v=9b8c89da" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+
+
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/serena/hooks';</script>
+    <script src="../../_static/serena-docs.js?v=0c448acb"></script>
+    <link rel="canonical" href="https://oraios.github.io/serena/_modules/serena/hooks.html" />
+    <link rel="icon" href="../../_static/serena-icon-32.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/serena-logo.svg" class="logo__image only-light" alt="Serena Documentation - Home"/>
+    <script>document.write(`<img src="../../_static/serena-logo-dark-mode.svg" class="logo__image only-dark" alt="Serena Documentation - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../01-about/000_intro.html">About Serena</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/020_programming-languages.html">Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/025_features.html">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/030_serena-in-action.html">Serena in Action</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/035_tools.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../01-about/050_acknowledgements.html">Acknowledgements</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../02-usage/000_intro.html">Usage</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/010_installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/020_running.html">Running Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/025_jetbrains_plugin.html">The Serena JetBrains Plugin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/030_clients.html">Connecting Your MCP Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/035_for-agents.html">For Agents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/040_workflow.html">The Project Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/045_memories.html">Memories &amp; Onboarding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/050_configuration.html">Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/060_dashboard.html">The Dashboard and GUI Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/065_logs.html">Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/070_security.html">Security Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../02-usage/999_additional-usage.html">Additional Usage Pointers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../03-special-guides/000_intro.html">Special Guides</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/cpp_setup.html">C/C++ Setup Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/custom_agent.html">Custom Agents with Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/godot_gdscript_setup_guide_for_serena.html">GDScript (Godot Engine) Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/groovy_setup_guide_for_serena.html">Groovy Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/ocaml_setup_guide_for_serena.html">OCaml Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/scala_setup_guide_for_serena.html">Scala Setup Guide for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/serena_on_chatgpt.html">Connecting Serena MCP Server to ChatGPT via MCPO &amp; Cloudflare Tunnel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../03-special-guides/unreal_engine_setup_guide_for_serena.html">Unreal Engine Setup Guide</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../04-evaluation/000_evaluation-intro.html">Evaluation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../04-evaluation/010_methodology.html">Methodology</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/020_prompts/000_prompts.html">Prompts</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/010_evaluation-prompt.html">Evaluation Prompt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/020_prompts/020_summary-prompt.html">Summary Prompt</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../04-evaluation/030_results/000_evaluation-results.html">Results</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/010_cc_on_tianshou.html">Claude Code (Opus 4.6, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/020_codex_on_jbplugin.html">Codex (GPT-5.4, high)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/030_copilot_cli_on_ente.html">Copilot CLI (GPT-5.4, medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/040_glm_on_tianshou.html">Claude Code (GLM 5.1)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../04-evaluation/030_results/050_junie_plugin_on_tianshou.html">JetBrains Junie Plugin (Opus 4.6)</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../06-contributing/000_contributing-intro.html">Contributing</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/010_getting-started.html">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/015_using-serena.html">Serena for Serena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/020_house-style.html">House Style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/030_adding-a-language.html">Adding Language Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/035_scripts.html">Scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/040_faq.html">FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/045_ci.html">The CI Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../06-contributing/050_solidlsp.html">SolidLSP</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../06-contributing/code-reference/000_code-reference-intro.html">Code Reference</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/agent.html">serena.agent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/analytics.html">serena.analytics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/cli.html">serena.cli</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/dashboard.html">serena.dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/gui_log_viewer.html">serena.gui_log_viewer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/hooks.html">serena.hooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/ls_manager.html">serena.ls_manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/mcp.html">serena.mcp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project.html">serena.project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/project_server.html">serena.project_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/prompt_factory.html">serena.prompt_factory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../06-contributing/code-reference/symbol.html">serena.symbol</a></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/config/index.html">config</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/client_setup.html">serena.config.client_setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/context_mode.html">serena.config.context_mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/config/serena_config.html">serena.config.serena_config</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/generated/index.html">generated</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/generated/generated_prompt_factory.html">serena.generated.generated_prompt_factory</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/index.html">jetbrains</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_plugin_client.html">serena.jetbrains.jetbrains_plugin_client</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/jetbrains/jetbrains_types.html">serena.jetbrains.jetbrains_types</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/memories/index.html">memories</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/memories/memory_reference_analysis.html">serena.memories.memory_reference_analysis</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/tools/index.html">tools</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/cmd_tools.html">serena.tools.cmd_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/config_tools.html">serena.tools.config_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/file_tools.html">serena.tools.file_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/jetbrains_tools.html">serena.tools.jetbrains_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/memory_tools.html">serena.tools.memory_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/query_project_tools.html">serena.tools.query_project_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/symbol_tools.html">serena.tools.symbol_tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/tools_base.html">serena.tools.tools_base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/tools/workflow_tools.html">serena.tools.workflow_tools</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../06-contributing/code-reference/util/index.html">util</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/cli_util.html">serena.util.cli_util</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/dataclass.html">serena.util.dataclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/exception.html">serena.util.exception</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_proxy.html">serena.util.file_proxy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/file_system.html">serena.util.file_system</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/inspection.html">serena.util.inspection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/logging.html">serena.util.logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pypi.html">serena.util.pypi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/pywebview.html">serena.util.pywebview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/shell.html">serena.util.shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/text_utils.html">serena.util.text_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/thread.html">serena.util.thread</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/version.html">serena.util.version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../06-contributing/code-reference/util/yaml.html">serena.util.yaml</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for serena.hooks</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Self</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">serena.util.cli_util</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoRegisteringGroup</span>
+
+<span class="c1"># copied from serena_config.py, we don&#39;t want to import anything here to keep the hook commands fast</span>
+<span class="n">serena_home_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;SERENA_HOME&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;.serena&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="HookClient">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.HookClient">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HookClient</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The client application that triggered the hook.&quot;&quot;&quot;</span>
+
+    <span class="n">CLAUDE_CODE</span> <span class="o">=</span> <span class="s2">&quot;claude-code&quot;</span>
+    <span class="n">CODEBUDDY</span> <span class="o">=</span> <span class="s2">&quot;codebuddy&quot;</span>
+    <span class="n">VSCODE</span> <span class="o">=</span> <span class="s2">&quot;vscode&quot;</span>
+    <span class="n">CODEX</span> <span class="o">=</span> <span class="s2">&quot;codex&quot;</span>
+    <span class="n">GROK</span> <span class="o">=</span> <span class="s2">&quot;grok&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="Hook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.Hook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Hook</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">HookClient</span><span class="p">):</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdin</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">input_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span> <span class="o">=</span> <span class="n">input_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">client</span>
+
+        <span class="n">session_id</span> <span class="o">=</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;session_id&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sessionId&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">session_id</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Session ID is required in the hook input data&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_session_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">session_persistence_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">serena_home_dir</span><span class="p">,</span> <span class="s2">&quot;hook_data&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_session_id</span><span class="p">)</span>
+        <span class="c1"># tool input has a timestamp but using now is enough</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triggered_at_timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="PreToolUseHook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseHook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PreToolUseHook</span><span class="p">(</span><span class="n">Hook</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+    <span class="n">_NON_SYMBOLIC_SERENA_TOOL_NAME_SUBSTRINGS</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;pattern&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;read&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;diagnostics&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;memory&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;onboarding&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;config&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;list_file&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;find_file&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;dashboard&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;restart_language_server&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">HookClient</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+        <span class="n">_tool_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tool_name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;toolName&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">_tool_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_tool_name</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_tool_name</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Tool name is required in the hook input data&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="o">=</span> <span class="n">_tool_name</span>
+        <span class="n">raw_tool_input</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tool_input&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;toolInput&quot;</span><span class="p">)</span>
+        <span class="c1"># TODO: some agents, like copilot CLI, can send a string as value for raw_tool_input</span>
+        <span class="c1">#  Example: &quot;tool_input&quot;:&quot;*** Begin Patch\n*** Add File: /Users/acbdef/.copilot/session-state/08a961db-02f0-4c7c-b783-1e9818290292/files/hook-tool-test-3.txt\n+third edit tool test\n*** End Patch\n&quot;</span>
+        <span class="c1">#  We currently don&#39;t parse such tool input and hence don&#39;t react to it in hooks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">raw_tool_input</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">raw_tool_input</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+
+        <span class="c1"># only relevant in claude code at the moment, (not all events include this field; default to empty string)</span>
+        <span class="n">raw_permission_mode</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;permission_mode&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;permissionMode&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_permission_mode</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">raw_permission_mode</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+<div class="viewcode-block" id="PreToolUseHook.OutputData">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseHook.OutputData">[docs]</a>
+    <span class="nd">@dataclass</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">OutputData</span><span class="p">:</span>
+        <span class="n">permission_decision</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;deny&quot;</span><span class="p">,</span> <span class="s2">&quot;allow&quot;</span><span class="p">]</span>
+        <span class="n">permission_decision_reason</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="n">additional_context</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">to_json_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">HookClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">client</span> <span class="o">==</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">GROK</span><span class="p">:</span>
+                <span class="n">grok_output</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;decision&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">permission_decision</span><span class="p">}</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">permission_decision</span> <span class="o">==</span> <span class="s2">&quot;deny&quot;</span><span class="p">:</span>
+                    <span class="n">grok_output</span><span class="p">[</span><span class="s2">&quot;reason&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">permission_decision_reason</span>
+                <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">grok_output</span><span class="p">)</span>
+
+            <span class="n">hook_output</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;hookSpecificOutput&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;hookEventName&quot;</span><span class="p">:</span> <span class="s2">&quot;PreToolUse&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;permissionDecision&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">permission_decision</span><span class="p">,</span>
+                    <span class="s2">&quot;permissionDecisionReason&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">permission_decision_reason</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="n">client</span> <span class="o">!=</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">CODEX</span><span class="p">:</span>
+                <span class="n">hook_output</span><span class="p">[</span><span class="s2">&quot;hookSpecificOutput&quot;</span><span class="p">][</span><span class="s2">&quot;additionalContext&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">additional_context</span>
+            <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">hook_output</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_serena_symbolic_tool</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;serena&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">substring</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="k">for</span> <span class="n">substring</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NON_SYMBOLIC_SERENA_TOOL_NAME_SUBSTRINGS</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="PreToolUseRemindAboutSymbolicToolsHook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseRemindAboutSymbolicToolsHook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PreToolUseRemindAboutSymbolicToolsHook</span><span class="p">(</span><span class="n">PreToolUseHook</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pre-tool-use hook that nudges the agent toward Serena&#39;s symbolic tools.</span>
+
+<span class="sd">    Tracks consecutive uses of grep and read-file tools via a persisted</span>
+<span class="sd">    :class:`ToolUseCounter`. When the number of recent calls reaches the</span>
+<span class="sd">    configured threshold, a deny response is emitted with a reminder to</span>
+<span class="sd">    use symbolic alternatives.</span>
+
+<span class="sd">    The counter for a given tool type is reset whenever</span>
+
+<span class="sd">    * a Serena tool is invoked (both counters are reset),</span>
+<span class="sd">    * a deny is emitted (the acting counter is reset so the next retry starts fresh),</span>
+<span class="sd">    * or the configured reset period elapses *between two consecutive calls of that</span>
+<span class="sd">      same tool type* — i.e. the period gates the gap between successive calls, not</span>
+<span class="sd">      an absolute sliding window. Three grep calls at t=0, t=9, t=18 therefore count</span>
+<span class="sd">      as a burst of three, even though the total span (18s) exceeds the 10s grep</span>
+<span class="sd">      period; only an individual pair that is more than 10s apart resets the counter.</span>
+
+<span class="sd">    Non-tracked tools (Edit, Write, Bash, etc.) are deliberately neutral: they neither</span>
+<span class="sd">    increment nor reset counters, so they also do not mask bursts by pushing the last</span>
+<span class="sd">    timestamp forward.</span>
+
+<span class="sd">    The hook is additionally gated by :attr:`ToolUseCounter._MIN_DENY_INTERVAL_SECONDS`</span>
+<span class="sd">    (two minutes by default): once a deny has been emitted, *every* subsequent</span>
+<span class="sd">    invocation of this hook is a no-op until the window has elapsed — neither the</span>
+<span class="sd">    counters are updated nor any further deny is produced. This prevents the agent</span>
+<span class="sd">    from being nudged more than once per window during a sustained non-symbolic-tool</span>
+<span class="sd">    burst, and also avoids surprising the user with reminders that were already</span>
+<span class="sd">    counted up under stale state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PreToolUseRemindAboutSymbolicToolsHook.ToolUseCounter">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseRemindAboutSymbolicToolsHook.ToolUseCounter">[docs]</a>
+    <span class="nd">@dataclass</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">ToolUseCounter</span><span class="p">:</span>
+        <span class="n">_FILE_NAME</span> <span class="o">=</span> <span class="s2">&quot;tool_use_counter.pkl&quot;</span>
+        <span class="n">_GREP_USES_THRESHOLD</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">_READ_FILE_USES_THRESHOLD</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="c1"># threshold for the combined &quot;non-symbolic&quot; counter that catches mixed sequences of grep+read</span>
+        <span class="n">_NON_SYMBOLIC_USES_THRESHOLD</span> <span class="o">=</span> <span class="mi">4</span>
+
+        <span class="c1"># The following periods are set to essentially infinity since we neglect the per-tool reset periods for them</span>
+        <span class="n">_READ_FILE_RESET_PERIOD_SECONDS</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="n">_GREP_RESET_PERIOD_SECONDS</span> <span class="o">=</span> <span class="mi">1000</span>
+        <span class="c1"># reset period for the combined counter</span>
+        <span class="n">_NON_SYMBOLIC_RESET_PERIOD_SECONDS</span> <span class="o">=</span> <span class="mi">2000</span>
+
+        <span class="c1"># minimum seconds between two engagements of the hook after a deny; the entire</span>
+        <span class="c1"># hook (counter updates included) is a no-op while this window is active, so a</span>
+        <span class="c1"># single sustained burst triggers at most one nudge per window</span>
+        <span class="n">_MIN_DENY_INTERVAL_SECONDS</span> <span class="o">=</span> <span class="mi">120</span>
+
+        <span class="n">n_recent_read_file_uses</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">n_recent_grep_uses</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">n_recent_non_symbolic_uses</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">last_grep_use_timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">last_read_file_use_timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">last_non_symbolic_use_timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># timestamp of the most recently emitted deny; deliberately not cleared by</span>
+        <span class="c1"># :meth:`reset` so the rate limit survives counter resets (e.g. Serena tool use)</span>
+        <span class="n">last_deny_timestamp</span><span class="p">:</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">too_many_recent_reads</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_read_file_uses</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_READ_FILE_USES_THRESHOLD</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">too_many_recent_greps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_grep_uses</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GREP_USES_THRESHOLD</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">too_many_recent_non_symbolic</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_non_symbolic_uses</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NON_SYMBOLIC_USES_THRESHOLD</span>
+
+<div class="viewcode-block" id="PreToolUseRemindAboutSymbolicToolsHook.ToolUseCounter.is_hook_active">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseRemindAboutSymbolicToolsHook.ToolUseCounter.is_hook_active">[docs]</a>
+        <span class="k">def</span><span class="w"> </span><span class="nf">is_hook_active</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            :return: whether the hook should engage at all at ``now``. Returns</span>
+<span class="sd">                ``False`` while we are still within :attr:`_MIN_DENY_INTERVAL_SECONDS`</span>
+<span class="sd">                of the most recent emitted deny — in that case the entire hook is</span>
+<span class="sd">                short-circuited (no counter updates, no deny). Returns ``True`` when</span>
+<span class="sd">                no deny has been emitted yet in this session, or when the window has</span>
+<span class="sd">                elapsed.</span>
+<span class="sd">            &quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_deny_timestamp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_deny_timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MIN_DENY_INTERVAL_SECONDS</span></div>
+
+
+        <span class="nd">@classmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_get_persistence_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hook</span><span class="p">:</span> <span class="n">Hook</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">hook</span><span class="o">.</span><span class="n">session_persistence_dir</span><span class="p">)</span> <span class="o">/</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_FILE_NAME</span>
+
+        <span class="nd">@classmethod</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">hook</span><span class="p">:</span> <span class="n">Hook</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Self</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_persistence_path</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hook</span><span class="p">:</span> <span class="n">Hook</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_persistence_path</span><span class="p">(</span><span class="n">hook</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hook</span><span class="p">:</span> <span class="s2">&quot;PreToolUseRemindAboutSymbolicToolsHook&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hook</span><span class="o">.</span><span class="n">is_serena_symbolic_tool</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+                <span class="k">return</span>
+
+            <span class="n">now</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">triggered_at_timestamp</span>
+            <span class="n">is_grep</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">is_grep_call</span><span class="p">()</span>
+            <span class="n">is_code_file_read</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">is_read_code_file_call</span><span class="p">()</span>
+
+            <span class="c1"># update grep counter</span>
+            <span class="k">if</span> <span class="n">is_grep</span><span class="p">:</span>
+                <span class="n">grep_period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GREP_RESET_PERIOD_SECONDS</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_grep_use_timestamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_grep_use_timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">grep_period</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_grep_uses</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_grep_uses</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_grep_use_timestamp</span> <span class="o">=</span> <span class="n">now</span>
+
+            <span class="c1"># update read file counter</span>
+            <span class="k">if</span> <span class="n">is_code_file_read</span><span class="p">:</span>
+                <span class="n">read_period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_READ_FILE_RESET_PERIOD_SECONDS</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">last_read_file_use_timestamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_read_file_use_timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">read_period</span>
+                <span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_read_file_uses</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_read_file_uses</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_read_file_use_timestamp</span> <span class="o">=</span> <span class="n">now</span>
+
+            <span class="c1"># update combined non-symbolic counter — catches mixed bursts (e.g.</span>
+            <span class="c1"># alternating grep/read) that neither per-tool counter would trip</span>
+            <span class="k">if</span> <span class="n">is_grep</span> <span class="ow">or</span> <span class="n">is_code_file_read</span><span class="p">:</span>
+                <span class="n">combined_period</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NON_SYMBOLIC_RESET_PERIOD_SECONDS</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">last_non_symbolic_use_timestamp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                    <span class="ow">and</span> <span class="p">(</span><span class="n">now</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_non_symbolic_use_timestamp</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">combined_period</span>
+                <span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_non_symbolic_uses</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_non_symbolic_uses</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">last_non_symbolic_use_timestamp</span> <span class="o">=</span> <span class="n">now</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_read_file_uses</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_grep_uses</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_recent_non_symbolic_uses</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_grep_use_timestamp</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_read_file_use_timestamp</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">last_non_symbolic_use_timestamp</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+    <span class="c1">#: substrings that, combined with ``&quot;file&quot;`` in the tool name, identify a</span>
+    <span class="c1">#: read-file tool for non-Claude-Code clients (whose tool names vary across</span>
+    <span class="c1">#: editors/agents). Lowercase because :attr:`_tool_name` is lowercased on</span>
+    <span class="c1">#: ingest. Conservative on purpose: only verbs that strongly imply *reading*</span>
+    <span class="c1">#: a file, never *modifying* one — so ``view_file``/``open_file``/``show_file``</span>
+    <span class="c1">#: are caught alongside ``read_file``, while ``write_file``/``edit_file`` are not.</span>
+    <span class="n">_READ_FILE_VERB_SUBSTRINGS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span><span class="s2">&quot;read&quot;</span><span class="p">,</span> <span class="s2">&quot;view&quot;</span><span class="p">,</span> <span class="s2">&quot;open&quot;</span><span class="p">,</span> <span class="s2">&quot;show&quot;</span><span class="p">))</span>
+
+    <span class="c1">#: Shell commands that perform grep-like search; used to classify Codex/Grok</span>
+    <span class="c1">#: shell-command tool calls whose ``cmd`` or ``command`` field starts with one of these.</span>
+    <span class="n">_GREP_SHELL_COMMANDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span><span class="s2">&quot;grep&quot;</span><span class="p">,</span> <span class="s2">&quot;rg&quot;</span><span class="p">,</span> <span class="s2">&quot;ag&quot;</span><span class="p">,</span> <span class="s2">&quot;ack&quot;</span><span class="p">,</span> <span class="s2">&quot;fgrep&quot;</span><span class="p">,</span> <span class="s2">&quot;egrep&quot;</span><span class="p">,</span> <span class="s2">&quot;search_for_pattern&quot;</span><span class="p">))</span>
+
+    <span class="c1">#: Shell commands that perform file-read operations; used to classify Codex/Grok</span>
+    <span class="c1">#: shell-command tool calls whose ``cmd`` or ``command`` field starts with one of these.</span>
+    <span class="n">_READ_SHELL_COMMANDS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">((</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;head&quot;</span><span class="p">,</span> <span class="s2">&quot;tail&quot;</span><span class="p">,</span> <span class="s2">&quot;sed&quot;</span><span class="p">,</span> <span class="s2">&quot;less&quot;</span><span class="p">,</span> <span class="s2">&quot;more&quot;</span><span class="p">,</span> <span class="s2">&quot;bat&quot;</span><span class="p">,</span> <span class="s2">&quot;get-content&quot;</span><span class="p">,</span> <span class="s2">&quot;gc&quot;</span><span class="p">))</span>
+
+    <span class="c1">#: file suffixes for source-like files where symbolic tools are usually more</span>
+    <span class="c1">#: appropriate than repeated raw reads. Lowercase and extension-only.</span>
+    <span class="c1">#: Note: ``search_for_pattern`` is always available regardless of extension and</span>
+    <span class="c1">#: is a better alternative to repeated raw reads for any structured file type.</span>
+    <span class="n">_CODE_FILE_EXTENSIONS</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;.al&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.bash&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.c&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.clj&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.cljs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.cpp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.cs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.css&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.dart&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.elm&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.ex&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.exs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.fs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.fsx&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.go&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.graphql&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.gql&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.groovy&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.h&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.hcl&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.hpp&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.hs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.html&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.java&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.jl&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.js&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.json&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.jsonc&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.jsx&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.kt&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.kts&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.lean&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.lua&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.m&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.matlab&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.nf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.php&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.proto&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.ps1&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.py&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.r&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.rb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.rs&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.scala&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.sh&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.sol&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.sql&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.svelte&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.swift&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.tf&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.tfvars&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.toml&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.ts&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.tsx&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.vue&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.yaml&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.yml&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;.zig&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">HookClient</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ToolUseCounter</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># extract a shell ``cmd``/``command`` field (Codex/Grok shell-command-style payloads):</span>
+        <span class="c1"># split into command name (basename, lowercased) and the remaining argument string</span>
+        <span class="c1"># so both bare names (``rg``) and path-prefixed invocations (``/usr/bin/grep``) are</span>
+        <span class="c1"># normalised the same way. Stays ``None`` when no shell command is present.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_command_args_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># extract a direct file-path field (Claude Code&#39;s ``Read``/``Edit``/``Write`` tool</span>
+        <span class="c1"># payloads pass the target as ``file_path`` rather than via a shell command).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_command</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cmd&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;command&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)))</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="p">:</span>
+                <span class="n">cmd_split</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">maxsplit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_split</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_command_args_str</span> <span class="o">=</span> <span class="n">cmd_split</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">cmd_split</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;file_path&quot;</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filePath&quot;</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;target_file&quot;</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_input</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;targetFile&quot;</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">or</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_grep_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HookClient</span><span class="o">.</span><span class="n">CLAUDE_CODE</span><span class="p">,</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">CODEBUDDY</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="o">==</span> <span class="s2">&quot;grep&quot;</span> <span class="ow">or</span> <span class="s2">&quot;search_for_pattern&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">GROK</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="o">==</span> <span class="s2">&quot;grep&quot;</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_shell_command_call</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GREP_SHELL_COMMANDS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">CODEX</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_shell_command_call</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GREP_SHELL_COMMANDS</span>
+        <span class="c1"># heuristic for other clients</span>
+        <span class="k">return</span> <span class="s2">&quot;grep&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_read_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HookClient</span><span class="o">.</span><span class="n">CLAUDE_CODE</span><span class="p">,</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">CODEBUDDY</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="o">==</span> <span class="s2">&quot;read&quot;</span> <span class="ow">or</span> <span class="s2">&quot;read_file&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">GROK</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span> <span class="o">==</span> <span class="s2">&quot;read_file&quot;</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_shell_command_call</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_READ_SHELL_COMMANDS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">==</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">CODEX</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_shell_command_call</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_READ_SHELL_COMMANDS</span>
+        <span class="c1"># heuristic for other clients</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_name</span>
+        <span class="k">if</span> <span class="s2">&quot;file&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">verb</span> <span class="ow">in</span> <span class="n">name</span> <span class="k">for</span> <span class="n">verb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_READ_FILE_VERB_SUBSTRINGS</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_shell_command_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return: whether the hook payload represents a shell-command tool call.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="PreToolUseRemindAboutSymbolicToolsHook.is_read_file_call">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseRemindAboutSymbolicToolsHook.is_read_file_call">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_read_file_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return: whether the tool call reads a file-like target.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_read_call</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="PreToolUseRemindAboutSymbolicToolsHook.is_read_code_file_call">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseRemindAboutSymbolicToolsHook.is_read_code_file_call">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_read_code_file_call</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return: whether the tool call reads a source-like file target.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_read_file_call</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_code_file_path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="ow">in</span> <span class="p">(</span><span class="n">HookClient</span><span class="o">.</span><span class="n">CODEX</span><span class="p">,</span> <span class="n">HookClient</span><span class="o">.</span><span class="n">GROK</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_args_str</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_is_code_file_path</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span> <span class="k">for</span> <span class="n">argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iter_shell_path_arguments</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_iter_shell_path_arguments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return: path-like shell arguments with quoting and common options removed.&quot;&quot;&quot;</span>
+        <span class="n">arguments</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_args_str</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">arguments</span>
+
+        <span class="k">for</span> <span class="n">raw_argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_command_args_str</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="n">argument</span> <span class="o">=</span> <span class="n">raw_argument</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">argument</span> <span class="ow">or</span> <span class="n">argument</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">arguments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argument</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">arguments</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_code_file_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;:return: whether ``file_path`` has a source-like suffix.&quot;&quot;&quot;</span>
+        <span class="n">cleaned_path</span> <span class="o">=</span> <span class="n">file_path</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">cleaned_path</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">Path</span><span class="p">(</span><span class="n">cleaned_path</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_CODE_FILE_EXTENSIONS</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># gate the entire hook on the rate-limit window: while we are within</span>
+        <span class="c1"># _MIN_DENY_INTERVAL_SECONDS of the last emitted deny, no counter</span>
+        <span class="c1"># updates and no deny detection happen at all. The pickle is left</span>
+        <span class="c1"># untouched so state survives the gating window unchanged.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">is_hook_active</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">triggered_at_timestamp</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># pick the deny that matches the current call first, so the emitted message lines up</span>
+        <span class="c1"># with the tool the agent just invoked; fall back to the other per-tool counter only</span>
+        <span class="c1"># if the current call did not itself trip a threshold (e.g. stale state loaded from</span>
+        <span class="c1"># pickle). The combined non-symbolic deny is checked last — it only fires when neither</span>
+        <span class="c1"># per-tool counter tripped, which is exactly the mixed-burst case (alternating grep/read).</span>
+        <span class="n">too_many_greps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">too_many_recent_greps</span><span class="p">()</span>
+        <span class="n">too_many_reads</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">too_many_recent_reads</span><span class="p">()</span>
+        <span class="n">too_many_non_symbolic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">too_many_recent_non_symbolic</span><span class="p">()</span>
+
+        <span class="n">output_data</span><span class="p">:</span> <span class="n">PreToolUseHook</span><span class="o">.</span><span class="n">OutputData</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_grep_call</span><span class="p">()</span> <span class="ow">and</span> <span class="n">too_many_greps</span><span class="p">:</span>
+            <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_grep_deny</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_read_code_file_call</span><span class="p">()</span> <span class="ow">and</span> <span class="n">too_many_reads</span><span class="p">:</span>
+            <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_code_read_deny</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">too_many_greps</span><span class="p">:</span>
+            <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_grep_deny</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">too_many_reads</span><span class="p">:</span>
+            <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_code_read_deny</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">too_many_non_symbolic</span><span class="p">:</span>
+            <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_non_symbolic_deny</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">output_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># reset burst counters so the next interval starts fresh, then record</span>
+            <span class="c1"># the deny timestamp and emit. The is_hook_active() guard at the top</span>
+            <span class="c1"># ensures we never reach this branch within the rate-limit window.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">last_deny_timestamp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">triggered_at_timestamp</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">output_data</span><span class="o">.</span><span class="n">to_json_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tool_call_counter</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_grep_deny</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PreToolUseHook.OutputData&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputData</span><span class="p">(</span>
+            <span class="n">permission_decision</span><span class="o">=</span><span class="s2">&quot;deny&quot;</span><span class="p">,</span>
+            <span class="n">permission_decision_reason</span><span class="o">=</span><span class="s2">&quot;Too many consecutive grep calls without using symbolic tools. &quot;</span>
+            <span class="s2">&quot;You can continue using grep now if needed, the counter was reset.&quot;</span><span class="p">,</span>
+            <span class="n">additional_context</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;You were using many grep calls recently. Consider using Serena&#39;s symbolic &quot;</span>
+                <span class="s2">&quot;mcp tools instead for more code-centric search. You can continue using grep now if needed, the counter was reset.&quot;</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_code_read_deny</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PreToolUseHook.OutputData&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputData</span><span class="p">(</span>
+            <span class="n">permission_decision</span><span class="o">=</span><span class="s2">&quot;deny&quot;</span><span class="p">,</span>
+            <span class="n">permission_decision_reason</span><span class="o">=</span><span class="s2">&quot;Too many consecutive read calls of files without using symbolic tools. &quot;</span>
+            <span class="s2">&quot;You can continue using read now if needed, the counter was reset.&quot;</span><span class="p">,</span>
+            <span class="n">additional_context</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;You were using many read calls on files recently. Consider using Serena&#39;s symbolic &quot;</span>
+                <span class="s2">&quot;mcp tools instead for more targeted reads. You can continue using read now if needed, the counter was reset.&quot;</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_non_symbolic_deny</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PreToolUseHook.OutputData&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputData</span><span class="p">(</span>
+            <span class="n">permission_decision</span><span class="o">=</span><span class="s2">&quot;deny&quot;</span><span class="p">,</span>
+            <span class="n">permission_decision_reason</span><span class="o">=</span><span class="s2">&quot;Too many consecutive non-symbolic tool calls (mixed grep and read). &quot;</span>
+            <span class="s2">&quot;You can continue using these tools now if needed, the counter was reset.&quot;</span><span class="p">,</span>
+            <span class="n">additional_context</span><span class="o">=</span><span class="p">(</span>
+                <span class="s2">&quot;You were alternating between grep and read file calls recently without using &quot;</span>
+                <span class="s2">&quot;Serena&#39;s symbolic mcp tools. Consider using symbolic search and targeted symbol &quot;</span>
+                <span class="s2">&quot;reads instead for more code-centric exploration. You can continue using these tools &quot;</span>
+                <span class="s2">&quot;now if needed, the counter was reset.&quot;</span>
+            <span class="p">),</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="SessionStartActivateProjectHook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.SessionStartActivateProjectHook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionStartActivateProjectHook</span><span class="p">(</span><span class="n">Hook</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="s2">&quot;**IMPORTANT**: If the current directory is a coding project you are working on:&quot;</span>
+            <span class="s2">&quot; 1. activate it using Serena&#39;s activate_project tool unless already done. &quot;</span>
+            <span class="s2">&quot; 2. if you haven&#39;t read Serena Instructions Manual yet, do so. &quot;</span>
+            <span class="s2">&quot;Follow this instruction before doing anything else.&quot;</span>
+        <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;hookSpecificOutput&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;hookEventName&quot;</span><span class="p">:</span> <span class="s2">&quot;SessionStart&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;additionalContext&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="SessionEndCleanupHook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.SessionEndCleanupHook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SessionEndCleanupHook</span><span class="p">(</span><span class="n">Hook</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">session_persistence_dir</span><span class="p">,</span> <span class="n">ignore_errors</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="PreToolUseAutoApproveSerenaHook">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.PreToolUseAutoApproveSerenaHook">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">PreToolUseAutoApproveSerenaHook</span><span class="p">(</span><span class="n">PreToolUseHook</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pre-tool-use hook that auto-approves Serena tool calls while the client is in a permissive permission mode.</span>
+
+<span class="sd">    Claude Code&#39;s permissive permission modes (``acceptEdits`` for blanket edit approval and</span>
+<span class="sd">    ``auto`` for hands-off autonomous execution) only apply to its built-in editing tools or</span>
+<span class="sd">    its auto-mode classifier; Serena&#39;s destructive tools (e.g. ``replace_symbol_body`` or</span>
+<span class="sd">    ``rename_symbol``) would still prompt the user on every call. This hook emits an ``allow``</span>
+<span class="sd">    decision for any Serena MCP tool call whenever the client reports one of these modes as</span>
+<span class="sd">    the active permission mode, so blanket approvals also cover Serena&#39;s tools. In all other</span>
+<span class="sd">    situations it stays silent, preserving the default approval flow.</span>
+
+<span class="sd">    ``bypassPermissions`` and ``dontAsk`` are deliberately excluded. ``bypassPermissions``</span>
+<span class="sd">    already approves everything before the hook would matter, so silence here is harmless.</span>
+<span class="sd">    ``dontAsk`` is the user&#39;s deliberate deny-by-default posture (auto-deny unless an explicit</span>
+<span class="sd">    allow rule matches); the hook honors that choice and stays silent rather than blanket</span>
+<span class="sd">    overriding it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#: permission modes for which this hook emits an ``allow`` decision. Frozen so the</span>
+    <span class="c1">#: set is immutable at the class level; matching is exact (case-sensitive) against</span>
+    <span class="c1">#: the canonical mode strings emitted by Claude Code&#39;s hook payload.</span>
+    <span class="n">_AUTO_APPROVE_MODES</span><span class="p">:</span> <span class="nb">frozenset</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">({</span><span class="s2">&quot;acceptEdits&quot;</span><span class="p">,</span> <span class="s2">&quot;auto&quot;</span><span class="p">})</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_auto_approve_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_permission_mode</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_AUTO_APPROVE_MODES</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># only emit a decision when both the tool and the mode match; stay silent otherwise</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_serena_symbolic_tool</span><span class="p">()</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_auto_approve_mode</span><span class="p">():</span>
+            <span class="k">return</span>
+
+        <span class="c1"># name the actual mode in the reason so logs/debug output are unambiguous</span>
+        <span class="c1"># (the same hook handles multiple modes now)</span>
+        <span class="n">output_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">OutputData</span><span class="p">(</span>
+            <span class="n">permission_decision</span><span class="o">=</span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+            <span class="n">permission_decision_reason</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Auto-approved: Serena tool call while client is in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_permission_mode</span><span class="si">}</span><span class="s2"> mode.&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">output_data</span><span class="o">.</span><span class="n">to_json_string</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="p">))</span></div>
+
+
+
+<span class="n">_client_option</span> <span class="o">=</span> <span class="n">click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span>
+    <span class="s2">&quot;--client&quot;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="n">click</span><span class="o">.</span><span class="n">Choice</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">HookClient</span><span class="p">],</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+    <span class="n">default</span><span class="o">=</span><span class="n">HookClient</span><span class="o">.</span><span class="n">CLAUDE_CODE</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="n">show_default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The client application that triggered the hook.&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="HookCommands">
+<a class="viewcode-back" href="../../06-contributing/code-reference/hooks.html#serena.hooks.HookCommands">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">HookCommands</span><span class="p">(</span><span class="n">AutoRegisteringGroup</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;serena-hook&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Commands that send reminders to agents when appropriate, to be used in hooks.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+        <span class="s2">&quot;activate&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Set this as hook at session startup to prompt the agent to activate the project at the start of the session and read Serena&#39;s instructions&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nd">@_client_option</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">activate</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">SessionStartActivateProjectHook</span><span class="p">(</span><span class="n">HookClient</span><span class="p">(</span><span class="n">client</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;cleanup&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Set this as hook at session end all hook data for the current session&quot;</span><span class="p">)</span>
+    <span class="nd">@_client_option</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cleanup</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">SessionEndCleanupHook</span><span class="p">(</span><span class="n">HookClient</span><span class="p">(</span><span class="n">client</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+        <span class="s2">&quot;remind&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Set this as hook at PreToolUse to remind the agent to use Serena&#39;s tools instead of overrelying on read_file and grep&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nd">@_client_option</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">remind</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">PreToolUseRemindAboutSymbolicToolsHook</span><span class="p">(</span><span class="n">HookClient</span><span class="p">(</span><span class="n">client</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">(</span>
+        <span class="s2">&quot;auto-approve&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Set this as hook at PreToolUse to auto-approve Serena tool calls while the client is in a &quot;</span>
+        <span class="s2">&quot;permissive permission mode (acceptEdits or auto, Claude Code).&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="nd">@_client_option</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">auto_approve</span><span class="p">(</span><span class="n">client</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">PreToolUseAutoApproveSerenaHook</span><span class="p">(</span><span class="n">HookClient</span><span class="p">(</span><span class="n">client</span><span class="p">))</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span></div>
+
+
+
+<span class="n">hook_commands</span> <span class="o">=</span> <span class="n">HookCommands</span><span class="p">()</span>
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Oraios AI & Oraios Software
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025 by Serena contributors.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
