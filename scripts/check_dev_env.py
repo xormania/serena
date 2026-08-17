@@ -4,10 +4,13 @@ Reports whether this machine is ready for Serena development: core environment c
 ``serena`` executable and this checkout, and which per-language pytest markers can run
 locally, given the toolchains that are present.
 
-The toolchain requirements mirror the install steps in ``.github/workflows/pytest.yml`` and
-the availability guards in ``test/conftest.py``, which remain canonical when in doubt. Language servers themselves are not checked here:
-Serena downloads most of them on first use. What is checked are the toolchains those
-servers and the test fixtures need (compilers, runtimes, package managers).
+The toolchain requirements mirror the availability guards in ``test/conftest.py``, which
+decide whether a suite runs at all, and — for languages the guards do not mention — the
+requirements of the language servers themselves. ``.github/workflows/pytest.yml`` is
+context, not authority: CI installing a toolchain does not make a marker runnable if the
+suite skips it anyway. Language servers themselves are not checked here: Serena downloads
+or bundles most of them on first use. What is checked are the toolchains those servers and
+the test fixtures need (compilers, runtimes, package managers).
 
 Usage::
 
@@ -634,22 +637,37 @@ def _check_install_skew(pyproject: dict) -> None:
         print("           Reinstall from this checkout:  uv tool install --reinstall -p 3.13 .")
 
 
-def _report_toolchains(language_markers: list[str]) -> list[str]:
+def _evaluate_toolchains() -> list[tuple[ToolchainRequirement, list[str]]]:
+    """
+    :return: every requirement paired with what it is missing on this machine (an empty list
+        when the requirement is satisfied). One evaluation, so the printed report and the
+        ``--markers`` expression can never disagree about what is runnable.
+    """
+    return [(requirement, requirement.unsatisfied()) for requirement in TOOLCHAIN_REQUIREMENTS]
+
+
+def _runnable_markers(language_markers: list[str], evaluated: list[tuple[ToolchainRequirement, list[str]]]) -> list[str]:
+    """
+    :param language_markers: the names of all registered language markers
+    :param evaluated: the requirement/missing pairs from :func:`_evaluate_toolchains`
+    :return: the markers whose required toolchains are all present, in registration order
+    """
+    blocked = {marker for requirement, missing in evaluated if missing for marker in requirement.markers}
+    return [marker for marker in language_markers if marker not in blocked]
+
+
+def _report_toolchains(language_markers: list[str], evaluated: list[tuple[ToolchainRequirement, list[str]]]) -> list[str]:
     """
     Prints the per-toolchain report and computes the runnable markers.
 
     :param language_markers: the names of all registered language markers
+    :param evaluated: the requirement/missing pairs from :func:`_evaluate_toolchains`
     :return: the markers whose required toolchains are all present, in registration order
     """
-    blocked_markers: dict[str, list[str]] = {}
-    for requirement in TOOLCHAIN_REQUIREMENTS:
-        missing = requirement.unsatisfied()
+    for requirement, missing in evaluated:
         status = "OK  " if not missing else "MISS"
         detail = requirement.note if not missing else f"{requirement.note} — missing: {', '.join(missing)}"
         print(f"  {status}     {', '.join(requirement.markers):<55} {detail}")
-        if missing:
-            for marker in requirement.markers:
-                blocked_markers.setdefault(marker, []).extend(missing)
 
     covered = {marker for requirement in TOOLCHAIN_REQUIREMENTS for marker in requirement.markers}
     uncovered = [marker for marker in language_markers if marker not in covered]
@@ -658,7 +676,7 @@ def _report_toolchains(language_markers: list[str]) -> list[str]:
         print(f"  No local toolchain is known to be required for: {', '.join(uncovered)}")
         print("  (Serena installs or bundles these language servers itself on first use.)")
 
-    return [marker for marker in language_markers if marker not in blocked_markers]
+    return _runnable_markers(language_markers, evaluated)
 
 
 def main() -> int:
@@ -670,7 +688,13 @@ def main() -> int:
     language_markers = _language_markers(pyproject)
 
     if args.markers:
-        print(" or ".join(_report_runnable_markers_quietly(language_markers)))
+        runnable = _runnable_markers(language_markers, _evaluate_toolchains())
+        if not runnable:
+            # an empty expression is NOT an empty selection: `pytest -m ""` applies no filter
+            # at all and runs the entire suite, the exact opposite of what this machine can do
+            print("no language marker is runnable on this machine; see the full report", file=sys.stderr)
+            return 1
+        print(" or ".join(runnable))
         return 0
 
     print("Core environment")
@@ -679,22 +703,16 @@ def main() -> int:
     print("Installed serena vs. this checkout")
     _check_install_skew(pyproject)
     print()
-    print("Language toolchains (requirements mirror .github/workflows/pytest.yml)")
-    runnable = _report_toolchains(language_markers)
+    print("Language toolchains (mirroring test/conftest.py's availability guards and the language servers' own requirements)")
+    runnable = _report_toolchains(language_markers, _evaluate_toolchains())
     print()
     print(f"Runnable language markers ({len(runnable)}/{len(language_markers)}):")
-    print(f'  uv run pytest test -m "{" or ".join(runnable)}"')
+    if runnable:
+        print(f'  uv run pytest test -m "{" or ".join(runnable)}"')
+    else:
+        print("  none — install a toolchain above; an empty -m expression would run the whole suite instead of nothing")
 
     return 0 if core_ok else 1
-
-
-def _report_runnable_markers_quietly(language_markers: list[str]) -> list[str]:
-    """
-    :param language_markers: the names of all registered language markers
-    :return: the markers whose required toolchains are all present, without printing a report
-    """
-    blocked = {marker for requirement in TOOLCHAIN_REQUIREMENTS if requirement.unsatisfied() for marker in requirement.markers}
-    return [marker for marker in language_markers if marker not in blocked]
 
 
 if __name__ == "__main__":

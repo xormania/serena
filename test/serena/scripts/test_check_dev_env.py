@@ -224,6 +224,30 @@ class TestVersionProbes:
         assert doctor._dotnet_sdk_majors() is None
 
 
+class TestMarkersExpression:
+    """--markers composes into `pytest -m "<expr>"`, so what it prints has to be safe there."""
+
+    def test_no_runnable_markers_prints_nothing_and_fails(self, doctor, monkeypatch, capsys) -> None:
+        """Given a machine where no marker is runnable, when --markers is asked for the
+        expression, then stdout stays empty and the exit code is nonzero — printing an empty
+        expression would be read by pytest as 'no filter' and run the entire suite, the exact
+        opposite of what the machine can do.
+        """
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py", "--markers"])
+        monkeypatch.setattr(doctor, "_runnable_markers", lambda markers, evaluated: [])
+        assert doctor.main() == 1
+        captured = capsys.readouterr()
+        assert captured.out.strip() == ""
+        assert "runnable" in captured.err
+
+    def test_runnable_markers_are_printed_as_an_or_expression(self, doctor, monkeypatch, capsys) -> None:
+        """Given two runnable markers, --markers prints exactly the pytest -m expression."""
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py", "--markers"])
+        monkeypatch.setattr(doctor, "_runnable_markers", lambda markers, evaluated: ["python", "go"])
+        assert doctor.main() == 0
+        assert capsys.readouterr().out.strip() == "python or go"
+
+
 class TestTableIntegrity:
     """The toolchain table cannot drift from the markers pyproject registers."""
 
