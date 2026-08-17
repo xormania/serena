@@ -421,6 +421,42 @@ class TestStatePreservation:
             os.kill(grandchild, 0)
 
     @posix_only
+    @pytest.mark.timeout(20)
+    def test_an_interrupt_mid_command_kills_the_detached_child(self, probe_module, tmp_path, monkeypatch) -> None:
+        """Given Ctrl-C arrives while a command is running, when _run unwinds, then the
+        detached child is dead — the child no longer receives the terminal's interrupt
+        (own session), and leaving it running would keep the Popen context manager waiting
+        without any timeout, so the emergency restore would never run. The 20s test timeout
+        is load-bearing: without the interrupt handler this test hangs on the child.
+        """
+        pid_file = tmp_path / "child.pid"
+        probe = _probe(probe_module, tmp_path)
+        real_communicate = probe_module.subprocess.Popen.communicate
+        calls = {"n": 0}
+
+        def interrupting_communicate(popen_self, *args, **kwargs):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                deadline = time.time() + 5
+                while not pid_file.is_file() and time.time() < deadline:
+                    time.sleep(0.02)
+                raise KeyboardInterrupt
+            return real_communicate(popen_self, *args, **kwargs)
+
+        monkeypatch.setattr(probe_module.subprocess.Popen, "communicate", interrupting_communicate)
+        with pytest.raises(KeyboardInterrupt):
+            probe._run(("sh", "-c", f"echo $$ > {pid_file}; sleep 300"))
+        child = int(pid_file.read_text())
+        for _ in range(40):
+            try:
+                os.kill(child, 0)
+            except ProcessLookupError:
+                break
+            time.sleep(0.05)
+        with pytest.raises(ProcessLookupError):
+            os.kill(child, 0)
+
+    @posix_only
     def test_a_recorded_snapshot_is_owner_only_regardless_of_umask(self, probe_module, tmp_path) -> None:
         """Given a permissive umask, when a probe result is snapshotted via --record, then the
         JSON lands owner-only, because transcripts echo other servers' registration lines,

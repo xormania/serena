@@ -60,6 +60,25 @@ from pathlib import Path
 from serena.config.client_setup import ClientSetupHandler, client_setup_handlers
 
 COMMAND_TIMEOUT_SECONDS = 120
+
+
+def _kill_process_tree(process: subprocess.Popen) -> None:
+    """
+    :param process: a child started with its own session (POSIX); its whole process tree is
+        terminated -- setup shells out to the client CLI, and a surviving descendant could
+        write its registration after the rollback has run
+    """
+    if os.name == "posix":
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+    else:
+        # Windows has no process groups to signal; taskkill /T walks the descendant tree
+        subprocess.run(["taskkill", "/F", "/T", "/PID", str(process.pid)], check=False, capture_output=True)
+        process.kill()
+
+
 """generous per-command cap; `mcp list` implementations may health-check the registered servers"""
 
 
@@ -179,18 +198,17 @@ class ClientProbe:
                     stdout, stderr = process.communicate(timeout=COMMAND_TIMEOUT_SECONDS)
                     executed = ExecutedCommand(argv, process.returncode, stdout, stderr)
                 except subprocess.TimeoutExpired:
-                    if os.name == "posix":
-                        try:
-                            os.killpg(process.pid, signal.SIGKILL)
-                        except ProcessLookupError:
-                            pass
-                    else:
-                        # Windows has no process groups to signal; taskkill /T walks the
-                        # descendant tree, which the shelled-out client command lives in
-                        subprocess.run(["taskkill", "/F", "/T", "/PID", str(process.pid)], check=False, capture_output=True)
-                        process.kill()
+                    _kill_process_tree(process)
                     process.communicate()
                     executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
+                except BaseException:
+                    # a Ctrl-C reaches this process but NOT the detached child (own session),
+                    # and the Popen context manager would then wait on it without any timeout,
+                    # keeping the emergency restore from ever running -- kill the tree, reap,
+                    # and let the interrupt continue unwinding
+                    _kill_process_tree(process)
+                    process.communicate()
+                    raise
         except OSError as e:
             executed = ExecutedCommand(argv, -1, "", str(e))
         self._transcript.append(executed)
