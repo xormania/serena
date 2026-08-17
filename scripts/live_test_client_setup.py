@@ -460,7 +460,15 @@ def _write_snapshot(record_dir: Path, result: ProbeResult) -> Path:
     # commands or env values -- owner-only from the first byte, not chmod'd after the
     # content already sits readable; fchmod covers a leftover file from an earlier run,
     # whose looser mode O_CREAT would not correct
-    fd = os.open(snapshot_path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, stat.S_IRUSR | stat.S_IWUSR)
+    # O_NOFOLLOW: following a pre-existing symlink here would truncate and chmod whatever
+    # it points at -- arbitrary file destruction when recording into a shared directory
+    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0)
+    try:
+        fd = os.open(snapshot_path, flags, stat.S_IRUSR | stat.S_IWUSR)
+    except OSError as e:
+        if snapshot_path.is_symlink():
+            raise RuntimeError(f"refusing to write through a pre-existing symlink at {snapshot_path}") from e
+        raise
     if hasattr(os, "fchmod"):
         os.fchmod(fd, stat.S_IRUSR | stat.S_IWUSR)
     with os.fdopen(fd, "w", encoding="utf-8") as snapshot_file:

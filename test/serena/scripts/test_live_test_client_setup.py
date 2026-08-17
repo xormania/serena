@@ -457,6 +457,22 @@ class TestStatePreservation:
             os.kill(child, 0)
 
     @posix_only
+    def test_a_snapshot_never_writes_through_a_planted_symlink(self, probe_module, tmp_path) -> None:
+        """Given the record directory already holds a symlink under the snapshot's name,
+        when the snapshot is written, then it refuses and the link's target is untouched —
+        following the link would truncate and chmod an unrelated file.
+        """
+        victim = tmp_path / "victim.json"
+        victim.write_text('{"precious": true}')
+        record_dir = tmp_path / "records"
+        record_dir.mkdir()
+        (record_dir / "stub.json").symlink_to(victim)
+        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
+        with pytest.raises(RuntimeError, match="symlink"):
+            probe_module._write_snapshot(record_dir, result)
+        assert victim.read_text() == '{"precious": true}'
+
+    @posix_only
     def test_a_recorded_snapshot_is_owner_only_regardless_of_umask(self, probe_module, tmp_path) -> None:
         """Given a permissive umask, when a probe result is snapshotted via --record, then the
         JSON lands owner-only, because transcripts echo other servers' registration lines,

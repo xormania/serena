@@ -224,6 +224,32 @@ def _dart_managed_sdk_check() -> str | None:
     return "a platform in the managed-SDK matrix (the provider does not use a system dart)"
 
 
+def _rust_analyzer_check() -> str | None:
+    # mirrors _ensure_rust_analyzer_installed (rust_analyzer.py) read-only: rustup counts
+    # (it can install the matching component), then a PATH rust-analyzer, then the
+    # provider's common install locations -- which() alone missed those
+    if shutil.which("rustup") or shutil.which("rust-analyzer"):
+        return None
+    home = Path.home()
+    if os.name == "nt":
+        candidates = [
+            home / ".cargo" / "bin" / "rust-analyzer.exe",
+            home / "scoop" / "shims" / "rust-analyzer.exe",
+            home / "scoop" / "apps" / "rust-analyzer" / "current" / "rust-analyzer.exe",
+            Path(os.environ.get("LOCALAPPDATA", "")) / "Programs" / "rust-analyzer" / "rust-analyzer.exe",
+        ]
+    else:
+        candidates = [
+            Path("/opt/homebrew/bin/rust-analyzer"),
+            Path("/usr/local/bin/rust-analyzer"),
+            home / ".cargo" / "bin" / "rust-analyzer",
+            home / ".local" / "bin" / "rust-analyzer",
+        ]
+    if any(candidate.is_file() and os.access(candidate, os.X_OK) for candidate in candidates):
+        return None
+    return "rust-analyzer (via rustup, the PATH, or a standard install location)"
+
+
 def _matlab_installation_check() -> str | None:
     # mirrors _is_matlab_available (test/conftest.py): MATLAB_PATH or a known install location --
     # a bare PATH launcher is NOT accepted, because neither the guard nor the provider's
@@ -359,7 +385,10 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     # native batch
     ToolchainRequirement(("go",), ("go", "gopls"), "Go toolchain + gopls (go install golang.org/x/tools/gopls@latest)"),
     ToolchainRequirement(
-        ("rust",), ("cargo", "rustup|rust-analyzer"), "Rust toolchain + rust-analyzer (resolved via rustup, or standalone on the PATH)"
+        ("rust",),
+        ("cargo",),
+        "Rust toolchain + rust-analyzer (rustup, the PATH, or a standard install location — the provider's search order)",
+        extra_check=_rust_analyzer_check,
     ),
     ToolchainRequirement(("zig",), ("zig", "zls"), "Zig + ZLS (the suite skips on native Windows)", extra_check=_windows_disabled_check),
     ToolchainRequirement(

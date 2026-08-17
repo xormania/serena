@@ -92,6 +92,20 @@ class TestRequirementVerdicts:
         assert doctor._dart_managed_sdk_check() is None
         assert doctor._hlsl_server_availability_check() is None
 
+    def test_rust_analyzer_is_found_in_the_providers_fallback_locations(self, doctor, monkeypatch, tmp_path) -> None:
+        """Given neither rustup nor rust-analyzer on the PATH but an executable binary in
+        ~/.cargo/bin, the check accepts it — the provider searches its common locations
+        after the PATH, and which() alone missed them. (Only the accepting direction is
+        asserted: the rejecting one would depend on the host's real /usr/local contents.)
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        (tmp_path / ".cargo" / "bin").mkdir(parents=True)
+        binary = tmp_path / ".cargo" / "bin" / ("rust-analyzer.exe" if os.name == "nt" else "rust-analyzer")
+        binary.write_text("#!/bin/sh\n")
+        binary.chmod(0o755)
+        monkeypatch.setattr(doctor.Path, "home", classmethod(lambda cls: tmp_path))
+        assert doctor._rust_analyzer_check() is None
+
     def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
         """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow
         check accepts it — the server consults $JAVA_HOME/bin/java first; given only a
