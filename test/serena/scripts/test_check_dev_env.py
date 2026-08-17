@@ -80,8 +80,11 @@ class TestRequirementVerdicts:
         """
         monkeypatch.setattr(doctor.sys, "platform", "linux")
         monkeypatch.setattr(doctor.platform, "machine", lambda: "aarch64")
+        # a PATH dart must not rescue an off-matrix host: the provider goes straight to its
+        # dependency table and never resolves a system dart
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"dart": "/usr/bin/dart"}))
+        assert doctor._dart_managed_sdk_check() == "a platform in the managed-SDK matrix (the provider does not use a system dart)"
         monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
-        assert doctor._dart_managed_sdk_check() == "the Dart SDK on the PATH (no managed SDK download exists for this platform)"
         assert doctor._hlsl_server_availability_check() == (
             "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
         )

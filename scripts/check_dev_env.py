@@ -213,14 +213,15 @@ def _hlsl_server_availability_check() -> str | None:
 
 def _dart_managed_sdk_check() -> str | None:
     # mirrors DartLanguageServer's managed-SDK matrix (linux-x64, win-x64/arm64,
-    # osx-x64/arm64): on those platforms Serena downloads its pinned SDK and no PATH dart
-    # is needed; elsewhere (e.g. linux-arm64) the PATH dart is the only path
+    # osx-x64/arm64): on those platforms Serena downloads its pinned SDK. Elsewhere the
+    # suite CANNOT run at all -- the provider goes straight to its dependency table and
+    # never resolves a system dart, so a PATH dart must not count
     machine = platform.machine().lower()
     if sys.platform == "darwin" or (sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64")):
         return None
     if sys.platform.startswith("linux") and machine in ("x86_64", "amd64"):
         return None
-    return None if shutil.which("dart") else "the Dart SDK on the PATH (no managed SDK download exists for this platform)"
+    return "a platform in the managed-SDK matrix (the provider does not use a system dart)"
 
 
 def _matlab_installation_check() -> str | None:
@@ -392,7 +393,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("dart",),
         (),
-        "Dart (Serena downloads its pinned SDK on win/mac x64+arm64 and linux x64; elsewhere dart must be on the PATH)",
+        "Dart (Serena downloads its pinned SDK on win/mac x64+arm64 and linux x64; other platforms cannot run the suite)",
         extra_check=_dart_managed_sdk_check,
     ),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
