@@ -175,6 +175,9 @@ class ClientProbe:
                         except ProcessLookupError:
                             pass
                     else:
+                        # Windows has no process groups to signal; taskkill /T walks the
+                        # descendant tree, which the shelled-out client command lives in
+                        subprocess.run(["taskkill", "/F", "/T", "/PID", str(process.pid)], check=False, capture_output=True)
                         process.kill()
                     process.communicate()
                     executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
