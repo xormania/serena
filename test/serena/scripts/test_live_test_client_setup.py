@@ -736,7 +736,11 @@ class TestStatePreservation:
         from collections.abc import Callable
         from typing import cast
 
-        previous = {s: signal_module.getsignal(s) for s in (signal_module.SIGTERM, signal_module.SIGHUP)}
+        # SIGHUP does not exist on Windows — the script skips what a platform lacks, and so
+        # must its test; SIGTERM is everywhere, so the unwinding contract is checked everywhere
+        sighup = getattr(signal_module, "SIGHUP", None)
+        signums = [signal_module.SIGTERM] + ([sighup] if sighup is not None else [])
+        previous = {s: signal_module.getsignal(s) for s in signums}
         try:
             probe_module._install_unwinding_signal_handlers()
             installed = signal_module.getsignal(signal_module.SIGTERM)
@@ -746,9 +750,10 @@ class TestStatePreservation:
 
             # an inherited SIG_IGN is deliberate (nohup): installing over it would abort the
             # detached runs this script documents
-            signal_module.signal(signal_module.SIGHUP, signal_module.SIG_IGN)
-            probe_module._install_unwinding_signal_handlers()
-            assert signal_module.getsignal(signal_module.SIGHUP) is signal_module.SIG_IGN
+            if sighup is not None:
+                signal_module.signal(sighup, signal_module.SIG_IGN)
+                probe_module._install_unwinding_signal_handlers()
+                assert signal_module.getsignal(sighup) is signal_module.SIG_IGN
         finally:
             for signum, handler in previous.items():
                 signal_module.signal(signum, handler)
