@@ -25,11 +25,11 @@ def _probe(probe_module, backup_dir: Path, config_path: Path | None = None):
     return probe_module.ClientProbe(handler, spec, Path("serena"), backup_dir)
 
 
-def _run_lifecycle(probe_module, probe, after_add: tuple[int, str], final: tuple[int, str] = (0, "")):
+def _run_lifecycle(probe_module, probe, after_add: tuple[int, str], final: tuple[int, str] = (0, ""), baseline: tuple[int, str] = (0, "")):
     """Drive the full lifecycle with scripted responses for the six commands it issues:
     --version, baseline list, setup, list after add, remove, final list.
     """
-    responses = iter([(0, "1.0"), (0, ""), (0, ""), after_add, (0, ""), final])
+    responses = iter([(0, "1.0"), baseline, (0, ""), after_add, (0, ""), final])
     calls: list[tuple[str, ...]] = []
 
     def scripted(argv: tuple[str, ...]):
@@ -106,6 +106,37 @@ class TestLifecycleVerdicts:
         assert result.status == probe_module.Status.FAIL
         assert "cannot verify the removal" in result.detail
         assert calls[-1] == ("stub", "remove")
+
+    def test_losing_another_servers_registration_fails_even_without_a_config_file(self, probe_module, tmp_path) -> None:
+        """Given a client with no known config file whose other registration vanished during
+        the lifecycle, when the final list is compared with the baseline, then the probe
+        FAILs instead of declaring the baseline restored on serena's absence alone.
+        """
+        result, calls = _run_lifecycle(
+            probe_module,
+            _probe(probe_module, tmp_path),
+            baseline=(0, "othertool  foo --serve"),
+            after_add=(0, f"othertool  foo --serve\nserena  {EXPECTED_COMMAND}"),
+            final=(0, ""),
+        )
+        assert result.status == probe_module.Status.FAIL
+        assert "registration set differs from the baseline" in result.detail
+        assert calls[-1] == ("stub", "remove")
+
+    def test_a_preserved_registration_set_passes_and_is_noted(self, probe_module, tmp_path) -> None:
+        """Given a client with no known config file whose other registration survived the
+        lifecycle untouched, when the final list matches the baseline, then the probe
+        PASSes and notes the comparison.
+        """
+        result, _ = _run_lifecycle(
+            probe_module,
+            _probe(probe_module, tmp_path),
+            baseline=(0, "othertool  foo --serve"),
+            after_add=(0, f"othertool  foo --serve\nserena  {EXPECTED_COMMAND}"),
+            final=(0, "othertool  foo --serve"),
+        )
+        assert result.status == probe_module.Status.PASS
+        assert any("registration set matches the baseline" in note for note in result.notes)
 
     def test_a_failed_query_after_add_fails_rather_than_misdiagnosing(self, probe_module, tmp_path) -> None:
         """Given a registration query that fails right after setup, when the lifecycle

@@ -182,6 +182,15 @@ class ClientProbe:
         """
         return "\n".join(line for line in list_output.splitlines() if re.match(r"\s*serena\b", line))
 
+    @staticmethod
+    def _registration_names(list_output: str) -> set[str]:
+        """
+        :param list_output: the stdout of the client's list command
+        :return: the first token of every nonempty line — the registration names (header lines
+            included; they cancel out when two outputs of the same client are compared)
+        """
+        return {line.split()[0] for line in list_output.splitlines() if line.strip()}
+
     def _backup_config(self) -> None:
         # snapshot the user-level config file (0600, inside the private backup dir) before mutating
         config_path = self.spec.user_config_path
@@ -307,6 +316,14 @@ class ClientProbe:
                 )
             if self._serena_registered(final.stdout):
                 return self._result(Status.FAIL, "serena is still registered after removal", cli_version)
+            if self.spec.user_config_path is None:
+                # no config file to byte-compare, so the registration list is the only baseline:
+                # every registration present before the probe must still be present, and none added
+                if self._registration_names(final.stdout) != self._registration_names(baseline.stdout):
+                    return self._result(
+                        Status.FAIL, "the registration set differs from the baseline — another server's entry changed", cli_version
+                    )
+                self._notes.append("registration set matches the baseline")
             mutated = False
         finally:
             if mutated:

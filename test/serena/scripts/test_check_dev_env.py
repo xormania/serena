@@ -165,6 +165,8 @@ class TestTableIntegrity:
             "markdown",
             "msl",
             "toml",
+            # lua-language-server is downloaded by LuaLanguageServer itself when absent (lua_ls.py)
+            "lua",
             # the language Serena itself runs on; the dev environment provides it
             "python",
         }

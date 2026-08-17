@@ -186,7 +186,8 @@ def _wolfram_kernel_check() -> str | None:
 TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     # jvm batch (see MARKERS_JVM in .github/workflows/pytest.yml)
     ToolchainRequirement(("java",), ("java",), "JDK 21+ (JDTLS_MIN_JDK_VERSION in eclipse_jdtls.py)", min_java=21),
-    ToolchainRequirement(("kotlin", "scala"), ("java",), "JDK (no declared minimum; CI uses 21)"),
+    ToolchainRequirement(("kotlin",), ("java",), "JDK (no declared minimum; CI uses 21)"),
+    ToolchainRequirement(("scala",), ("java", "metals|cs|coursier"), "JDK + Metals (a global metals, or cs/coursier to bootstrap it)"),
     ToolchainRequirement(
         ("groovy",), ("java",), "JDK + a Groovy language-server JAR named by GROOVY_LS_JAR_PATH", extra_check=_groovy_ls_jar_check
     ),
@@ -210,13 +211,14 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("rust",), ("cargo", "rustup|rust-analyzer"), "Rust toolchain + rust-analyzer (resolved via rustup, or standalone on the PATH)"
     ),
     ToolchainRequirement(("zig",), ("zig", "zls"), "Zig + ZLS"),
-    ToolchainRequirement(("cpp",), ("clangd|ccls",), "clangd (the default C/C++ server) or ccls (the alternative)"),
+    ToolchainRequirement(
+        ("cpp",), ("clangd",), "clangd (part of the cpp suite launches it unconditionally; ccls is an optional extra server)"
+    ),
     ToolchainRequirement(("pascal",), ("fpc",), "Free Pascal (fpc + fpc-source)"),
     ToolchainRequirement(("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (CI runs Swift tests on macOS only)"),
     # other-langs batch
     ToolchainRequirement(("ruby",), ("ruby", "gem"), "Ruby (ruby-lsp is installed via gem)"),
     ToolchainRequirement(("php",), ("php",), "PHP 8.1+ (enforced by phpactor, whose phar Serena downloads itself)", min_php=(8, 1)),
-    ToolchainRequirement(("lua",), ("lua-language-server",), "lua-language-server"),
     ToolchainRequirement(("powershell",), ("pwsh",), "PowerShell 7 (preinstalled on CI runners)"),
     ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
     ToolchainRequirement(("erlang",), ("erl", "rebar3"), "Erlang/OTP + rebar3 (the test fixture compiles with rebar3)"),
