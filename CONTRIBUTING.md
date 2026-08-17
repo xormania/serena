@@ -34,6 +34,18 @@ You can install a virtual environment with the required as follows
     * On Windows outside of Git Bash: `.venv\Scripts\activate.bat` (in cmd/ps) or `source .venv/Scripts/activate` (in git-bash) 
 3. Install the required packages with all extras: `uv sync --extra dev`
 
+## Checking Your Environment
+
+To verify your development environment and see which language test suites can run on your machine, run
+
+```shell
+uv run python scripts/check_dev_env.py
+```
+
+It reports core environment problems, version skew between a persistently installed `serena` and your
+checkout, and the pytest language markers whose toolchains are present on this machine
+(`--markers` prints just the marker expression, for use with `pytest -m`).
+
 ## Local Installation as Tool
 
 To install Serena as a local tool, run
