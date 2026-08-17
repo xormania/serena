@@ -72,6 +72,21 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {8})
         assert requirement.unsatisfied() == ["dotnet runtime >= 10 (found 8)"]
 
+    def test_a_runtime_only_dotnet_does_not_satisfy_an_sdk_minimum(self, doctor, monkeypatch) -> None:
+        """Given a machine with a satisfying runtime but no SDK, the verdict names the
+        missing SDK — a runtime alone cannot load the SDK-style test project; given SDK 8
+        alongside, nothing is unmet.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"dotnet": "/usr/bin/dotnet"}))
+        requirement = doctor.ToolchainRequirement(("csharp",), ("dotnet",), "note", min_dotnet_runtime=10, min_dotnet_sdk=8)
+        monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {10})
+        monkeypatch.setattr(doctor, "_dotnet_sdk_majors", lambda: None)
+        assert requirement.unsatisfied() == [
+            "dotnet SDK >= 8 (no installed SDK could be determined — a runtime alone cannot load projects)"
+        ]
+        monkeypatch.setattr(doctor, "_dotnet_sdk_majors", lambda: {8})
+        assert requirement.unsatisfied() == []
+
     def test_an_undeterminable_version_is_reported_as_such_not_as_satisfied(self, doctor, monkeypatch) -> None:
         """Given java present but its version unreadable, when the requirement declares a
         minimum, then the verdict says so — presence alone never satisfies a version gate.
@@ -144,6 +159,18 @@ class TestVersionProbes:
             doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout=listing, stderr="")
         )
         assert doctor._dotnet_runtime_majors() == {8, 10}
+
+    def test_dotnet_sdk_majors_are_read_one_per_line(self, doctor, monkeypatch) -> None:
+        """Given dotnet --list-sdks output, the probe collects the SDK majors; given no
+        output (a runtime-only installation), it reports None rather than an empty set.
+        """
+        listing = "8.0.412 [/usr/lib/dotnet/sdk]\n10.0.100 [/usr/lib/dotnet/sdk]\n"
+        monkeypatch.setattr(
+            doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout=listing, stderr="")
+        )
+        assert doctor._dotnet_sdk_majors() == {8, 10}
+        monkeypatch.setattr(doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout="", stderr=""))
+        assert doctor._dotnet_sdk_majors() is None
 
 
 class TestTableIntegrity:

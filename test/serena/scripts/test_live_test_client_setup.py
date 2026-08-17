@@ -78,6 +78,17 @@ class TestLifecycleVerdicts:
         assert "lacks expected parts: --context=fake" in result.detail
         assert calls[-1] == ("stub", "remove")
 
+    def test_a_token_that_only_prefixes_a_longer_token_does_not_verify(self, probe_module, tmp_path) -> None:
+        """Given a reformatted row whose token extends an expected one ('--context=fake-extra'
+        for expected '--context=fake'), the probe FAILs naming the missing part — substring
+        membership would have accepted the prefix as a match.
+        """
+        result, _ = _run_lifecycle(
+            probe_module, _probe(probe_module, tmp_path), after_add=(0, "serena  serena   start-mcp-server --context=fake-extra")
+        )
+        assert result.status == probe_module.Status.FAIL
+        assert "--context=fake" in result.detail
+
     def test_tokens_on_another_servers_row_do_not_verify_the_registration(self, probe_module, tmp_path) -> None:
         """Given the expected tokens appearing only on another server's row, when the
         lifecycle runs, then the serena registration is not reported as verified.

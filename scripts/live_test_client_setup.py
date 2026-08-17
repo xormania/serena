@@ -293,10 +293,12 @@ class ClientProbe:
                 self._notes.append(f"registration carries the expected command: {expected_command}")
             elif "start-mcp-server" in serena_row:
                 # the client echoes command text, but possibly reformatted (codex renders columns), so
-                # verify token by token within the serena row. Boundary: an executable swapped while the
-                # row keeps its ``serena`` name would still match; exact command-field parsing is the
-                # deep single-client instrument's job (live_test_grok.py).
-                missing_parts = [part for part in expected_command.split() if part not in serena_row]
+                # verify token by token within the serena row -- whole tokens, not substrings, or
+                # ``--context=x`` would be satisfied by a row carrying ``--context=x-extra``. Boundary:
+                # an executable swapped while the row keeps its ``serena`` name would still match; exact
+                # command-field parsing is the deep single-client instrument's job (live_test_grok.py).
+                row_tokens = set(serena_row.split())
+                missing_parts = [part for part in expected_command.split() if part not in row_tokens]
                 if missing_parts:
                     return self._result(
                         Status.FAIL, f"the registered command lacks expected parts: {', '.join(missing_parts)}", cli_version

@@ -55,6 +55,8 @@ class ToolchainRequirement:
     """the minimum PHP (major, minor) version, verified in addition to the presence of ``php``"""
     min_dotnet_runtime: int | None = None
     """the minimum .NET runtime major version, verified in addition to the presence of ``dotnet``"""
+    min_dotnet_sdk: int | None = None
+    """the minimum .NET SDK major version, verified in addition to the presence of ``dotnet``"""
     extra_check: Callable[[], str | None] | None = None
     """an additional predicate mirroring an availability guard in ``test/conftest.py``;
     returns a description of what is missing, or None when the requirement is met"""
@@ -85,6 +87,13 @@ class ToolchainRequirement:
                 problems.append(f"{wanted} (the installed runtimes could not be determined)")
             elif max(majors) < self.min_dotnet_runtime:
                 problems.append(f"{wanted} (found {max(majors)})")
+        if self.min_dotnet_sdk is not None and "dotnet" in self.commands and shutil.which("dotnet") is not None:
+            sdk_majors = _dotnet_sdk_majors()
+            wanted = f"dotnet SDK >= {self.min_dotnet_sdk}"
+            if sdk_majors is None:
+                problems.append(f"{wanted} (no installed SDK could be determined — a runtime alone cannot load projects)")
+            elif max(sdk_majors) < self.min_dotnet_sdk:
+                problems.append(f"{wanted} (found {max(sdk_majors)})")
         if self.extra_check is not None and not problems:
             extra_problem = self.extra_check()
             if extra_problem is not None:
@@ -130,6 +139,19 @@ def _dotnet_runtime_majors() -> set[int] | None:
     except (OSError, subprocess.TimeoutExpired):
         return None
     majors = {int(match.group(1)) for match in re.finditer(r"^Microsoft\.NETCore\.App (\d+)\.", result.stdout, re.MULTILINE)}
+    return majors or None
+
+
+def _dotnet_sdk_majors() -> set[int] | None:
+    """
+    :return: the major versions of the installed .NET SDKs, or None if they cannot be determined
+    """
+    try:
+        result = subprocess.run(["dotnet", "--list-sdks"], check=False, capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    # one SDK per line, e.g. '10.0.100 [/usr/lib/dotnet/sdk]'
+    majors = {int(match.group(1)) for match in re.finditer(r"^(\d+)\.", result.stdout, re.MULTILINE)}
     return majors or None
 
 
@@ -271,7 +293,11 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("clojure",), ("java", "clojure"), "JDK + a functional tools.deps Clojure CLI (probed)", extra_check=_clojure_cli_check
     ),
     ToolchainRequirement(
-        ("csharp",), ("dotnet",), ".NET SDK with a 10+ runtime (the Roslyn server ships as net10.0)", min_dotnet_runtime=10
+        ("csharp",),
+        ("dotnet",),
+        ".NET SDK 8+ and a 10+ runtime (the Roslyn server ships as net10.0; loading the SDK-style net8.0 test project needs an SDK)",
+        min_dotnet_runtime=10,
+        min_dotnet_sdk=8,
     ),
     ToolchainRequirement(
         ("fsharp",),
