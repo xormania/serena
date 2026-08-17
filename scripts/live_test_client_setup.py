@@ -381,7 +381,7 @@ def main() -> int:
     record_dir: Path | None = None
     if args.record is not None:
         record_dir = Path(args.record)
-        record_dir.mkdir(parents=True, exist_ok=True)
+        record_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
 
     # one private 0700 directory holds all config backups for this run
     backup_dir = Path(tempfile.mkdtemp(prefix="serena-client-probe-"))

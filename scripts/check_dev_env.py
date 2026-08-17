@@ -363,7 +363,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         extra_check=_perl_language_server_check,
     ),
     ToolchainRequirement(("lean4",), ("lean", "lake"), "Lean 4 via elan (lean runs the server; the test fixture is built with lake)"),
-    ToolchainRequirement(("nix",), ("nix", "nixd"), "Nix + nixd (CI skips Nix tests on Windows)"),
+    ToolchainRequirement(("nix",), ("nixd",), "nixd (the conftest guard probes nixd alone; CI skips Nix tests on Windows)"),
     ToolchainRequirement(
         ("ocaml",), ("opam",), "opam + ocaml-lsp-server resolved in the active switch (probed)", extra_check=_ocamllsp_check
     ),
