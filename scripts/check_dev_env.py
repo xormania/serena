@@ -179,9 +179,10 @@ def _hlsl_macos_bootstrap_check() -> str | None:
 
 
 def _matlab_installation_check() -> str | None:
-    # mirrors _is_matlab_available (test/conftest.py), plus a PATH launcher: MATLAB_PATH, a known
-    # install location, or matlab on the PATH
-    if os.environ.get("MATLAB_PATH") or shutil.which("matlab"):
+    # mirrors _is_matlab_available (test/conftest.py) verbatim: MATLAB_PATH or a known install
+    # location -- a bare PATH launcher is NOT accepted, because neither the guard nor the
+    # provider's _find_matlab_installation resolves one
+    if os.environ.get("MATLAB_PATH"):
         return None
     known_locations = (
         "/Applications/MATLAB_R2024b.app",
@@ -191,7 +192,7 @@ def _matlab_installation_check() -> str | None:
     )
     if any(Path(location).exists() for location in known_locations):
         return None
-    return "a locatable MATLAB installation (MATLAB_PATH, a standard install dir, or PATH)"
+    return "a locatable MATLAB installation (MATLAB_PATH or a standard install dir)"
 
 
 def _suite_always_disabled_check() -> str | None:
@@ -337,7 +338,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("matlab",),
         ("node",),
-        "MATLAB R2021b+ (discovered via MATLAB_PATH, a standard install dir, or the PATH) + Node.js for its language server",
+        "MATLAB R2021b+ (discovered via MATLAB_PATH or a standard install dir) + Node.js for its language server",
         extra_check=_matlab_installation_check,
     ),
     ToolchainRequirement(
