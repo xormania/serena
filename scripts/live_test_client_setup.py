@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Live breadth test for ``serena setup <client>`` against the MCP client CLIs actually installed on
 this machine — the breadth counterpart of ``live_test_grok.py``, which probes a single integration
