@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Generates a GraphML file of the memory reference structure for a given project."""
 
 import argparse

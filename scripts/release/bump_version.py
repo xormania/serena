@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""Bumps the project version (``--major``/``--minor``/``--patch``, or an explicit
+``--version X.Y.Z``), rewriting ``pyproject.toml`` and the package ``__version__``,
+stamping the CHANGELOG, and creating the git tag whose push starts the release workflow.
+The surrounding release process lives in README-dev.md; contributors never need this.
+"""
+
 from __future__ import annotations
 
 import logging
