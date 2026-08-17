@@ -46,7 +46,7 @@ KOTLIN_LSP_ALLOWED_HOSTS = ("download-cdn.jetbrains.com",)
 # Version pinning convention (see eclipse_jdtls.py for the full spec):
 #   INITIAL_* — frozen forever; legacy unversioned install dir is reserved for it.
 #   DEFAULT_* — bumped on upgrades; goes into a versioned subdir.
-# NOTE: After changing either pinned version, run scripts/update_downloaded_dependency_hashes.py.
+# NOTE: After changing either pinned version, run scripts/dev/update_downloaded_dependency_hashes.py.
 INITIAL_KOTLIN_LSP_VERSION = "261.13587.0"
 DEFAULT_KOTLIN_LSP_VERSION = "262.9593.0"
 

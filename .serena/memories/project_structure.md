@@ -12,7 +12,7 @@ Serena is an MCP-based "IDE for coding agents": semantic code retrieval/editing/
   - `resources/config/contexts/*.yml`, `resources/config/modes/*.yml` — context/mode definitions
   - `code_editor.py`, `symbol.py`, `ls_manager.py` — symbolic editing / LS lifecycle
   - `dashboard.py`, `gui_log_viewer.py` — web dashboard / log viewer
-  - `prompt_factory.py` + `generated/generated_prompt_factory.py` — prompts (regenerate with `scripts/gen_prompt_factory.py`)
+  - `prompt_factory.py` + `generated/generated_prompt_factory.py` — prompts (regenerate with `scripts/dev/gen_prompt_factory.py`)
 - `src/solidlsp/` — LSP client framework; per-language servers under `language_servers/`
 - `src/interprompt/` — prompt template library (synced from external repo; see `.syncCommitId.*`)
 - `test/serena/`, `test/solidlsp/<lang>/` — pytest suites; per-language tests gated by pytest markers

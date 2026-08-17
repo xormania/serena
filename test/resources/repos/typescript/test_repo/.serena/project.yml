@@ -4,7 +4,7 @@
 #
 # Below is the complete list of tools for convenience.
 # To make sure you have the latest list of tools, and to view their descriptions, 
-# execute `uv run scripts/print_tool_overview.py`.
+# execute `uv run scripts/dev/print_tool_overview.py`.
 #
 #  * `activate_project`: Activates a project by name.
 #  * `create_text_file`: Creates/overwrites a file in the project directory.

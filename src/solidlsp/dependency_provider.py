@@ -359,7 +359,7 @@ class DownloadedDependency:
                 if is_running_in_ci():
                     raise RuntimeError(
                         f"No SHA256 hash found for {self._url}. "
-                        "Please update the hash database by running 'scripts/update_downloaded_dependency_hashes.py'."
+                        "Please update the hash database by running 'scripts/dev/update_downloaded_dependency_hashes.py'."
                     )
                 log.warning("No SHA256 hash found for %s. The downloaded file will not be verified.", self._url)
         else:
