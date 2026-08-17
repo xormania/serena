@@ -43,6 +43,7 @@ Exit code: 1 if any probed client failed, 0 otherwise (skipped and undetected cl
 """
 
 import argparse
+import contextlib
 import json
 import os
 import re
@@ -52,6 +53,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import Enum
@@ -79,6 +81,28 @@ def _kill_process_tree(process: subprocess.Popen) -> None:
         process.kill()
 
 
+@contextlib.contextmanager
+def _uninterruptible_cleanup() -> Iterator[None]:
+    """
+    Holds SIGTERM/SIGHUP for the duration of a kill-and-reap sequence.
+
+    Making those signals unwind gave them a new place to land: arriving midway through the
+    cleanup, the SystemExit escapes into ``Popen.__exit__``, whose ``wait()`` has no timeout
+    and is being asked about a child that has just proved it hangs. Deferring delivery until
+    the child is dead keeps the cleanup that protects the rollback from being preempted by a
+    second unwind.
+    """
+    if not hasattr(signal, "pthread_sigmask"):
+        yield
+        return
+    blocked = {s for s in (getattr(signal, "SIGTERM", None), getattr(signal, "SIGHUP", None)) if s is not None}
+    previous = signal.pthread_sigmask(signal.SIG_BLOCK, blocked)
+    try:
+        yield
+    finally:
+        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
+
+
 def _drain(process: subprocess.Popen, timeout: int = 5) -> None:
     """
     :param process: an already-killed child whose pipes are being closed
@@ -103,6 +127,10 @@ def _install_unwinding_signal_handlers() -> None:
     runs: closing the terminal mid-probe would skip the rollback, leave the client
     registered and leave a credential-bearing backup in a temp directory the user was never
     told about. Raising ``SystemExit`` puts them on the same footing as Ctrl-C.
+
+    An inherited ``SIG_IGN`` is left alone: ``nohup``-style launchers ignore SIGHUP on
+    purpose so a detached run survives the terminal closing, and overriding that would abort
+    exactly the unattended runs this script documents.
     """
 
     def unwind(signum: int, _frame: object) -> None:
@@ -110,11 +138,14 @@ def _install_unwinding_signal_handlers() -> None:
 
     for name in ("SIGTERM", "SIGHUP"):
         signum = getattr(signal, name, None)
-        if signum is not None:
-            try:
-                signal.signal(signum, unwind)
-            except (OSError, ValueError):  # not the main thread, or unsupported here
-                pass
+        if signum is None:
+            continue
+        try:
+            if signal.getsignal(signum) is signal.SIG_IGN:
+                continue
+            signal.signal(signum, unwind)
+        except (OSError, ValueError):  # not the main thread, or unsupported here
+            pass
 
 
 """generous per-command cap; `mcp list` implementations may health-check the registered servers"""
@@ -237,16 +268,18 @@ class ClientProbe:
                     stdout, stderr = process.communicate(timeout=COMMAND_TIMEOUT_SECONDS)
                     executed = ExecutedCommand(argv, process.returncode, stdout, stderr)
                 except subprocess.TimeoutExpired:
-                    _kill_process_tree(process)
-                    _drain(process)
+                    with _uninterruptible_cleanup():
+                        _kill_process_tree(process)
+                        _drain(process)
                     executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
                 except BaseException:
                     # a Ctrl-C reaches this process but NOT the detached child (own session),
                     # and the Popen context manager would then wait on it without any timeout,
                     # keeping the emergency restore from ever running -- kill the tree, reap,
                     # and let the interrupt continue unwinding
-                    _kill_process_tree(process)
-                    _drain(process)
+                    with _uninterruptible_cleanup():
+                        _kill_process_tree(process)
+                        _drain(process)
                     raise
         except OSError as e:
             executed = ExecutedCommand(argv, -1, "", str(e))
@@ -357,13 +390,17 @@ class ClientProbe:
         # the resolved target recorded at backup time: replacing the config PATH would clobber
         # a symlinked dotfile with a regular file
         restore_path = self._config_restore_path or self.spec.user_config_path
-        if self._config_hardlinked:
+        if self._config_hardlinked and os.path.lexists(restore_path):
             # write THROUGH the inode: os.replace would install a new one and leave the
-            # hardlinked twin holding whatever the client wrote. Atomicity is traded for
-            # link preservation here, and the backup survives a failure mid-write
+            # hardlinked twin holding whatever the client wrote. Atomicity is traded for link
+            # preservation here -- but only that: the backup is READ BEFORE the truncate, so a
+            # missing or unreadable backup cannot leave both names empty. A config the client
+            # DELETED has no inode left to preserve, so that case falls through to the atomic
+            # path below, which can recreate it
+            payload = self._backup_path.read_bytes()
             fd = os.open(restore_path, os.O_WRONLY | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0))
             with os.fdopen(fd, "wb") as config_file:
-                config_file.write(self._backup_path.read_bytes())
+                config_file.write(payload)
             if self._config_mode is not None:
                 os.chmod(restore_path, self._config_mode)
             self._notes.append("the config is hardlinked; it was restored through its inode so the other name keeps the baseline")
@@ -591,13 +628,15 @@ def main() -> int:
     record_dir: Path | None = None
     if args.record is not None:
         record_dir = Path(args.record)
-        record_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
         # O_NOFOLLOW on the snapshot guards only the final component: a pre-existing record
         # directory that is itself a symlink (mkdir(exist_ok=True) accepts one) would
-        # redirect every write, and one owned by another user is theirs to swap at will
+        # redirect every write, and one owned by another user is theirs to swap at will.
+        # Checked BEFORE mkdir, which would otherwise raise FileExistsError on a dangling
+        # link and lose the explanation
         if record_dir.is_symlink():
             print(f"--record must not be a symlink: {record_dir}", file=sys.stderr)
             return 2
+        record_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
         if os.name == "posix" and record_dir.stat().st_uid != os.getuid():
             print(f"--record directory is owned by another user: {record_dir}", file=sys.stderr)
             return 2

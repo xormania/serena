@@ -273,6 +273,10 @@ def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches:
         return f"a supported architecture for {what} (no build exists for {machine})"
     if sys.platform == "win32" and is_arm64 and not windows_arm64:
         return f"a Windows arm64 build of {what} (none is published)"
+    # PlatformUtils keys musl Linux separately (linux-musl-*), and these upstreams publish
+    # nothing under those keys -- same libc test the provider uses
+    if sys.platform.startswith("linux") and platform.libc_ver()[0] != "glibc":
+        return f"a glibc Linux build of {what} (musl platforms have no published build)"
     return None
 
 

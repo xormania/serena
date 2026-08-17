@@ -7,7 +7,9 @@ involved. Faults planted into the filesystem are asserted to have landed before 
 behavior under test runs.
 """
 
+import contextlib
 import os
+import signal
 import stat
 import sys
 import time
@@ -509,6 +511,47 @@ class TestStatePreservation:
         assert not target.exists()
 
     @posix_only
+    def test_a_hardlinked_config_deleted_by_the_client_is_recreated(self, probe_module, tmp_path) -> None:
+        """Given a hardlinked config the client then DELETED, when the probe restores it,
+        then the file is back with the baseline bytes — writing through the inode is
+        impossible once the path is gone, and a restore that only knows that trick would
+        crash with a good backup in hand.
+        """
+        config_path = tmp_path / "config.json"
+        twin = tmp_path / "dotfiles-config.json"
+        original = b'{"hardlinked": true}'
+        config_path.write_bytes(original)
+        os.link(config_path, twin)
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        config_path.unlink()
+        assert not config_path.exists()  # the plant landed
+        probe._emergency_restore()
+        assert config_path.read_bytes() == original
+
+    @posix_only
+    def test_an_unreadable_backup_leaves_a_hardlinked_config_intact(self, probe_module, tmp_path) -> None:
+        """Given the backup has gone missing, when the hardlinked restore runs, then the
+        config and its twin still hold what they held — reading the backup only after
+        truncating would empty both names before discovering there was nothing to write.
+        """
+        config_path = tmp_path / "config.json"
+        twin = tmp_path / "dotfiles-config.json"
+        config_path.write_bytes(b'{"baseline": true}')
+        os.link(config_path, twin)
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        config_path.write_bytes(b'{"client-wrote": true}')
+        assert probe._backup_path is not None
+        probe._backup_path.unlink()  # the backup disappears before the restore
+        with pytest.raises(OSError):
+            probe._restore_config_bytes()
+        assert config_path.read_bytes() == b'{"client-wrote": true}'
+        assert twin.read_bytes() == b'{"client-wrote": true}'
+
+    @posix_only
     def test_a_hardlinked_config_is_restored_through_its_inode(self, probe_module, tmp_path) -> None:
         """Given the config is hardlinked into a dotfiles tree, when the probe restores it,
         then the twin name carries the baseline bytes too — an atomic replace would install a
@@ -674,9 +717,15 @@ class TestStatePreservation:
         """
         monkeypatch.setattr(probe_module, "COMMAND_TIMEOUT_SECONDS", 2)
         probe = _probe(probe_module, tmp_path)
+        pid_file = tmp_path / "escaped.pid"
         # setsid puts the grandchild outside the killed group; it inherits stdout/stderr
-        executed = probe._run(("sh", "-c", "setsid sleep 300 & sleep 300"))
+        executed = probe._run(("sh", "-c", f"setsid sh -c 'echo $$ > {pid_file}; sleep 300' & sleep 300"))
         assert executed.returncode == -1 and "timed out" in executed.stderr
+        # the escaped grandchild is this test's litter, not the probe's: clean it up rather
+        # than leaving it running for five minutes after the suite finishes
+        if pid_file.is_file():
+            with contextlib.suppress(ProcessLookupError, ValueError):
+                os.kill(int(pid_file.read_text().strip()), signal.SIGKILL)
 
     def test_sigterm_unwinds_instead_of_killing_the_process(self, probe_module) -> None:
         """Given the handlers this script installs, when SIGTERM arrives, then it raises
@@ -687,11 +736,22 @@ class TestStatePreservation:
         from collections.abc import Callable
         from typing import cast
 
-        probe_module._install_unwinding_signal_handlers()
-        installed = signal_module.getsignal(signal_module.SIGTERM)
-        assert callable(installed)  # not SIG_DFL/SIG_IGN, which would kill the process instead
-        with pytest.raises(SystemExit):
-            cast(Callable[[int, object], None], installed)(signal_module.SIGTERM, None)
+        previous = {s: signal_module.getsignal(s) for s in (signal_module.SIGTERM, signal_module.SIGHUP)}
+        try:
+            probe_module._install_unwinding_signal_handlers()
+            installed = signal_module.getsignal(signal_module.SIGTERM)
+            assert callable(installed)  # not SIG_DFL/SIG_IGN, which would kill the process instead
+            with pytest.raises(SystemExit):
+                cast(Callable[[int, object], None], installed)(signal_module.SIGTERM, None)
+
+            # an inherited SIG_IGN is deliberate (nohup): installing over it would abort the
+            # detached runs this script documents
+            signal_module.signal(signal_module.SIGHUP, signal_module.SIG_IGN)
+            probe_module._install_unwinding_signal_handlers()
+            assert signal_module.getsignal(signal_module.SIGHUP) is signal_module.SIG_IGN
+        finally:
+            for signum, handler in previous.items():
+                signal_module.signal(signum, handler)
 
     @posix_only
     def test_a_snapshot_never_writes_through_a_planted_symlink(self, probe_module, tmp_path) -> None:
