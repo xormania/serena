@@ -161,6 +161,11 @@ def _perl_language_server_check() -> str | None:
     return None if _probe_succeeds(["perl", "-MPerl::LanguageServer", "-e", "1"], timeout=30) else "the Perl::LanguageServer module"
 
 
+def _suite_always_disabled_check() -> str | None:
+    # test/conftest.py section 1: the suite is disabled everywhere, regardless of toolchains
+    return "a conftest re-enable (the suite is currently always-disabled as unreliable)"
+
+
 def _clojure_cli_check() -> str | None:
     # mirrors verify_clojure_cli (clojure_lsp.py): distro launchers without tools.deps fail -Spath
     if _probe_succeeds(["clojure", "-Spath"], timeout=120):
@@ -198,7 +203,11 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("groovy",), ("java",), "JDK + a Groovy language-server JAR named by GROOVY_LS_JAR_PATH", extra_check=_groovy_ls_jar_check
     ),
     ToolchainRequirement(
-        ("bsl",), ("java",), "JDK 21+ (bsl_language_server.py; suite currently always-disabled in test/conftest.py as flaky)", min_java=21
+        ("bsl",),
+        ("java",),
+        "JDK 21+ (bsl_language_server.py; suite currently always-disabled in test/conftest.py as flaky)",
+        min_java=21,
+        extra_check=_suite_always_disabled_check,
     ),
     ToolchainRequirement(("nextflow",), ("java",), "JDK 17+ (MIN_JDK_VERSION in nextflow_language_server.py)", min_java=17),
     ToolchainRequirement(
@@ -212,6 +221,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("dotnet",),
         ".NET SDK with an 8+ runtime (fsautocomplete; suite currently always-disabled in test/conftest.py as unreliable)",
         min_dotnet_runtime=8,
+        extra_check=_suite_always_disabled_check,
     ),
     # native batch
     ToolchainRequirement(("go",), ("go", "gopls"), "Go toolchain + gopls (go install golang.org/x/tools/gopls@latest)"),
@@ -270,7 +280,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "Perl + the Perl::LanguageServer module (probed; CI skips Perl tests on Windows)",
         extra_check=_perl_language_server_check,
     ),
-    ToolchainRequirement(("lean4",), ("lake",), "Lean 4 via elan (the test fixture is built with lake)"),
+    ToolchainRequirement(("lean4",), ("lean", "lake"), "Lean 4 via elan (lean runs the server; the test fixture is built with lake)"),
     ToolchainRequirement(("nix",), ("nix", "nixd"), "Nix + nixd (CI skips Nix tests on Windows)"),
     ToolchainRequirement(
         ("ocaml",), ("opam",), "opam + ocaml-lsp-server resolved in the active switch (probed)", extra_check=_ocamllsp_check
