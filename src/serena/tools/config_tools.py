@@ -12,6 +12,8 @@ class OpenDashboardTool(Tool, ToolMarkerOptional, ToolMarkerDoesNotRequireActive
     def apply(self) -> str:
         """
         Opens the Serena web dashboard in the default web browser.
+
+        :return: a message giving the dashboard's URL, and whether it could be opened for the user
         """
         if self.agent.open_dashboard():
             return f"Serena web dashboard has been opened in the user's default web browser: {self.agent.get_dashboard_url()}"
@@ -31,6 +33,7 @@ class ActivateProjectTool(Tool, ToolMarkerDoesNotRequireActiveProject):
         Activates the project with the given name or path.
 
         :param project: the name of a registered project to activate or a path to a project directory
+        :return: the activation message for the project, describing its configuration and available memories
         """
         is_new_activation = self.agent.activate_project_from_path_or_name(project)
         mark_used(is_new_activation)
@@ -49,6 +52,7 @@ class RemoveProjectTool(Tool, ToolMarkerDoesNotRequireActiveProject, ToolMarkerO
         Removes a project from the Serena configuration.
 
         :param project_name: Name of the project to remove
+        :return: a confirmation naming the project that was removed from the configuration
         """
         self.agent.serena_config.remove_project(project_name)
         return f"Successfully removed project '{project_name}' from configuration."
@@ -62,5 +66,7 @@ class GetCurrentConfigTool(Tool):
     def apply(self) -> str:
         """
         Print the current configuration of the agent, including the active and available projects, tools, contexts, and modes.
+
+        :return: an overview of the active project, modes, context and enabled tools
         """
         return self.agent.get_current_config_overview()

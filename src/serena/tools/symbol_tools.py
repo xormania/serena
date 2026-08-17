@@ -28,6 +28,8 @@ class RestartLanguageServerTool(Tool, ToolMarkerOptional):
     def apply(self) -> str:
         """Use this tool only on explicit user request or after confirmation.
         It may be necessary to restart the language server if it hangs.
+
+        :return: "OK" once the language server has been restarted
         """
         self.agent.reset_language_server_manager()
         return SUCCESS_RESULT
@@ -421,6 +423,7 @@ class FindDeclarationTool(Tool, ToolMarkerSymbolicRead):
         :param containing_symbol_name_path: optional name path of a containing symbol whose body shall be searched instead of the full file.
         :param include_body: whether to include the symbol's body in the result. Default False.
         :param include_info: whether to include additional info (hover-like). Default False.
+        :return: a JSON object describing the declaration, including its body and location when requested
         """
         self.project.ls_sync_file_system_changes()
 
@@ -604,6 +607,8 @@ class ReplaceSymbolBodyTool(EditingToolWithDiagnostics):
         :param body: the new symbol body. The symbol body is the definition of a symbol
             in the programming language, including e.g. the signature line for functions.
             Depending on the language, it may or may not include a preceding docstring or other preceding annotations.
+
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         with self.DiagnosticsContext(self, relative_path) as diagnostics_context:
             code_editor = self.create_code_editor()
@@ -634,6 +639,8 @@ class InsertAfterSymbolTool(EditingToolWithDiagnostics):
         :param relative_path: the relative path to the file containing the symbol
         :param body: the body/content to be inserted. The inserted code shall begin with the next line after
             the symbol.
+
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         with self.DiagnosticsContext(self, relative_path) as diagnostics_context:
             code_editor = self.create_code_editor()
@@ -660,6 +667,7 @@ class InsertBeforeSymbolTool(EditingToolWithDiagnostics):
         :param name_path: name path of the symbol before which to insert content
         :param relative_path: the relative path to the file containing the symbol
         :param body: the body/content to be inserted before the line in which the referenced symbol is defined
+        :return: "OK", or a JSON object carrying that result together with any diagnostics the edit introduced
         """
         with self.DiagnosticsContext(self, relative_path) as diagnostics_context:
             code_editor = self.create_code_editor()
@@ -707,6 +715,7 @@ class SafeDeleteSymbol(Tool, ToolMarkerSymbolicEdit):
 
         :param name_path_pattern: name path of the symbol to delete
         :param relative_path: the relative path to the file containing the symbol to delete
+        :return: "OK" if the symbol was deleted, otherwise a message naming the files that still reference it
         """
         self.project.ls_sync_file_system_changes()
 
