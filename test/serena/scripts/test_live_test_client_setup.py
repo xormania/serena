@@ -273,6 +273,28 @@ class TestStatePreservation:
         assert config_path.read_bytes() == original
         assert stat.S_IMODE(config_path.stat().st_mode) == 0o644
 
+    @posix_only
+    def test_a_symlinked_config_keeps_its_link_and_target_after_restore(self, probe_module, tmp_path) -> None:
+        """Given a config managed as a symlink into a dotfiles tree, when emergency restore
+        rewrites it, then the link is still a link, its target carries the pre-probe bytes,
+        and no regular file has replaced the link — the restore writes through to the
+        resolved target.
+        """
+        dotfiles = tmp_path / "dotfiles"
+        dotfiles.mkdir()
+        target = dotfiles / "config.json"
+        original = b'{"linked": true}'
+        target.write_bytes(original)
+        link = tmp_path / "config.json"
+        link.symlink_to(target)
+        probe = _probe(probe_module, tmp_path, link)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        target.write_bytes(b'{"mutated": true}')  # the client wrote through the link
+        probe._emergency_restore()
+        assert link.is_symlink()
+        assert target.read_bytes() == original
+
     def test_a_config_rewritten_during_the_lifecycle_is_restored_with_disclosure(self, probe_module, tmp_path) -> None:
         """Given a clean lifecycle during which the config's bytes changed (a client rewrite
         and a concurrent edit by another process are indistinguishable on opaque bytes), when

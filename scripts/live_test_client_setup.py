@@ -154,6 +154,7 @@ class ClientProbe:
         self._backup_path: Path | None = None
         self._config_existed = False
         self._config_mode: int | None = None
+        self._config_restore_path: Path | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
         # execute, record in the transcript, and echo for the live reader. On POSIX the child
@@ -223,6 +224,9 @@ class ClientProbe:
             self._notes.append(f"{config_path} did not exist before the probe")
             return
         self._config_mode = stat.S_IMODE(config_path.stat().st_mode)
+        # restores must write through a symlinked config (dotfile trees), never replace the
+        # link itself with a regular file -- so the restore target is resolved NOW
+        self._config_restore_path = config_path.resolve()
         self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
         self._backup_path.write_bytes(config_path.read_bytes())
         self._backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
@@ -241,14 +245,16 @@ class ClientProbe:
         # the temp file BEFORE it atomically replaces the config, so no wider-than-intended
         # window ever exists and an interruption leaves only a 0600 temp file behind.
         assert self._backup_path is not None and self.spec.user_config_path is not None
-        config_path = self.spec.user_config_path
-        fd, temp_name = tempfile.mkstemp(dir=str(config_path.parent), prefix=f".{config_path.name}.")
+        # the resolved target recorded at backup time: replacing the config PATH would clobber
+        # a symlinked dotfile with a regular file
+        restore_path = self._config_restore_path or self.spec.user_config_path
+        fd, temp_name = tempfile.mkstemp(dir=str(restore_path.parent), prefix=f".{restore_path.name}.")
         try:
             with os.fdopen(fd, "wb") as temp_file:
                 temp_file.write(self._backup_path.read_bytes())
             if self._config_mode is not None:
                 os.chmod(temp_name, self._config_mode)
-            os.replace(temp_name, config_path)
+            os.replace(temp_name, restore_path)
         except BaseException:
             try:
                 os.unlink(temp_name)

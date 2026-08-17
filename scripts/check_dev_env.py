@@ -101,12 +101,13 @@ class ToolchainRequirement:
         return problems
 
 
-def _java_major_version() -> int | None:
+def _java_major_version(java_executable: str = "java") -> int | None:
     """
-    :return: the major version of the ``java`` executable on the PATH, or None if it cannot be determined
+    :param java_executable: the java executable to interrogate (a PATH name or a full path)
+    :return: the major version of that executable, or None if it cannot be determined
     """
     try:
-        result = subprocess.run(["java", "-version"], check=False, capture_output=True, text=True, timeout=60)
+        result = subprocess.run([java_executable, "-version"], check=False, capture_output=True, text=True, timeout=60)
     except (OSError, subprocess.TimeoutExpired):
         return None
     # `java -version` prints to stderr, e.g. 'openjdk version "21.0.2"' or 'java version "1.8.0_402"'
@@ -239,6 +240,25 @@ def _clojure_cli_check() -> str | None:
     return "a functional tools.deps Clojure CLI (clojure -Spath failed)"
 
 
+def _nextflow_java_check() -> str | None:
+    # mirrors NextflowLanguageServer._resolve_java: $JAVA_HOME/bin/java is consulted before
+    # the PATH, and the FIRST existing candidate is the one whose version must satisfy 17+
+    java_exe_name = "java.exe" if os.name == "nt" else "java"
+    java_home = os.environ.get("JAVA_HOME")
+    if java_home and Path(java_home, "bin", java_exe_name).is_file():
+        chosen = str(Path(java_home, "bin", java_exe_name))
+    else:
+        chosen = shutil.which("java")
+    if chosen is None:
+        return "a JDK 17+ (via JAVA_HOME/bin/java or the PATH)"
+    major = _java_major_version(chosen)
+    if major is None:
+        return "a JDK 17+ (the resolved java's version could not be determined)"
+    if major < 17:
+        return f"java >= 17 for nextflow (found {major} via the server's resolution order)"
+    return None
+
+
 def _groovy_ls_jar_check() -> str | None:
     # the groovy suite skips unless GROOVY_LS_JAR_PATH names an existing JAR (test/solidlsp/groovy)
     jar_path = os.environ.get("GROOVY_LS_JAR_PATH")
@@ -290,7 +310,12 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         min_java=21,
         extra_check=_suite_always_disabled_check,
     ),
-    ToolchainRequirement(("nextflow",), ("java",), "JDK 17+ (MIN_JDK_VERSION in nextflow_language_server.py)", min_java=17),
+    ToolchainRequirement(
+        ("nextflow",),
+        (),
+        "JDK 17+ resolved the way the server resolves it: JAVA_HOME/bin/java, then the PATH",
+        extra_check=_nextflow_java_check,
+    ),
     ToolchainRequirement(
         ("clojure",), ("java", "clojure"), "JDK + a functional tools.deps Clojure CLI (probed)", extra_check=_clojure_cli_check
     ),

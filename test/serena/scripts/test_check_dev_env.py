@@ -5,6 +5,7 @@ Each scenario states a machine condition (Given), evaluates a requirement or ver
 real toolchain is consulted: PATH lookups and version probes are replaced per scenario.
 """
 
+import os
 import subprocess
 
 import pytest
@@ -71,6 +72,23 @@ class TestRequirementVerdicts:
         assert requirement.unsatisfied() == []
         monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {8})
         assert requirement.unsatisfied() == ["dotnet runtime >= 10 (found 8)"]
+
+    def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
+        """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow
+        check accepts it — the server consults $JAVA_HOME/bin/java first; given only a
+        too-old PATH java, the verdict names the resolved major.
+        """
+        java_bin = tmp_path / "jdk" / "bin"
+        java_bin.mkdir(parents=True)
+        (java_bin / ("java.exe" if os.name == "nt" else "java")).write_text("#!/bin/sh\n")
+        monkeypatch.setenv("JAVA_HOME", str(tmp_path / "jdk"))
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda exe="java": 17)
+        assert doctor._nextflow_java_check() is None
+        monkeypatch.delenv("JAVA_HOME")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda exe="java": 11)
+        assert doctor._nextflow_java_check() == "java >= 17 for nextflow (found 11 via the server's resolution order)"
 
     def test_a_runtime_only_dotnet_does_not_satisfy_an_sdk_minimum(self, doctor, monkeypatch) -> None:
         """Given a machine with a satisfying runtime but no SDK, the verdict names the
