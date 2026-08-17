@@ -246,9 +246,18 @@ class ClientProbe:
         if config_path is None:
             self._notes.append("no known user-config path for this client; baseline is verified via the registration list only")
             return
+        # a DANGLING symlink is not a file, but it is still the user's link: record its shape
+        # first, so cleanup removes what setup created through it and never the link itself
+        self._config_was_symlink = config_path.is_symlink()
+        if self._config_was_symlink:
+            self._config_link_target = os.readlink(config_path)
         self._config_existed = config_path.is_file()
         if not self._config_existed:
-            self._notes.append(f"{config_path} did not exist before the probe")
+            self._notes.append(
+                f"{config_path} was a dangling symlink before the probe"
+                if self._config_was_symlink
+                else f"{config_path} did not exist before the probe"
+            )
             return
         self._config_mode = stat.S_IMODE(config_path.stat().st_mode)
         # restores must write through a symlinked config (dotfile trees), never replace the
@@ -256,17 +265,25 @@ class ClientProbe:
         # link's shape and literal target are recorded so a client that atomically replaces
         # the link with a regular file can be undone too
         self._config_restore_path = config_path.resolve()
-        self._config_was_symlink = config_path.is_symlink()
-        if self._config_was_symlink:
-            self._config_link_target = os.readlink(config_path)
         self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
         self._backup_path.write_bytes(config_path.read_bytes())
         self._backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
 
     def _remove_config_created_by_probe(self) -> None:
-        # delete a config file that the probe's setup call created (the baseline had none)
+        # delete what the probe's setup call created (the baseline had no config file)
         config_path = self.spec.user_config_path
-        if config_path is not None and not self._config_existed and config_path.is_file():
+        if config_path is None or self._config_existed:
+            return
+        if self._config_was_symlink:
+            # the baseline was a DANGLING link: setup wrote through it and created the
+            # target. Remove that target and leave the link exactly as it was found --
+            # unlinking the path here would destroy the user's link instead
+            target = config_path.resolve()
+            if target.is_file():
+                target.unlink()
+                self._notes.append(f"removed {target}, created through the pre-existing symlink at {config_path}")
+            return
+        if config_path.is_file():
             config_path.unlink()
             self._notes.append(f"removed {config_path}, which the probe had created")
 
@@ -431,12 +448,15 @@ class ClientProbe:
                         Status.FAIL, "the registration set differs from the baseline — another server's entry changed", cli_version
                     )
                 self._notes.append("registration set matches the baseline")
+            # the baseline must be restored and CONFIRMED before the rollback is disarmed:
+            # a client reserialization plus an interrupt in between would otherwise leave the
+            # rewritten bytes in place with the finally already skipping the restore
+            self._verify_config_baseline()
             mutated = False
         finally:
             if mutated:
                 self._emergency_restore()
 
-        self._verify_config_baseline()
         return self._result(Status.PASS, "add/verify/remove lifecycle completed; baseline confirmed", cli_version)
 
 

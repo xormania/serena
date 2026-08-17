@@ -350,6 +350,68 @@ class TestStatePreservation:
         assert target.read_bytes() == original
         assert any("link was recreated" in note for note in result.notes)
 
+    @posix_only
+    def test_a_dangling_config_symlink_survives_and_its_created_target_is_removed(self, probe_module, tmp_path) -> None:
+        """Given the config path is a dangling symlink, when setup writes through it and the
+        probe cleans up, then the link is still there pointing where it did, and only the
+        target the probe created is removed — treating the path as nonexistent would unlink
+        the user's link and leave the created file behind.
+        """
+        dotfiles = tmp_path / "dotfiles"
+        dotfiles.mkdir()
+        target = dotfiles / "config.json"  # deliberately absent: the link dangles
+        link = tmp_path / "config.json"
+        link.symlink_to(target)
+        probe = _probe(probe_module, tmp_path, link)
+        calls = {"lists": 0}
+
+        def creating_run(argv):
+            if "setup" in argv:
+                target.write_text('{"created": true}')  # written THROUGH the dangling link
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = creating_run
+        result = probe.run()
+        assert result.status == probe_module.Status.PASS
+        assert link.is_symlink()
+        assert os.readlink(link) == str(target)
+        assert not target.exists()
+
+    def test_an_interrupt_before_the_baseline_is_confirmed_still_restores(self, probe_module, tmp_path) -> None:
+        """Given the client reserialized the config and an interrupt arrives while the
+        baseline is being verified, when the probe unwinds, then emergency restore still
+        runs — the rollback must stay armed until the baseline is confirmed, not be cleared
+        on the strength of the registration checks alone.
+        """
+        config_path = tmp_path / "config.json"
+        original = b'{"clean": true}'
+        config_path.write_bytes(original)
+        probe = _probe(probe_module, tmp_path, config_path)
+        calls = {"lists": 0}
+
+        def rewriting_run(argv):
+            if "setup" in argv:
+                config_path.write_bytes(b'{"client-reserialized": true}')
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = rewriting_run
+        real_verify = probe._verify_config_baseline
+
+        def interrupted_verify():
+            raise KeyboardInterrupt
+
+        probe._verify_config_baseline = interrupted_verify
+        with pytest.raises(KeyboardInterrupt):
+            probe.run()
+        assert real_verify is not None
+        assert config_path.read_bytes() == original
+
     def test_a_config_rewritten_during_the_lifecycle_is_restored_with_disclosure(self, probe_module, tmp_path) -> None:
         """Given a clean lifecycle during which the config's bytes changed (a client rewrite
         and a concurrent edit by another process are indistinguishable on opaque bytes), when
