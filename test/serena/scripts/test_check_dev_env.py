@@ -73,6 +73,22 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {8})
         assert requirement.unsatisfied() == ["dotnet runtime >= 10 (found 8)"]
 
+    def test_platform_matrix_checks_reject_hosts_without_a_managed_strategy(self, doctor, monkeypatch) -> None:
+        """Given a linux-arm64 host with neither toolchain on the PATH, both matrix-modelled
+        rows name what is missing — dart's managed SDK and hlsl's prebuilt server cover
+        linux only on x86_64; given linux-x86_64, both are satisfied with nothing installed.
+        """
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "aarch64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._dart_managed_sdk_check() == "the Dart SDK on the PATH (no managed SDK download exists for this platform)"
+        assert doctor._hlsl_server_availability_check() == (
+            "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
+        )
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert doctor._dart_managed_sdk_check() is None
+        assert doctor._hlsl_server_availability_check() is None
+
     def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
         """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow
         check accepts it — the server consults $JAVA_HOME/bin/java first; given only a

@@ -24,6 +24,7 @@ never fail the check; they only shrink the set of runnable markers.
 
 import argparse
 import os
+import platform
 import re
 import shutil
 import subprocess
@@ -194,11 +195,32 @@ def _macos_only_check() -> str | None:
     return None if sys.platform == "darwin" else "macOS (the swift suite is enabled only there)"
 
 
-def _hlsl_macos_bootstrap_check() -> str | None:
-    # Linux/Windows download a prebuilt shader-language-server; macOS builds it via cargo install
-    if sys.platform != "darwin" or shutil.which("shader-language-server") or shutil.which("cargo"):
+def _hlsl_server_availability_check() -> str | None:
+    # mirrors the provider's dependency matrix: prebuilt binaries exist for win-x64,
+    # win-arm64 and linux-x64; macOS builds from source via cargo; any other platform
+    # (e.g. linux-arm64) has no managed strategy and needs a system server
+    if shutil.which("shader-language-server"):
         return None
-    return "an existing shader-language-server, or cargo to build it (macOS has no prebuilt binary)"
+    machine = platform.machine().lower()
+    if sys.platform == "darwin":
+        return None if shutil.which("cargo") else "an existing shader-language-server, or cargo to build it (macOS has no prebuilt binary)"
+    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64"):
+        return None
+    if sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64"):
+        return None
+    return "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
+
+
+def _dart_managed_sdk_check() -> str | None:
+    # mirrors DartLanguageServer's managed-SDK matrix (linux-x64, win-x64/arm64,
+    # osx-x64/arm64): on those platforms Serena downloads its pinned SDK and no PATH dart
+    # is needed; elsewhere (e.g. linux-arm64) the PATH dart is the only path
+    machine = platform.machine().lower()
+    if sys.platform == "darwin" or (sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64")):
+        return None
+    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64"):
+        return None
+    return None if shutil.which("dart") else "the Dart SDK on the PATH (no managed SDK download exists for this platform)"
 
 
 def _matlab_installation_check() -> str | None:
@@ -367,7 +389,12 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "Erlang/OTP + rebar3 (the fixture compiles with it) + erlang_ls; the suite is disabled on native Windows",
         extra_check=_windows_disabled_check,
     ),
-    ToolchainRequirement(("dart",), ("dart",), "Dart SDK"),
+    ToolchainRequirement(
+        ("dart",),
+        (),
+        "Dart (Serena downloads its pinned SDK on win/mac x64+arm64 and linux x64; elsewhere dart must be on the PATH)",
+        extra_check=_dart_managed_sdk_check,
+    ),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
     ToolchainRequirement(
         ("haxe",), ("haxe", "node"), "Haxe + Node.js (the downloaded haxe server is server.js, run via node; neko is never invoked)"
@@ -397,8 +424,8 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("hlsl",),
         (),
-        "shader-language-server (downloaded on Linux/Windows; macOS builds it via cargo)",
-        extra_check=_hlsl_macos_bootstrap_check,
+        "shader-language-server (prebuilt for win x64/arm64 + linux x64; macOS builds via cargo; other platforms need a system binary)",
+        extra_check=_hlsl_server_availability_check,
     ),
     ToolchainRequirement(
         ("wolfram",),
