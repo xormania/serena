@@ -4,8 +4,8 @@ Reports whether this machine is ready for Serena development: core environment c
 ``serena`` executable and this checkout, and which per-language pytest markers can run
 locally, given the toolchains that are present.
 
-The toolchain requirements mirror the install steps in ``.github/workflows/pytest.yml``,
-which remains canonical when in doubt. Language servers themselves are not checked here:
+The toolchain requirements mirror the install steps in ``.github/workflows/pytest.yml`` and
+the availability guards in ``test/conftest.py``, which remain canonical when in doubt. Language servers themselves are not checked here:
 Serena downloads most of them on first use. What is checked are the toolchains those
 servers and the test fixtures need (compilers, runtimes, package managers).
 
@@ -29,6 +29,7 @@ import shutil
 import subprocess
 import sys
 import tomllib
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -54,6 +55,9 @@ class ToolchainRequirement:
     """the minimum PHP (major, minor) version, verified in addition to the presence of ``php``"""
     min_dotnet_runtime: int | None = None
     """the minimum .NET runtime major version, verified in addition to the presence of ``dotnet``"""
+    extra_check: Callable[[], str | None] | None = None
+    """an additional predicate mirroring an availability guard in ``test/conftest.py``;
+    returns a description of what is missing, or None when the requirement is met"""
 
     def unsatisfied(self) -> list[str]:
         """
@@ -81,6 +85,10 @@ class ToolchainRequirement:
                 problems.append(f"{wanted} (the installed runtimes could not be determined)")
             elif max(majors) < self.min_dotnet_runtime:
                 problems.append(f"{wanted} (found {max(majors)})")
+        if self.extra_check is not None and not problems:
+            extra_problem = self.extra_check()
+            if extra_problem is not None:
+                problems.append(extra_problem)
         return problems
 
 
@@ -125,24 +133,84 @@ def _dotnet_runtime_majors() -> set[int] | None:
     return majors or None
 
 
+def _probe_succeeds(argv: list[str], timeout: int = 60) -> bool:
+    """
+    :param argv: the command to run
+    :param timeout: seconds before the probe is abandoned
+    :return: whether the command ran and exited 0
+    """
+    try:
+        return subprocess.run(argv, capture_output=True, timeout=timeout, check=False).returncode == 0
+    except (OSError, subprocess.SubprocessError):
+        return False
+
+
+def _r_languageserver_check() -> str | None:
+    # mirrors test/conftest.py's _is_r_language_server_available: the R binary alone is not enough
+    probe = ["R", "--vanilla", "-e", 'quit(status = as.integer(!requireNamespace("languageserver", quietly = TRUE)))']
+    return None if _probe_succeeds(probe) else "the R package 'languageserver'"
+
+
+def _ocamllsp_check() -> str | None:
+    # mirrors test/conftest.py's _is_ocaml_lsp_available: ocamllsp must resolve in the active opam switch
+    return None if _probe_succeeds(["opam", "exec", "--", "ocamllsp", "--version"]) else "ocamllsp in the active opam switch"
+
+
+def _perl_language_server_check() -> str | None:
+    # mirrors test/conftest.py's _is_perl_language_server_available: perl ships with most systems, the module is the signal
+    return None if _probe_succeeds(["perl", "-MPerl::LanguageServer", "-e", "1"], timeout=30) else "the Perl::LanguageServer module"
+
+
+def _groovy_ls_jar_check() -> str | None:
+    # the groovy suite skips unless GROOVY_LS_JAR_PATH names an existing JAR (test/solidlsp/groovy)
+    jar_path = os.environ.get("GROOVY_LS_JAR_PATH")
+    if jar_path and Path(jar_path).is_file():
+        return None
+    return "GROOVY_LS_JAR_PATH naming an existing Groovy language-server JAR"
+
+
+def _wolfram_kernel_check() -> str | None:
+    # mirrors the kernel discovery the server and test/conftest.py use; falls back to a PATH
+    # lookup when solidlsp is not importable, since this script is otherwise stdlib-only
+    try:
+        from solidlsp.language_servers.wolfram_language_server import _find_wolfram_kernel
+    except ImportError:
+        return None if shutil.which("WolframKernel") is not None else "a WolframKernel (wolframscript alone is not enough)"
+    try:
+        _find_wolfram_kernel()
+    except FileNotFoundError:
+        return "a WolframKernel (wolframscript alone is not enough)"
+    return None
+
+
 TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     # jvm batch (see MARKERS_JVM in .github/workflows/pytest.yml)
     ToolchainRequirement(("java",), ("java",), "JDK 21+ (JDTLS_MIN_JDK_VERSION in eclipse_jdtls.py)", min_java=21),
-    ToolchainRequirement(("kotlin", "scala", "groovy"), ("java",), "JDK (no declared minimum; CI uses 21)"),
-    ToolchainRequirement(("bsl",), ("java",), "JDK 21+ (BSL_LS_MIN_JAVA_VERSION in bsl_language_server.py)", min_java=21),
+    ToolchainRequirement(("kotlin", "scala"), ("java",), "JDK (no declared minimum; CI uses 21)"),
+    ToolchainRequirement(
+        ("groovy",), ("java",), "JDK + a Groovy language-server JAR named by GROOVY_LS_JAR_PATH", extra_check=_groovy_ls_jar_check
+    ),
+    ToolchainRequirement(
+        ("bsl",), ("java",), "JDK 21+ (bsl_language_server.py; suite currently always-disabled in test/conftest.py as flaky)", min_java=21
+    ),
     ToolchainRequirement(("nextflow",), ("java",), "JDK 17+ (MIN_JDK_VERSION in nextflow_language_server.py)", min_java=17),
     ToolchainRequirement(("clojure",), ("java", "clojure"), "JDK + Clojure CLI"),
     ToolchainRequirement(
         ("csharp",), ("dotnet",), ".NET SDK with a 10+ runtime (the Roslyn server ships as net10.0)", min_dotnet_runtime=10
     ),
-    ToolchainRequirement(("fsharp",), ("dotnet",), ".NET SDK with an 8+ runtime (fsautocomplete)", min_dotnet_runtime=8),
+    ToolchainRequirement(
+        ("fsharp",),
+        ("dotnet",),
+        ".NET SDK with an 8+ runtime (fsautocomplete; suite currently always-disabled in test/conftest.py as unreliable)",
+        min_dotnet_runtime=8,
+    ),
     # native batch
     ToolchainRequirement(("go",), ("go", "gopls"), "Go toolchain + gopls (go install golang.org/x/tools/gopls@latest)"),
     ToolchainRequirement(
         ("rust",), ("cargo", "rustup|rust-analyzer"), "Rust toolchain + rust-analyzer (resolved via rustup, or standalone on the PATH)"
     ),
     ToolchainRequirement(("zig",), ("zig", "zls"), "Zig + ZLS"),
-    ToolchainRequirement(("cpp",), ("ccls",), "ccls"),
+    ToolchainRequirement(("cpp",), ("clangd|ccls",), "clangd (the default C/C++ server) or ccls (the alternative)"),
     ToolchainRequirement(("pascal",), ("fpc",), "Free Pascal (fpc + fpc-source)"),
     ToolchainRequirement(("swift",), ("swift",), "Swift, which bundles sourcekit-lsp (CI runs Swift tests on macOS only)"),
     # other-langs batch
@@ -151,13 +219,17 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("lua",), ("lua-language-server",), "lua-language-server"),
     ToolchainRequirement(("powershell",), ("pwsh",), "PowerShell 7 (preinstalled on CI runners)"),
     ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
-    ToolchainRequirement(("erlang",), ("erl",), "Erlang/OTP"),
+    ToolchainRequirement(("erlang",), ("erl", "rebar3"), "Erlang/OTP + rebar3 (the test fixture compiles with rebar3)"),
     ToolchainRequirement(("dart",), ("dart",), "Dart SDK"),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
     ToolchainRequirement(
         ("haxe",), ("haxe", "neko", "node"), "Haxe + Neko + Node.js (the downloaded haxe server is server.js, run via node)"
     ),
-    ToolchainRequirement(("haskell",), ("ghc", "cabal"), "GHC + cabal for HLS (CI runs Haskell tests on Linux only)"),
+    ToolchainRequirement(
+        ("haskell",),
+        ("ghc", "cabal", "haskell-language-server-wrapper"),
+        "GHC + cabal + the HLS wrapper (CI runs Haskell tests on Linux only)",
+    ),
     ToolchainRequirement(("terraform",), ("terraform",), "Terraform CLI"),
     ToolchainRequirement(("rego",), ("regal",), "Regal"),
     ToolchainRequirement(("ansible",), ("ansible", "ansible-lint", "node"), "ansible-core + ansible-lint + Node.js"),
@@ -165,15 +237,27 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("systemverilog",), ("verible-verilog-ls",), "Verible"),
     ToolchainRequirement(("qml",), ("qmlls6|qmlls",), "Qt qmlls, qmlls6 preferred (CI runs QML tests on Linux only)"),
     ToolchainRequirement(("matlab",), ("matlab", "node"), "MATLAB R2021b+ + Node.js (the MATLAB language server runs via node)"),
-    ToolchainRequirement(("wolfram",), ("wolframscript",), "Mathematica 13.0+ or Wolfram Engine 12.1+"),
+    ToolchainRequirement(
+        ("wolfram",),
+        (),
+        "Mathematica 13.0+ or Wolfram Engine 12.1+ (kernel discovery, not wolframscript)",
+        extra_check=_wolfram_kernel_check,
+    ),
     ToolchainRequirement(("crystal",), ("crystalline",), "Crystalline (not auto-installed by Serena; crystal tests skip without it)"),
     # niche batch
     ToolchainRequirement(("julia",), ("julia",), "Julia (plus the LanguageServer.jl package)"),
-    ToolchainRequirement(("r",), ("R", "Rscript"), "R (plus the languageserver package)"),
-    ToolchainRequirement(("perl",), ("perl", "cpanm"), "Perl + cpanminus (Perl::LanguageServer; CI skips Perl tests on Windows)"),
+    ToolchainRequirement(("r",), ("R", "Rscript"), "R + the languageserver package (probed)", extra_check=_r_languageserver_check),
+    ToolchainRequirement(
+        ("perl",),
+        ("perl",),
+        "Perl + the Perl::LanguageServer module (probed; CI skips Perl tests on Windows)",
+        extra_check=_perl_language_server_check,
+    ),
     ToolchainRequirement(("lean4",), ("lake",), "Lean 4 via elan (the test fixture is built with lake)"),
     ToolchainRequirement(("nix",), ("nix", "nixd"), "Nix + nixd (CI skips Nix tests on Windows)"),
-    ToolchainRequirement(("ocaml",), ("opam", "ocamllsp"), "opam + ocaml-lsp-server"),
+    ToolchainRequirement(
+        ("ocaml",), ("opam",), "opam + ocaml-lsp-server resolved in the active switch (probed)", extra_check=_ocamllsp_check
+    ),
     # catch-all batch: npm-distributed language servers need a Node.js runtime
     ToolchainRequirement(
         ("typescript", "vue", "angular", "svelte", "yaml", "json", "html", "scss", "bash", "solidity"),

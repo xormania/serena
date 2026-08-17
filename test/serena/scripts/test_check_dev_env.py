@@ -81,6 +81,24 @@ class TestRequirementVerdicts:
         requirement = doctor.ToolchainRequirement(("java",), ("java",), "note", min_java=21)
         assert requirement.unsatisfied() == ["java >= 21 (the installed version could not be determined)"]
 
+    def test_a_failing_availability_predicate_is_named_in_the_verdict(self, doctor, monkeypatch) -> None:
+        """Given a requirement whose conftest-mirroring predicate reports something missing,
+        when the requirement is evaluated, then the verdict carries that description.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"R": "/usr/bin/R"}))
+        requirement = doctor.ToolchainRequirement(("r",), ("R",), "note", extra_check=lambda: "the R package 'languageserver'")
+        assert requirement.unsatisfied() == ["the R package 'languageserver'"]
+
+    def test_the_availability_predicate_is_skipped_while_commands_are_already_missing(self, doctor, monkeypatch) -> None:
+        """Given a requirement whose executable is absent, when it is evaluated, then the
+        verdict names the executable and the (possibly expensive) predicate never runs.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        ran = []
+        requirement = doctor.ToolchainRequirement(("r",), ("R",), "note", extra_check=lambda: ran.append(1) or "unreachable")
+        assert requirement.unsatisfied() == ["R"]
+        assert ran == []
+
 
 class TestVersionProbes:
     """The version probes read the output shapes real tools print."""
