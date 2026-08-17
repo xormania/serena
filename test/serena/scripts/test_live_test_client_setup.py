@@ -7,6 +7,7 @@ involved. Faults planted into the filesystem are asserted to have landed before 
 behavior under test runs.
 """
 
+import os
 import stat
 import sys
 from pathlib import Path
@@ -232,3 +233,18 @@ class TestStatePreservation:
         probe._emergency_restore()
         assert config_path.read_bytes() == original
         assert stat.S_IMODE(config_path.stat().st_mode) == 0o600
+
+    @posix_only
+    def test_a_recorded_snapshot_is_owner_only_regardless_of_umask(self, probe_module, tmp_path) -> None:
+        """Given a permissive umask, when a probe result is snapshotted via --record, then the
+        JSON lands owner-only, because transcripts echo other servers' registration lines,
+        which can carry credentials in commands or env values.
+        """
+        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
+        old_umask = os.umask(0o000)
+        try:
+            snapshot_path = probe_module._write_snapshot(tmp_path, result)
+        finally:
+            os.umask(old_umask)
+        assert snapshot_path.is_file()
+        assert stat.S_IMODE(snapshot_path.stat().st_mode) == 0o600

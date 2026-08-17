@@ -200,7 +200,15 @@ def _suite_always_disabled_check() -> str | None:
 
 
 def _clojure_cli_check() -> str | None:
-    # mirrors verify_clojure_cli (clojure_lsp.py): distro launchers without tools.deps fail -Spath
+    # mirrors verify_clojure_cli (clojure_lsp.py), which requires BOTH capabilities: the official
+    # CLI advertises -Aaliases in its help text, and tools.deps must resolve a classpath (-Spath);
+    # distro launchers can pass one and fail the other
+    try:
+        help_proc = subprocess.run(["clojure", "--help"], capture_output=True, text=True, timeout=120, check=False)
+    except (OSError, subprocess.SubprocessError):
+        return "a functional tools.deps Clojure CLI (clojure --help failed)"
+    if help_proc.returncode != 0 or "-Aaliases" not in help_proc.stdout + help_proc.stderr:
+        return "the official Clojure CLI (this launcher does not advertise -Aaliases)"
     if _probe_succeeds(["clojure", "-Spath"], timeout=120):
         return None
     return "a functional tools.deps Clojure CLI (clojure -Spath failed)"
@@ -226,6 +234,19 @@ def _wolfram_kernel_check() -> str | None:
     except FileNotFoundError:
         return "a WolframKernel (wolframscript alone is not enough)"
     return None
+
+
+def _pwsh_discovery_check() -> str | None:
+    # mirrors PowerShellLanguageServer._get_pwsh_path: PATH first, then fixed per-OS install
+    # locations such as ~/.dotnet/tools/pwsh; falls back to a PATH lookup when solidlsp is not
+    # importable, since this script is otherwise stdlib-only
+    try:
+        from solidlsp.language_servers.powershell_language_server import PowerShellLanguageServer
+    except ImportError:
+        return None if shutil.which("pwsh") is not None else "PowerShell 7 (pwsh)"
+    if PowerShellLanguageServer._get_pwsh_path() is not None:
+        return None
+    return "PowerShell 7 (pwsh on PATH or in a standard install location)"
 
 
 TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
@@ -279,7 +300,12 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "PHP 8.1+ with Node.js/npm (intelephense, the default php server, runs on node; phpactor is the conditional extra)",
         min_php=(8, 1),
     ),
-    ToolchainRequirement(("powershell",), ("pwsh",), "PowerShell 7 (preinstalled on CI runners)"),
+    ToolchainRequirement(
+        ("powershell",),
+        (),
+        "PowerShell 7 (discovered the way the server does: PATH or a standard install location)",
+        extra_check=_pwsh_discovery_check,
+    ),
     ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
     ToolchainRequirement(
         ("erlang",),

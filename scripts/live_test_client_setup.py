@@ -351,6 +351,9 @@ def _write_snapshot(record_dir: Path, result: ProbeResult) -> Path:
     }
     snapshot_path = record_dir / f"{result.client}.json"
     snapshot_path.write_text(json.dumps(snapshot, indent=2) + "\n", encoding="utf-8")
+    # transcripts echo other servers' registration lines, which can carry credentials in
+    # commands or env values -- owner-only, like the config backups above
+    snapshot_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
     return snapshot_path
 
 
