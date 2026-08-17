@@ -2,7 +2,7 @@
 Script to build a single JSON file from all individual news HTML files.
 
 Usage:
-    uv run python scripts/build_news_json.py
+    uv run python scripts/release/build_news_json.py
 
 This reads all .html files from the `news/` directory and creates
 `news/news.json` containing a mapping of news IDs to HTML content strings.

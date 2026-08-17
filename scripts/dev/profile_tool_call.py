@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Use cProfile to determine which functions take the most time overall (and use snakeviz to visualize)
     profiler: Literal["pyinstrument", "cprofile"] = "cprofile"
 
-    project_path = Path(__file__).parent.parent  # Serena root
+    project_path = Path(__file__).parents[2]  # Serena root
 
     serena_config = SerenaConfig.from_config_file()
     serena_config.log_level = logging.INFO

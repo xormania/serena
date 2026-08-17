@@ -10,8 +10,8 @@ and tools for formatting and type checking.
 1. Ensure clean git status.
 2. Set the version for release, e.g.
    
-       python scripts/bump_version.py --patch
-       python scripts/bump_version.py --minor
+       python scripts/release/bump_version.py --patch
+       python scripts/release/bump_version.py --minor
 
    This also creates the git tag.
 3. Push to GitHub:

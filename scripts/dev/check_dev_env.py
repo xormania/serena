@@ -11,12 +11,12 @@ servers and the test fixtures need (compilers, runtimes, package managers).
 
 Usage::
 
-    uv run python scripts/check_dev_env.py             # full report
-    uv run python scripts/check_dev_env.py --markers   # only the pytest -m expression of runnable markers
+    uv run python scripts/dev/check_dev_env.py             # full report
+    uv run python scripts/dev/check_dev_env.py --markers   # only the pytest -m expression of runnable markers
 
 The ``--markers`` form composes directly with pytest::
 
-    uv run pytest test -m "$(uv run python scripts/check_dev_env.py --markers)"
+    uv run pytest test -m "$(uv run python scripts/dev/check_dev_env.py --markers)"
 
 Exit code: 1 if a core environment check fails, 0 otherwise. Missing language toolchains
 never fail the check; they only shrink the set of runnable markers.
@@ -33,7 +33,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 NON_LANGUAGE_MARKERS = {"snapshot", "slow"}
 """markers registered in pyproject.toml that do not correspond to a language"""

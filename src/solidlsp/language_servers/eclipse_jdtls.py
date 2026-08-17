@@ -251,7 +251,7 @@ class EclipseJDTLS(SolidLanguageServer):
 
         # currently used default versions
         # NOTE: After bumping any of these, also update the corresponding hashes by running
-        #       scripts/update_downloaded_dependency_hashes.py and commit the resulting changes.
+        #       scripts/dev/update_downloaded_dependency_hashes.py and commit the resulting changes.
         DEFAULT_GRADLE_VERSION = "8.14.2"
         DEFAULT_VSCODE_JAVA_VERSION = "1.54.0-923"
         DEFAULT_VSCODE_JAVA_PATHS = VsixResourcePaths(

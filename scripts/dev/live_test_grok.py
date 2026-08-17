@@ -27,10 +27,10 @@ prefix ``serena-grok-live-``). The exit code is 0 iff no check FAILed.
 
 Usage::
 
-    uv run python scripts/live_test_grok.py               # full run
-    uv run python scripts/live_test_grok.py --hooks-only  # pure-local checks only (no Grok config changes)
-    uv run python scripts/live_test_grok.py --skip-unit   # skip the pytest smoke run
-    uv run python scripts/live_test_grok.py --help        # all options
+    uv run python scripts/dev/live_test_grok.py               # full run
+    uv run python scripts/dev/live_test_grok.py --hooks-only  # pure-local checks only (no Grok config changes)
+    uv run python scripts/dev/live_test_grok.py --skip-unit   # skip the pytest smoke run
+    uv run python scripts/dev/live_test_grok.py --help        # all options
 """
 
 import argparse
@@ -264,7 +264,7 @@ class LiveTestConfig:
         :return: the resolved configuration, with defaults derived from the repository layout
         :raises AbortError: if a required executable cannot be resolved
         """
-        repo_root = Path(args.repo_root).resolve() if args.repo_root else Path(__file__).resolve().parents[1]
+        repo_root = Path(args.repo_root).resolve() if args.repo_root else Path(__file__).resolve().parents[2]
 
         # resolve the executables under test, defaulting to the repository's venv
         serena_bin = Path(args.serena_bin) if args.serena_bin else cls._venv_executable(repo_root, "serena")

@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
 
 NEXTFLOW_LS_ALLOWED_HOSTS = ("github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com")
 
-# NOTE: after bumping this, re-run scripts/update_downloaded_dependency_hashes.py and commit the
+# NOTE: after bumping this, re-run scripts/dev/update_downloaded_dependency_hashes.py and commit the
 # updated src/solidlsp/resources/downloaded_dependency_hashes.json.
 DEFAULT_NEXTFLOW_LS_VERSION = "26.04.3"
 

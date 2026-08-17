@@ -32,10 +32,10 @@ of other configured MCP servers — review them before committing or sharing.
 
 Usage::
 
-    uv run python scripts/live_test_client_setup.py                 # probe all detected clients
-    uv run python scripts/live_test_client_setup.py --client codex  # probe a single client
-    uv run python scripts/live_test_client_setup.py --list          # only show which clients are detected
-    uv run python scripts/live_test_client_setup.py --record out/   # additionally write JSON snapshots
+    uv run python scripts/dev/live_test_client_setup.py                 # probe all detected clients
+    uv run python scripts/dev/live_test_client_setup.py --client codex  # probe a single client
+    uv run python scripts/dev/live_test_client_setup.py --list          # only show which clients are detected
+    uv run python scripts/dev/live_test_client_setup.py --record out/   # additionally write JSON snapshots
 
 Run it via ``uv run`` so that the ``serena`` executable under test is the one from this checkout.
 

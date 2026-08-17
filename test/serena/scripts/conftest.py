@@ -14,7 +14,7 @@ _REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _load_script(name: str) -> ModuleType:
-    script_path = _REPO_ROOT / "scripts" / f"{name}.py"
+    script_path = _REPO_ROOT / "scripts" / "dev" / f"{name}.py"
     assert script_path.is_file(), f"contributor script not where this tree keeps it: {script_path}"
     spec = importlib.util.spec_from_file_location(name, script_path)
     assert spec is not None and spec.loader is not None

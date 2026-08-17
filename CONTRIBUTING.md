@@ -39,7 +39,7 @@ You can install a virtual environment with the required as follows
 To verify your development environment and see which language test suites can run on your machine, run
 
 ```shell
-uv run python scripts/check_dev_env.py
+uv run python scripts/dev/check_dev_env.py
 ```
 
 It reports core environment problems, version skew between a persistently installed `serena` and your
@@ -66,4 +66,4 @@ We use poe to execute development tasks:
 The Serena tools (and in fact all Serena code) can be executed without an LLM, and also without
 any MCP specifics (though you can use the mcp inspector, if you want).
 
-An example script for running tools is provided in [scripts/demo_run_tools.py](scripts/demo_run_tools.py).
+An example script for running tools is provided in [scripts/demos/demo_run_tools.py](scripts/demos/demo_run_tools.py).
