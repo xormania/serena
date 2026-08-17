@@ -289,7 +289,9 @@ class ClientProbe:
                 return self._result(Status.FAIL, "serena setup succeeded but no registration is visible in the client", cli_version)
             expected_command = self.handler.get_mcp_server_command()
             serena_row = self._serena_row(after_add.stdout)
-            if expected_command in serena_row:
+            # token boundaries on BOTH branches: a bare substring test would let a row carrying
+            # ``--context=x-extra`` satisfy an expected ``--context=x``
+            if f" {expected_command} " in f" {serena_row} ":
                 self._notes.append(f"registration carries the expected command: {expected_command}")
             elif "start-mcp-server" in serena_row:
                 # the client echoes command text, but possibly reformatted (codex renders columns), so

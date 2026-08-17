@@ -333,7 +333,7 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "PowerShell 7 (discovered the way the server does: PATH or a standard install location)",
         extra_check=_pwsh_discovery_check,
     ),
-    ToolchainRequirement(("elixir",), ("elixir", "erl"), "Elixir + Erlang/OTP"),
+    ToolchainRequirement(("elixir",), ("elixir", "erl", "mix"), "Elixir + Erlang/OTP + mix (the fixture runs mix deps.get/compile)"),
     ToolchainRequirement(
         ("erlang",),
         ("erl", "rebar3", "erlang_ls"),

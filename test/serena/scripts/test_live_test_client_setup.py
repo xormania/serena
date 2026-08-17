@@ -89,6 +89,16 @@ class TestLifecycleVerdicts:
         assert result.status == probe_module.Status.FAIL
         assert "--context=fake" in result.detail
 
+    def test_a_suffixed_command_fails_even_when_listed_verbatim_but_extended(self, probe_module, tmp_path) -> None:
+        """Given a row that lists the expected command verbatim except its last token grew a
+        suffix ('--context=fake-extra'), the probe FAILs — the exact-match branch takes this
+        path (single-spaced, so it is a plain substring hit) and must enforce token
+        boundaries just like the reformatted branch.
+        """
+        result, _ = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, f"serena  {EXPECTED_COMMAND}-extra"))
+        assert result.status == probe_module.Status.FAIL
+        assert "--context=fake" in result.detail
+
     def test_tokens_on_another_servers_row_do_not_verify_the_registration(self, probe_module, tmp_path) -> None:
         """Given the expected tokens appearing only on another server's row, when the
         lifecycle runs, then the serena registration is not reported as verified.
