@@ -1,7 +1,7 @@
 """Conventions every script under scripts/ must keep: a shebang, an executable bit, a
-module docstring saying what the script does, and a --help path — argparse or click, or
-membership in the explicit delegation list for entry points whose underlying CLI parses
-argv itself.
+module docstring saying what the script does, and a working --help. All of it is checked
+through the artifact's observable surface — file mode, first line, docstring, and what
+--help actually prints — never through how a script is implemented.
 """
 
 import ast
@@ -14,9 +14,6 @@ import pytest
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 _SCRIPTS_DIR = _REPO_ROOT / "scripts"
-
-HELP_BY_DELEGATION = {"mcp_server.py", "agno_agent.py"}
-"""scripts whose --help is answered by the CLI they delegate to, or that build a served app"""
 
 _ALL_SCRIPTS = sorted(_SCRIPTS_DIR.rglob("*.py"))
 
@@ -35,15 +32,6 @@ class TestScriptConventions:
         assert source.splitlines()[0] == "#!/usr/bin/env python3", f"{script.name} lacks the shebang"
         docstring = ast.get_docstring(ast.parse(source))
         assert docstring is not None and len(docstring.strip()) >= 20, f"{script.name} lacks a meaningful module docstring"
-
-    def test_answers_help_or_is_a_documented_delegation(self, script: Path) -> None:
-        """Given any script, it either wires argparse or click (which provide -h/--help)
-        or is on the explicit delegation list.
-        """
-        if script.name in HELP_BY_DELEGATION:
-            return
-        source = script.read_text(encoding="utf-8")
-        assert "argparse" in source or "click" in source, f"{script.name} has no --help path"
 
     @posix_only
     def test_is_executable(self, script: Path) -> None:
@@ -66,11 +54,13 @@ class TestScriptSmoke:
         [script for script in _ALL_SCRIPTS if script.name not in SERVED_APPS],
         ids=lambda p: str(p.relative_to(_SCRIPTS_DIR)),
     )
-    def test_help_exits_zero(self, script: Path) -> None:
+    def test_help_exits_zero_and_prints_help(self, script: Path) -> None:
         """Given any script that is not a served app, when it is invoked with --help,
-        then it exits 0.
+        then it exits 0 and prints usage text — exit code alone would also pass a script
+        that ignores its arguments and silently does its real work instead.
         """
         result = subprocess.run(
             [sys.executable, str(script), "--help"], capture_output=True, text=True, timeout=120, check=False, cwd=_REPO_ROOT
         )
         assert result.returncode == 0, f"{script.name} --help exited {result.returncode}:\n{result.stderr[-800:]}"
+        assert "usage" in (result.stdout + result.stderr).lower(), f"{script.name} --help exited 0 without printing help"
