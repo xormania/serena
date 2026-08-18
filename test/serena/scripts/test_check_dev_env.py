@@ -142,6 +142,30 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
         assert doctor._runnable_markers(markers, evaluated) == ["go"]
 
+    def test_a_marker_whose_download_reaches_further_is_not_withheld_with_the_rest(self, doctor, monkeypatch) -> None:
+        """Given Windows arm64, cue stays runnable while ada does not: cue's download covers
+        that platform and ada's stops at Windows x64, so applying one server's matrix to
+        every waived marker would hide a suite that runs.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        assert doctor._runnable_markers(["go", "ada", "cue"], evaluated) == ["go", "cue"]
+
+    def test_the_declared_extra_platforms_match_the_providers_own_tables(self, doctor) -> None:
+        """The declaration of which waived markers reach beyond the common matrix is checked
+        against the dependency tables it claims to describe — a publisher dropping a target
+        must fail here rather than mislead someone reading --markers.
+        """
+        from solidlsp.language_servers.ada_language_server import DEFAULT_ALS_VERSION, AdaLanguageServer
+        from solidlsp.language_servers.cue_language_server import DEFAULT_CUE_VERSION, CueLanguageServer
+
+        cue_keys = {d.platform_id for d in CueLanguageServer._runtime_dependencies(DEFAULT_CUE_VERSION)._id_and_platform_id_to_dep.values()}
+        assert doctor.MANAGED_EXTRA_PLATFORM_KEYS["cue"] <= cue_keys
+        ada_keys = {d.platform_id for d in AdaLanguageServer._runtime_dependencies(DEFAULT_ALS_VERSION)._id_and_platform_id_to_dep.values()}
+        assert "win-arm64" not in ada_keys  # the common-matrix baseline the declaration is an exception to
+
     def test_ci_only_disablements_are_withheld_on_ci(self, doctor, monkeypatch) -> None:
         """Given the guard's CI-only section disables kotlin on runners, when the doctor runs
         with CI set, then kotlin is not advertised — locally it is, since the suite works
@@ -192,6 +216,12 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
         assert doctor._bash_shellcheck_check() is None
         assert doctor._solidity_forge_check() is None
+
+        # an OS outside the download matrices is missing too, even on a supported CPU:
+        # PlatformUtils rejects FreeBSD before a download is ever looked up
+        monkeypatch.setattr(doctor.sys, "platform", "freebsd14")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert doctor._bash_shellcheck_check() == "a supported operating system for ShellCheck (no build exists for freebsd14)"
 
     def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
         """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow

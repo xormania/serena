@@ -275,13 +275,18 @@ def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches:
     is_arm64 = machine in ("arm64", "aarch64")
     if not (is_x64 or is_arm64 or extra_arches):
         return f"a supported architecture for {what} (no build exists for {machine})"
-    if sys.platform == "win32" and is_arm64 and not windows_arm64:
-        return f"a Windows arm64 build of {what} (none is published)"
-    # PlatformUtils keys musl Linux separately (linux-musl-*), and these upstreams publish
-    # nothing under those keys -- same libc test the provider uses
-    if sys.platform.startswith("linux") and platform.libc_ver()[0] != "glibc":
-        return f"a glibc Linux build of {what} (musl platforms have no published build)"
-    return None
+    # an ALLOWLIST of operating systems, not a list of known-bad ones: PlatformUtils resolves
+    # Windows, macOS and Linux and rejects everything else (FreeBSD included) before a
+    # download is even looked up, and musl Linux is keyed separately with nothing published
+    if sys.platform == "darwin":
+        return None
+    if sys.platform == "win32":
+        return None if is_x64 or windows_arm64 else f"a Windows arm64 build of {what} (none is published)"
+    if sys.platform.startswith("linux"):
+        if platform.libc_ver()[0] != "glibc":
+            return f"a glibc Linux build of {what} (musl platforms have no published build)"
+        return None
+    return f"a supported operating system for {what} (no build exists for {sys.platform})"
 
 
 def _ci_disabled_markers() -> dict[str, str]:
@@ -295,6 +300,31 @@ def _ci_disabled_markers() -> dict[str, str]:
     if os.getenv("CI") != "true" and os.getenv("GITHUB_ACTIONS") != "true":
         return {}
     return {"kotlin": "disabled on CI: the IntelliJ-based Kotlin server crashes under runner memory limits"}
+
+
+def _current_platform_key() -> str:
+    """
+    :return: this host in the platform vocabulary Serena's download tables use (e.g.
+        ``win-arm64``), or ``unknown`` where no key applies
+    """
+    machine = platform.machine().lower()
+    arch = "x64" if machine in ("x86_64", "amd64") else "arm64" if machine in ("arm64", "aarch64") else None
+    if arch is None:
+        return "unknown"
+    if sys.platform == "darwin":
+        return f"osx-{arch}"
+    if sys.platform == "win32":
+        return f"win-{arch}"
+    if sys.platform.startswith("linux"):
+        return f"linux-{arch}" if platform.libc_ver()[0] == "glibc" else f"linux-musl-{arch}"
+    return "unknown"
+
+
+# Waived markers whose managed download reaches BEYOND the five keys publishers converge on.
+# Withholding them on those platforms would hide a runnable suite, so the exceptions are
+# declared here — and a test compares each declaration against the provider's own dependency
+# table, so a publisher dropping a target fails CI instead of misleading a contributor.
+MANAGED_EXTRA_PLATFORM_KEYS: dict[str, frozenset[str]] = {"cue": frozenset({"win-arm64"})}
 
 
 def _narrow_platform_reason() -> str | None:
@@ -781,10 +811,16 @@ def _runnable_markers(language_markers: list[str], evaluated: list[tuple[Toolcha
     covered = {marker for requirement, _ in evaluated for marker in requirement.markers}
     narrow_platform = _narrow_platform_reason()
     ci_disabled = _ci_disabled_markers()
+    platform_key = _current_platform_key()
+
+    def waived_marker_runs_here(marker: str) -> bool:
+        # the common matrix withholds, unless this marker's own download reaches further
+        return narrow_platform is None or platform_key in MANAGED_EXTRA_PLATFORM_KEYS.get(marker, frozenset())
+
     return [
         marker
         for marker in language_markers
-        if marker not in blocked and marker not in ci_disabled and (marker in covered or narrow_platform is None)
+        if marker not in blocked and marker not in ci_disabled and (marker in covered or waived_marker_runs_here(marker))
     ]
 
 

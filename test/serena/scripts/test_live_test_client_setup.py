@@ -528,6 +528,24 @@ class TestStatePreservation:
         assert not target.exists()
 
     @posix_only
+    def test_the_inode_anchor_never_overwrites_something_already_there(self, probe_module, tmp_path) -> None:
+        """Given a file already sitting where the probe would anchor the config's inode, when
+        the backup runs, then that file is untouched and the anchor goes elsewhere — it could
+        be an unrelated user file, or the recovery anchor an interrupted probe left behind,
+        and destroying either to make room would be the opposite of preserving state.
+        """
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"hardlinked": true}')
+        os.link(config_path, tmp_path / "dotfiles-config.json")
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        squatter = tmp_path / f".config.json.serena-probe-link.{os.getpid()}.0"
+        squatter.write_bytes(b"someone else's file")
+        probe._backup_config()
+        assert squatter.read_bytes() == b"someone else's file"
+        assert probe._config_link_anchor is not None and probe._config_link_anchor != squatter
+
+    @posix_only
     def test_an_atomic_rewrite_that_severs_a_hardlink_is_relinked(self, probe_module, tmp_path) -> None:
         """Given a hardlinked config and a client that rewrites it by atomic rename with
         BYTE-IDENTICAL content, when the lifecycle finishes, then the path is back on its

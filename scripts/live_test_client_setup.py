@@ -96,7 +96,9 @@ def _uninterruptible_cleanup() -> Iterator[None]:
     if not hasattr(signal, "pthread_sigmask"):
         yield
         return
-    blocked = {s for s in (getattr(signal, "SIGTERM", None), getattr(signal, "SIGHUP", None)) if s is not None}
+    blocked = {
+        s for s in (getattr(signal, "SIGTERM", None), getattr(signal, "SIGHUP", None), getattr(signal, "SIGINT", None)) if s is not None
+    }
     previous = signal.pthread_sigmask(signal.SIG_BLOCK, blocked)
     try:
         yield
@@ -371,12 +373,20 @@ class ClientProbe:
             # not knowable from here -- so hold the original inode open with a link of our
             # own, beside the config (same filesystem, unlike the backup dir), which lets the
             # relationship be restored rather than merely reported
-            anchor = config_path.parent / f".{config_path.name}.serena-probe-link"
+            # os.link REFUSES an existing destination, which is exactly the semantics wanted:
+            # an unrelated user file -- or the recovery anchor an interrupted probe left
+            # behind -- must never be deleted to make room. Names are tried until one is free
             try:
-                if anchor.exists() or anchor.is_symlink():
-                    anchor.unlink()
-                os.link(config_path, anchor)
-                self._config_link_anchor = anchor
+                for attempt in range(8):
+                    candidate = config_path.parent / f".{config_path.name}.serena-probe-link.{os.getpid()}.{attempt}"
+                    try:
+                        os.link(config_path, candidate)
+                    except FileExistsError:
+                        continue
+                    self._config_link_anchor = candidate
+                    break
+                if self._config_link_anchor is None:
+                    raise OSError("no free anchor name beside the config")
             except OSError as e:
                 self._notes.append(
                     f"the config is hardlinked, but its inode could not be anchored ({e}); a severed link can only be reported"
@@ -545,13 +555,19 @@ class ClientProbe:
         # would discard the in-flight verdict (its detail, notes and transcript), abandon the
         # remaining clients, and tell the user about the restore instead of the failure
         try:
-            self._run(self.spec.remove_argv)
-            if self._backup_path is not None and self.spec.user_config_path is not None:
-                self._relink_config_to_its_original_inode()
-                self._restore_config_bytes()
-                self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
-            else:
-                self._remove_config_created_by_probe()
+            # signals are DEFERRED for the whole rollback, not merely caught: SystemExit from
+            # the SIGTERM handler and KeyboardInterrupt are BaseExceptions, so `except
+            # Exception` would let either abort the restore halfway -- leaving exactly the
+            # mutated client this method exists to undo. Blocking delivers them afterwards,
+            # so the interrupt is honoured without costing the rollback
+            with _uninterruptible_cleanup():
+                self._run(self.spec.remove_argv)
+                if self._backup_path is not None and self.spec.user_config_path is not None:
+                    self._relink_config_to_its_original_inode()
+                    self._restore_config_bytes()
+                    self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
+                else:
+                    self._remove_config_created_by_probe()
         except Exception as e:
             self._notes.append(f"EMERGENCY RESTORE FAILED ({e}) — the client may still be mutated; backup kept at {self._backup_path}")
             print(f"    !! emergency restore failed: {e}", flush=True)
