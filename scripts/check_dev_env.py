@@ -280,6 +280,26 @@ def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches:
     return None
 
 
+def _narrow_platform_reason() -> str | None:
+    """
+    :return: why servers Serena downloads itself cannot be assumed available here, or None on
+        a platform every bundled download publishes for
+
+    The languages with no row are waived because Serena installs their servers itself — but a
+    managed download is only a waiver where a build EXISTS. Publishers converge on five
+    platform keys (glibc Linux x64/arm64, macOS x64/arm64, Windows x64); the Ada server, for
+    one, stops exactly there. Rather than copy thirteen matrices that would rot, this reports
+    the two platforms outside that set, where a waived marker must not be called runnable.
+    """
+    machine = platform.machine().lower()
+    is_arm64 = machine in ("arm64", "aarch64")
+    if sys.platform == "win32" and is_arm64:
+        return "Windows arm64 (servers Serena downloads publish x64 builds for Windows)"
+    if sys.platform.startswith("linux") and platform.libc_ver()[0] != "glibc":
+        return "musl-based Linux (servers Serena downloads publish glibc builds)"
+    return None
+
+
 def _solidity_forge_check() -> str | None:
     # mirrors _get_forge_npm_package (solidity_language_server.py): forge publishes no
     # Windows arm64 package and nothing outside x86_64/arm64, and the raise happens while
@@ -730,10 +750,15 @@ def _runnable_markers(language_markers: list[str], evaluated: list[tuple[Toolcha
     """
     :param language_markers: the names of all registered language markers
     :param evaluated: the requirement/missing pairs from :func:`_evaluate_toolchains`
-    :return: the markers whose required toolchains are all present, in registration order
+    :return: the markers whose required toolchains are all present, in registration order.
+        A marker with no row rides on Serena downloading its server, which holds only where
+        that download exists -- so on a platform outside the published set those markers are
+        withheld rather than assumed
     """
     blocked = {marker for requirement, missing in evaluated if missing for marker in requirement.markers}
-    return [marker for marker in language_markers if marker not in blocked]
+    covered = {marker for requirement, _ in evaluated for marker in requirement.markers}
+    narrow_platform = _narrow_platform_reason()
+    return [marker for marker in language_markers if marker not in blocked and (marker in covered or narrow_platform is None)]
 
 
 def _report_toolchains(language_markers: list[str], evaluated: list[tuple[ToolchainRequirement, list[str]]]) -> list[str]:
@@ -753,8 +778,14 @@ def _report_toolchains(language_markers: list[str], evaluated: list[tuple[Toolch
     uncovered = [marker for marker in language_markers if marker not in covered]
     if uncovered:
         print()
-        print(f"  No local toolchain is known to be required for: {', '.join(uncovered)}")
-        print("  (Serena installs or bundles these language servers itself on first use.)")
+        narrow_platform = _narrow_platform_reason()
+        if narrow_platform is None:
+            print(f"  No local toolchain is known to be required for: {', '.join(uncovered)}")
+            print("  (Serena installs or bundles these language servers itself on first use.)")
+        else:
+            print(f"  NOT CLAIMED on {narrow_platform}: {', '.join(uncovered)}")
+            print("  (Serena installs these servers itself, but a managed download is only a waiver where a build")
+            print("   exists — the Ada server, for one, publishes nothing for this platform. Verify per language.)")
 
     return _runnable_markers(language_markers, evaluated)
 

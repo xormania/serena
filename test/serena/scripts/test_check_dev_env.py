@@ -110,6 +110,29 @@ class TestRequirementVerdicts:
         binary.chmod(0o755)
         assert doctor._rust_analyzer_check() is None
 
+    def test_waived_markers_are_withheld_where_managed_downloads_do_not_publish(self, doctor, monkeypatch) -> None:
+        """Given Windows arm64 or musl Linux, a marker with no toolchain row is NOT reported
+        runnable: the waiver rides on Serena downloading the server, and those platforms are
+        outside the set the publishers cover (the Ada server stops at Windows x64). On a
+        published platform the same marker is runnable with nothing installed.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        markers = ["go", "ada"]  # ada has no row: it rides on the managed download
+
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        assert doctor._runnable_markers(markers, evaluated) == ["go", "ada"]
+
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("", ""))  # musl reports no glibc
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
     def test_mandatory_helper_binaries_gate_platforms_their_upstream_skips(self, doctor, monkeypatch) -> None:
         """Given Windows on arm64, the rows whose servers download a mandatory helper report
         it missing — ShellCheck, foundry forge and pasls publish no build there, and the
