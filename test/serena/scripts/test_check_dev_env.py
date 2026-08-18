@@ -1,0 +1,711 @@
+"""Behavior tests for the dev-environment doctor (check_dev_env.py).
+
+Each scenario states a machine condition (Given), evaluates a requirement or version probe
+(When), and asserts that the verdict names exactly what the condition implies (Then). No
+real toolchain is consulted: PATH lookups and version probes are replaced per scenario.
+"""
+
+import os
+import subprocess
+import sys
+from pathlib import Path
+from unittest import mock
+
+import pytest
+
+
+def _which_map(available: dict[str, str]):
+    """A shutil.which replacement resolving only the given commands"""
+    return lambda command: available.get(command)
+
+
+def _conftest_command_guards(registered_markers: set[str]) -> dict[str, tuple[set[frozenset[str]], set[frozenset[str]]]]:
+    """Asks test/conftest.py which commands really decide whether a marker can run, by running it.
+
+    The doctor cannot import conftest: it pulls in pytest, SerenaAgent and the whole
+    language-server stack, and has to answer on the machine where exactly that is broken. Its
+    table is therefore written by hand -- so the rule is re-derived here by calling conftest's
+    own gating function against a substituted PATH and watching which servers it disables, and a
+    table that stops matching it fails instead of misinforming a contributor.
+
+    Derived by execution rather than from conftest's source, which is what this did before and
+    was wrong twice over. Reading the syntax froze it: extracting a predicate or looping over a
+    command table would have failed this suite while behaviour was unchanged. And it saw only
+    ``_sh.which(...)`` written directly in an ``if`` test, so every guard behind a helper --
+    matlab, R, ocaml, perl -- was invisible to it.
+
+    Reach, declared rather than assumed: ``_sh`` IS ``shutil``, so substituting its ``which``
+    reaches every guard that consults PATH, wherever it lives -- conftest's own, the helpers it
+    calls, and the language servers' discovery routines. Guards fixed at import time
+    (``ERLANG_LS_UNAVAILABLE``, ``EXPERT_UNAVAILABLE``) cannot be moved that way, and guards that
+    shell out instead of looking up PATH are equally out of reach; neither is claimed here.
+
+    Several commands in one guard are alternatives (conftest disables QML only when neither
+    qmlls6 nor qmlls is present), which is what the table's ``a|b`` entries mean. Whether a guard
+    disables ALL the servers behind a marker or only some of them is the distinction that matters:
+    the table may require the first, and must not require the second, because the marker still
+    runs on the backends the guard did not disable.
+
+    :param registered_markers: the language markers pyproject registers
+    :return: marker -> (groups whose absence disables EVERY server behind it, groups whose
+        absence disables only some of them)
+    """
+    import test.conftest as conftest
+    from solidlsp.ls_config import LanguageServerId
+
+    explicit = {server.name: {getattr(mark, "name", mark) for mark in marks} for server, marks in conftest._LANGUAGE_PYTEST_MARKERS.items()}
+
+    def markers_of(server_name: str) -> set[str]:
+        # most servers carry a marker named after their id; the rest are listed in conftest
+        # because their marker differs (cpp_ccls runs under cpp). A server with neither has no
+        # tests to gate, so it cannot make a marker unrunnable
+        if server_name in explicit:
+            return explicit[server_name]
+        value = LanguageServerId[server_name].value
+        return {value} if value in registered_markers else set()
+
+    servers_behind: dict[str, set[str]] = {}
+    for server in LanguageServerId:
+        for marker in markers_of(server.name):
+            servers_behind.setdefault(marker, set()).add(server.name)
+
+    def disabled_without(absent: frozenset[str]) -> tuple[set[str], set[str]]:
+        """
+        :param absent: the commands to withhold from the substituted PATH
+        :return: the servers conftest disables, and every command it looked up
+
+        The host is pinned to non-CI Linux so that the answer describes conftest's COMMAND
+        guards rather than the machine this runs on -- its platform guards (swift off macOS,
+        ansible on Windows) would otherwise make the derived table differ per developer. Those
+        guards still fire; they drop out of every comparison below because the baseline
+        carries them too.
+        """
+        looked_up: set[str] = set()
+
+        def which(command: str, *args: object, **kwargs: object) -> str | None:
+            looked_up.add(command)
+            return None if command in absent else f"/usr/bin/{command}"
+
+        with (
+            mock.patch.object(conftest._sh, "which", which),
+            mock.patch.object(conftest, "is_ci", False),
+            mock.patch.object(conftest, "is_windows", False),
+            mock.patch.object(conftest, "is_macos", False),
+            mock.patch.object(conftest, "is_linux", True),
+        ):
+            disabled = conftest._determine_disabled_language_servers()
+        return {server.name for server in disabled}, looked_up
+
+    baseline, vocabulary = disabled_without(frozenset())
+    effects: dict[frozenset[str], set[str]] = {}
+    for command in sorted(vocabulary):
+        alone = disabled_without(frozenset({command}))[0] - baseline
+        if alone:
+            effects[frozenset({command})] = alone
+
+    # a command whose own absence changes nothing may still be one of several that must ALL be
+    # missing (qmlls6/qmlls). Withhold every such command at once, then hand them back one at a
+    # time: whichever hand-back rescues a server is one of that server's alternatives
+    inert = frozenset(command for command in vocabulary if frozenset({command}) not in effects)
+    for server in disabled_without(inert)[0] - baseline:
+        alternatives = frozenset(command for command in inert if server not in disabled_without(inert - {command})[0])
+        if alternatives:
+            effects.setdefault(alternatives, set()).add(server)
+
+    guards: dict[str, tuple[set[frozenset[str]], set[frozenset[str]]]] = {}
+    for commands, disabled in effects.items():
+        resolved = {marker for server in disabled for marker in markers_of(server)}
+        # a command guard exists to disable tests, so it must reach a marker: silently resolving
+        # to nothing would shrink this check's reach without shrinking what it claims to cover
+        assert resolved, f"conftest gates {sorted(commands)} on {sorted(disabled)}, which resolves to no marker"
+        for marker in resolved:
+            whole, partial = guards.setdefault(marker, (set(), set()))
+            (whole if servers_behind[marker] <= disabled else partial).add(commands)
+    return guards
+
+
+class TestRequirementVerdicts:
+    """A requirement's verdict lists exactly the unmet parts, by name and version."""
+
+    def test_an_absent_command_is_named_in_the_verdict(self, doctor, monkeypatch) -> None:
+        """Given a required executable that is not installed, when the requirement is
+        evaluated, then the verdict names that executable.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        requirement = doctor.ToolchainRequirement(("x",), ("somecompiler",), "note")
+        assert requirement.unsatisfied() == ["somecompiler"]
+
+    def test_any_pipe_separated_alternative_satisfies_the_requirement(self, doctor, monkeypatch) -> None:
+        """Given a requirement accepting qmlls6 or qmlls, when only qmlls6 is installed,
+        then nothing is unmet — and with neither installed, the verdict shows both names.
+        """
+        requirement = doctor.ToolchainRequirement(("qml",), ("qmlls6|qmlls",), "note")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"qmlls6": "/usr/bin/qmlls6"}))
+        assert requirement.unsatisfied() == []
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert requirement.unsatisfied() == ["qmlls6|qmlls"]
+
+    def test_a_too_old_java_is_reported_with_required_and_found_versions(self, doctor, monkeypatch) -> None:
+        """Given java installed at major 17 against a declared minimum of 21, when the
+        requirement is evaluated, then the verdict reads 'java >= 21 (found 17)'.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda: 17)
+        requirement = doctor.ToolchainRequirement(("java",), ("java",), "note", min_java=21)
+        assert requirement.unsatisfied() == ["java >= 21 (found 17)"]
+
+    def test_a_java_meeting_the_minimum_is_not_reported(self, doctor, monkeypatch) -> None:
+        """Given java installed at exactly the declared minimum, then nothing is unmet."""
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda: 21)
+        requirement = doctor.ToolchainRequirement(("java",), ("java",), "note", min_java=21)
+        assert requirement.unsatisfied() == []
+
+    def test_a_too_old_php_is_reported_with_required_and_found_versions(self, doctor, monkeypatch) -> None:
+        """Given PHP 7.4 installed against a declared minimum of 8.1, then the verdict
+        reads 'php >= 8.1 (found 7.4)'.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"php": "/usr/bin/php"}))
+        monkeypatch.setattr(doctor, "_php_version", lambda: (7, 4))
+        requirement = doctor.ToolchainRequirement(("php",), ("php",), "note", min_php=(8, 1))
+        assert requirement.unsatisfied() == ["php >= 8.1 (found 7.4)"]
+
+    def test_the_newest_installed_dotnet_runtime_decides_the_verdict(self, doctor, monkeypatch) -> None:
+        """Given .NET runtimes 8 and 10 installed against a minimum of 10, nothing is
+        unmet; given only 8, the verdict reads 'dotnet runtime >= 10 (found 8)'.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"dotnet": "/usr/bin/dotnet"}))
+        requirement = doctor.ToolchainRequirement(("csharp",), ("dotnet",), "note", min_dotnet_runtime=10)
+        monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {8, 10})
+        assert requirement.unsatisfied() == []
+        monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {8})
+        assert requirement.unsatisfied() == ["dotnet runtime >= 10 (found 8)"]
+
+    def test_platform_matrix_checks_reject_hosts_without_a_managed_strategy(self, doctor, monkeypatch) -> None:
+        """Given a linux-arm64 host with neither toolchain on the PATH, both matrix-modelled
+        rows name what is missing — dart's managed SDK and hlsl's prebuilt server cover
+        linux only on x86_64; given linux-x86_64, both are satisfied with nothing installed.
+        """
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "aarch64")
+        # a PATH dart must not rescue an off-matrix host: the provider goes straight to its
+        # dependency table and never resolves a system dart
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"dart": "/usr/bin/dart"}))
+        assert doctor._dart_managed_sdk_check() == "a platform in the managed-SDK matrix (the provider does not use a system dart)"
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._hlsl_server_availability_check() == (
+            "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
+        )
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        assert doctor._dart_managed_sdk_check() is None
+        assert doctor._hlsl_server_availability_check() is None
+        # musl x86_64 is a SEPARATE platform key upstream with nothing published against it, so
+        # the arch alone does not settle it: a green verdict here becomes a hard raise at startup
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("", ""))
+        assert doctor._dart_managed_sdk_check() == "a platform in the managed-SDK matrix (the provider does not use a system dart)"
+        assert doctor._hlsl_server_availability_check() == (
+            "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
+        )
+
+    @pytest.mark.parametrize(
+        ("marker", "commands_present", "named_in_verdict", "rescued_by"),
+        [
+            ("terraform", ("terraform",), "terraform-ls", None),
+            ("elixir", ("elixir", "erl", "mix"), "Expert", "expert"),
+        ],
+    )
+    def test_a_downloaded_server_with_no_windows_arm64_build_withholds_its_marker(
+        self, doctor, monkeypatch, marker, commands_present, named_in_verdict, rescued_by
+    ) -> None:
+        """Given Windows arm64 with every command the row asks for present, the row is still
+        unsatisfied, because the command it asks for is NOT the server: the terraform CLI and
+        elixir are separate from the servers downloaded for them, and neither download publishes
+        a Windows arm64 build. Asserted through the row rather than the check it delegates to —
+        a row that stopped calling its check would otherwise pass this.
+        """
+        requirement = next(r for r in doctor.TOOLCHAIN_REQUIREMENTS if marker in r.markers)
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "arm64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({c: f"/usr/bin/{c}" for c in commands_present}))
+        problems = requirement.unsatisfied()
+        assert any(named_in_verdict in problem for problem in problems), f"{marker} was advertised where its server has no build"
+        if rescued_by is not None:
+            # ...unless the server is already on the PATH, which the provider prefers over a download
+            present = {c: f"/usr/bin/{c}" for c in (*commands_present, rescued_by)}
+            monkeypatch.setattr(doctor.shutil, "which", _which_map(present))
+            assert requirement.unsatisfied() == []
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({c: f"/usr/bin/{c}" for c in commands_present}))
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert requirement.unsatisfied() == [], "a published platform must not be withheld"
+
+    def test_rust_analyzer_is_found_in_the_providers_fallback_locations(self, doctor, monkeypatch, tmp_path) -> None:
+        """Given neither rustup nor rust-analyzer on the PATH but an executable binary in
+        ~/.cargo/bin, the check accepts it — the provider searches its common locations
+        after the PATH, and which() alone missed them; with that binary gone it reports
+        rust-analyzer missing. The machine-wide locations are neutralised so the verdict
+        comes from the code rather than from whatever this host has in /usr/local.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        monkeypatch.setattr(doctor, "RUST_ANALYZER_FIXED_PATHS", ())
+        monkeypatch.setattr(doctor.Path, "home", classmethod(lambda cls: tmp_path))
+        assert doctor._rust_analyzer_check() == "rust-analyzer (via rustup, the PATH, or a standard install location)"
+        (tmp_path / ".cargo" / "bin").mkdir(parents=True)
+        binary = tmp_path / ".cargo" / "bin" / ("rust-analyzer.exe" if os.name == "nt" else "rust-analyzer")
+        binary.write_text("#!/bin/sh\n")
+        binary.chmod(0o755)
+        assert doctor._rust_analyzer_check() is None
+
+    def test_waived_markers_are_withheld_where_managed_downloads_do_not_publish(self, doctor, monkeypatch) -> None:
+        """Given Windows arm64 or musl Linux, a marker with no toolchain row is NOT reported
+        runnable: the waiver rides on Serena downloading the server, and those platforms are
+        outside the set the publishers cover (the Ada server stops at Windows x64). On a
+        published platform the same marker is runnable with nothing installed.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        markers = ["go", "ada"]  # ada has no row: it rides on the managed download
+
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        assert doctor._runnable_markers(markers, evaluated) == ["go", "ada"]
+
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("", ""))  # musl reports no glibc
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+        # the rule is an ALLOWLIST of the published five, not a list of known-bad platforms:
+        # 32-bit Linux and anything unfamiliar are outside the matrix too
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "i686")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+        monkeypatch.setattr(doctor.sys, "platform", "freebsd14")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+    def test_a_marker_whose_download_reaches_further_is_not_withheld_with_the_rest(self, doctor, monkeypatch) -> None:
+        """Given Windows arm64, cue stays runnable while ada does not: cue's download covers
+        that platform and ada's stops at Windows x64, so applying one server's matrix to
+        every waived marker would hide a suite that runs.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        assert doctor._runnable_markers(["go", "ada", "cue"], evaluated) == ["go", "cue"]
+
+    def test_the_declared_extra_platforms_match_the_providers_own_tables(self, doctor) -> None:
+        """The declaration of which waived markers reach beyond the common matrix is checked
+        against the dependency tables it claims to describe — a publisher dropping a target
+        must fail here rather than mislead someone reading --markers.
+        """
+        from solidlsp.language_servers.ada_language_server import DEFAULT_ALS_VERSION, AdaLanguageServer
+        from solidlsp.language_servers.cue_language_server import DEFAULT_CUE_VERSION, CueLanguageServer
+        from solidlsp.language_servers.kotlin_language_server import KOTLIN_SERVER_ARTIFACT_BY_PLATFORM
+
+        cue_keys = {d.platform_id for d in CueLanguageServer._runtime_dependencies(DEFAULT_CUE_VERSION)._id_and_platform_id_to_dep.values()}
+        assert doctor.MANAGED_EXTRA_PLATFORM_KEYS["cue"] <= cue_keys
+        assert doctor.MANAGED_EXTRA_PLATFORM_KEYS["kotlin"] <= set(KOTLIN_SERVER_ARTIFACT_BY_PLATFORM)
+        ada_keys = {d.platform_id for d in AdaLanguageServer._runtime_dependencies(DEFAULT_ALS_VERSION)._id_and_platform_id_to_dep.values()}
+        assert "win-arm64" not in ada_keys  # the common-matrix baseline the declaration is an exception to
+
+    # every provider that ships a win-arm64 artifact today. The check below is the reverse of the
+    # one above -- a declaration must not claim more than its provider publishes, AND a provider
+    # publishing beyond the common matrix must not go undeclared. Only the second direction can
+    # catch a WAIVED marker that is quietly withheld on a platform where its server does exist,
+    # which is exactly how kotlin was missed
+    PROVIDERS_PUBLISHING_WIN_ARM64 = frozenset(
+        {
+            "csharp_language_server.py",
+            "cue_language_server.py",
+            "dart_language_server.py",
+            "hlsl_language_server.py",
+            "kotlin_language_server.py",
+        }
+    )
+
+    def test_no_provider_reaches_win_arm64_without_the_doctor_knowing(self) -> None:
+        """Given the language servers that publish a Windows arm64 artifact, the set is the one
+        this tree accounts for — a new one must be classified (a row of its own, or a declared
+        waiver exception) rather than silently withholding a suite that would have run there.
+        """
+        providers = Path(__file__).resolve().parents[3] / "src" / "solidlsp" / "language_servers"
+        publishing = {path.name for path in providers.glob("*.py") if '"win-arm64"' in path.read_text(encoding="utf-8")}
+        assert publishing == self.PROVIDERS_PUBLISHING_WIN_ARM64
+
+    def test_ci_only_disablements_are_withheld_on_ci(self, doctor, monkeypatch) -> None:
+        """Given the guard's CI-only section disables kotlin on runners, when the doctor runs
+        with CI set, then kotlin is not advertised — locally it is, since the suite works
+        there. A marker pytest will skip must never appear in the expression.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        markers = ["go", "kotlin"]
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        monkeypatch.delenv("CI", raising=False)
+        monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+        assert doctor._runnable_markers(markers, evaluated) == ["go", "kotlin"]
+        monkeypatch.setenv("CI", "true")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+        monkeypatch.delenv("CI")
+        monkeypatch.setenv("GITHUB_ACTIONS", "true")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+    def test_a_system_language_server_stands_in_for_the_runtime_that_would_run_it(self, doctor) -> None:
+        """Given a row whose server is normally a downloaded script, a system executable of
+        that server satisfies it without the runtime: the haxe provider short-circuits to a
+        haxe-language-server on the PATH and launches it directly, so requiring Node there
+        would hide a runnable suite.
+        """
+        haxe = next(requirement for requirement in doctor.TOOLCHAIN_REQUIREMENTS if "haxe" in requirement.markers)
+        monkeypatch = pytest.MonkeyPatch()
+        try:
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe", "haxe-language-server": "/usr/bin/hxls"}))
+            assert haxe.unsatisfied() == []
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe", "node": "/usr/bin/node"}))
+            assert haxe.unsatisfied() == []  # the downloaded server.js path still works
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe"}))
+            assert haxe.unsatisfied() == ["haxe-language-server|node"]
+        finally:
+            monkeypatch.undo()
+
+    def test_perl_is_unavailable_on_windows_whatever_is_installed(self, doctor, monkeypatch) -> None:
+        """Given Windows with perl and the module present, the perl row still reports it
+        missing: the provider accepts Linux and macOS platform IDs only and raises on
+        Windows, so the suite cannot start there no matter what is installed.
+        """
+        monkeypatch.setattr(doctor, "_probe_succeeds", lambda argv, timeout=60: True)
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        assert doctor._perl_language_server_check() == "a non-Windows platform (the Perl language server supports Linux and macOS only)"
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        assert doctor._perl_language_server_check() is None
+
+    def test_mandatory_helper_binaries_gate_platforms_their_upstream_skips(self, doctor, monkeypatch) -> None:
+        """Given Windows on arm64, the rows whose servers download a mandatory helper report
+        it missing — ShellCheck, foundry forge and pasls publish no build there, and the
+        provider RAISES rather than skipping, so the marker must not be called runnable;
+        on Windows x64 the same rows are satisfied, and a pasls already on the PATH rescues
+        the pascal row anywhere.
+        """
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._bash_shellcheck_check() == "a Windows arm64 build of ShellCheck (none is published)"
+        assert doctor._solidity_forge_check() == "a Windows arm64 build of foundry forge (none is published)"
+        assert doctor._pascal_pasls_check() == "a Windows arm64 build of pasls (none is published)"
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"pasls": "C:/tools/pasls.exe"}))
+        assert doctor._pascal_pasls_check() is None
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "AMD64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        assert doctor._bash_shellcheck_check() is None
+        assert doctor._solidity_forge_check() is None
+
+        # an OS outside the download matrices is missing too, even on a supported CPU:
+        # PlatformUtils rejects FreeBSD before a download is ever looked up
+        monkeypatch.setattr(doctor.sys, "platform", "freebsd14")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert doctor._bash_shellcheck_check() == "a supported operating system for ShellCheck (no build exists for freebsd14)"
+
+    def test_nextflow_java_resolves_through_java_home_before_the_path(self, doctor, monkeypatch, tmp_path) -> None:
+        """Given a JDK 17 exposed only through JAVA_HOME (nothing on the PATH), the nextflow
+        check accepts it — the server consults $JAVA_HOME/bin/java first; given only a
+        too-old PATH java, the verdict names the resolved major.
+        """
+        java_bin = tmp_path / "jdk" / "bin"
+        java_bin.mkdir(parents=True)
+        (java_bin / ("java.exe" if os.name == "nt" else "java")).write_text("#!/bin/sh\n")
+        monkeypatch.setenv("JAVA_HOME", str(tmp_path / "jdk"))
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda exe="java": 17)
+        assert doctor._nextflow_java_check() is None
+
+        # BOTH present and disagreeing: this is the scenario that actually pins the ORDER.
+        # With only one source present at a time, an inverted implementation passes too.
+        def major_of(executable="java"):
+            return 17 if str(tmp_path) in str(executable) else 11
+
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
+        monkeypatch.setattr(doctor, "_java_major_version", major_of)
+        assert doctor._nextflow_java_check() is None  # JAVA_HOME's 17 decides, not the PATH's 11
+        monkeypatch.setattr(doctor, "_java_major_version", lambda executable="java": 11 if str(tmp_path) in str(executable) else 17)
+        # JAVA_HOME's 11 decides even though a newer java sits on the PATH: the provider takes
+        # the first candidate that exists and version-checks THAT one, with no fall-through
+        assert doctor._nextflow_java_check() == "java >= 17 for nextflow (found 11 via the server's resolution order)"
+
+        monkeypatch.delenv("JAVA_HOME")
+        monkeypatch.setattr(doctor, "_java_major_version", lambda executable="java": 11)
+        assert doctor._nextflow_java_check() == "java >= 17 for nextflow (found 11 via the server's resolution order)"
+
+    def test_a_runtime_only_dotnet_does_not_satisfy_an_sdk_minimum(self, doctor, monkeypatch) -> None:
+        """Given a machine with a satisfying runtime but no SDK, the verdict names the
+        missing SDK — a runtime alone cannot load the SDK-style test project; given SDK 8
+        alongside, nothing is unmet.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"dotnet": "/usr/bin/dotnet"}))
+        requirement = doctor.ToolchainRequirement(("csharp",), ("dotnet",), "note", min_dotnet_runtime=10, min_dotnet_sdk=8)
+        monkeypatch.setattr(doctor, "_dotnet_runtime_majors", lambda: {10})
+        monkeypatch.setattr(doctor, "_dotnet_sdk_majors", lambda: None)
+        assert requirement.unsatisfied() == [
+            "dotnet SDK >= 8 (no installed SDK could be determined — a runtime alone cannot load projects)"
+        ]
+        monkeypatch.setattr(doctor, "_dotnet_sdk_majors", lambda: {8})
+        assert requirement.unsatisfied() == []
+
+    def test_an_undeterminable_version_is_reported_as_such_not_as_satisfied(self, doctor, monkeypatch) -> None:
+        """Given java present but its version unreadable, when the requirement declares a
+        minimum, then the verdict says so — presence alone never satisfies a version gate.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"java": "/usr/bin/java"}))
+        monkeypatch.setattr(doctor, "_java_major_version", lambda: None)
+        requirement = doctor.ToolchainRequirement(("java",), ("java",), "note", min_java=21)
+        assert requirement.unsatisfied() == ["java >= 21 (the installed version could not be determined)"]
+
+    def test_a_failing_availability_predicate_is_named_in_the_verdict(self, doctor, monkeypatch) -> None:
+        """Given a requirement whose conftest-mirroring predicate reports something missing,
+        when the requirement is evaluated, then the verdict carries that description.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({"R": "/usr/bin/R"}))
+        requirement = doctor.ToolchainRequirement(("r",), ("R",), "note", extra_check=lambda: "the R package 'languageserver'")
+        assert requirement.unsatisfied() == ["the R package 'languageserver'"]
+
+    def test_the_availability_predicate_is_skipped_while_commands_are_already_missing(self, doctor, monkeypatch) -> None:
+        """Given a requirement whose executable is absent, when it is evaluated, then the
+        verdict names the executable and the (possibly expensive) predicate never runs.
+        """
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({}))
+        ran = []
+        requirement = doctor.ToolchainRequirement(("r",), ("R",), "note", extra_check=lambda: ran.append(1) or "unreachable")
+        assert requirement.unsatisfied() == ["R"]
+        assert ran == []
+
+
+class TestVersionProbes:
+    """The version probes read the output shapes real tools print."""
+
+    @pytest.mark.parametrize(
+        ("stderr", "expected"),
+        [
+            ('openjdk version "21.0.2" 2024-01-16', 21),
+            ('java version "1.8.0_402"', 8),
+            ("nothing that looks like a version", None),
+        ],
+    )
+    def test_java_version_output_shapes(self, doctor, monkeypatch, stderr: str, expected: int | None) -> None:
+        """Given the version banners modern and 1.x-era JVMs print (on stderr), the probe
+        reads the major version, or None when there is none to read.
+        """
+        monkeypatch.setattr(doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout="", stderr=stderr))
+        assert doctor._java_major_version() == expected
+
+    @pytest.mark.parametrize(
+        ("stdout", "expected"),
+        [
+            ("PHP 8.3.6 (cli) (built: Jan 01 2026)", (8, 3)),
+            ("PHP 7.4.33 (cli)", (7, 4)),
+            ("no php here", None),
+        ],
+    )
+    def test_php_version_output_shapes(self, doctor, monkeypatch, stdout: str, expected: tuple[int, int] | None) -> None:
+        """Given php --version's banner, the probe reads (major, minor)."""
+        monkeypatch.setattr(doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout=stdout, stderr=""))
+        assert doctor._php_version() == expected
+
+    def test_dotnet_runtimes_are_read_from_netcore_lines_only(self, doctor, monkeypatch) -> None:
+        """Given dotnet --list-runtimes output carrying both NETCore and AspNetCore lines,
+        the probe collects the NETCore majors only.
+        """
+        listing = (
+            "Microsoft.AspNetCore.App 8.0.16 [/usr/share/dotnet]\n"
+            "Microsoft.NETCore.App 8.0.16 [/usr/share/dotnet]\n"
+            "Microsoft.NETCore.App 10.0.0 [/usr/share/dotnet]\n"
+        )
+        monkeypatch.setattr(
+            doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout=listing, stderr="")
+        )
+        assert doctor._dotnet_runtime_majors() == {8, 10}
+
+    def test_dotnet_sdk_majors_are_read_one_per_line(self, doctor, monkeypatch) -> None:
+        """Given dotnet --list-sdks output, the probe collects the SDK majors; given no
+        output (a runtime-only installation), it reports None rather than an empty set.
+        """
+        listing = "8.0.412 [/usr/lib/dotnet/sdk]\n10.0.100 [/usr/lib/dotnet/sdk]\n"
+        monkeypatch.setattr(
+            doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout=listing, stderr="")
+        )
+        assert doctor._dotnet_sdk_majors() == {8, 10}
+        monkeypatch.setattr(doctor.subprocess, "run", lambda argv, **kwargs: subprocess.CompletedProcess(argv, 0, stdout="", stderr=""))
+        assert doctor._dotnet_sdk_majors() is None
+
+
+class TestCoreEnvironment:
+    """The core checks decide the exit code, so what they accept has to be exact."""
+
+    def test_bounds_are_checked_and_unknown_constraints_are_reported_not_assumed(self, doctor) -> None:
+        """Given a specifier this script fully understands, the verdict is the bounds check;
+        given one carrying an exclusion it cannot parse, the constraint comes back named —
+        silently treating it as satisfied would clear an interpreter the project excludes.
+        """
+        current = ".".join(str(c) for c in sys.version_info[:2])
+        assert doctor._python_version_in_range(">=3.11, <3.15") == (True, [])
+        assert doctor._python_version_in_range(f">={current}") == (True, [])
+        assert doctor._python_version_in_range(">=99.0")[0] is False
+        assert doctor._python_version_in_range(f">=3.11, !={current}.*") == (True, [f"!={current}.*"])
+
+    def test_the_exit_code_follows_the_core_checks_only(self, doctor, monkeypatch, capsys) -> None:
+        """Given the core checks fail, main exits 1; given they pass, main exits 0 even when
+        toolchains are missing — a missing compiler is information, not a failed environment.
+        """
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py"])
+        monkeypatch.setattr(doctor, "_check_install_skew", lambda pyproject: None)
+        monkeypatch.setattr(doctor, "_report_toolchains", lambda markers, evaluated: [])
+        monkeypatch.setattr(doctor, "_check_core_environment", lambda pyproject: False)
+        assert doctor.main() == 1
+        monkeypatch.setattr(doctor, "_check_core_environment", lambda pyproject: True)
+        assert doctor.main() == 0
+        assert "none —" in capsys.readouterr().out
+
+
+class TestMarkersExpression:
+    """--markers composes into `pytest -m "<expr>"`, so what it prints has to be safe there."""
+
+    def test_no_runnable_markers_prints_nothing_and_fails(self, doctor, monkeypatch, capsys) -> None:
+        """Given a machine where no marker is runnable, when --markers is asked for the
+        expression, then stdout stays empty and the exit code is nonzero — printing an empty
+        expression would be read by pytest as 'no filter' and run the entire suite, the exact
+        opposite of what the machine can do.
+        """
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py", "--markers"])
+        monkeypatch.setattr(doctor, "_runnable_markers", lambda markers, evaluated: [])
+        assert doctor.main() == 1
+        captured = capsys.readouterr()
+        assert captured.out.strip() == ""
+        assert "runnable" in captured.err
+
+    def test_runnable_markers_are_printed_as_an_or_expression(self, doctor, monkeypatch, capsys) -> None:
+        """Given two runnable markers, --markers prints exactly the pytest -m expression."""
+        monkeypatch.setattr(doctor.sys, "argv", ["check_dev_env.py", "--markers"])
+        monkeypatch.setattr(doctor, "_runnable_markers", lambda markers, evaluated: ["python", "go"])
+        assert doctor.main() == 0
+        assert capsys.readouterr().out.strip() == "python or go"
+
+
+class TestTableIntegrity:
+    """The toolchain table cannot drift from the markers pyproject registers."""
+
+    KNOWN_UNCOVERED_MARKERS = frozenset(
+        {
+            # verified per server: their language servers are installed or bundled by Serena
+            # itself (cue/ada/al/luau download pinned releases for every platform Serena
+            # runs on; marksman, texlab and taplo are downloaded binaries; fortls and
+            # pyright run via uvx; msl ships a bundled server), so no local toolchain is
+            # required. hlsl is NOT here: its download has a platform matrix, so it carries
+            # a row of its own — a managed dependency only waives a language when it covers
+            # every platform
+            "ada",
+            "al",
+            "cue",
+            "fortran",
+            "latex",
+            "luau",
+            "markdown",
+            "msl",
+            "toml",
+            # lua-language-server is downloaded by LuaLanguageServer itself when absent (lua_ls.py)
+            "lua",
+            # the managed Kotlin server ships bin/intellij-server with a bundled JBR (kotlin_language_server.py)
+            "kotlin",
+            # the default jdtls setup downloads the vscode-java bundle with its own JRE 21 (eclipse_jdtls.py)
+            "java",
+            # the language Serena itself runs on; the dev environment provides it
+            "python",
+        }
+    )
+
+    def test_every_marker_without_a_table_row_is_an_explicit_waiver(self, doctor) -> None:
+        """Given the registered language markers and the toolchain table, every marker
+        without a row is on the documented waiver list above — a newly added language
+        cannot silently land in the no-requirement bucket, and a row cannot be dropped
+        without the waiver saying why.
+        """
+        registered = doctor._language_markers(doctor._read_pyproject())
+        covered = {marker for requirement in doctor.TOOLCHAIN_REQUIREMENTS for marker in requirement.markers}
+        uncovered = {marker for marker in registered if marker not in covered}
+        assert uncovered == self.KNOWN_UNCOVERED_MARKERS
+
+    def test_every_marker_in_the_table_is_a_registered_language_marker(self, doctor) -> None:
+        """Given the language markers registered in pyproject.toml, every marker named by
+        a toolchain requirement is one of them — a removed or renamed language cannot
+        leave a stale row behind unnoticed.
+        """
+        registered = set(doctor._language_markers(doctor._read_pyproject()))
+        for requirement in doctor.TOOLCHAIN_REQUIREMENTS:
+            unknown = set(requirement.markers) - registered
+            assert not unknown, f"row '{requirement.note}' names unregistered markers: {sorted(unknown)}"
+
+    # commands a row requires that conftest does not gate the whole marker on. Each is a
+    # provider requirement conftest has no opinion about, and each must say which provider,
+    # because the alternative -- an undeclared extra -- withholds a marker that would have run
+    REQUIREMENTS_CONFTEST_DOES_NOT_MAKE = {
+        "nix": {"nix": "nixd_ls.py raises without the nix CLI, which conftest does not check"},
+        "php": {
+            "node": "intelephense, the default backend, runs on node; conftest gates only phpactor/phpantom, and on php",
+            "npm": "...and npm installs it",
+        },
+        "elm": {
+            "elm-language-server": "elm_ls.py needs the server itself; conftest gates only the elm compiler",
+            "node": "...and node/npm to install it when it is absent",
+            "npm": "...and node/npm to install it when it is absent",
+        },
+        "haskell": {
+            "ghc": "GUARD IS WIDER THAN THE SUITE: haskell_ls.py wants a full toolchain, conftest gates only the wrapper",
+            "cabal": "GUARD IS WIDER THAN THE SUITE: see ghc — both are queued for a separate alignment PR",
+        },
+        "cpp": {
+            "clangd": "GUARD IS WIDER THAN THE SUITE: conftest disables only the clangd backend, cpp_ccls still runs"
+            " under the same marker — queued for the same alignment PR",
+        },
+    }
+
+    # the mirror of the dict above: guards conftest DOES make that a row satisfies by probing
+    # rather than by naming a command. A row covers these through extra_check, so comparing only
+    # against its `commands` would report drift that is not there
+    GUARDS_A_ROW_PROBES_INSTEAD = {
+        "wolfram": {"WolframKernel": "the row's _wolfram_kernel_check mirrors the same kernel discovery conftest uses"},
+    }
+
+    def test_the_table_agrees_with_the_guards_conftest_actually_applies(self, doctor) -> None:
+        """Given the availability guards in test/conftest.py, re-derived from its own source,
+        every toolchain row requires exactly what really decides whether its marker can run.
+
+        The doctor cannot import conftest — it would drag in pytest and the whole language-server
+        stack, on the machine where that is precisely what is broken — so the table is written by
+        hand. This is what keeps the copy honest: a row that requires less than conftest gates on
+        reports a marker runnable that is not, and a row that requires more withholds one that
+        works. Both have happened; the second three times.
+        """
+        registered = set(doctor._language_markers(doctor._read_pyproject()))
+        guards = _conftest_command_guards(registered)
+        assert guards, "no guard was derived from conftest — the reader stopped resolving rather than finding agreement"
+        rows = {marker: requirement for requirement in doctor.TOOLCHAIN_REQUIREMENTS for marker in requirement.markers}
+        drift = []
+        for marker, (whole_marker, partial) in sorted(guards.items()):
+            required = {frozenset(entry.split("|")) for entry in rows[marker].commands} if marker in rows else set()
+            justified = self.REQUIREMENTS_CONFTEST_DOES_NOT_MAKE.get(marker, {})
+            probed = self.GUARDS_A_ROW_PROBES_INSTEAD.get(marker, {})
+            for group in sorted(whole_marker - required, key=sorted):
+                unprobed = sorted(command for command in group if command not in probed)
+                if unprobed:
+                    drift.append(f"{marker}: conftest disables it without {unprobed}, but no row requires or probes that")
+            for group in sorted(required - whole_marker, key=sorted):
+                undeclared = sorted(command for command in group if command not in justified)
+                if undeclared:
+                    reason = "conftest gates only some of its backends on that" if group in partial else "conftest does not gate it on that"
+                    drift.append(f"{marker}: the row requires {undeclared}, and {reason}")
+        assert not drift, "the table and conftest disagree:\n  " + "\n  ".join(drift)
