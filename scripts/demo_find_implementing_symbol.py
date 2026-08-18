@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 """
 Demonstrates FindImplementationsTool on the Go test repository.
 """
 
+import argparse
 import json
 from pathlib import Path
 from pprint import pprint
@@ -49,6 +51,7 @@ def print_section(title: str) -> None:
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     agent = make_agent(GO_TEST_REPO, LanguageServerId.GO, "demo_go_test_repo")
 
     try:

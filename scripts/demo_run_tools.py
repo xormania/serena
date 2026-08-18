@@ -1,8 +1,10 @@
+#!/usr/bin/env python3
 """
 This script demonstrates how to use Serena's tools locally, useful
 for testing or development. Here the tools will be operation the serena repo itself.
 """
 
+import argparse
 import json
 from pathlib import Path
 from pprint import pprint
@@ -23,6 +25,7 @@ from serena.tools import (
 )
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     serena_config = SerenaConfig.from_config_file()
     serena_config.web_dashboard = False
     serena_config.language_backend = LanguageBackend.LSP

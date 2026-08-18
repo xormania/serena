@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Script to build a single JSON file from all individual news HTML files.
 
@@ -8,6 +9,7 @@ This reads all .html files from the `news/` directory and creates
 `news/news.json` containing a mapping of news IDs to HTML content strings.
 """
 
+import argparse
 import json
 import os
 import sys
@@ -42,14 +44,13 @@ def build_news_json() -> None:
 
 
 if __name__ == "__main__":
-    deploy = False
-    for arg in sys.argv[1:]:
-        if arg == "--deploy":
-            deploy = True
+    parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
+    parser.add_argument("--deploy", action="store_true", help="scp the built news.json to the Hades web root (requires HADES_USER)")
+    args = parser.parse_args()
 
     build_news_json()
 
-    if deploy:
+    if args.deploy:
         user = os.getenv("HADES_USER")
         assert user, "HADES_USER environment variable must be set to deploy news.json to Hades"
         os.system(f"scp news/news.json {user}@hades:/var/www/html/oraios-software/serena_news.json")

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Demonstrates the progressive shortening of tool results when max_answer_chars is exceeded.
 It exercises all tools that use _limit_length with shortened_results,
@@ -6,6 +7,7 @@ to show the successive shortening stages. Both LSP and JetBrains backends
 are tested (JB is skipped if no IDE is running).
 """
 
+import argparse
 import json
 from pprint import pprint
 
@@ -172,6 +174,7 @@ def make_agent(backend: LanguageBackend) -> SerenaAgent:
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     # LSP backend
     lsp_agent = make_agent(LanguageBackend.LSP)
     try:

@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""Profiles a symbol lookup end to end: starts a SerenaAgent on this repository, runs
+FindSymbolTool once, and writes profiler output — ``tool_call.pstat`` for cProfile (view
+with snakeviz), or a pyinstrument report; switch the ``profiler`` variable in this file.
+"""
+
+import argparse
 import cProfile
 from pathlib import Path
 from typing import Literal
@@ -14,6 +21,7 @@ log = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     logging.configure()
 
     # The profiler to use:

@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 """
 Autogenerates the `prompt_factory.py` module
 """
 
+import argparse
 from pathlib import Path
 
 from sensai.util import logging
@@ -20,4 +22,5 @@ def main():
 
 
 if __name__ == "__main__":
+    argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
     logging.run_main(main)
