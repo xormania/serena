@@ -554,7 +554,9 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ),
     ToolchainRequirement(("deno",), ("deno",), "Deno v2 (deno lsp ships with the CLI)"),
     ToolchainRequirement(
-        ("haxe",), ("haxe", "node"), "Haxe + Node.js (the downloaded haxe server is server.js, run via node; neko is never invoked)"
+        ("haxe",),
+        ("haxe", "haxe-language-server|node"),
+        "Haxe, plus either a system haxe-language-server or Node.js for the downloaded server.js (neko is never invoked)",
     ),
     ToolchainRequirement(
         ("haskell",),

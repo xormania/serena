@@ -113,74 +113,42 @@ class TestLifecycleVerdicts:
         assert "cannot query registrations" in result.detail
         assert not any("setup" in argv for argv in issued)
 
-    def test_a_clean_lifecycle_passes_and_names_the_verified_command(self, probe_module, tmp_path) -> None:
-        """Given a client that registers, echoes the expected command, and removes
-        cleanly, when the lifecycle runs, then the probe PASSes and notes the command.
+    # What a client's list output says about serena's registration, and the verdict each
+    # shape must produce. One contract, so one table: every row is a real client behaviour
+    # (codex renders columns; a wrong or extended command must not pass; another server's
+    # row is not evidence about ours) and the verdict is what the probe is allowed to claim.
+    @pytest.mark.parametrize(
+        ("case", "serena_row_output", "expected_status", "expected_evidence"),
+        [
+            ("verbatim", f"serena  {EXPECTED_COMMAND}", "PASS", "expected command:"),
+            ("column-formatted", "serena  serena   start-mcp-server --context=fake", "PASS", "reformatted by the client"),
+            ("wrong command", "serena  serena start-mcp-server --context=WRONG", "FAIL", "lacks expected parts: --context=fake"),
+            ("token merely prefixed", "serena  serena   start-mcp-server --context=fake-extra", "FAIL", "--context=fake"),
+            ("verbatim but suffixed", f"serena  {EXPECTED_COMMAND}-extra", "FAIL", "--context=fake"),
+            (
+                "tokens only on another row",
+                "othertool  foo start-mcp-server --context=fake\nserena  serena",
+                "PASS",
+                "does not expose command text",
+            ),
+            ("no command text at all", "serena", "PASS", "does not expose command text"),
+        ],
+        ids=lambda value: value if isinstance(value, str) and " " in value and "serena" not in value else None,
+    )
+    def test_the_registered_command_is_verified_from_what_the_client_shows(
+        self, probe_module, tmp_path, case: str, serena_row_output: str, expected_status: str, expected_evidence: str
+    ) -> None:
+        """Given each shape a client's list output takes, the probe reaches the verdict the
+        evidence supports — and never a stronger one.
         """
-        result, _ = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, f"serena  {EXPECTED_COMMAND}"))
-        assert result.status == probe_module.Status.PASS
-        assert any("expected command:" in note for note in result.notes)
-
-    def test_a_column_formatted_command_is_verified_token_by_token(self, probe_module, tmp_path) -> None:
-        """Given a client that renders the command as table columns (codex does), when
-        every expected token appears in the serena row, then the probe PASSes and notes
-        the reformatting.
-        """
-        result, _ = _run_lifecycle(
-            probe_module, _probe(probe_module, tmp_path), after_add=(0, "serena  serena   start-mcp-server --context=fake")
-        )
-        assert result.status == probe_module.Status.PASS
-        assert any("reformatted by the client" in note for note in result.notes)
-
-    def test_a_wrong_registered_command_fails_naming_the_missing_parts(self, probe_module, tmp_path) -> None:
-        """Given a client whose serena row echoes a different command, when the lifecycle
-        runs, then the probe FAILs naming the absent parts, and the rollback still runs.
-        """
-        result, calls = _run_lifecycle(
-            probe_module, _probe(probe_module, tmp_path), after_add=(0, "serena  serena start-mcp-server --context=WRONG")
-        )
-        assert result.status == probe_module.Status.FAIL
-        assert "lacks expected parts: --context=fake" in result.detail
-        assert calls[-1] == ("stub", "remove")
-
-    def test_a_token_that_only_prefixes_a_longer_token_does_not_verify(self, probe_module, tmp_path) -> None:
-        """Given a reformatted row whose token extends an expected one ('--context=fake-extra'
-        for expected '--context=fake'), the probe FAILs naming the missing part — substring
-        membership would have accepted the prefix as a match.
-        """
-        result, _ = _run_lifecycle(
-            probe_module, _probe(probe_module, tmp_path), after_add=(0, "serena  serena   start-mcp-server --context=fake-extra")
-        )
-        assert result.status == probe_module.Status.FAIL
-        assert "--context=fake" in result.detail
-
-    def test_a_suffixed_command_fails_even_when_listed_verbatim_but_extended(self, probe_module, tmp_path) -> None:
-        """Given a row that lists the expected command verbatim except its last token grew a
-        suffix ('--context=fake-extra'), the probe FAILs — the exact-match branch takes this
-        path (single-spaced, so it is a plain substring hit) and must enforce token
-        boundaries just like the reformatted branch.
-        """
-        result, _ = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, f"serena  {EXPECTED_COMMAND}-extra"))
-        assert result.status == probe_module.Status.FAIL
-        assert "--context=fake" in result.detail
-
-    def test_tokens_on_another_servers_row_do_not_verify_the_registration(self, probe_module, tmp_path) -> None:
-        """Given the expected tokens appearing only on another server's row, when the
-        lifecycle runs, then the serena registration is not reported as verified.
-        """
-        listing = "othertool  foo start-mcp-server --context=fake\nserena  serena"
-        result, _ = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, listing))
-        assert result.status == probe_module.Status.PASS
-        assert not any("expected command" in note for note in result.notes)
-        assert any("does not expose command text" in note for note in result.notes)
-
-    def test_output_without_command_text_yields_a_note_not_a_verdict(self, probe_module, tmp_path) -> None:
-        """Given a client whose list output carries no command text at all, when the
-        lifecycle runs, then the probe PASSes with an explicit not-verifiable note.
-        """
-        result, _ = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, "serena"))
-        assert result.status == probe_module.Status.PASS
-        assert any("does not expose command text" in note for note in result.notes)
+        result, calls = _run_lifecycle(probe_module, _probe(probe_module, tmp_path), after_add=(0, serena_row_output))
+        assert result.status == getattr(probe_module.Status, expected_status)
+        evidence = result.detail + " ".join(result.notes)
+        assert expected_evidence in evidence
+        if expected_status == "FAIL":
+            assert calls[-1] == ("stub", "remove")  # a failed verification still rolls back
+        if case == "tokens only on another row":
+            assert not any("expected command:" in note for note in result.notes)
 
     def test_a_failed_final_query_fails_with_the_rollback_still_armed(self, probe_module, tmp_path) -> None:
         """Given a final registration query that exits nonzero, when the lifecycle runs,
@@ -330,141 +298,91 @@ class TestStatePreservation:
         assert list(tmp_path.glob("fake-config.json"))
 
     @posix_only
-    def test_the_clean_path_restores_bytes_and_permissions(self, probe_module, tmp_path) -> None:
-        """Given a client that rewrote the config's bytes and loosened its mode, when the
-        baseline is verified, then both the bytes and the pre-probe mode return.
+    # The pre-probe mode must come back whether the client loosened it or deleted the file,
+    # and whatever that mode was: 0600 catches a naive write inheriting the umask, 0644
+    # catches a restore that inherits the owner-only temp file instead of applying the
+    # recorded mode. One property, three ways for a client to break it.
+    @posix_only
+    @pytest.mark.parametrize(
+        ("mode", "client_action"),
+        [(0o600, "rewrite"), (0o600, "delete"), (0o644, "delete")],
+        ids=["loosened-from-0600", "deleted-was-0600", "deleted-was-0644"],
+    )
+    def test_the_pre_probe_mode_and_bytes_come_back(self, probe_module, tmp_path, mode: int, client_action: str) -> None:
+        """Given a config the client rewrote or deleted, when the probe restores it, then
+        both its bytes and its pre-probe mode return.
         """
         probe, config_path = self._restore_probe(probe_module, tmp_path)
         original = b'{"perm": "test"}'
         config_path.write_bytes(original)
-        config_path.chmod(0o600)
+        config_path.chmod(mode)
         probe._backup_config()
-        config_path.write_bytes(b'{"perm": "mutated"}')
-        config_path.chmod(0o644)
-        assert stat.S_IMODE(config_path.stat().st_mode) == 0o644  # the plant landed
-        probe._verify_config_baseline()
+        if client_action == "rewrite":
+            config_path.write_bytes(b'{"perm": "mutated"}')
+            config_path.chmod(0o644 if mode == 0o600 else 0o600)
+            assert config_path.read_bytes() != original  # the plant landed
+            probe._verify_config_baseline()
+        else:
+            config_path.unlink()
+            assert not config_path.is_file()  # the plant landed
+            probe._emergency_restore()
         assert config_path.read_bytes() == original
-        assert stat.S_IMODE(config_path.stat().st_mode) == 0o600
+        assert stat.S_IMODE(config_path.stat().st_mode) == mode
 
+    # A symlinked config has two independent properties a client can break: whether the path
+    # is still a link, and what its target holds. Four shapes cover the matrix — the link may
+    # exist or dangle, and the client may write THROUGH it or REPLACE it (atomic-rename
+    # writers do) — and in every one the user's link must survive with the right content
+    # behind it. Byte comparison alone sees none of this.
     @posix_only
-    def test_an_emergency_recreate_restores_the_original_mode_not_the_umask(self, probe_module, tmp_path) -> None:
-        """Given a client that deleted its config mid-lifecycle, when emergency restore
-        recreates it from backup, then the file carries the pre-probe 0600 mode rather
-        than whatever the process umask would grant.
-        """
-        probe, config_path = self._restore_probe(probe_module, tmp_path)
-        original = b'{"perm": "test"}'
-        config_path.write_bytes(original)
-        config_path.chmod(0o600)
-        probe._backup_config()
-        config_path.unlink()
-        assert not config_path.is_file()  # the plant landed
-        probe._emergency_restore()
-        assert config_path.read_bytes() == original
-        assert stat.S_IMODE(config_path.stat().st_mode) == 0o600
-
-    @posix_only
-    def test_an_emergency_recreate_restores_a_wider_mode_than_the_temp_files(self, probe_module, tmp_path) -> None:
-        """Given a config whose pre-probe mode was 0644, when emergency restore recreates it
-        from backup, then it carries 0644 — the atomic temp file starts owner-only, so the
-        pre-probe mode must be applied explicitly, not inherited from the temp.
-        """
-        probe, config_path = self._restore_probe(probe_module, tmp_path)
-        original = b'{"perm": "wide"}'
-        config_path.write_bytes(original)
-        config_path.chmod(0o644)
-        probe._backup_config()
-        config_path.unlink()
-        assert not config_path.is_file()  # the plant landed
-        probe._emergency_restore()
-        assert config_path.read_bytes() == original
-        assert stat.S_IMODE(config_path.stat().st_mode) == 0o644
-
-    @posix_only
-    def test_a_symlinked_config_keeps_its_link_and_target_after_restore(self, probe_module, tmp_path) -> None:
-        """Given a config managed as a symlink into a dotfiles tree, when emergency restore
-        rewrites it, then the link is still a link, its target carries the pre-probe bytes,
-        and no regular file has replaced the link — the restore writes through to the
-        resolved target.
+    @pytest.mark.parametrize(
+        ("target_exists", "client_replaces_the_link"),
+        [(True, False), (True, True), (False, False), (False, True)],
+        ids=["intact-written-through", "intact-replaced", "dangling-written-through", "dangling-replaced"],
+    )
+    def test_a_symlinked_config_survives_every_way_a_client_writes_it(
+        self, probe_module, tmp_path, target_exists: bool, client_replaces_the_link: bool
+    ) -> None:
+        """Given a config managed as a symlink, when the lifecycle finishes, then the path is
+        still that link, its target holds the pre-probe content, and nothing the probe caused
+        is left behind.
         """
         dotfiles = tmp_path / "dotfiles"
         dotfiles.mkdir()
         target = dotfiles / "config.json"
         original = b'{"linked": true}'
-        target.write_bytes(original)
-        link = tmp_path / "config.json"
-        link.symlink_to(target)
-        probe = _probe(probe_module, tmp_path, link)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        target.write_bytes(b'{"mutated": true}')  # the client wrote through the link
-        probe._emergency_restore()
-        assert link.is_symlink()
-        assert target.read_bytes() == original
-
-    @posix_only
-    def test_a_link_replaced_by_an_identical_regular_file_is_recreated(self, probe_module, tmp_path) -> None:
-        """Given a client that rewrites configs by atomic rename — replacing the symlinked
-        config with a regular file whose bytes are IDENTICAL — when the clean lifecycle
-        verifies the baseline, then the link is recreated: byte-identity alone must not
-        declare the baseline intact while the user's dotfile link is gone.
-        """
-        dotfiles = tmp_path / "dotfiles"
-        dotfiles.mkdir()
-        target = dotfiles / "config.json"
-        original = b'{"linked": true}'
-        target.write_bytes(original)
+        if target_exists:
+            target.write_bytes(original)
         link = tmp_path / "config.json"
         link.symlink_to(target)
         probe = _probe(probe_module, tmp_path, link)
         calls = {"lists": 0}
 
-        def link_replacing_run(argv):
+        def writing_run(argv):
             if "setup" in argv:
-                link.unlink()
-                link.write_bytes(original)  # same bytes, but the link is now a regular file
+                if client_replaces_the_link:
+                    link.unlink()
+                    # IDENTICAL bytes where there were any: an atomic-rename writer preserves
+                    # content, so only the link's shape betrays the swap. Writing different
+                    # bytes here would let the byte comparison catch it and leave the shape
+                    # check unexercised
+                    link.write_bytes(original if target_exists else b'{"written-by-rename": true}')
+                else:
+                    target.write_bytes(b'{"written-through": true}')  # written through the link
             if argv == ("stub", "list"):
                 calls["lists"] += 1
                 return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
             return probe_module.ExecutedCommand(argv, 0, "", "")
 
-        probe._run = link_replacing_run
+        probe._run = writing_run
         result = probe.run()
         assert result.status == probe_module.Status.PASS
         assert link.is_symlink()
         assert os.readlink(link) == str(target)
-        assert target.read_bytes() == original
-        assert any("link was recreated" in note for note in result.notes)
-
-    @posix_only
-    def test_a_dangling_config_symlink_survives_and_its_created_target_is_removed(self, probe_module, tmp_path) -> None:
-        """Given the config path is a dangling symlink, when setup writes through it and the
-        probe cleans up, then the link is still there pointing where it did, and only the
-        target the probe created is removed — treating the path as nonexistent would unlink
-        the user's link and leave the created file behind.
-        """
-        dotfiles = tmp_path / "dotfiles"
-        dotfiles.mkdir()
-        target = dotfiles / "config.json"  # deliberately absent: the link dangles
-        link = tmp_path / "config.json"
-        link.symlink_to(target)
-        probe = _probe(probe_module, tmp_path, link)
-        calls = {"lists": 0}
-
-        def creating_run(argv):
-            if "setup" in argv:
-                target.write_text('{"created": true}')  # written THROUGH the dangling link
-            if argv == ("stub", "list"):
-                calls["lists"] += 1
-                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
-            return probe_module.ExecutedCommand(argv, 0, "", "")
-
-        probe._run = creating_run
-        result = probe.run()
-        assert result.status == probe_module.Status.PASS
-        assert link.is_symlink()
-        assert os.readlink(link) == str(target)
-        assert not target.exists()
+        if target_exists:
+            assert target.read_bytes() == original
+        else:
+            assert not target.exists()  # a dangling link is left dangling, as it was found
 
     def test_an_interrupt_before_the_baseline_is_confirmed_still_restores(self, probe_module, tmp_path) -> None:
         """Given the client reserialized the config and an interrupt arrives while the
@@ -497,35 +415,20 @@ class TestStatePreservation:
         assert config_path.read_bytes() == original
 
     @posix_only
-    def test_a_dangling_link_replaced_by_a_regular_file_is_recreated(self, probe_module, tmp_path) -> None:
-        """Given the config was a dangling symlink and the client writes by atomic rename —
-        replacing the link itself with a regular file — when the probe cleans up, then the
-        link is back: deleting the file and stopping there would leave the user with neither
-        their link nor a file.
+    def test_a_failed_backup_leaves_no_hidden_hardlink_behind(self, probe_module, tmp_path) -> None:
+        """Given the backup fails after the config's inode was anchored, when the probe gives
+        up, then no anchor is left in the user's config directory — it is a hidden hardlink to
+        a possibly credential-bearing file, and this runs before the caller's cleanup exists,
+        so nothing else would ever remove it.
         """
-        dotfiles = tmp_path / "dotfiles"
-        dotfiles.mkdir()
-        target = dotfiles / "config.json"  # absent: the link dangles
-        link = tmp_path / "config.json"
-        link.symlink_to(target)
-        probe = _probe(probe_module, tmp_path, link)
-        calls = {"lists": 0}
-
-        def rename_writing_run(argv):
-            if "setup" in argv:
-                link.unlink()
-                link.write_text('{"written-by-rename": true}')  # the link is now a regular file
-            if argv == ("stub", "list"):
-                calls["lists"] += 1
-                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
-            return probe_module.ExecutedCommand(argv, 0, "", "")
-
-        probe._run = rename_writing_run
-        result = probe.run()
-        assert result.status == probe_module.Status.PASS
-        assert link.is_symlink()
-        assert os.readlink(link) == str(target)
-        assert not target.exists()
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"hardlinked": true}')
+        os.link(config_path, tmp_path / "dotfiles-config.json")
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe.backup_dir = tmp_path / "does-not-exist"  # the backup write will fail
+        with pytest.raises(OSError):
+            probe._backup_config()
+        assert not list(tmp_path.glob(".config.json.serena-probe-link*"))
 
     @posix_only
     def test_the_inode_anchor_never_overwrites_something_already_there(self, probe_module, tmp_path) -> None:
@@ -600,6 +503,25 @@ class TestStatePreservation:
         assert config_path.read_bytes() == original
 
     @posix_only
+    def test_a_deleted_hardlinked_config_is_recreated_even_without_an_anchor(self, probe_module, tmp_path) -> None:
+        """Given a hardlinked config the client deleted, and no inode anchor to relink from
+        (a filesystem that refused one), when the restore runs, then the file comes back —
+        writing through an inode is impossible once the path is gone, so the restore must
+        fall back to recreating it rather than raising with a good backup in hand.
+        """
+        config_path = tmp_path / "config.json"
+        original = b'{"hardlinked": true}'
+        config_path.write_bytes(original)
+        os.link(config_path, tmp_path / "dotfiles-config.json")
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        probe._discard_link_anchor()  # as if the filesystem had refused the anchor
+        config_path.unlink()
+        probe._restore_config_bytes()
+        assert config_path.read_bytes() == original
+
+    @posix_only
     def test_an_unreadable_backup_leaves_a_hardlinked_config_intact(self, probe_module, tmp_path) -> None:
         """Given the backup has gone missing, when the hardlinked restore runs, then the
         config and its twin still hold what they held — reading the backup only after
@@ -619,6 +541,27 @@ class TestStatePreservation:
             probe._restore_config_bytes()
         assert config_path.read_bytes() == b'{"client-wrote": true}'
         assert twin.read_bytes() == b'{"client-wrote": true}'
+
+    @posix_only
+    def test_a_hardlinked_restore_refuses_to_write_through_a_symlink(self, probe_module, tmp_path) -> None:
+        """Given the config path became a symlink pointing at an unrelated file, when the
+        hardlink restore runs, then it refuses rather than truncating the link's target —
+        the inode write is the one restore path that opens by name without the atomic
+        replace's protections.
+        """
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"hardlinked": true}')
+        os.link(config_path, tmp_path / "dotfiles-config.json")
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        victim = tmp_path / "victim.json"
+        victim.write_text("precious")
+        config_path.unlink()
+        config_path.symlink_to(victim)
+        with pytest.raises(OSError):
+            probe._restore_config_bytes()
+        assert victim.read_text() == "precious"
 
     @posix_only
     def test_a_hardlinked_config_is_restored_through_its_inode(self, probe_module, tmp_path) -> None:

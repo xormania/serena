@@ -186,6 +186,24 @@ class TestRequirementVerdicts:
         monkeypatch.setenv("GITHUB_ACTIONS", "true")
         assert doctor._runnable_markers(markers, evaluated) == ["go"]
 
+    def test_a_system_language_server_stands_in_for_the_runtime_that_would_run_it(self, doctor) -> None:
+        """Given a row whose server is normally a downloaded script, a system executable of
+        that server satisfies it without the runtime: the haxe provider short-circuits to a
+        haxe-language-server on the PATH and launches it directly, so requiring Node there
+        would hide a runnable suite.
+        """
+        haxe = next(requirement for requirement in doctor.TOOLCHAIN_REQUIREMENTS if "haxe" in requirement.markers)
+        monkeypatch = pytest.MonkeyPatch()
+        try:
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe", "haxe-language-server": "/usr/bin/hxls"}))
+            assert haxe.unsatisfied() == []
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe", "node": "/usr/bin/node"}))
+            assert haxe.unsatisfied() == []  # the downloaded server.js path still works
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({"haxe": "/usr/bin/haxe"}))
+            assert haxe.unsatisfied() == ["haxe-language-server|node"]
+        finally:
+            monkeypatch.undo()
+
     def test_perl_is_unavailable_on_windows_whatever_is_installed(self, doctor, monkeypatch) -> None:
         """Given Windows with perl and the module present, the perl row still reports it
         missing: the provider accepts Linux and macOS platform IDs only and raises on

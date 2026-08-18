@@ -343,7 +343,18 @@ class ClientProbe:
         return {" ".join(line.split()) for line in list_output.splitlines() if line.strip()}
 
     def _backup_config(self) -> None:
-        # snapshot the user-level config file (0600, inside the private backup dir) before mutating
+        # snapshot the user-level config file (0600, inside the private backup dir) before mutating.
+        # Anything that fails PART WAY through cleans up after itself: the anchor is a hidden
+        # hardlink to a possibly credential-bearing config, and this runs before the caller's
+        # try/finally exists, so nothing else would ever remove it
+        try:
+            self._take_config_backup()
+        except BaseException:
+            self._discard_link_anchor()
+            raise
+
+    def _take_config_backup(self) -> None:
+        """Records everything about the config that a restore will need to put back."""
         config_path = self.spec.user_config_path
         if config_path is None:
             self._notes.append("no known user-config path for this client; baseline is verified via the registration list only")
