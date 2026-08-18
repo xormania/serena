@@ -279,6 +279,8 @@ class ClientProbe:
         self._config_was_symlink = False
         self._config_link_target: str | None = None
         self._config_hardlinked = False
+        self._config_inode: tuple[int, int] | None = None
+        self._config_link_anchor: Path | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
         # execute, record in the transcript, and echo for the live reader. On POSIX the child
@@ -363,6 +365,22 @@ class ClientProbe:
         # os.replace would install a new one, leaving the twin permanently carrying whatever
         # the client wrote while the probed path looked pristine
         self._config_hardlinked = config_stat.st_nlink > 1
+        if self._config_hardlinked:
+            self._config_inode = (config_stat.st_dev, config_stat.st_ino)
+            # a client that rewrites by atomic rename severs the link, and the OTHER name is
+            # not knowable from here -- so hold the original inode open with a link of our
+            # own, beside the config (same filesystem, unlike the backup dir), which lets the
+            # relationship be restored rather than merely reported
+            anchor = config_path.parent / f".{config_path.name}.serena-probe-link"
+            try:
+                if anchor.exists() or anchor.is_symlink():
+                    anchor.unlink()
+                os.link(config_path, anchor)
+                self._config_link_anchor = anchor
+            except OSError as e:
+                self._notes.append(
+                    f"the config is hardlinked, but its inode could not be anchored ({e}); a severed link can only be reported"
+                )
         # restores must write through a symlinked config (dotfile trees), never replace the
         # link itself with a regular file -- so the restore target is resolved NOW, and the
         # link's shape and literal target are recorded so a client that atomically replaces
@@ -396,6 +414,45 @@ class ClientProbe:
         if config_path.is_file():
             config_path.unlink()
             self._notes.append(f"removed {config_path}, which the probe had created")
+
+    def _config_link_is_intact(self) -> bool:
+        """
+        :return: whether the config path still names the inode it named before the probe
+            (trivially true when the config was not hardlinked)
+        """
+        if not self._config_hardlinked or self._config_inode is None:
+            return True
+        config_path = self.spec.user_config_path
+        if config_path is None or not config_path.is_file():
+            return False
+        current = config_path.stat()
+        return (current.st_dev, current.st_ino) == self._config_inode
+
+    def _relink_config_to_its_original_inode(self) -> None:
+        """Puts the config path back on the inode it shared before the probe.
+
+        An atomic-rename writer leaves byte-identical content on a NEW inode, so the other
+        name in the user's dotfile tree silently stops being the same file. The anchor taken
+        at backup time still holds the original inode, so the relationship can be restored;
+        without it (a filesystem that refused the link), the break is reported instead.
+        """
+        config_path = self.spec.user_config_path
+        if config_path is None or self._config_link_is_intact():
+            return
+        if self._config_link_anchor is None or not self._config_link_anchor.is_file():
+            self._notes.append("the client replaced the hardlinked config with a new inode; the link to its other name is BROKEN")
+            return
+        if config_path.exists() or config_path.is_symlink():
+            config_path.unlink()
+        os.link(self._config_link_anchor, config_path)
+        self._notes.append("the client's rewrite severed the config's hardlink; the path was relinked to its original inode")
+
+    def _discard_link_anchor(self) -> None:
+        # the anchor is the probe's own litter: remove it once the link question is settled
+        if self._config_link_anchor is not None:
+            with contextlib.suppress(OSError):
+                self._config_link_anchor.unlink()
+            self._config_link_anchor = None
 
     def _restore_config_bytes(self) -> None:
         # restore the backup atomically, owner-only from the first byte: recreating a deleted
@@ -458,9 +515,13 @@ class ClientProbe:
         # identical bytes are not enough: a client that rewrites configs by atomic rename
         # replaces a symlinked config with a regular file while preserving every byte
         link_shape_intact = not self._config_was_symlink or config_path.is_symlink()
-        if bytes_intact and link_shape_intact:
+        # ...and identical bytes on a NEW inode silently unlink a hardlinked config from the
+        # other name that shared it, which no byte comparison can see
+        link_target_intact = self._config_link_is_intact()
+        if bytes_intact and link_shape_intact and link_target_intact:
             self._notes.append("user config is byte-identical to the baseline")
         else:
+            self._relink_config_to_its_original_inode()
             if not bytes_intact:
                 # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
                 # another process are indistinguishable; the byte-restore contract wins, and the
@@ -474,6 +535,7 @@ class ClientProbe:
         if self._config_mode is not None and stat.S_IMODE(config_path.stat().st_mode) != self._config_mode:
             config_path.chmod(self._config_mode)
             self._notes.append("user config permissions restored to the pre-probe mode")
+        self._discard_link_anchor()
         self._backup_path.unlink()
         self._backup_path = None
 
@@ -485,6 +547,7 @@ class ClientProbe:
         try:
             self._run(self.spec.remove_argv)
             if self._backup_path is not None and self.spec.user_config_path is not None:
+                self._relink_config_to_its_original_inode()
                 self._restore_config_bytes()
                 self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
             else:
@@ -493,6 +556,8 @@ class ClientProbe:
             self._notes.append(f"EMERGENCY RESTORE FAILED ({e}) — the client may still be mutated; backup kept at {self._backup_path}")
             print(f"    !! emergency restore failed: {e}", flush=True)
             print(f"    !! the client may still carry a serena registration; backup kept at {self._backup_path}", flush=True)
+        finally:
+            self._discard_link_anchor()
 
     def _result(self, status: Status, detail: str, cli_version: str | None = None) -> ProbeResult:
         return ProbeResult(self.handler.name, status, detail, cli_version, self._notes, self._transcript)

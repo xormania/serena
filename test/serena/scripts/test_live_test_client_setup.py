@@ -528,6 +528,40 @@ class TestStatePreservation:
         assert not target.exists()
 
     @posix_only
+    def test_an_atomic_rewrite_that_severs_a_hardlink_is_relinked(self, probe_module, tmp_path) -> None:
+        """Given a hardlinked config and a client that rewrites it by atomic rename with
+        BYTE-IDENTICAL content, when the lifecycle finishes, then the path is back on its
+        original inode — the bytes match either way, so only the inode identity can see that
+        the user's two names silently stopped being the same file.
+        """
+        config_path = tmp_path / "config.json"
+        twin = tmp_path / "dotfiles-config.json"
+        original = b'{"hardlinked": true}'
+        config_path.write_bytes(original)
+        os.link(config_path, twin)
+        inode_before = config_path.stat().st_ino
+        probe = _probe(probe_module, tmp_path, config_path)
+        calls = {"lists": 0}
+
+        def rename_writing_run(argv):
+            if "setup" in argv:
+                replacement = tmp_path / "incoming.json"
+                replacement.write_bytes(original)  # same bytes, brand-new inode
+                os.replace(replacement, config_path)
+            if argv == ("stub", "list"):
+                calls["lists"] += 1
+                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
+            return probe_module.ExecutedCommand(argv, 0, "", "")
+
+        probe._run = rename_writing_run
+        result = probe.run()
+        assert result.status == probe_module.Status.PASS
+        assert config_path.stat().st_ino == inode_before == twin.stat().st_ino
+        assert config_path.read_bytes() == original
+        assert any("relinked" in note for note in result.notes)
+        assert not list(tmp_path.glob(".config.json.serena-probe-link"))  # the anchor is cleaned up
+
+    @posix_only
     def test_a_hardlinked_config_deleted_by_the_client_is_recreated(self, probe_module, tmp_path) -> None:
         """Given a hardlinked config the client then DELETED, when the probe restores it,
         then the file is back with the baseline bytes — writing through the inode is
