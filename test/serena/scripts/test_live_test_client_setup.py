@@ -490,9 +490,7 @@ class TestStatePreservation:
         assert result.status is probe_module.Status.SKIP
         assert config_path.exists() is False, "the query created a config and the skip kept it"
 
-    def test_a_pre_existing_config_rewritten_while_inspecting_is_restored_when_the_client_is_skipped(
-        self, probe_module, tmp_path
-    ) -> None:
+    def test_a_pre_existing_config_rewritten_while_inspecting_is_restored_when_the_client_is_skipped(self, probe_module, tmp_path) -> None:
         """Given a config that already existed and a registration query that reserializes it, when
         the probe skips because serena is already registered, then the file holds the bytes it had.
 
