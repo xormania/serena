@@ -363,6 +363,23 @@ def _solidity_forge_check() -> str | None:
     return _managed_binary_platform_check("foundry forge", windows_arm64=False)
 
 
+def _terraform_ls_check() -> str | None:
+    # the row requires the terraform CLI, which is NOT the server: terraform_ls.py downloads
+    # terraform-ls separately, and its table stops at osx/linux x64+arm64 and win-x64. A
+    # satisfied command therefore says nothing about win-arm64, where the download raises
+    return _managed_binary_platform_check("terraform-ls", windows_arm64=False)
+
+
+def _elixir_expert_check() -> str | None:
+    # same shape as terraform: elixir/erl/mix are not the server. elixir_tools.py prefers an
+    # `expert` on the PATH and otherwise downloads one, from a table with no win-arm64 build.
+    # test/conftest.py's guard only asks whether Elixir itself is installed, so it does not
+    # cover this either
+    if shutil.which("expert"):
+        return None
+    return _managed_binary_platform_check("the Expert language server", windows_arm64=False)
+
+
 def _bash_shellcheck_check() -> str | None:
     # mirrors _SHELLCHECK_DEPENDENCIES (bash_language_server.py): linux/osx x64+arm64 and
     # win x64 only; _install_shellcheck_if_missing raises on anything else
@@ -544,7 +561,13 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "PowerShell 7 (discovered the way the server does: PATH or a standard install location)",
         extra_check=_pwsh_discovery_check,
     ),
-    ToolchainRequirement(("elixir",), ("elixir", "erl", "mix"), "Elixir + Erlang/OTP + mix (the fixture runs mix deps.get/compile)"),
+    ToolchainRequirement(
+        ("elixir",),
+        ("elixir", "erl", "mix"),
+        "Elixir + Erlang/OTP + mix (the fixture runs mix deps.get/compile); the Expert server is"
+        " downloaded unless one is on the PATH, and has no Windows arm64 build",
+        extra_check=_elixir_expert_check,
+    ),
     ToolchainRequirement(
         ("erlang",),
         ("erl", "rebar3", "erlang_ls"),
@@ -568,7 +591,12 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         ("ghc", "cabal", "haskell-language-server-wrapper"),
         "GHC + cabal + the HLS wrapper (CI runs Haskell tests on Linux only)",
     ),
-    ToolchainRequirement(("terraform",), ("terraform",), "Terraform CLI"),
+    ToolchainRequirement(
+        ("terraform",),
+        ("terraform",),
+        "Terraform CLI; terraform-ls is downloaded separately and has no Windows arm64 build",
+        extra_check=_terraform_ls_check,
+    ),
     ToolchainRequirement(("rego",), ("regal",), "Regal"),
     ToolchainRequirement(
         ("ansible",),

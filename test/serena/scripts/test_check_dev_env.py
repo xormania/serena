@@ -171,6 +171,37 @@ class TestRequirementVerdicts:
             "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
         )
 
+    @pytest.mark.parametrize(
+        ("marker", "commands_present", "named_in_verdict", "rescued_by"),
+        [
+            ("terraform", ("terraform",), "terraform-ls", None),
+            ("elixir", ("elixir", "erl", "mix"), "Expert", "expert"),
+        ],
+    )
+    def test_a_downloaded_server_with_no_windows_arm64_build_withholds_its_marker(
+        self, doctor, monkeypatch, marker, commands_present, named_in_verdict, rescued_by
+    ) -> None:
+        """Given Windows arm64 with every command the row asks for present, the row is still
+        unsatisfied, because the command it asks for is NOT the server: the terraform CLI and
+        elixir are separate from the servers downloaded for them, and neither download publishes
+        a Windows arm64 build. Asserted through the row rather than the check it delegates to —
+        a row that stopped calling its check would otherwise pass this.
+        """
+        requirement = next(r for r in doctor.TOOLCHAIN_REQUIREMENTS if marker in r.markers)
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "arm64")
+        monkeypatch.setattr(doctor.shutil, "which", _which_map({c: f"/usr/bin/{c}" for c in commands_present}))
+        problems = requirement.unsatisfied()
+        assert any(named_in_verdict in problem for problem in problems), f"{marker} was advertised where its server has no build"
+        if rescued_by is not None:
+            # ...unless the server is already on the PATH, which the provider prefers over a download
+            present = {c: f"/usr/bin/{c}" for c in (*commands_present, rescued_by)}
+            monkeypatch.setattr(doctor.shutil, "which", _which_map(present))
+            assert requirement.unsatisfied() == []
+            monkeypatch.setattr(doctor.shutil, "which", _which_map({c: f"/usr/bin/{c}" for c in commands_present}))
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert requirement.unsatisfied() == [], "a published platform must not be withheld"
+
     def test_rust_analyzer_is_found_in_the_providers_fallback_locations(self, doctor, monkeypatch, tmp_path) -> None:
         """Given neither rustup nor rust-analyzer on the PATH but an executable binary in
         ~/.cargo/bin, the check accepts it — the provider searches its common locations
