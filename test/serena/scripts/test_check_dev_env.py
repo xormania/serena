@@ -5,11 +5,11 @@ Each scenario states a machine condition (Given), evaluates a requirement or ver
 real toolchain is consulted: PATH lookups and version probes are replaced per scenario.
 """
 
-import ast
 import os
 import subprocess
 import sys
 from pathlib import Path
+from unittest import mock
 
 import pytest
 
@@ -19,13 +19,26 @@ def _which_map(available: dict[str, str]):
     return lambda command: available.get(command)
 
 
-def _conftest_command_guards(registered_markers: set[str]) -> dict[str, set[frozenset[str]]]:
-    """Reads back out of test/conftest.py which commands really decide whether a marker can run.
+def _conftest_command_guards(registered_markers: set[str]) -> dict[str, tuple[set[frozenset[str]], set[frozenset[str]]]]:
+    """Asks test/conftest.py which commands really decide whether a marker can run, by running it.
 
     The doctor cannot import conftest: it pulls in pytest, SerenaAgent and the whole
     language-server stack, and has to answer on the machine where exactly that is broken. Its
-    table is therefore written by hand -- so the rule is re-derived here from conftest's own
-    source, and a table that stops matching it fails instead of misinforming a contributor.
+    table is therefore written by hand -- so the rule is re-derived here by calling conftest's
+    own gating function against a substituted PATH and watching which servers it disables, and a
+    table that stops matching it fails instead of misinforming a contributor.
+
+    Derived by execution rather than from conftest's source, which is what this did before and
+    was wrong twice over. Reading the syntax froze it: extracting a predicate or looping over a
+    command table would have failed this suite while behaviour was unchanged. And it saw only
+    ``_sh.which(...)`` written directly in an ``if`` test, so every guard behind a helper --
+    matlab, R, ocaml, perl -- was invisible to it.
+
+    Reach, declared rather than assumed: ``_sh`` IS ``shutil``, so substituting its ``which``
+    reaches every guard that consults PATH, wherever it lives -- conftest's own, the helpers it
+    calls, and the language servers' discovery routines. Guards fixed at import time
+    (``ERLANG_LS_UNAVAILABLE``, ``EXPERT_UNAVAILABLE``) cannot be moved that way, and guards that
+    shell out instead of looking up PATH are equally out of reach; neither is claimed here.
 
     Several commands in one guard are alternatives (conftest disables QML only when neither
     qmlls6 nor qmlls is present), which is what the table's ``a|b`` entries mean. Whether a guard
@@ -56,27 +69,51 @@ def _conftest_command_guards(registered_markers: set[str]) -> dict[str, set[froz
         for marker in markers_of(server.name):
             servers_behind.setdefault(marker, set()).add(server.name)
 
-    source = ast.parse(Path("test/conftest.py").read_text(encoding="utf-8"))
-    determine = next(
-        node for node in ast.walk(source) if isinstance(node, ast.FunctionDef) and node.name == "_determine_disabled_language_servers"
-    )
+    def disabled_without(absent: frozenset[str]) -> tuple[set[str], set[str]]:
+        """
+        :param absent: the commands to withhold from the substituted PATH
+        :return: the servers conftest disables, and every command it looked up
+
+        The host is pinned to non-CI Linux so that the answer describes conftest's COMMAND
+        guards rather than the machine this runs on -- its platform guards (swift off macOS,
+        ansible on Windows) would otherwise make the derived table differ per developer. Those
+        guards still fire; they drop out of every comparison below because the baseline
+        carries them too.
+        """
+        looked_up: set[str] = set()
+
+        def which(command: str, *args: object, **kwargs: object) -> str | None:
+            looked_up.add(command)
+            return None if command in absent else f"/usr/bin/{command}"
+
+        with (
+            mock.patch.object(conftest._sh, "which", which),
+            mock.patch.object(conftest, "is_ci", False),
+            mock.patch.object(conftest, "is_windows", False),
+            mock.patch.object(conftest, "is_macos", False),
+            mock.patch.object(conftest, "is_linux", True),
+        ):
+            disabled = conftest._determine_disabled_language_servers()
+        return {server.name for server in disabled}, looked_up
+
+    baseline, vocabulary = disabled_without(frozenset())
+    effects: dict[frozenset[str], set[str]] = {}
+    for command in sorted(vocabulary):
+        alone = disabled_without(frozenset({command}))[0] - baseline
+        if alone:
+            effects[frozenset({command})] = alone
+
+    # a command whose own absence changes nothing may still be one of several that must ALL be
+    # missing (qmlls6/qmlls). Withhold every such command at once, then hand them back one at a
+    # time: whichever hand-back rescues a server is one of that server's alternatives
+    inert = frozenset(command for command in vocabulary if frozenset({command}) not in effects)
+    for server in disabled_without(inert)[0] - baseline:
+        alternatives = frozenset(command for command in inert if server not in disabled_without(inert - {command})[0])
+        if alternatives:
+            effects.setdefault(alternatives, set()).add(server)
+
     guards: dict[str, tuple[set[frozenset[str]], set[frozenset[str]]]] = {}
-    for branch in (node for node in ast.walk(determine) if isinstance(node, ast.If)):
-        commands = frozenset(
-            call.args[0].value
-            for call in ast.walk(branch.test)
-            if isinstance(call, ast.Call)
-            and getattr(call.func, "attr", "") == "which"
-            and call.args
-            and isinstance(call.args[0], ast.Constant)
-        )
-        disabled = {
-            node.attr
-            for node in ast.walk(branch)
-            if isinstance(node, ast.Attribute) and getattr(node.value, "id", "") == "LanguageServerId"
-        }
-        if not commands:
-            continue
+    for commands, disabled in effects.items():
         resolved = {marker for server in disabled for marker in markers_of(server)}
         # a command guard exists to disable tests, so it must reach a marker: silently resolving
         # to nothing would shrink this check's reach without shrinking what it claims to cover
@@ -636,6 +673,13 @@ class TestTableIntegrity:
         },
     }
 
+    # the mirror of the dict above: guards conftest DOES make that a row satisfies by probing
+    # rather than by naming a command. A row covers these through extra_check, so comparing only
+    # against its `commands` would report drift that is not there
+    GUARDS_A_ROW_PROBES_INSTEAD = {
+        "wolfram": {"WolframKernel": "the row's _wolfram_kernel_check mirrors the same kernel discovery conftest uses"},
+    }
+
     def test_the_table_agrees_with_the_guards_conftest_actually_applies(self, doctor) -> None:
         """Given the availability guards in test/conftest.py, re-derived from its own source,
         every toolchain row requires exactly what really decides whether its marker can run.
@@ -654,8 +698,11 @@ class TestTableIntegrity:
         for marker, (whole_marker, partial) in sorted(guards.items()):
             required = {frozenset(entry.split("|")) for entry in rows[marker].commands} if marker in rows else set()
             justified = self.REQUIREMENTS_CONFTEST_DOES_NOT_MAKE.get(marker, {})
+            probed = self.GUARDS_A_ROW_PROBES_INSTEAD.get(marker, {})
             for group in sorted(whole_marker - required, key=sorted):
-                drift.append(f"{marker}: conftest disables it without {sorted(group)}, but no row requires that")
+                unprobed = sorted(command for command in group if command not in probed)
+                if unprobed:
+                    drift.append(f"{marker}: conftest disables it without {unprobed}, but no row requires or probes that")
             for group in sorted(required - whole_marker, key=sorted):
                 undeclared = sorted(command for command in group if command not in justified)
                 if undeclared:
