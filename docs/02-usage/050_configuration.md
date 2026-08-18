@@ -319,6 +319,17 @@ ls_specific_settings:
         enabled: true
 ```
 
+#### Ada
+
+Serena uses [AdaCore's Ada Language Server](https://github.com/AdaCore/ada_language_server) for Ada / SPARK support.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `ls_path` | managed download | Absolute path to a pre-installed `ada_language_server` executable (e.g. from Alire, GNAT Studio or the Ada VS Code extension). If set, Serena does not download ALS. |
+| `als_version` | `2026.2.202604091` | Override the pinned ALS release version Serena downloads when `ls_path` is not set. Versions other than the default skip SHA256 verification. |
+
 #### AL
 
 Serena uses the AL language server bundled in the Microsoft Dynamics 365 Business Central VS Code extension.
@@ -526,6 +537,17 @@ Supported settings:
 | `omnisharp_version` | `1.39.10` | Override the OmniSharp version Serena downloads. |
 | `razor_omnisharp_version` | `7.0.0-preview.23363.1` | Override the Razor OmniSharp plugin version Serena downloads. |
 
+#### CUE
+
+Serena uses `cue lsp` from the [official CUE CLI](https://github.com/cue-lang/cue) for CUE support.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `ls_path` | managed download | Absolute path to a pre-installed `cue` binary (e.g. from `brew install cue` or `go install`). Bypasses Serena's auto-download. |
+| `cue_version` | `v0.16.1` | Override the pinned CUE release version Serena downloads when `ls_path` is not set. Versions other than the default skip SHA256 verification. |
+
 #### Dart
 
 Serena uses the Dart SDK's built-in language server for Dart support.
@@ -555,6 +577,7 @@ Supported settings:
 | Setting | Default | Description |
 |---|---|---|
 | `elm_language_server_version` | `2.8.0` | Override the npm package version Serena installs when no system `elm-language-server` is found. |
+| `elm_compiler_version` | `0.19.1-6` | Override the `elm` compiler npm package version Serena installs alongside the language server. |
 | `npm_registry` | `null` | Override the npm registry Serena uses for the managed install. |
 
 #### F#
@@ -567,6 +590,16 @@ Supported settings:
 |---|---|---|
 | `fsautocomplete_version` | `0.83.0` | Override the FsAutoComplete version Serena installs as a .NET tool. |
 
+
+#### Fortran
+
+Serena uses [fortls](https://github.com/fortran-lang/fortls) for Fortran support.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `fortls_version` | `3.2.2` | Override the exact `fortls` package version Serena launches through `uvx` / `uv tool run`. |
 
 #### GDScript (Godot Engine)
 
@@ -787,6 +820,17 @@ ls_specific_settings:
         default: true
 ```
 
+#### JSON
+
+Serena uses Microsoft's `vscode-json-languageserver` for JSON support.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `json_language_server_version` | `1.3.4` | Override the npm package version Serena installs. |
+| `npm_registry` | `null` | Override the npm registry Serena uses for the managed install. |
+
 #### Kotlin
 
 Serena uses [JetBrains' Kotlin Language Server](https://github.com/Kotlin/kotlin-lsp) for Kotlin support.
@@ -880,6 +924,21 @@ Supported settings:
 | `matlab_path` | auto-detected | Path to the MATLAB installation. This overrides `MATLAB_PATH` and auto-detection, but not Serena's managed extension download. |
 | `matlab_extension_version` | `1.3.9` | Override the MathWorks VS Code extension version Serena downloads. |
 
+#### Nextflow
+
+Serena uses the [official Nextflow language server](https://github.com/nextflow-io/language-server),
+which is distributed as a fat JAR and requires a Java runtime.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `ls_path` | managed download | Use an existing `language-server-all.jar` instead of downloading one. |
+| `nextflow_ls_version` | `26.04.3` | Override the language-server JAR release version Serena downloads when `ls_path` is not set. |
+| `java_home` | `JAVA_HOME` / `java` on `PATH` | JDK used to run the JAR. |
+| `jvm_options` | `[]` | JVM options for the language-server process (e.g. `['-Xmx2G']`). |
+| `exclude_patterns` | `["work", ".nextflow"]` | Workspace paths the language server shall ignore. |
+
 #### Nix
 
 Serena uses [nixd](https://github.com/nix-community/nixd) for Nix support.
@@ -941,14 +1000,14 @@ Serena automatically checks for pasls updates every 24 hours. Updates include:
 
 Configure pasls via `ls_specific_settings.pascal` in `serena_config.yml`:
 
-| Setting          | Description                                                                 |
-| ---------------- | --------------------------------------------------------------------------- |
-| `pasls_version`  | Override the pinned pasls version Serena downloads by default               |
-| `pp`             | Path to FPC compiler driver (must be `fpc` or `fpc.exe`, not `ppc386.exe`)  |
-| `fpcdir`         | Path to FPC source directory                                                |
-| `lazarusdir`     | Path to Lazarus directory (required for LCL projects)                       |
-| `fpc_target`     | Target OS override (e.g., `Win32`, `Win64`, `Linux`)                        |
-| `fpc_target_cpu` | Target CPU override (e.g., `i386`, `x86_64`, `aarch64`)                     |
+| Setting | Default | Description |
+|---|---|---|
+| `pasls_version` | `v0.2.0` | Override the pinned pasls version Serena downloads by default. |
+| `pp` | unset | Path to FPC compiler driver (must be `fpc` or `fpc.exe`, not `ppc386.exe`). |
+| `fpcdir` | unset | Path to FPC source directory. |
+| `lazarusdir` | unset | Path to Lazarus directory (required for LCL projects). |
+| `fpc_target` | unset | Target OS override (e.g., `Win32`, `Win64`, `Linux`). |
+| `fpc_target_cpu` | unset | Target CPU override (e.g., `i386`, `x86_64`, `aarch64`). |
 
 Example configuration:
 
@@ -1033,6 +1092,20 @@ Supported settings:
 | `phpactor_version` | `2025.12.21.1` | Override the Phpactor PHAR version Serena downloads when `ls_path` is not set. |
 | `ignore_vendor` | `true` | Ignore directories named `vendor` while indexing the project. |
 
+#### PHP (`PHPantom`)
+
+Serena uses the `php_phpantom` language key for [PHPantom](https://github.com/PHPantom-dev/phpantom_lsp),
+an open-source PHP language server written in Rust. It is an experimental alternative to Intelephense,
+which remains the default PHP language server.
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `ls_path` | managed download | Path to a pre-installed `phpantom_lsp` binary. |
+| `phpantom_version` | `0.8.0` | Selects the PHPantom release Serena downloads when `ls_path` is not set. Only the bundled `0.8.0` is currently supported; other values are rejected at startup. |
+| `ignore_vendor` | `true` | Ignore directories named `vendor` while indexing the project. |
+
 #### PowerShell
 
 Serena uses PowerShell Editor Services for PowerShell support.
@@ -1042,6 +1115,7 @@ Supported settings:
 | Setting | Default | Description |
 |---|---|---|
 | `pses_version` | `4.4.0` | Override the PowerShell Editor Services version Serena downloads. Serena still requires `pwsh` to be available locally. |
+| `psscriptanalyzer_version` | `1.25.0` | Override the PSScriptAnalyzer module version loaded from the PSES bundle. |
 
 #### Python
 
@@ -1064,7 +1138,7 @@ To use [BasedPyright](https://github.com/DetachHead/basedpyright), select its se
 language key:
 
 ```yaml
-languages: [python_basedpyright]
+language_servers: [python_basedpyright]
 ls_specific_settings:
   python_basedpyright:
     basedpyright_version: "1.39.9"
@@ -1082,6 +1156,45 @@ and `ls_extra_args`, apply to both servers. `ls_args` replaces the default argum
 `ls_extra_args` appends to them.
 
 Other alternative Python language keys are `python_ty`, `python_pyrefly`, and `python_jedi`.
+
+##### Pyrefly (`python_pyrefly`)
+
+To use Meta's [Pyrefly](https://github.com/facebook/pyrefly), select its separate experimental
+language key:
+
+```yaml
+language_servers: [python_pyrefly]
+ls_specific_settings:
+  python_pyrefly:
+    pyrefly_version: "1.1.1"
+```
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `pyrefly_version` | `1.1.1` | Override the exact Pyrefly package version Serena launches through `uvx` / `uv tool run`. |
+| `ls_path` | managed executable | Override the `pyrefly` executable and bypass the managed `uvx` / `uv tool run` invocation. |
+| `indexing_mode` | unset | Override Pyrefly's LSP indexing mode (e.g. `lazy-blocking`). |
+| `workspace_indexing_limit` | unset | Override Pyrefly's workspace indexing limit. |
+
+##### ty (`python_ty`)
+
+To use Astral's [ty](https://github.com/astral-sh/ty), select its separate experimental language key:
+
+```yaml
+language_servers: [python_ty]
+ls_specific_settings:
+  python_ty:
+    ty_version: "0.0.25"
+```
+
+Supported settings:
+
+| Setting | Default | Description |
+|---|---|---|
+| `ty_version` | `0.0.25` | Override the exact ty package version Serena launches through `uvx` / `uv tool run`. |
+| `ls_path` | managed executable | Override the `ty` executable and bypass the managed `uvx` / `uv tool run` invocation. |
 
 #### Ruby
 
@@ -1164,6 +1277,7 @@ Supported settings:
 |---|---|---|
 | `ls_path` | managed install | Override the Solidity language server executable path. |
 | `solidity_language_server_version` | `0.8.4` | Override the npm package version Serena installs when `ls_path` is not set. |
+| `forge_version` | `1.5.1` | Override the Foundry `forge` CLI version Serena installs alongside the language server. |
 | `npm_registry` | `null` | Override the npm registry Serena uses for the managed install. |
 
 #### SystemVerilog
