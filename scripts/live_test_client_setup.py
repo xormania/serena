@@ -22,6 +22,21 @@ Safety properties (mirroring ``live_test_grok.py``):
 * **State-preserving.** Every add is paired with a removal, the baseline is verified at the end,
   and a client that already has a ``serena`` registration is skipped, never touched. If a probe
   aborts after mutating, removal and configuration restore are attempted before the script exits.
+
+  "Restored" is stated as the properties it means, because a configuration path is not just its
+  bytes and every one of these has been a defect found by reading it as though it were:
+
+  1. **content** — the bytes are those read before the probe ran;
+  2. **mode** — the pre-probe permissions, set before the content lands, never after;
+  3. **link shape** — a path that was a symlink is still a symlink, not a regular file left by
+     an atomic-rename writer;
+  4. **link target** — and it points at what it pointed at, which being *a* symlink does not imply;
+  5. **existence** — a path that did not exist before does not exist after, including one created
+     by a command that merely read registrations.
+
+  Whatever cannot be returned to that state is refused rather than probed: a hardlinked
+  configuration has no restore that avoids either detaching its twin or truncating both names,
+  and an unreadable one cannot be captured to begin with.
 * **Credential-safe.** Configuration backups (which may carry tokens) are written 0600 inside a
   fresh private 0700 directory and deleted once the baseline is confirmed intact; they are kept
   only when a probe fails, and the report then points to them. Restored configuration files keep
@@ -464,14 +479,16 @@ class ClientProbe:
             self._remove_config_created_by_probe()
             return
         assert self._backup_path is not None
-        bytes_intact = config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes()
-        # identical bytes are not enough: a client that rewrites configs by atomic rename
-        # replaces a symlinked config with a regular file while preserving every byte
-        link_shape_intact = self._config_link_is_the_recorded_one()
-        if bytes_intact and link_shape_intact:
+        # the properties the module docstring promises, checked one per name. Bytes alone are not
+        # the state: an atomic-rename writer preserves every byte while replacing a symlinked
+        # config with a regular file, and a retargeted link preserves both while the path the
+        # client reads has moved. Mode is checked below, after any restore has landed
+        content_intact = config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes()
+        link_intact = self._config_link_is_the_recorded_one()
+        if content_intact and link_intact:
             self._notes.append("user config is byte-identical to the baseline")
         else:
-            if not bytes_intact:
+            if not content_intact:
                 # a client rewrite and a concurrent edit by another process are indistinguishable
                 # on opaque bytes, so the note DISCLOSES that a concurrent change was rolled back
                 self._notes.append(
