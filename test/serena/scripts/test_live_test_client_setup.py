@@ -240,25 +240,6 @@ class TestClientSpecs:
         assert specs["claude-code"].user_config_path == Path.home() / ".claude.json"
 
 
-class TestRecordDirectory:
-    """--record writes credential-bearing transcripts, so where it writes them matters."""
-
-    @posix_only
-    def test_a_symlinked_record_directory_is_refused(self, probe_module, monkeypatch, tmp_path, capsys) -> None:
-        """Given --record names a pre-existing symlink to a directory, when the script runs,
-        then it refuses: mkdir(exist_ok=True) accepts such a link, and every snapshot write
-        would then be redirected through it — the leaf-only O_NOFOLLOW guard cannot see that.
-        """
-        victim_dir = tmp_path / "victim"
-        victim_dir.mkdir()
-        link = tmp_path / "records"
-        link.symlink_to(victim_dir)
-        monkeypatch.setattr(probe_module.sys, "argv", ["live_test_client_setup.py", "--record", str(link)])
-        monkeypatch.setattr(probe_module.shutil, "which", lambda name: "/usr/bin/serena")
-        assert probe_module.main() == 2
-        assert "symlink" in capsys.readouterr().err
-
-
 class TestStatePreservation:
     """Whatever happens, the client's configuration returns to its pre-probe state."""
 
@@ -415,174 +396,66 @@ class TestStatePreservation:
         assert config_path.read_bytes() == original
 
     @posix_only
-    def test_a_failed_backup_leaves_no_hidden_hardlink_behind(self, probe_module, tmp_path) -> None:
-        """Given the backup fails after the config's inode was anchored, when the probe gives
-        up, then no anchor is left in the user's config directory — it is a hidden hardlink to
-        a possibly credential-bearing file, and this runs before the caller's cleanup exists,
-        so nothing else would ever remove it.
-        """
-        config_path = tmp_path / "config.json"
-        config_path.write_bytes(b'{"hardlinked": true}')
-        os.link(config_path, tmp_path / "dotfiles-config.json")
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe.backup_dir = tmp_path / "does-not-exist"  # the backup write will fail
-        with pytest.raises(OSError):
-            probe._backup_config()
-        assert not list(tmp_path.glob(".config.json.serena-probe-link*"))
-
-    @posix_only
-    def test_the_inode_anchor_never_overwrites_something_already_there(self, probe_module, tmp_path) -> None:
-        """Given a file already sitting where the probe would anchor the config's inode, when
-        the backup runs, then that file is untouched and the anchor goes elsewhere — it could
-        be an unrelated user file, or the recovery anchor an interrupted probe left behind,
-        and destroying either to make room would be the opposite of preserving state.
-        """
-        config_path = tmp_path / "config.json"
-        config_path.write_bytes(b'{"hardlinked": true}')
-        os.link(config_path, tmp_path / "dotfiles-config.json")
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        squatter = tmp_path / f".config.json.serena-probe-link.{os.getpid()}.0"
-        squatter.write_bytes(b"someone else's file")
-        probe._backup_config()
-        assert squatter.read_bytes() == b"someone else's file"
-        assert probe._config_link_anchor is not None and probe._config_link_anchor != squatter
-
-    @posix_only
-    def test_an_atomic_rewrite_that_severs_a_hardlink_is_relinked(self, probe_module, tmp_path) -> None:
-        """Given a hardlinked config and a client that rewrites it by atomic rename with
-        BYTE-IDENTICAL content, when the lifecycle finishes, then the path is back on its
-        original inode — the bytes match either way, so only the inode identity can see that
-        the user's two names silently stopped being the same file.
+    def test_a_hardlinked_config_is_refused_before_anything_is_touched(self, probe_module, tmp_path) -> None:
+        """Given the config shares its inode with another name (dotfile managers make these),
+        when the probe reaches it, then it SKIPs without running setup: an atomic restore would
+        install a new inode and silently detach the twin, and writing through the inode means a
+        truncate whose interruption empties every name. Neither is acceptable on a config the
+        user did not ask to have rewritten, and refusing is the only option that cannot damage it.
         """
         config_path = tmp_path / "config.json"
         twin = tmp_path / "dotfiles-config.json"
         original = b'{"hardlinked": true}'
         config_path.write_bytes(original)
         os.link(config_path, twin)
-        inode_before = config_path.stat().st_ino
+        assert config_path.stat().st_nlink == 2  # the plant landed
         probe = _probe(probe_module, tmp_path, config_path)
-        calls = {"lists": 0}
-
-        def rename_writing_run(argv):
-            if "setup" in argv:
-                replacement = tmp_path / "incoming.json"
-                replacement.write_bytes(original)  # same bytes, brand-new inode
-                os.replace(replacement, config_path)
-            if argv == ("stub", "list"):
-                calls["lists"] += 1
-                return probe_module.ExecutedCommand(argv, 0, f"serena  {EXPECTED_COMMAND}" if calls["lists"] == 2 else "", "")
-            return probe_module.ExecutedCommand(argv, 0, "", "")
-
-        probe._run = rename_writing_run
-        result = probe.run()
-        assert result.status == probe_module.Status.PASS
-        assert config_path.stat().st_ino == inode_before == twin.stat().st_ino
-        assert config_path.read_bytes() == original
-        assert any("relinked" in note for note in result.notes)
-        assert not list(tmp_path.glob(".config.json.serena-probe-link"))  # the anchor is cleaned up
-
-    @posix_only
-    def test_a_hardlinked_config_deleted_by_the_client_is_recreated(self, probe_module, tmp_path) -> None:
-        """Given a hardlinked config the client then DELETED, when the probe restores it,
-        then the file is back with the baseline bytes — writing through the inode is
-        impossible once the path is gone, and a restore that only knows that trick would
-        crash with a good backup in hand.
-        """
-        config_path = tmp_path / "config.json"
-        twin = tmp_path / "dotfiles-config.json"
-        original = b'{"hardlinked": true}'
-        config_path.write_bytes(original)
-        os.link(config_path, twin)
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        config_path.unlink()
-        assert not config_path.exists()  # the plant landed
-        probe._emergency_restore()
-        assert config_path.read_bytes() == original
-
-    @posix_only
-    def test_a_deleted_hardlinked_config_is_recreated_even_without_an_anchor(self, probe_module, tmp_path) -> None:
-        """Given a hardlinked config the client deleted, and no inode anchor to relink from
-        (a filesystem that refused one), when the restore runs, then the file comes back —
-        writing through an inode is impossible once the path is gone, so the restore must
-        fall back to recreating it rather than raising with a good backup in hand.
-        """
-        config_path = tmp_path / "config.json"
-        original = b'{"hardlinked": true}'
-        config_path.write_bytes(original)
-        os.link(config_path, tmp_path / "dotfiles-config.json")
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        probe._discard_link_anchor()  # as if the filesystem had refused the anchor
-        config_path.unlink()
-        probe._restore_config_bytes()
-        assert config_path.read_bytes() == original
-
-    @posix_only
-    def test_an_unreadable_backup_leaves_a_hardlinked_config_intact(self, probe_module, tmp_path) -> None:
-        """Given the backup has gone missing, when the hardlinked restore runs, then the
-        config and its twin still hold what they held — reading the backup only after
-        truncating would empty both names before discovering there was nothing to write.
-        """
-        config_path = tmp_path / "config.json"
-        twin = tmp_path / "dotfiles-config.json"
-        config_path.write_bytes(b'{"baseline": true}')
-        os.link(config_path, twin)
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        config_path.write_bytes(b'{"client-wrote": true}')
-        assert probe._backup_path is not None
-        probe._backup_path.unlink()  # the backup disappears before the restore
-        with pytest.raises(OSError):
-            probe._restore_config_bytes()
-        assert config_path.read_bytes() == b'{"client-wrote": true}'
-        assert twin.read_bytes() == b'{"client-wrote": true}'
-
-    @posix_only
-    def test_a_hardlinked_restore_refuses_to_write_through_a_symlink(self, probe_module, tmp_path) -> None:
-        """Given the config path became a symlink pointing at an unrelated file, when the
-        hardlink restore runs, then it refuses rather than truncating the link's target —
-        the inode write is the one restore path that opens by name without the atomic
-        replace's protections.
-        """
-        config_path = tmp_path / "config.json"
-        config_path.write_bytes(b'{"hardlinked": true}')
-        os.link(config_path, tmp_path / "dotfiles-config.json")
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        victim = tmp_path / "victim.json"
-        victim.write_text("precious")
-        config_path.unlink()
-        config_path.symlink_to(victim)
-        with pytest.raises(OSError):
-            probe._restore_config_bytes()
-        assert victim.read_text() == "precious"
-
-    @posix_only
-    def test_a_hardlinked_config_is_restored_through_its_inode(self, probe_module, tmp_path) -> None:
-        """Given the config is hardlinked into a dotfiles tree, when the probe restores it,
-        then the twin name carries the baseline bytes too — an atomic replace would install a
-        new inode and leave the twin holding whatever the client wrote.
-        """
-        config_path = tmp_path / "config.json"
-        twin = tmp_path / "dotfiles-config.json"
-        original = b'{"hardlinked": true}'
-        config_path.write_bytes(original)
-        os.link(config_path, twin)
-        probe = _probe(probe_module, tmp_path, config_path)
-        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
-        probe._backup_config()
-        with open(config_path, "wb") as mutated:  # in-place rewrite: the twin sees it too
-            mutated.write(b'{"client-wrote": true}')
-        assert twin.read_bytes() == b'{"client-wrote": true}'  # the plant landed
-        probe._emergency_restore()
+        result, calls = _run_lifecycle(probe_module, probe, after_add=(0, ""))
+        assert result.status is probe_module.Status.SKIP
+        assert "hardlink" in result.detail
+        assert not any("setup" in argv for argv in calls)
         assert config_path.read_bytes() == original
         assert twin.read_bytes() == original
+
+    @posix_only
+    def test_an_unreadable_config_skips_one_client_rather_than_the_whole_run(self, probe_module, tmp_path) -> None:
+        """Given the config cannot be read, when the backup is attempted, then this client is
+        SKIPped — letting the error escape would abandon every client still to be probed, and
+        report a file-permission problem instead of the run's actual findings.
+        """
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"secret": true}')
+        config_path.chmod(0o000)
+        if os.access(config_path, os.R_OK):
+            pytest.skip("running with privileges that ignore file modes")  # the plant did not land
+        probe = _probe(probe_module, tmp_path, config_path)
+        result, calls = _run_lifecycle(probe_module, probe, after_add=(0, ""))
+        config_path.chmod(0o600)
+        assert result.status is probe_module.Status.SKIP
+        assert not any("setup" in argv for argv in calls)
+
+    def test_a_config_the_probes_own_query_created_is_removed_again(self, probe_module, tmp_path) -> None:
+        """Given the client has no config and its registration query creates one (verified live:
+        `CLAUDE_CONFIG_DIR=<tmp> claude mcp list` writes .claude.json), when the lifecycle
+        finishes, then that file is gone. Deciding what existed AFTER the first query would
+        record the probe's own side effect as the user's state and then faithfully preserve it.
+        """
+        config_path = tmp_path / "config.json"
+        probe = _probe(probe_module, tmp_path, config_path)
+        list_responses = iter([(0, ""), (0, EXPECTED_COMMAND), (0, "")])
+
+        def scripted(argv: tuple[str, ...]):
+            if argv == probe.spec.list_argv:
+                config_path.write_bytes(b'{"created-by-the-query": true}')  # what the real CLI does
+                returncode, stdout = next(list_responses, (0, ""))
+            else:
+                returncode, stdout = 0, "1.0" if "--version" in argv else ""
+            return probe_module.ExecutedCommand(argv, returncode, stdout, "")
+
+        probe._run = scripted
+        result = probe.run()
+        assert config_path.exists() is False, "the probe kept a config file that only existed because it asked"
+        assert result.status is probe_module.Status.PASS
 
     def test_a_failing_emergency_restore_keeps_the_probes_own_verdict(self, probe_module, tmp_path) -> None:
         """Given the rollback itself fails, when the probe unwinds, then the probe's own FAIL
@@ -769,50 +642,3 @@ class TestStatePreservation:
         finally:
             for signum, handler in previous.items():
                 signal_module.signal(signum, handler)
-
-    @posix_only
-    def test_a_snapshot_never_writes_through_a_planted_symlink(self, probe_module, tmp_path) -> None:
-        """Given the record directory already holds a symlink under the snapshot's name,
-        when the snapshot is written, then it refuses and the link's target is untouched —
-        following the link would truncate and chmod an unrelated file.
-        """
-        victim = tmp_path / "victim.json"
-        victim.write_text('{"precious": true}')
-        record_dir = tmp_path / "records"
-        record_dir.mkdir()
-        (record_dir / "stub.json").symlink_to(victim)
-        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
-        with pytest.raises(RuntimeError, match="symlink"):
-            probe_module._write_snapshot(record_dir, result)
-        assert victim.read_text() == '{"precious": true}'
-
-    @posix_only
-    def test_a_recorded_snapshot_is_owner_only_regardless_of_umask(self, probe_module, tmp_path) -> None:
-        """Given a permissive umask, when a probe result is snapshotted via --record, then the
-        JSON lands owner-only, because transcripts echo other servers' registration lines,
-        which can carry credentials in commands or env values.
-        """
-        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
-        old_umask = os.umask(0o000)
-        try:
-            snapshot_path = probe_module._write_snapshot(tmp_path, result)
-        finally:
-            os.umask(old_umask)
-        assert snapshot_path.is_file()
-        assert stat.S_IMODE(snapshot_path.stat().st_mode) == 0o600
-
-    @posix_only
-    def test_a_leftover_snapshot_with_a_looser_mode_is_tightened_before_content_lands(self, probe_module, tmp_path) -> None:
-        """Given a snapshot file left by an earlier run with a permissive mode, when the
-        probe snapshots over it, then the rewritten file is owner-only — creation-time
-        modes only govern new files, so the leftover must be tightened explicitly.
-        """
-        leftover = tmp_path / "stub.json"
-        leftover.write_text("{}")
-        leftover.chmod(0o644)
-        assert stat.S_IMODE(leftover.stat().st_mode) == 0o644  # the plant landed
-        result = probe_module.ProbeResult(client="stub", status=probe_module.Status.PASS, detail="ok")
-        snapshot_path = probe_module._write_snapshot(tmp_path, result)
-        assert snapshot_path == leftover
-        assert "transcript" in snapshot_path.read_text()  # the content really was rewritten
-        assert stat.S_IMODE(snapshot_path.stat().st_mode) == 0o600

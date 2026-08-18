@@ -90,8 +90,16 @@ class TestRequirementVerdicts:
             "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
         )
         monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
         assert doctor._dart_managed_sdk_check() is None
         assert doctor._hlsl_server_availability_check() is None
+        # musl x86_64 is a SEPARATE platform key upstream with nothing published against it, so
+        # the arch alone does not settle it: a green verdict here becomes a hard raise at startup
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("", ""))
+        assert doctor._dart_managed_sdk_check() == "a platform in the managed-SDK matrix (the provider does not use a system dart)"
+        assert doctor._hlsl_server_availability_check() == (
+            "a system shader-language-server (no prebuilt binary or build path exists for this platform)"
+        )
 
     def test_rust_analyzer_is_found_in_the_providers_fallback_locations(self, doctor, monkeypatch, tmp_path) -> None:
         """Given neither rustup nor rust-analyzer on the PATH but an executable binary in

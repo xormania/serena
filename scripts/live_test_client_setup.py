@@ -5,8 +5,10 @@ in depth. For every applicable ``ClientSetupHandler`` (claude-code, codebuddy, c
 real registration lifecycle is exercised:
 
 1. detect the client CLI and record its version,
-2. refuse to touch a client that already has a ``serena`` MCP server registered,
-3. back up the client's user-level configuration file (where its location is known),
+2. back up the client's user-level configuration file (where its location is known), before any
+   client command runs — a command that merely lists registrations can create the file it reads,
+3. refuse to touch a client that already has a ``serena`` MCP server registered, or whose config
+   is hardlinked (no restore of one can avoid either detaching its twin or truncating both),
 4. run ``serena setup <client>`` — the exact code path a user runs,
 5. verify the registration actually landed and carries the expected server command,
 6. remove the registration again and verify the client is back at its baseline,
@@ -24,18 +26,11 @@ Safety properties (mirroring ``live_test_grok.py``):
   only when a probe fails, and the report then points to them. Restored configuration files keep
   their pre-probe permissions.
 
-With ``--record <dir>``, each probe additionally writes a JSON snapshot of the client's observable
-command surface (CLI version, every command executed with its exit code and output) — a re-runnable
-record of how the client behaves *today*, suitable for diffing across client releases, e.g. from a
-scheduled CI job. Snapshots contain command transcripts, which can include the registration lines
-of other configured MCP servers — review them before committing or sharing.
-
 Usage::
 
     uv run python scripts/live_test_client_setup.py                 # probe all detected clients
     uv run python scripts/live_test_client_setup.py --client codex  # probe a single client
     uv run python scripts/live_test_client_setup.py --list          # only show which clients are detected
-    uv run python scripts/live_test_client_setup.py --record out/   # additionally write JSON snapshots
 
 Run it via ``uv run`` so that the ``serena`` executable under test is the one from this checkout.
 
@@ -44,7 +39,6 @@ Exit code: 1 if any probed client failed, 0 otherwise (skipped and undetected cl
 
 import argparse
 import contextlib
-import json
 import os
 import re
 import shutil
@@ -56,7 +50,6 @@ import tempfile
 import threading
 from collections.abc import Iterator
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
 from enum import Enum
 from pathlib import Path
 
@@ -280,9 +273,6 @@ class ClientProbe:
         self._config_restore_path: Path | None = None
         self._config_was_symlink = False
         self._config_link_target: str | None = None
-        self._config_hardlinked = False
-        self._config_inode: tuple[int, int] | None = None
-        self._config_link_anchor: Path | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
         # execute, record in the transcript, and echo for the live reader. On POSIX the child
@@ -343,18 +333,13 @@ class ClientProbe:
         return {" ".join(line.split()) for line in list_output.splitlines() if line.strip()}
 
     def _backup_config(self) -> None:
-        # snapshot the user-level config file (0600, inside the private backup dir) before mutating.
-        # Anything that fails PART WAY through cleans up after itself: the anchor is a hidden
-        # hardlink to a possibly credential-bearing config, and this runs before the caller's
-        # try/finally exists, so nothing else would ever remove it
-        try:
-            self._take_config_backup()
-        except BaseException:
-            self._discard_link_anchor()
-            raise
+        """Records everything about the config that a restore will need to put back.
 
-    def _take_config_backup(self) -> None:
-        """Records everything about the config that a restore will need to put back."""
+        Called BEFORE the first client command, because a mere registration query can create a
+        config (verified live: ``CLAUDE_CONFIG_DIR=<tmp> claude mcp list`` creates
+        ``<tmp>/.claude.json``). Deciding afterwards what the user had would record the probe's
+        own side effect as pre-existing state, and then faithfully preserve it.
+        """
         config_path = self.spec.user_config_path
         if config_path is None:
             self._notes.append("no known user-config path for this client; baseline is verified via the registration list only")
@@ -374,34 +359,6 @@ class ClientProbe:
             return
         config_stat = config_path.stat()
         self._config_mode = stat.S_IMODE(config_stat.st_mode)
-        # a hardlinked config (dotfile managers use them) must be restored THROUGH its inode:
-        # os.replace would install a new one, leaving the twin permanently carrying whatever
-        # the client wrote while the probed path looked pristine
-        self._config_hardlinked = config_stat.st_nlink > 1
-        if self._config_hardlinked:
-            self._config_inode = (config_stat.st_dev, config_stat.st_ino)
-            # a client that rewrites by atomic rename severs the link, and the OTHER name is
-            # not knowable from here -- so hold the original inode open with a link of our
-            # own, beside the config (same filesystem, unlike the backup dir), which lets the
-            # relationship be restored rather than merely reported
-            # os.link REFUSES an existing destination, which is exactly the semantics wanted:
-            # an unrelated user file -- or the recovery anchor an interrupted probe left
-            # behind -- must never be deleted to make room. Names are tried until one is free
-            try:
-                for attempt in range(8):
-                    candidate = config_path.parent / f".{config_path.name}.serena-probe-link.{os.getpid()}.{attempt}"
-                    try:
-                        os.link(config_path, candidate)
-                    except FileExistsError:
-                        continue
-                    self._config_link_anchor = candidate
-                    break
-                if self._config_link_anchor is None:
-                    raise OSError("no free anchor name beside the config")
-            except OSError as e:
-                self._notes.append(
-                    f"the config is hardlinked, but its inode could not be anchored ({e}); a severed link can only be reported"
-                )
         # restores must write through a symlinked config (dotfile trees), never replace the
         # link itself with a regular file -- so the restore target is resolved NOW, and the
         # link's shape and literal target are recorded so a client that atomically replaces
@@ -410,6 +367,25 @@ class ClientProbe:
         self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
         self._backup_path.write_bytes(config_path.read_bytes())
         self._backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+
+    def _hardlinked_config_reason(self) -> str | None:
+        """
+        :return: why a config cannot be probed safely, or None when it can. A hardlinked config
+            (some dotfile managers make them) has no restore this probe is willing to perform:
+            the atomic path installs a NEW inode, silently detaching the other name and leaving
+            it holding whatever the client wrote, while writing through the inode means a
+            truncate whose interruption empties EVERY name of the file. Refusing is the only
+            option that cannot damage the user's config.
+        """
+        config_path = self.spec.user_config_path
+        if config_path is None or not self._config_existed:
+            return None
+        # stat() deliberately follows the link: it is the target's link count that matters
+        if config_path.stat().st_nlink > 1:
+            return (
+                f"{config_path} is hardlinked (another name shares its inode) — refusing to touch a config this probe cannot restore safely"
+            )
+        return None
 
     def _remove_config_created_by_probe(self) -> None:
         # delete what the probe's setup call created (the baseline had no config file)
@@ -436,45 +412,6 @@ class ClientProbe:
             config_path.unlink()
             self._notes.append(f"removed {config_path}, which the probe had created")
 
-    def _config_link_is_intact(self) -> bool:
-        """
-        :return: whether the config path still names the inode it named before the probe
-            (trivially true when the config was not hardlinked)
-        """
-        if not self._config_hardlinked or self._config_inode is None:
-            return True
-        config_path = self.spec.user_config_path
-        if config_path is None or not config_path.is_file():
-            return False
-        current = config_path.stat()
-        return (current.st_dev, current.st_ino) == self._config_inode
-
-    def _relink_config_to_its_original_inode(self) -> None:
-        """Puts the config path back on the inode it shared before the probe.
-
-        An atomic-rename writer leaves byte-identical content on a NEW inode, so the other
-        name in the user's dotfile tree silently stops being the same file. The anchor taken
-        at backup time still holds the original inode, so the relationship can be restored;
-        without it (a filesystem that refused the link), the break is reported instead.
-        """
-        config_path = self.spec.user_config_path
-        if config_path is None or self._config_link_is_intact():
-            return
-        if self._config_link_anchor is None or not self._config_link_anchor.is_file():
-            self._notes.append("the client replaced the hardlinked config with a new inode; the link to its other name is BROKEN")
-            return
-        if config_path.exists() or config_path.is_symlink():
-            config_path.unlink()
-        os.link(self._config_link_anchor, config_path)
-        self._notes.append("the client's rewrite severed the config's hardlink; the path was relinked to its original inode")
-
-    def _discard_link_anchor(self) -> None:
-        # the anchor is the probe's own litter: remove it once the link question is settled
-        if self._config_link_anchor is not None:
-            with contextlib.suppress(OSError):
-                self._config_link_anchor.unlink()
-            self._config_link_anchor = None
-
     def _restore_config_bytes(self) -> None:
         # restore the backup atomically, owner-only from the first byte: recreating a deleted
         # config with write_bytes would land at the process umask -- credentials readable by
@@ -494,33 +431,22 @@ class ClientProbe:
         # the resolved target recorded at backup time: replacing the config PATH would clobber
         # a symlinked dotfile with a regular file
         restore_path = self._config_restore_path or self.spec.user_config_path
-        if self._config_hardlinked and os.path.lexists(restore_path):
-            # write THROUGH the inode: os.replace would install a new one and leave the
-            # hardlinked twin holding whatever the client wrote. Atomicity is traded for link
-            # preservation here -- but only that: the backup is READ BEFORE the truncate, so a
-            # missing or unreadable backup cannot leave both names empty. A config the client
-            # DELETED has no inode left to preserve, so that case falls through to the atomic
-            # path below, which can recreate it
-            payload = self._backup_path.read_bytes()
-            fd = os.open(restore_path, os.O_WRONLY | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0))
-            with os.fdopen(fd, "wb") as config_file:
-                config_file.write(payload)
-            if self._config_mode is not None:
-                os.chmod(restore_path, self._config_mode)
-            self._notes.append("the config is hardlinked; it was restored through its inode so the other name keeps the baseline")
-            return
-        fd, temp_name = tempfile.mkstemp(dir=str(restore_path.parent), prefix=f".{restore_path.name}.")
+        # the temp file is created INSIDE the guard that removes it: creating it first leaves a
+        # window in which an interrupt strands a temp file beside the user's credentials
+        temp_name: str | None = None
         try:
+            fd, temp_name = tempfile.mkstemp(dir=str(restore_path.parent), prefix=f".{restore_path.name}.")
             with os.fdopen(fd, "wb") as temp_file:
                 temp_file.write(self._backup_path.read_bytes())
             if self._config_mode is not None:
                 os.chmod(temp_name, self._config_mode)
             os.replace(temp_name, restore_path)
         except BaseException:
-            try:
-                os.unlink(temp_name)
-            except OSError:
-                pass
+            if temp_name is not None:
+                try:
+                    os.unlink(temp_name)
+                except OSError:
+                    pass
             raise
 
     def _verify_config_baseline(self) -> None:
@@ -536,13 +462,9 @@ class ClientProbe:
         # identical bytes are not enough: a client that rewrites configs by atomic rename
         # replaces a symlinked config with a regular file while preserving every byte
         link_shape_intact = not self._config_was_symlink or config_path.is_symlink()
-        # ...and identical bytes on a NEW inode silently unlink a hardlinked config from the
-        # other name that shared it, which no byte comparison can see
-        link_target_intact = self._config_link_is_intact()
-        if bytes_intact and link_shape_intact and link_target_intact:
+        if bytes_intact and link_shape_intact:
             self._notes.append("user config is byte-identical to the baseline")
         else:
-            self._relink_config_to_its_original_inode()
             if not bytes_intact:
                 # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
                 # another process are indistinguishable; the byte-restore contract wins, and the
@@ -556,7 +478,6 @@ class ClientProbe:
         if self._config_mode is not None and stat.S_IMODE(config_path.stat().st_mode) != self._config_mode:
             config_path.chmod(self._config_mode)
             self._notes.append("user config permissions restored to the pre-probe mode")
-        self._discard_link_anchor()
         self._backup_path.unlink()
         self._backup_path = None
 
@@ -574,7 +495,6 @@ class ClientProbe:
             with _uninterruptible_cleanup():
                 self._run(self.spec.remove_argv)
                 if self._backup_path is not None and self.spec.user_config_path is not None:
-                    self._relink_config_to_its_original_inode()
                     self._restore_config_bytes()
                     self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
                 else:
@@ -583,8 +503,6 @@ class ClientProbe:
             self._notes.append(f"EMERGENCY RESTORE FAILED ({e}) — the client may still be mutated; backup kept at {self._backup_path}")
             print(f"    !! emergency restore failed: {e}", flush=True)
             print(f"    !! the client may still carry a serena registration; backup kept at {self._backup_path}", flush=True)
-        finally:
-            self._discard_link_anchor()
 
     def _result(self, status: Status, detail: str, cli_version: str | None = None) -> ProbeResult:
         return ProbeResult(self.handler.name, status, detail, cli_version, self._notes, self._transcript)
@@ -600,6 +518,20 @@ class ClientProbe:
             return self._result(Status.SKIP, f"client detection did not answer within {COMMAND_TIMEOUT_SECONDS}s; not probing")
         if not applicable:
             return self._result(Status.NOT_DETECTED, "client CLI not found or not functional")
+        # the config is captured BEFORE any client command runs, not merely before the mutating
+        # one: a command that only reads registrations can still create the config it reads
+        # (verified live: `CLAUDE_CONFIG_DIR=<tmp> claude mcp list` creates <tmp>/.claude.json),
+        # and capturing afterwards would take the probe's own side effect for the user's state.
+        # A config that cannot be read skips THIS client rather than aborting the whole run
+        try:
+            self._backup_config()
+        except OSError as e:
+            return self._result(Status.SKIP, f"the user config could not be backed up ({e}); not probing")
+        # ...and one this probe has no safe way to put back is not probed at all
+        hardlinked_config = self._hardlinked_config_reason()
+        if hardlinked_config is not None:
+            return self._result(Status.SKIP, hardlinked_config)
+
         version_command = self._run((self.spec.list_argv[0], "--version"))
         cli_version = version_command.stdout.strip() or None
 
@@ -612,7 +544,6 @@ class ClientProbe:
         if self._serena_registered(baseline.stdout):
             return self._result(Status.SKIP, "a serena MCP server is already registered — refusing to touch a live setup", cli_version)
 
-        self._backup_config()
         mutated = False
         try:
             # arm the rollback BEFORE the mutating command runs: an interrupt mid-setup may
@@ -689,49 +620,12 @@ class ClientProbe:
         return self._result(Status.PASS, "add/verify/remove lifecycle completed; baseline confirmed", cli_version)
 
 
-def _write_snapshot(record_dir: Path, result: ProbeResult) -> Path:
-    """
-    :param record_dir: the directory to write the snapshot into
-    :param result: the probe result to snapshot
-    :return: the path of the written snapshot
-    """
-    snapshot = {
-        "client": result.client,
-        "recorded_at": datetime.now(UTC).isoformat(timespec="seconds"),
-        "cli_version": result.cli_version,
-        "status": result.status.value,
-        "detail": result.detail,
-        "notes": result.notes,
-        "transcript": [executed.as_dict() for executed in result.transcript],
-    }
-    snapshot_path = record_dir / f"{result.client}.json"
-    # transcripts echo other servers' registration lines, which can carry credentials in
-    # commands or env values -- owner-only from the first byte, not chmod'd after the
-    # content already sits readable; fchmod covers a leftover file from an earlier run,
-    # whose looser mode O_CREAT would not correct
-    # O_NOFOLLOW: following a pre-existing symlink here would truncate and chmod whatever
-    # it points at -- arbitrary file destruction when recording into a shared directory
-    flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC | getattr(os, "O_NOFOLLOW", 0)
-    try:
-        fd = os.open(snapshot_path, flags, stat.S_IRUSR | stat.S_IWUSR)
-    except OSError as e:
-        if snapshot_path.is_symlink():
-            raise RuntimeError(f"refusing to write through a pre-existing symlink at {snapshot_path}") from e
-        raise
-    if hasattr(os, "fchmod"):
-        os.fchmod(fd, stat.S_IRUSR | stat.S_IWUSR)
-    with os.fdopen(fd, "w", encoding="utf-8") as snapshot_file:
-        snapshot_file.write(json.dumps(snapshot, indent=2) + "\n")
-    return snapshot_path
-
-
 def main() -> int:
     _install_unwinding_signal_handlers()
     specs = client_probe_specs()
     parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
     parser.add_argument("--client", choices=sorted(specs), help="probe only this client")
     parser.add_argument("--list", action="store_true", help="only report which client CLIs are detected; do not probe")
-    parser.add_argument("--record", metavar="DIR", help="write a JSON snapshot of each probed client's command surface into DIR")
     args = parser.parse_args()
 
     handlers = [h for h in client_setup_handlers if args.client is None or h.name == args.client]
@@ -748,22 +642,6 @@ def main() -> int:
         return 2
     print(f"serena executable under test: {serena_executable}")
 
-    record_dir: Path | None = None
-    if args.record is not None:
-        record_dir = Path(args.record)
-        # O_NOFOLLOW on the snapshot guards only the final component: a pre-existing record
-        # directory that is itself a symlink (mkdir(exist_ok=True) accepts one) would
-        # redirect every write, and one owned by another user is theirs to swap at will.
-        # Checked BEFORE mkdir, which would otherwise raise FileExistsError on a dangling
-        # link and lose the explanation
-        if record_dir.is_symlink():
-            print(f"--record must not be a symlink: {record_dir}", file=sys.stderr)
-            return 2
-        record_dir.mkdir(mode=0o700, parents=True, exist_ok=True)
-        if os.name == "posix" and record_dir.stat().st_uid != os.getuid():
-            print(f"--record directory is owned by another user: {record_dir}", file=sys.stderr)
-            return 2
-
     # one private 0700 directory holds all config backups for this run
     backup_dir = Path(tempfile.mkdtemp(prefix="serena-client-probe-"))
 
@@ -779,8 +657,6 @@ def main() -> int:
                 print(f"    client version: {result.cli_version}")
             for note in result.notes:
                 print(f"    note: {note}")
-            if record_dir is not None:
-                print(f"    snapshot: {_write_snapshot(record_dir, result)}")
     finally:
         # ALWAYS dispose of the backup directory, interrupt included: emergency restore
         # retains credential-bearing backups, and an exception between backup and summary

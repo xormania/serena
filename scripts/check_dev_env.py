@@ -77,7 +77,11 @@ class ToolchainRequirement:
                 problems.append(f"java >= {self.min_java} (the installed version could not be determined)")
             elif major < self.min_java:
                 problems.append(f"java >= {self.min_java} (found {major})")
-        if self.min_php is not None and "php" in self.commands and shutil.which("php") is not None:
+        # deliberately NOT gated on "php" being a required command: the php marker runs on node
+        # alone (intelephense), but an INSTALLED php below the floor is worse than none at all --
+        # test/conftest.py skips phpactor and phpantom only when php is absent, so a too-old one
+        # is not skipped, it fails
+        if self.min_php is not None and shutil.which("php") is not None:
             php_version = _php_version()
             wanted = f"php >= {self.min_php[0]}.{self.min_php[1]}"
             if php_version is None:
@@ -211,7 +215,8 @@ def _hlsl_server_availability_check() -> str | None:
     machine = platform.machine().lower()
     if sys.platform == "darwin":
         return None if shutil.which("cargo") else "an existing shader-language-server, or cargo to build it (macOS has no prebuilt binary)"
-    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64"):
+    # glibc explicitly: musl Linux is a separate platform key upstream, with nothing published
+    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64") and platform.libc_ver()[0] == "glibc":
         return None
     if sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64"):
         return None
@@ -226,7 +231,8 @@ def _dart_managed_sdk_check() -> str | None:
     machine = platform.machine().lower()
     if sys.platform == "darwin" or (sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64")):
         return None
-    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64"):
+    # glibc explicitly: the SDK table keys musl Linux separately and publishes nothing for it
+    if sys.platform.startswith("linux") and machine in ("x86_64", "amd64") and platform.libc_ver()[0] == "glibc":
         return None
     return "a platform in the managed-SDK matrix (the provider does not use a system dart)"
 
@@ -259,11 +265,10 @@ def _rust_analyzer_check() -> str | None:
     return "rust-analyzer (via rustup, the PATH, or a standard install location)"
 
 
-def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches: bool = False) -> str | None:
+def _managed_binary_platform_check(what: str, windows_arm64: bool) -> str | None:
     """
     :param what: the managed binary, named in the verdict
     :param windows_arm64: whether a Windows arm64 build exists
-    :param extra_arches: whether architectures beyond x86_64/arm64 are supported
     :return: what is missing, or None when this platform is served
 
     Several servers download a mandatory helper whose upstream publishes a narrower platform
@@ -273,7 +278,7 @@ def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches:
     machine = platform.machine().lower()
     is_x64 = machine in ("x86_64", "amd64")
     is_arm64 = machine in ("arm64", "aarch64")
-    if not (is_x64 or is_arm64 or extra_arches):
+    if not (is_x64 or is_arm64):
         return f"a supported architecture for {what} (no build exists for {machine})"
     # an ALLOWLIST of operating systems, not a list of known-bad ones: PlatformUtils resolves
     # Windows, macOS and Linux and rejects everything else (FreeBSD included) before a
@@ -529,8 +534,11 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(("ruby",), ("ruby", "gem|ruby-lsp"), "Ruby (a global ruby-lsp is used if present, else gem installs it)"),
     ToolchainRequirement(
         ("php",),
-        ("php", "node", "npm"),
-        "PHP 8.1+ with Node.js/npm (intelephense, the default php server, runs on node; phpactor is the conditional extra)",
+        ("node", "npm"),
+        # test/conftest.py skips only the phpactor and phpantom servers when php is absent:
+        # intelephense, the DEFAULT php server, runs on node alone, so the marker still runs
+        # and requiring a php binary here would withhold it from a machine that can use it
+        "Node.js with npm (intelephense, the default php server, runs on node; phpactor and phpantom additionally need PHP 8.1+)",
         min_php=(8, 1),
     ),
     ToolchainRequirement(
@@ -604,7 +612,9 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
         "Perl + the Perl::LanguageServer module (probed; CI skips Perl tests on Windows)",
         extra_check=_perl_language_server_check,
     ),
-    ToolchainRequirement(("lean4",), ("lean", "lake"), "Lean 4 via elan (lean runs the server; the test fixture is built with lake)"),
+    # test/conftest.py gates on `lean` alone, and the provider treats a missing `lake` as a
+    # warning: the fixture is checked in already built, so lake is not needed to run the suite
+    ToolchainRequirement(("lean4",), ("lean",), "Lean 4 via elan (lean runs the language server)"),
     ToolchainRequirement(
         ("nix",),
         ("nix", "nixd"),
