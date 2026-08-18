@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Live smoke test for Serena's Grok Build integration.
 

@@ -5,6 +5,8 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - Every script under `scripts/` now documents itself: a module docstring, `--help`, a shebang
+    and the executable bit — enforced by a conventions test
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
