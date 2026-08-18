@@ -78,10 +78,9 @@ class ToolchainRequirement:
                 problems.append(f"java >= {self.min_java} (the installed version could not be determined)")
             elif major < self.min_java:
                 problems.append(f"java >= {self.min_java} (found {major})")
-        # deliberately NOT gated on "php" being a required command: the php marker runs on node
-        # alone (intelephense), but an INSTALLED php below the floor is worse than none at all --
-        # test/conftest.py skips phpactor and phpantom only when php is absent, so a too-old one
-        # is not skipped, it fails
+        # NOT gated on "php" being a required command: the marker runs on node alone, but an
+        # INSTALLED php below the floor is worse than none -- conftest skips phpactor and
+        # phpantom only when php is absent, so a too-old one is not skipped, it fails
         if self.min_php is not None and shutil.which("php") is not None:
             php_version = _php_version()
             wanted = f"php >= {self.min_php[0]}.{self.min_php[1]}"
@@ -225,10 +224,8 @@ def _hlsl_server_availability_check() -> str | None:
 
 
 def _dart_managed_sdk_check() -> str | None:
-    # mirrors DartLanguageServer's managed-SDK matrix (linux-x64, win-x64/arm64,
-    # osx-x64/arm64): on those platforms Serena downloads its pinned SDK. Elsewhere the
-    # suite CANNOT run at all -- the provider goes straight to its dependency table and
-    # never resolves a system dart, so a PATH dart must not count
+    # mirrors DartLanguageServer's managed-SDK matrix (linux-x64, win-x64/arm64, osx-x64/arm64):
+    # elsewhere the provider never resolves a system dart, so a PATH dart must not count
     machine = platform.machine().lower()
     if sys.platform == "darwin" or (sys.platform == "win32" and machine in ("amd64", "x86_64", "arm64", "aarch64")):
         return None
@@ -238,9 +235,8 @@ def _dart_managed_sdk_check() -> str | None:
     return "a platform in the managed-SDK matrix (the provider does not use a system dart)"
 
 
-# rust-analyzer's fallback locations, split by whether they are under the home directory, so
-# a test can neutralise the machine-wide ones instead of depending on what this host happens
-# to have in /usr/local
+# rust-analyzer's fallback locations, split by whether they sit under the home directory, so a
+# test can neutralise the machine-wide ones rather than depend on what this host has
 RUST_ANALYZER_HOME_RELATIVE_PATHS: tuple[str, ...] = (
     (".cargo/bin/rust-analyzer.exe", "scoop/shims/rust-analyzer.exe", "scoop/apps/rust-analyzer/current/rust-analyzer.exe")
     if os.name == "nt"
@@ -327,9 +323,8 @@ def _current_platform_key() -> str:
 
 
 # Waived markers whose managed download reaches BEYOND the five keys publishers converge on.
-# Withholding them on those platforms would hide a runnable suite, so the exceptions are
-# declared here — and a test compares each declaration against the provider's own dependency
-# table, so a publisher dropping a target fails CI instead of misleading a contributor.
+# Withholding them there would hide a runnable suite, so the exceptions are declared here, and a
+# test compares each against the provider's own dependency table.
 MANAGED_EXTRA_PLATFORM_KEYS: dict[str, frozenset[str]] = {"cue": frozenset({"win-arm64"})}
 
 
@@ -379,10 +374,8 @@ def _pascal_pasls_check() -> str | None:
 
 
 def _matlab_installation_check() -> str | None:
-    # mirrors _is_matlab_available (test/conftest.py): MATLAB_PATH or a known install location --
-    # a bare PATH launcher is NOT accepted, because neither the guard nor the provider's
-    # _find_matlab_installation resolves one; and the provider rejects a MATLAB_PATH that is
-    # not a real directory, so a stale value must not count
+    # mirrors _is_matlab_available (test/conftest.py): MATLAB_PATH or a known install location,
+    # never a bare PATH launcher -- and a MATLAB_PATH that is not a real directory does not count
     matlab_path = os.environ.get("MATLAB_PATH")
     if matlab_path and Path(matlab_path).is_dir():
         return None
@@ -536,9 +529,8 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ToolchainRequirement(
         ("php",),
         ("node", "npm"),
-        # test/conftest.py skips only the phpactor and phpantom servers when php is absent:
-        # intelephense, the DEFAULT php server, runs on node alone, so the marker still runs
-        # and requiring a php binary here would withhold it from a machine that can use it
+        # conftest skips only phpactor and phpantom when php is absent: intelephense, the DEFAULT
+        # server, runs on node alone, so requiring php here would withhold a marker that works
         "Node.js with npm (intelephense, the default php server, runs on node; phpactor and phpantom additionally need PHP 8.1+)",
         min_php=(8, 1),
     ),
