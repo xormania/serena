@@ -184,7 +184,11 @@ def _ocamllsp_check() -> str | None:
 
 
 def _perl_language_server_check() -> str | None:
-    # mirrors test/conftest.py's _is_perl_language_server_available: perl ships with most systems, the module is the signal
+    # mirrors test/conftest.py's _is_perl_language_server_available (perl ships with most
+    # systems, the module is the signal), plus the provider's own platform restriction:
+    # _setup_runtime_dependencies accepts Linux and macOS only and raises on Windows
+    if sys.platform == "win32":
+        return "a non-Windows platform (the Perl language server supports Linux and macOS only)"
     return None if _probe_succeeds(["perl", "-MPerl::LanguageServer", "-e", "1"], timeout=30) else "the Perl::LanguageServer module"
 
 
@@ -280,6 +284,19 @@ def _managed_binary_platform_check(what: str, windows_arm64: bool, extra_arches:
     return None
 
 
+def _ci_disabled_markers() -> dict[str, str]:
+    """
+    :return: markers the central guard disables ONLY on CI, mapped to why
+
+    Mirrors section 5 of ``_determine_disabled_language_servers``: some suites work locally
+    and are switched off on the runners, so on CI the doctor must not advertise them. Same
+    environment test the guard uses.
+    """
+    if os.getenv("CI") != "true" and os.getenv("GITHUB_ACTIONS") != "true":
+        return {}
+    return {"kotlin": "disabled on CI: the IntelliJ-based Kotlin server crashes under runner memory limits"}
+
+
 def _narrow_platform_reason() -> str | None:
     """
     :return: why servers Serena downloads itself cannot be assumed available here, or None on
@@ -288,16 +305,20 @@ def _narrow_platform_reason() -> str | None:
     The languages with no row are waived because Serena installs their servers itself — but a
     managed download is only a waiver where a build EXISTS. Publishers converge on five
     platform keys (glibc Linux x64/arm64, macOS x64/arm64, Windows x64); the Ada server, for
-    one, stops exactly there. Rather than copy thirteen matrices that would rot, this reports
-    the two platforms outside that set, where a waived marker must not be called runnable.
+    one, stops exactly there. This ALLOWS those five and withholds everywhere else, rather
+    than naming the exclusions: 32-bit Linux, BSD and every future architecture are outside
+    the matrix too, and a deny-list would keep discovering them one platform at a time.
     """
     machine = platform.machine().lower()
+    is_x64 = machine in ("x86_64", "amd64")
     is_arm64 = machine in ("arm64", "aarch64")
-    if sys.platform == "win32" and is_arm64:
-        return "Windows arm64 (servers Serena downloads publish x64 builds for Windows)"
-    if sys.platform.startswith("linux") and platform.libc_ver()[0] != "glibc":
-        return "musl-based Linux (servers Serena downloads publish glibc builds)"
-    return None
+    if sys.platform == "darwin" and (is_x64 or is_arm64):
+        return None
+    if sys.platform == "win32" and is_x64:
+        return None
+    if sys.platform.startswith("linux") and (is_x64 or is_arm64) and platform.libc_ver()[0] == "glibc":
+        return None
+    return f"{sys.platform}/{machine or 'unknown'} (servers Serena downloads publish for glibc Linux x64/arm64, macOS x64/arm64 and Windows x64)"
 
 
 def _solidity_forge_check() -> str | None:
@@ -753,12 +774,18 @@ def _runnable_markers(language_markers: list[str], evaluated: list[tuple[Toolcha
     :return: the markers whose required toolchains are all present, in registration order.
         A marker with no row rides on Serena downloading its server, which holds only where
         that download exists -- so on a platform outside the published set those markers are
-        withheld rather than assumed
+        withheld rather than assumed. Markers the guard disables only on CI are withheld
+        there, whatever the local toolchains say
     """
     blocked = {marker for requirement, missing in evaluated if missing for marker in requirement.markers}
     covered = {marker for requirement, _ in evaluated for marker in requirement.markers}
     narrow_platform = _narrow_platform_reason()
-    return [marker for marker in language_markers if marker not in blocked and (marker in covered or narrow_platform is None)]
+    ci_disabled = _ci_disabled_markers()
+    return [
+        marker
+        for marker in language_markers
+        if marker not in blocked and marker not in ci_disabled and (marker in covered or narrow_platform is None)
+    ]
 
 
 def _report_toolchains(language_markers: list[str], evaluated: list[tuple[ToolchainRequirement, list[str]]]) -> list[str]:
@@ -776,6 +803,9 @@ def _report_toolchains(language_markers: list[str], evaluated: list[tuple[Toolch
 
     covered = {marker for requirement in TOOLCHAIN_REQUIREMENTS for marker in requirement.markers}
     uncovered = [marker for marker in language_markers if marker not in covered]
+    for marker, reason in sorted(_ci_disabled_markers().items()):
+        print(f"  MISS     {marker:<55} {reason}")
+
     if uncovered:
         print()
         narrow_platform = _narrow_platform_reason()

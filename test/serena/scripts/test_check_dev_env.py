@@ -133,6 +133,46 @@ class TestRequirementVerdicts:
         monkeypatch.setattr(doctor.platform, "machine", lambda: "ARM64")
         assert doctor._runnable_markers(markers, evaluated) == ["go"]
 
+        # the rule is an ALLOWLIST of the published five, not a list of known-bad platforms:
+        # 32-bit Linux and anything unfamiliar are outside the matrix too
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "i686")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+        monkeypatch.setattr(doctor.sys, "platform", "freebsd14")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+    def test_ci_only_disablements_are_withheld_on_ci(self, doctor, monkeypatch) -> None:
+        """Given the guard's CI-only section disables kotlin on runners, when the doctor runs
+        with CI set, then kotlin is not advertised — locally it is, since the suite works
+        there. A marker pytest will skip must never appear in the expression.
+        """
+        requirement = doctor.ToolchainRequirement(("go",), (), "note")
+        evaluated = [(requirement, [])]
+        markers = ["go", "kotlin"]
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        monkeypatch.setattr(doctor.platform, "machine", lambda: "x86_64")
+        monkeypatch.setattr(doctor.platform, "libc_ver", lambda: ("glibc", "2.39"))
+        monkeypatch.delenv("CI", raising=False)
+        monkeypatch.delenv("GITHUB_ACTIONS", raising=False)
+        assert doctor._runnable_markers(markers, evaluated) == ["go", "kotlin"]
+        monkeypatch.setenv("CI", "true")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+        monkeypatch.delenv("CI")
+        monkeypatch.setenv("GITHUB_ACTIONS", "true")
+        assert doctor._runnable_markers(markers, evaluated) == ["go"]
+
+    def test_perl_is_unavailable_on_windows_whatever_is_installed(self, doctor, monkeypatch) -> None:
+        """Given Windows with perl and the module present, the perl row still reports it
+        missing: the provider accepts Linux and macOS platform IDs only and raises on
+        Windows, so the suite cannot start there no matter what is installed.
+        """
+        monkeypatch.setattr(doctor, "_probe_succeeds", lambda argv, timeout=60: True)
+        monkeypatch.setattr(doctor.sys, "platform", "win32")
+        assert doctor._perl_language_server_check() == "a non-Windows platform (the Perl language server supports Linux and macOS only)"
+        monkeypatch.setattr(doctor.sys, "platform", "linux")
+        assert doctor._perl_language_server_check() is None
+
     def test_mandatory_helper_binaries_gate_platforms_their_upstream_skips(self, doctor, monkeypatch) -> None:
         """Given Windows on arm64, the rows whose servers download a mandatory helper report
         it missing — ShellCheck, foundry forge and pasls publish no build there, and the

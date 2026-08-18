@@ -53,6 +53,7 @@ import stat
 import subprocess
 import sys
 import tempfile
+import threading
 from collections.abc import Iterator
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -117,6 +118,31 @@ def _drain(process: subprocess.Popen, timeout: int = 5) -> None:
         process.communicate(timeout=timeout)
     except subprocess.TimeoutExpired:
         pass
+
+
+def _is_applicable_within_timeout(handler: ClientSetupHandler, timeout: int | None = None) -> bool | None:
+    """
+    :param handler: the client setup handler whose detection predicate to evaluate
+    :param timeout: seconds to allow the predicate; the module's command timeout by default,
+        read HERE rather than bound as a default argument, which would freeze it at import
+    :return: what the predicate answered, or None if it did not answer in time
+
+    ``is_applicable`` shells out through ``execute_shell_command``, which waits without a
+    timeout -- so a client CLI that hangs in its own version probe would hang this script
+    before the bounded runner ever gets a turn. The predicate is upstream's and stays
+    authoritative; it is merely given a deadline, on a daemon thread so an unresponsive
+    client cannot keep the interpreter alive either.
+    """
+    answer: list[bool] = []
+
+    def evaluate() -> None:
+        with contextlib.suppress(Exception):
+            answer.append(handler.is_applicable())
+
+    thread = threading.Thread(target=evaluate, daemon=True)
+    thread.start()
+    thread.join(COMMAND_TIMEOUT_SECONDS if timeout is None else timeout)
+    return answer[0] if answer else None
 
 
 def _install_unwinding_signal_handlers() -> None:
@@ -475,8 +501,12 @@ class ClientProbe:
         """
         :return: the outcome of the full add/verify/remove/verify lifecycle for this client
         """
-        # detection, via the same predicate `serena setup` uses
-        if not self.handler.is_applicable():
+        # detection, via the same predicate `serena setup` uses -- under a deadline, since it
+        # shells out without one
+        applicable = _is_applicable_within_timeout(self.handler)
+        if applicable is None:
+            return self._result(Status.SKIP, f"client detection did not answer within {COMMAND_TIMEOUT_SECONDS}s; not probing")
+        if not applicable:
             return self._result(Status.NOT_DETECTED, "client CLI not found or not functional")
         version_command = self._run((self.spec.list_argv[0], "--version"))
         cli_version = version_command.stdout.strip() or None
@@ -616,7 +646,8 @@ def main() -> int:
 
     if args.list:
         for handler in handlers:
-            print(f"  {handler.name:<12} {'detected' if handler.is_applicable() else '-'}")
+            detected = _is_applicable_within_timeout(handler)
+            print(f"  {handler.name:<12} {'detected' if detected else '-' if detected is not None else 'no answer in time'}")
         return 0
 
     serena_executable = shutil.which("serena")

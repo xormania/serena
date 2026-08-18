@@ -56,6 +56,23 @@ def _run_lifecycle(probe_module, probe, after_add: tuple[int, str], final: tuple
 class TestLifecycleVerdicts:
     """A verdict is only ever reported on observed evidence."""
 
+    @pytest.mark.timeout(30)
+    def test_a_client_whose_detection_hangs_is_skipped_not_waited_on(self, probe_module, tmp_path, monkeypatch) -> None:
+        """Given a client CLI that hangs inside its own detection predicate, when the probe
+        runs, then it SKIPs after the deadline instead of waiting forever — that predicate
+        shells out without a timeout, so it is the one call that can outlast the bounded
+        runner and hang the whole script.
+        """
+        monkeypatch.setattr(probe_module, "COMMAND_TIMEOUT_SECONDS", 1)
+        probe = _probe(probe_module, tmp_path)
+        issued: list[tuple[str, ...]] = []
+        probe._run = lambda argv: issued.append(argv) or probe_module.ExecutedCommand(argv, 0, "", "")
+        probe.handler.is_applicable = lambda: time.sleep(300) or True  # never answers in time
+        result = probe.run()
+        assert result.status == probe_module.Status.SKIP
+        assert "did not answer" in result.detail
+        assert issued == []  # nothing was run against a client we could not even detect
+
     def test_a_client_that_already_has_serena_is_skipped_untouched(self, probe_module, tmp_path) -> None:
         """Given the client already carries a serena registration, when the probe runs, then
         it SKIPs without issuing setup — this is the guard that keeps the probe off a live
