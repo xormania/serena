@@ -457,6 +457,50 @@ class TestStatePreservation:
         assert config_path.exists() is False, "the probe kept a config file that only existed because it asked"
         assert result.status is probe_module.Status.PASS
 
+    def test_skipping_after_the_backup_leaves_no_credential_copy_behind(self, probe_module, tmp_path) -> None:
+        """Given a client that turns out to be already registered — discovered only after the
+        config was captured — when the probe skips it, then the backup is gone. It is a
+        credential-bearing copy, and one left in the run's directory makes the summary report
+        that state was kept because a probe failed, when no probe ran at all.
+        """
+        config_path = tmp_path / "config.json"
+        config_path.write_bytes(b'{"tokens": "secret"}')
+        probe = _probe(probe_module, tmp_path, config_path)
+        result, _ = _run_lifecycle(probe_module, probe, after_add=(0, ""), baseline=(0, "serena  " + EXPECTED_COMMAND))
+        assert result.status is probe_module.Status.SKIP
+        assert probe._backup_path is None
+        assert not list(tmp_path.glob("fake-*")), "a backup of the user's config outlived the skip"
+
+    def test_a_config_created_while_inspecting_is_removed_even_when_the_client_is_skipped(self, probe_module, tmp_path) -> None:
+        """Given the registration query creates the config and the query then fails, when the
+        probe skips the client, then the created file is gone — the probe caused it, so a skip
+        must not leave it any more than a completed run would.
+        """
+        config_path = tmp_path / "config.json"
+        probe = _probe(probe_module, tmp_path, config_path)
+
+        def scripted(argv: tuple[str, ...]):
+            if argv == probe.spec.list_argv:
+                config_path.write_bytes(b'{"created-by-the-query": true}')
+                return probe_module.ExecutedCommand(argv, 1, "", "boom")
+            return probe_module.ExecutedCommand(argv, 0, "1.0" if "--version" in argv else "", "")
+
+        probe._run = scripted
+        result = probe.run()
+        assert result.status is probe_module.Status.SKIP
+        assert config_path.exists() is False, "the query created a config and the skip kept it"
+
+    def test_a_failed_emergency_removal_is_reported_rather_than_swallowed(self, probe_module, tmp_path) -> None:
+        """Given the rollback's removal command fails, when the probe unwinds, then it says so.
+        For a client with no known config path this command IS the whole rollback, so silence
+        would report the original failure while leaving a registration the probe created.
+        """
+        probe = _probe(probe_module, tmp_path, None)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 1 if argv == probe.spec.remove_argv else 0, "", "")
+        probe._emergency_restore()
+        assert any("EMERGENCY REMOVAL FAILED" in note for note in probe._notes)
+        assert any("may still carry a serena registration" in note for note in probe._notes)
+
     def test_a_failing_emergency_restore_keeps_the_probes_own_verdict(self, probe_module, tmp_path) -> None:
         """Given the rollback itself fails, when the probe unwinds, then the probe's own FAIL
         verdict survives with a loud note — raising from the finally would discard the

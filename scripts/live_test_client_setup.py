@@ -476,7 +476,16 @@ class ClientProbe:
             # signals are DEFERRED for the whole rollback, not merely caught: SystemExit and
             # KeyboardInterrupt are BaseExceptions, and either would abort the restore halfway
             with _uninterruptible_cleanup():
-                self._run(self.spec.remove_argv)
+                removal = self._run(self.spec.remove_argv)
+                if removal.returncode != 0:
+                    # the rollback's own failure, and for a client with no config path (codebuddy)
+                    # this command IS the whole rollback -- silence here would report the original
+                    # failure while leaving a registration the probe put there
+                    self._notes.append(
+                        f"EMERGENCY REMOVAL FAILED ({' '.join(self.spec.remove_argv)} exited {removal.returncode})"
+                        " — the client may still carry a serena registration"
+                    )
+                    print(f"    !! emergency removal exited {removal.returncode}; the client may still be registered", flush=True)
                 if self._backup_path is not None and self.spec.user_config_path is not None:
                     self._restore_config_bytes()
                     self._notes.append(f"user config restored from backup after failure; backup kept at {self._backup_path}")
@@ -489,6 +498,20 @@ class ClientProbe:
 
     def _result(self, status: Status, detail: str, cli_version: str | None = None) -> ProbeResult:
         return ProbeResult(self.handler.name, status, detail, cli_version, self._notes, self._transcript)
+
+    def _skip_without_probing(self, detail: str, cli_version: str | None = None) -> ProbeResult:
+        """Skips a client, releasing whatever inspecting it already took.
+
+        Every SKIP after the backup goes through here rather than returning directly: the backup
+        is a credential-bearing copy, and a run that leaves one behind makes main() report that
+        state was kept because a probe failed, when none ran. Inspection can also have created
+        the config it read, which is undone for the same reason.
+        """
+        self._remove_config_created_by_probe()
+        if self._backup_path is not None:
+            self._backup_path.unlink(missing_ok=True)
+            self._backup_path = None
+        return self._result(Status.SKIP, detail, cli_version)
 
     def run(self) -> ProbeResult:
         """
@@ -508,11 +531,11 @@ class ClientProbe:
         try:
             self._backup_config()
         except OSError as e:
-            return self._result(Status.SKIP, f"the user config could not be backed up ({e}); not probing")
+            return self._skip_without_probing(f"the user config could not be backed up ({e}); not probing")
         # ...and one this probe has no safe way to put back is not probed at all
         hardlinked_config = self._hardlinked_config_reason()
         if hardlinked_config is not None:
-            return self._result(Status.SKIP, hardlinked_config)
+            return self._skip_without_probing(hardlinked_config)
 
         version_command = self._run((self.spec.list_argv[0], "--version"))
         cli_version = version_command.stdout.strip() or None
@@ -520,11 +543,11 @@ class ClientProbe:
         # baseline: never touch a client that already has a serena registration
         baseline = self._run(self.spec.list_argv)
         if baseline.returncode != 0:
-            return self._result(
-                Status.SKIP, f"cannot query registrations ({' '.join(self.spec.list_argv)} exited {baseline.returncode})", cli_version
+            return self._skip_without_probing(
+                f"cannot query registrations ({' '.join(self.spec.list_argv)} exited {baseline.returncode})", cli_version
             )
         if self._serena_registered(baseline.stdout):
-            return self._result(Status.SKIP, "a serena MCP server is already registered — refusing to touch a live setup", cli_version)
+            return self._skip_without_probing("a serena MCP server is already registered — refusing to touch a live setup", cli_version)
 
         mutated = False
         try:
