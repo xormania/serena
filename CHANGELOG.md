@@ -5,6 +5,10 @@ Status of the `main` branch. Changes prior to the next official version change w
 * General:
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - Add `scripts/live_test_client_setup.py`, which exercises the `serena setup` registration
+    lifecycle against the MCP client CLIs installed on the machine, restoring each client's
+    configuration and refusing any it cannot restore safely; covered by behavior tests under
+    `test/serena/scripts/`
 
 * Language Servers:
   - Fix: Dart's `$/analyzerStatus` notifications were logged as unhandled-method warnings during analysis (#1855)
