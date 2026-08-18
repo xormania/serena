@@ -238,11 +238,37 @@ class TestRequirementVerdicts:
         """
         from solidlsp.language_servers.ada_language_server import DEFAULT_ALS_VERSION, AdaLanguageServer
         from solidlsp.language_servers.cue_language_server import DEFAULT_CUE_VERSION, CueLanguageServer
+        from solidlsp.language_servers.kotlin_language_server import KOTLIN_SERVER_ARTIFACT_BY_PLATFORM
 
         cue_keys = {d.platform_id for d in CueLanguageServer._runtime_dependencies(DEFAULT_CUE_VERSION)._id_and_platform_id_to_dep.values()}
         assert doctor.MANAGED_EXTRA_PLATFORM_KEYS["cue"] <= cue_keys
+        assert doctor.MANAGED_EXTRA_PLATFORM_KEYS["kotlin"] <= set(KOTLIN_SERVER_ARTIFACT_BY_PLATFORM)
         ada_keys = {d.platform_id for d in AdaLanguageServer._runtime_dependencies(DEFAULT_ALS_VERSION)._id_and_platform_id_to_dep.values()}
         assert "win-arm64" not in ada_keys  # the common-matrix baseline the declaration is an exception to
+
+    # every provider that ships a win-arm64 artifact today. The check below is the reverse of the
+    # one above -- a declaration must not claim more than its provider publishes, AND a provider
+    # publishing beyond the common matrix must not go undeclared. Only the second direction can
+    # catch a WAIVED marker that is quietly withheld on a platform where its server does exist,
+    # which is exactly how kotlin was missed
+    PROVIDERS_PUBLISHING_WIN_ARM64 = frozenset(
+        {
+            "csharp_language_server.py",
+            "cue_language_server.py",
+            "dart_language_server.py",
+            "hlsl_language_server.py",
+            "kotlin_language_server.py",
+        }
+    )
+
+    def test_no_provider_reaches_win_arm64_without_the_doctor_knowing(self) -> None:
+        """Given the language servers that publish a Windows arm64 artifact, the set is the one
+        this tree accounts for — a new one must be classified (a row of its own, or a declared
+        waiver exception) rather than silently withholding a suite that would have run there.
+        """
+        providers = Path(__file__).resolve().parents[3] / "src" / "solidlsp" / "language_servers"
+        publishing = {path.name for path in providers.glob("*.py") if '"win-arm64"' in path.read_text(encoding="utf-8")}
+        assert publishing == self.PROVIDERS_PUBLISHING_WIN_ARM64
 
     def test_ci_only_disablements_are_withheld_on_ci(self, doctor, monkeypatch) -> None:
         """Given the guard's CI-only section disables kotlin on runners, when the doctor runs

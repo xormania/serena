@@ -325,7 +325,11 @@ def _current_platform_key() -> str:
 # Waived markers whose managed download reaches BEYOND the five keys publishers converge on.
 # Withholding them there would hide a runnable suite, so the exceptions are declared here, and a
 # test compares each against the provider's own dependency table.
-MANAGED_EXTRA_PLATFORM_KEYS: dict[str, frozenset[str]] = {"cue": frozenset({"win-arm64"})}
+MANAGED_EXTRA_PLATFORM_KEYS: dict[str, frozenset[str]] = {
+    "cue": frozenset({"win-arm64"}),
+    # the modern Kotlin server publishes an aarch64 Windows archive, and it carries its own JBR
+    "kotlin": frozenset({"win-arm64"}),
+}
 
 
 def _narrow_platform_reason() -> str | None:
