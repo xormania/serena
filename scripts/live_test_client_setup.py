@@ -197,9 +197,8 @@ def client_probe_specs() -> dict[str, ClientProbeSpec]:
         "claude-code": ClientProbeSpec(
             ("claude", "mcp", "list"),
             ("claude", "mcp", "remove", "--scope", "user", "serena"),
-            # claude keeps .claude.json under CLAUDE_CONFIG_DIR when set (verified live:
-            # CLAUDE_CONFIG_DIR=<tmp> claude mcp list creates <tmp>/.claude.json) -- backing
-            # up the home-directory path would guard a file the client never touches
+            # claude keeps .claude.json under CLAUDE_CONFIG_DIR when set; the home-directory
+            # path would guard a file the client never touches
             Path(os.environ.get("CLAUDE_CONFIG_DIR") or Path.home()) / ".claude.json",
         ),
         # untested mirror of claude-code (CodeBuddy's setup handler is command-compatible)
@@ -210,10 +209,7 @@ def client_probe_specs() -> dict[str, ClientProbeSpec]:
         "codex": ClientProbeSpec(
             ("codex", "mcp", "list"),
             ("codex", "mcp", "remove", "serena"),
-            # codex resolves its home from CODEX_HOME when set (verified live: codex names
-            # the override as its codex_home and lists from there; `codex mcp add` writes
-            # $CODEX_HOME/config.toml). serena's handler shells out to the codex CLI, so
-            # the CLI's resolution is the one that counts
+            # the codex CLI resolves its home from CODEX_HOME, and serena shells out to that CLI
             Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex") / "config.toml",
         ),
         "grok": ClientProbeSpec(
@@ -276,10 +272,9 @@ class ClientProbe:
         self._config_link_target: str | None = None
 
     def _run(self, argv: tuple[str, ...]) -> ExecutedCommand:
-        # execute, record in the transcript, and echo for the live reader. On POSIX the child
-        # gets its own process group so a timeout can terminate the WHOLE tree: setup shells
-        # out to the client CLI, and an orphaned grandchild finishing its registration AFTER
-        # the rollback would silently undo the cleanup.
+        # execute, record in the transcript, and echo for the live reader. On POSIX the child gets
+        # its own process group so a timeout kills the WHOLE tree: an orphaned grandchild
+        # finishing its registration after the rollback would silently undo it
         print(f"    $ {' '.join(argv)}", flush=True)
         try:
             with subprocess.Popen(
@@ -294,10 +289,8 @@ class ClientProbe:
                         _drain(process)
                     executed = ExecutedCommand(argv, -1, "", f"timed out after {COMMAND_TIMEOUT_SECONDS}s; the process tree was terminated")
                 except BaseException:
-                    # a Ctrl-C reaches this process but NOT the detached child (own session),
-                    # and the Popen context manager would then wait on it without any timeout,
-                    # keeping the emergency restore from ever running -- kill the tree, reap,
-                    # and let the interrupt continue unwinding
+                    # a Ctrl-C reaches this process but NOT the detached child, and Popen would
+                    # then wait on it untimed: kill the tree and reap, then keep unwinding
                     with _uninterruptible_cleanup():
                         _kill_process_tree(process)
                         _drain(process)
@@ -360,10 +353,9 @@ class ClientProbe:
             return
         config_stat = config_path.stat()
         self._config_mode = stat.S_IMODE(config_stat.st_mode)
-        # restores must write through a symlinked config (dotfile trees), never replace the
-        # link itself with a regular file -- so the restore target is resolved NOW, and the
-        # link's shape and literal target are recorded so a client that atomically replaces
-        # the link with a regular file can be undone too
+        # restores must write THROUGH a symlinked config, never replace the link with a regular
+        # file: the target is resolved now, and the link's shape and literal target recorded so a
+        # client that replaces the link can be undone too
         self._config_restore_path = config_path.resolve()
         self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
         self._backup_path.write_bytes(config_path.read_bytes())
@@ -394,9 +386,8 @@ class ClientProbe:
         if config_path is None or self._config_existed:
             return
         if self._config_was_symlink:
-            # the baseline was a DANGLING link. Two client behaviours to undo, and the link
-            # must survive both: a write-through created the target, or an atomic-rename
-            # writer replaced the link itself with a regular file
+            # the baseline was a DANGLING link, and it must survive both undo paths: a
+            # write-through that created the target, and a writer that replaced the link itself
             if not config_path.is_symlink():
                 if config_path.exists():
                     config_path.unlink()
@@ -414,11 +405,8 @@ class ClientProbe:
             self._notes.append(f"removed {config_path}, which the probe had created")
 
     def _restore_config_bytes(self) -> None:
-        # restore the backup atomically, owner-only from the first byte: recreating a deleted
-        # config with write_bytes would land at the process umask -- credentials readable by
-        # other users until a later chmod. mkstemp starts 0600; the pre-probe mode goes onto
-        # the temp file BEFORE it atomically replaces the config, so no wider-than-intended
-        # window ever exists and an interruption leaves only a 0600 temp file behind.
+        # atomic and owner-only from the first byte: mkstemp starts at 0600 and the pre-probe mode
+        # goes on before the replace, so the config is never briefly readable by other users
         assert self._backup_path is not None and self.spec.user_config_path is not None
         config_path = self.spec.user_config_path
         if self._config_was_symlink and not config_path.is_symlink():
@@ -467,9 +455,8 @@ class ClientProbe:
             self._notes.append("user config is byte-identical to the baseline")
         else:
             if not bytes_intact:
-                # boundary: on opaque bytes the client's own rewrite and a concurrent edit by
-                # another process are indistinguishable; the byte-restore contract wins, and the
-                # note DISCLOSES that concurrent changes (if any) were rolled back with it
+                # a client rewrite and a concurrent edit by another process are indistinguishable
+                # on opaque bytes, so the note DISCLOSES that a concurrent change was rolled back
                 self._notes.append(
                     "user config restored from backup: its bytes changed during the probe. A client rewrite and a"
                     " concurrent edit by another process look the same, so any concurrent change was rolled back"
@@ -483,16 +470,11 @@ class ClientProbe:
         self._backup_path = None
 
     def _emergency_restore(self) -> None:
-        # best-effort rollback for a probe that failed after mutating the client -- and
-        # best-effort means it may not raise: this runs from a finally, so an exception here
-        # would discard the in-flight verdict (its detail, notes and transcript), abandon the
-        # remaining clients, and tell the user about the restore instead of the failure
+        # best-effort rollback after a failed mutation -- and it may not raise: this runs from a
+        # finally, where an exception discards the verdict and the clients still to be probed
         try:
-            # signals are DEFERRED for the whole rollback, not merely caught: SystemExit from
-            # the SIGTERM handler and KeyboardInterrupt are BaseExceptions, so `except
-            # Exception` would let either abort the restore halfway -- leaving exactly the
-            # mutated client this method exists to undo. Blocking delivers them afterwards,
-            # so the interrupt is honoured without costing the rollback
+            # signals are DEFERRED for the whole rollback, not merely caught: SystemExit and
+            # KeyboardInterrupt are BaseExceptions, and either would abort the restore halfway
             with _uninterruptible_cleanup():
                 self._run(self.spec.remove_argv)
                 if self._backup_path is not None and self.spec.user_config_path is not None:
@@ -519,11 +501,10 @@ class ClientProbe:
             return self._result(Status.SKIP, f"client detection did not answer within {COMMAND_TIMEOUT_SECONDS}s; not probing")
         if not applicable:
             return self._result(Status.NOT_DETECTED, "client CLI not found or not functional")
-        # the config is captured BEFORE any client command runs, not merely before the mutating
-        # one: a command that only reads registrations can still create the config it reads
-        # (verified live: `CLAUDE_CONFIG_DIR=<tmp> claude mcp list` creates <tmp>/.claude.json),
-        # and capturing afterwards would take the probe's own side effect for the user's state.
-        # A config that cannot be read skips THIS client rather than aborting the whole run
+        # captured before ANY client command runs: a command that only reads registrations can
+        # still create the file it reads (claude mcp list does), and capturing afterwards would
+        # take the probe's own side effect for the user's state. An unreadable config skips this
+        # client rather than aborting the run
         try:
             self._backup_config()
         except OSError as e:
@@ -547,9 +528,8 @@ class ClientProbe:
 
         mutated = False
         try:
-            # arm the rollback BEFORE the mutating command runs: an interrupt mid-setup may
-            # arrive after the registration was already written, and the finally below must
-            # then restore -- arming afterwards would skip it
+            # arm the rollback BEFORE the mutating command: an interrupt can arrive after the
+            # registration was already written, and the finally below must still restore
             mutated = True
             # the real user-facing path: serena setup <client>
             setup = self._run((str(self.serena_executable), "setup", self.handler.name))
@@ -573,11 +553,10 @@ class ClientProbe:
             if f" {expected_command} " in f" {serena_row} ":
                 self._notes.append(f"registration carries the expected command: {expected_command}")
             elif "start-mcp-server" in serena_row:
-                # the client echoes command text, but possibly reformatted (codex renders columns), so
-                # verify token by token within the serena row -- whole tokens, not substrings, or
-                # ``--context=x`` would be satisfied by a row carrying ``--context=x-extra``. Boundary:
-                # an executable swapped while the row keeps its ``serena`` name would still match; exact
-                # command-field parsing is the deep single-client instrument's job (live_test_grok.py).
+                # the client may reformat the command text (codex renders columns), so verify it
+                # token by token -- whole tokens, or ``--context=x`` would be satisfied by a row
+                # carrying ``--context=x-extra``. An executable swapped while the row keeps its
+                # ``serena`` name still matches; exact parsing is live_test_grok.py's job
                 row_tokens = set(serena_row.split())
                 missing_parts = [part for part in expected_command.split() if part not in row_tokens]
                 if missing_parts:
@@ -609,9 +588,8 @@ class ClientProbe:
                         Status.FAIL, "the registration set differs from the baseline — another server's entry changed", cli_version
                     )
                 self._notes.append("registration set matches the baseline")
-            # the baseline must be restored and CONFIRMED before the rollback is disarmed:
-            # a client reserialization plus an interrupt in between would otherwise leave the
-            # rewritten bytes in place with the finally already skipping the restore
+            # restored and CONFIRMED before the rollback is disarmed: a client reserialization
+            # plus an interrupt in between would otherwise leave the rewritten bytes in place
             self._verify_config_baseline()
             mutated = False
         finally:
@@ -659,9 +637,8 @@ def main() -> int:
             for note in result.notes:
                 print(f"    note: {note}")
     finally:
-        # ALWAYS dispose of the backup directory, interrupt included: emergency restore
-        # retains credential-bearing backups, and an exception between backup and summary
-        # must not leave a secret copy in a temp dir the user was never told about
+        # ALWAYS dispose of the backup directory, interrupt included: it holds credential-bearing
+        # copies in a temp dir the user was never told about
         if not any(backup_dir.iterdir()):
             backup_dir.rmdir()
         else:
