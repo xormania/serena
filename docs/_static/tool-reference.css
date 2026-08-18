@@ -1,0 +1,15 @@
+/* Inline literals must wrap, or the page scrolls sideways on a phone.
+ *
+ * The generated parameter tables are full of backticked names — `containing_symbol_name_path`,
+ * `relative_path` — and Sphinx renders each as <code><span class="pre">. `pre` means no
+ * wrapping, so a long identifier pushes the whole page out: measured 143px past a 320px
+ * viewport on the symbol-tools page, 73px at 390px, clean at 1280px.
+ *
+ * The table itself is already handled — the theme wraps it in .pst-scrollable-table-container
+ * and it scrolls there. This is only about the literals inside the cells and the prose.
+ */
+.bd-article code,
+.bd-article code .pre {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}

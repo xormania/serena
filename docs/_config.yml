@@ -113,6 +113,8 @@ sphinx:
     autodoc_default_options:
       show-inheritance: True
     autodoc_show_sourcelink: True
+    html_css_files:
+      - tool-reference.css
     add_module_names: False
     github_username: oraios
     github_repository: serena

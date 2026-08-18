@@ -43,6 +43,8 @@ class ReadMemoryTool(Tool):
     def apply(self, memory_name: str) -> str:
         """
         Use to read a memory that is likely to be relevant to the current task, inferring relevance e.g. from the name.
+
+        :param memory_name: the name of the memory to read, as listed by the tool that lists memories
         """
         return self.memory_manager.load_memory(memory_name)
 
@@ -55,6 +57,8 @@ class ListMemoriesTool(Tool):
     def apply(self, topic: str = "") -> str:
         """
         Lists available memories, optionally filtered by topic.
+
+        :param topic: the topic to restrict the listing to; the empty default lists every memory
         """
         return self._to_json(self.memory_manager.list_memories(topic).to_dict())
 
@@ -67,6 +71,8 @@ class DeleteMemoryTool(Tool, ToolMarkerCanEdit):
     def apply(self, memory_name: str) -> str:
         """
         Delete a memory, only call if instructed explicitly or permission was granted by the user.
+
+        :param memory_name: the name of the memory to delete, as listed by the tool that lists memories
         """
         return self.memory_manager.delete_memory(memory_name, is_tool_context=True)
 
@@ -82,6 +88,9 @@ class RenameMemoryTool(Tool, ToolMarkerCanEdit):
         The "global" topic should only be used if explicitly instructed.
         References to other memories that are marked with the `mem:` prefix will be updated accordingly.
         References in read-only memories are not affected.
+
+        :param old_name: the current name of the memory
+        :param new_name: the name to give it, optionally containing "/" to place it under a topic
         """
         renaming_message, n_references_updated = self.memory_manager.rename_memory_and_propagate_references(
             old_name, new_name, is_tool_context=True
