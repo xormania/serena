@@ -404,19 +404,36 @@ class ClientProbe:
             config_path.unlink()
             self._notes.append(f"removed {config_path}, which the probe had created")
 
+    def _config_link_is_the_recorded_one(self) -> bool:
+        """
+        :return: whether the config is still the symlink recorded at backup time, pointing where
+            it pointed. Being *a* symlink is not enough: a client that retargets the link leaves
+            the shape intact while the path now resolves somewhere else entirely, so restoring
+            bytes to the original target would return nothing the client actually reads.
+        """
+        config_path = self.spec.user_config_path
+        if config_path is None or not self._config_was_symlink:
+            return True
+        return config_path.is_symlink() and os.readlink(config_path) == self._config_link_target
+
     def _restore_config_bytes(self) -> None:
         # atomic and owner-only from the first byte: mkstemp starts at 0600 and the pre-probe mode
         # goes on before the replace, so the config is never briefly readable by other users
         assert self._backup_path is not None and self.spec.user_config_path is not None
         config_path = self.spec.user_config_path
-        if self._config_was_symlink and not config_path.is_symlink():
-            # the client replaced the symlink with a regular file (atomic-rename writers do);
-            # remove the impostor and recreate the recorded link, preserving a relative target
+        if self._config_was_symlink and not self._config_link_is_the_recorded_one():
+            # the client either replaced the symlink with a regular file (atomic-rename writers
+            # do) or retargeted it; both are undone the same way -- remove what is there and
+            # recreate the recorded link, preserving a relative target
+            was_retargeted = config_path.is_symlink()
             if config_path.exists() or config_path.is_symlink():
                 config_path.unlink()
             assert self._config_link_target is not None
             config_path.symlink_to(self._config_link_target)
-            self._notes.append("the client replaced the config symlink with a regular file; the link was recreated")
+            self._notes.append(
+                f"the client {'retargeted' if was_retargeted else 'replaced'} the config symlink;"
+                f" the link to {self._config_link_target} was recreated"
+            )
         # the resolved target recorded at backup time: replacing the config PATH would clobber
         # a symlinked dotfile with a regular file
         restore_path = self._config_restore_path or self.spec.user_config_path
@@ -450,7 +467,7 @@ class ClientProbe:
         bytes_intact = config_path.is_file() and config_path.read_bytes() == self._backup_path.read_bytes()
         # identical bytes are not enough: a client that rewrites configs by atomic rename
         # replaces a symlinked config with a regular file while preserving every byte
-        link_shape_intact = not self._config_was_symlink or config_path.is_symlink()
+        link_shape_intact = self._config_link_is_the_recorded_one()
         if bytes_intact and link_shape_intact:
             self._notes.append("user config is byte-identical to the baseline")
         else:

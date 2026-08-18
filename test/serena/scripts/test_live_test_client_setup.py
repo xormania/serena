@@ -490,6 +490,34 @@ class TestStatePreservation:
         assert result.status is probe_module.Status.SKIP
         assert config_path.exists() is False, "the query created a config and the skip kept it"
 
+    @posix_only
+    def test_a_retargeted_config_symlink_is_pointed_back_where_it_was(self, probe_module, tmp_path) -> None:
+        """Given the config is a symlink and the client repoints it at a different file, when the
+        probe restores, then the link points where it did and that file holds the baseline. Still
+        BEING a symlink is not the property that matters — bytes written to the original target
+        while the path resolves elsewhere restore nothing the client actually reads.
+        """
+        real = tmp_path / "real-config.json"
+        original = b'{"baseline": true}'
+        real.write_bytes(original)
+        elsewhere = tmp_path / "elsewhere.json"
+        # IDENTICAL bytes, deliberately: reading through the retargeted link then gives exactly the
+        # baseline, so a byte comparison cannot see the change and the link check is the only thing
+        # standing between a retargeted config and a reported PASS
+        elsewhere.write_bytes(original)
+        config_path = tmp_path / "config.json"
+        config_path.symlink_to(real.name)
+        probe = _probe(probe_module, tmp_path, config_path)
+        probe._run = lambda argv: probe_module.ExecutedCommand(argv, 0, "", "")
+        probe._backup_config()
+        config_path.unlink()
+        config_path.symlink_to(elsewhere.name)  # the client retargets the link
+        assert config_path.is_symlink() and os.readlink(config_path) == elsewhere.name  # the plant landed
+        assert config_path.read_bytes() == original  # ...and the bytes still match, so only the link differs
+        probe._verify_config_baseline()
+        assert os.readlink(config_path) == real.name, "the link was left pointing at the client's file"
+        assert real.read_bytes() == original
+
     def test_a_failed_emergency_removal_is_reported_rather_than_swallowed(self, probe_module, tmp_path) -> None:
         """Given the rollback's removal command fails, when the probe unwinds, then it says so.
         For a client with no known config path this command IS the whole rollback, so silence
