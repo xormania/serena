@@ -5,9 +5,11 @@ Each scenario states a machine condition (Given), evaluates a requirement or ver
 real toolchain is consulted: PATH lookups and version probes are replaced per scenario.
 """
 
+import ast
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -15,6 +17,74 @@ import pytest
 def _which_map(available: dict[str, str]):
     """A shutil.which replacement resolving only the given commands"""
     return lambda command: available.get(command)
+
+
+def _conftest_command_guards(registered_markers: set[str]) -> dict[str, set[frozenset[str]]]:
+    """Reads back out of test/conftest.py which commands really decide whether a marker can run.
+
+    The doctor cannot import conftest: it pulls in pytest, SerenaAgent and the whole
+    language-server stack, and has to answer on the machine where exactly that is broken. Its
+    table is therefore written by hand -- so the rule is re-derived here from conftest's own
+    source, and a table that stops matching it fails instead of misinforming a contributor.
+
+    Several commands in one guard are alternatives (conftest disables QML only when neither
+    qmlls6 nor qmlls is present), which is what the table's ``a|b`` entries mean. Whether a guard
+    disables ALL the servers behind a marker or only some of them is the distinction that matters:
+    the table may require the first, and must not require the second, because the marker still
+    runs on the backends the guard did not disable.
+
+    :param registered_markers: the language markers pyproject registers
+    :return: marker -> (groups whose absence disables EVERY server behind it, groups whose
+        absence disables only some of them)
+    """
+    import test.conftest as conftest
+    from solidlsp.ls_config import LanguageServerId
+
+    explicit = {server.name: {getattr(mark, "name", mark) for mark in marks} for server, marks in conftest._LANGUAGE_PYTEST_MARKERS.items()}
+
+    def markers_of(server_name: str) -> set[str]:
+        # most servers carry a marker named after their id; the rest are listed in conftest
+        # because their marker differs (cpp_ccls runs under cpp). A server with neither has no
+        # tests to gate, so it cannot make a marker unrunnable
+        if server_name in explicit:
+            return explicit[server_name]
+        value = LanguageServerId[server_name].value
+        return {value} if value in registered_markers else set()
+
+    servers_behind: dict[str, set[str]] = {}
+    for server in LanguageServerId:
+        for marker in markers_of(server.name):
+            servers_behind.setdefault(marker, set()).add(server.name)
+
+    source = ast.parse(Path("test/conftest.py").read_text(encoding="utf-8"))
+    determine = next(
+        node for node in ast.walk(source) if isinstance(node, ast.FunctionDef) and node.name == "_determine_disabled_language_servers"
+    )
+    guards: dict[str, tuple[set[frozenset[str]], set[frozenset[str]]]] = {}
+    for branch in (node for node in ast.walk(determine) if isinstance(node, ast.If)):
+        commands = frozenset(
+            call.args[0].value
+            for call in ast.walk(branch.test)
+            if isinstance(call, ast.Call)
+            and getattr(call.func, "attr", "") == "which"
+            and call.args
+            and isinstance(call.args[0], ast.Constant)
+        )
+        disabled = {
+            node.attr
+            for node in ast.walk(branch)
+            if isinstance(node, ast.Attribute) and getattr(node.value, "id", "") == "LanguageServerId"
+        }
+        if not commands:
+            continue
+        resolved = {marker for server in disabled for marker in markers_of(server)}
+        # a command guard exists to disable tests, so it must reach a marker: silently resolving
+        # to nothing would shrink this check's reach without shrinking what it claims to cover
+        assert resolved, f"conftest gates {sorted(commands)} on {sorted(disabled)}, which resolves to no marker"
+        for marker in resolved:
+            whole, partial = guards.setdefault(marker, (set(), set()))
+            (whole if servers_behind[marker] <= disabled else partial).add(commands)
+    return guards
 
 
 class TestRequirementVerdicts:
@@ -484,3 +554,54 @@ class TestTableIntegrity:
         for requirement in doctor.TOOLCHAIN_REQUIREMENTS:
             unknown = set(requirement.markers) - registered
             assert not unknown, f"row '{requirement.note}' names unregistered markers: {sorted(unknown)}"
+
+    # commands a row requires that conftest does not gate the whole marker on. Each is a
+    # provider requirement conftest has no opinion about, and each must say which provider,
+    # because the alternative -- an undeclared extra -- withholds a marker that would have run
+    REQUIREMENTS_CONFTEST_DOES_NOT_MAKE = {
+        "nix": {"nix": "nixd_ls.py raises without the nix CLI, which conftest does not check"},
+        "php": {
+            "node": "intelephense, the default backend, runs on node; conftest gates only phpactor/phpantom, and on php",
+            "npm": "...and npm installs it",
+        },
+        "elm": {
+            "elm-language-server": "elm_ls.py needs the server itself; conftest gates only the elm compiler",
+            "node": "...and node/npm to install it when it is absent",
+            "npm": "...and node/npm to install it when it is absent",
+        },
+        "haskell": {
+            "ghc": "GUARD IS WIDER THAN THE SUITE: haskell_ls.py wants a full toolchain, conftest gates only the wrapper",
+            "cabal": "GUARD IS WIDER THAN THE SUITE: see ghc — both are queued for a separate alignment PR",
+        },
+        "cpp": {
+            "clangd": "GUARD IS WIDER THAN THE SUITE: conftest disables only the clangd backend, cpp_ccls still runs"
+            " under the same marker — queued for the same alignment PR",
+        },
+    }
+
+    def test_the_table_agrees_with_the_guards_conftest_actually_applies(self, doctor) -> None:
+        """Given the availability guards in test/conftest.py, re-derived from its own source,
+        every toolchain row requires exactly what really decides whether its marker can run.
+
+        The doctor cannot import conftest — it would drag in pytest and the whole language-server
+        stack, on the machine where that is precisely what is broken — so the table is written by
+        hand. This is what keeps the copy honest: a row that requires less than conftest gates on
+        reports a marker runnable that is not, and a row that requires more withholds one that
+        works. Both have happened; the second three times.
+        """
+        registered = set(doctor._language_markers(doctor._read_pyproject()))
+        guards = _conftest_command_guards(registered)
+        assert guards, "no guard was derived from conftest — the reader stopped resolving rather than finding agreement"
+        rows = {marker: requirement for requirement in doctor.TOOLCHAIN_REQUIREMENTS for marker in requirement.markers}
+        drift = []
+        for marker, (whole_marker, partial) in sorted(guards.items()):
+            required = {frozenset(entry.split("|")) for entry in rows[marker].commands} if marker in rows else set()
+            justified = self.REQUIREMENTS_CONFTEST_DOES_NOT_MAKE.get(marker, {})
+            for group in sorted(whole_marker - required, key=sorted):
+                drift.append(f"{marker}: conftest disables it without {sorted(group)}, but no row requires that")
+            for group in sorted(required - whole_marker, key=sorted):
+                undeclared = sorted(command for command in group if command not in justified)
+                if undeclared:
+                    reason = "conftest gates only some of its backends on that" if group in partial else "conftest does not gate it on that"
+                    drift.append(f"{marker}: the row requires {undeclared}, and {reason}")
+        assert not drift, "the table and conftest disagree:\n  " + "\n  ".join(drift)
