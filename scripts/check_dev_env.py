@@ -578,7 +578,16 @@ TOOLCHAIN_REQUIREMENTS: list[ToolchainRequirement] = [
     ),
     ToolchainRequirement(("gleam",), ("gleam",), "Gleam compiler (bundles `gleam lsp`)"),
     ToolchainRequirement(("systemverilog",), ("verible-verilog-ls",), "Verible"),
-    ToolchainRequirement(("qml",), ("qmlls6|qmlls",), "Qt qmlls, qmlls6 preferred (CI runs QML tests on Linux only)"),
+    # presence is all that can be checked: qmlls exposes no Qt version (the standalone build
+    # reports its own release, `qmlls (standalone) 0.6`, and bundles Qt statically), and the
+    # capability that matters needs a full LSP session. test/conftest.py gates on presence for the
+    # same reason, so the note carries the requirement rather than pretending to verify it
+    ToolchainRequirement(
+        ("qml",),
+        ("qmlls6|qmlls",),
+        "Qt qmlls from Qt 6.6+, qmlls6 preferred (6.4 answers textDocument/documentSymbol with -32601"
+        " and the suite fails; only presence is checked). CI runs QML tests on Linux only",
+    ),
     ToolchainRequirement(
         ("matlab",),
         ("node",),
