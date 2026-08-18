@@ -372,9 +372,13 @@ class ClientProbe:
         # file: the target is resolved now, and the link's shape and literal target recorded so a
         # client that replaces the link can be undone too
         self._config_restore_path = config_path.resolve()
-        self._backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
-        self._backup_path.write_bytes(config_path.read_bytes())
-        self._backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+        # assigned only once the copy is on disk: capturing an unreadable config raises here, and
+        # a _backup_path naming a file that was never written makes every later "is there a
+        # baseline to compare against" check answer yes and then fail reading it
+        backup_path = self.backup_dir / f"{self.handler.name}-{config_path.name}"
+        backup_path.write_bytes(config_path.read_bytes())
+        backup_path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+        self._backup_path = backup_path
 
     def _hardlinked_config_reason(self) -> str | None:
         """
@@ -538,13 +542,24 @@ class ClientProbe:
 
         Every SKIP after the backup goes through here rather than returning directly: the backup
         is a credential-bearing copy, and a run that leaves one behind makes main() report that
-        state was kept because a probe failed, when none ran. Inspection can also have created
-        the config it read, which is undone for the same reason.
+        state was kept because a probe failed, when none ran.
+
+        Releasing the backup is not enough on its own, because inspection is not read-only. The
+        version and registration-list commands have already run by the time a skip is decided,
+        and a list command can rewrite the config it reads -- so this performs the same
+        verification the clean path does, which restores a pre-existing config that inspection
+        changed and removes one that inspection created. Discarding the backup without it
+        reported the client as untouched while its bytes, mode or link shape had already moved,
+        and the commonest skip of all -- a serena registration already present -- is precisely
+        the case where there IS a config to have changed.
         """
-        self._remove_config_created_by_probe()
-        if self._backup_path is not None:
-            self._backup_path.unlink(missing_ok=True)
-            self._backup_path = None
+        if self._backup_path is None:
+            # no baseline was captured -- either there was no config, or capturing it raised
+            # partway (an unreadable one does). Nothing can be compared, and nothing had run yet
+            # to need comparing: undo only a config the probe itself created
+            self._remove_config_created_by_probe()
+            return self._result(Status.SKIP, detail, cli_version)
+        self._verify_config_baseline()
         return self._result(Status.SKIP, detail, cli_version)
 
     def run(self) -> ProbeResult:

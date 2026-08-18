@@ -490,6 +490,35 @@ class TestStatePreservation:
         assert result.status is probe_module.Status.SKIP
         assert config_path.exists() is False, "the query created a config and the skip kept it"
 
+    def test_a_pre_existing_config_rewritten_while_inspecting_is_restored_when_the_client_is_skipped(
+        self, probe_module, tmp_path
+    ) -> None:
+        """Given a config that already existed and a registration query that reserializes it, when
+        the probe skips because serena is already registered, then the file holds the bytes it had.
+
+        The removal helper only undoes a config the probe CREATED, so a skip that merely discarded
+        the backup reported the client untouched while inspection had rewritten it. "Already
+        registered" is the commonest skip there is, which makes a pre-existing config the normal
+        case here rather than the unusual one.
+        """
+        config_path = tmp_path / "config.json"
+        original = b'{"tokens": "secret", "style": "as the user left it"}'
+        config_path.write_bytes(original)
+        probe = _probe(probe_module, tmp_path, config_path)
+
+        def scripted(argv: tuple[str, ...]):
+            if argv == probe.spec.list_argv:
+                # a query that rewrites what it reads; verified live for `claude mcp list`
+                config_path.write_bytes(b'{"tokens":"secret","style":"reserialized by the query"}')
+                return probe_module.ExecutedCommand(argv, 0, "serena  " + EXPECTED_COMMAND, "")
+            return probe_module.ExecutedCommand(argv, 0, "1.0" if "--version" in argv else "", "")
+
+        probe._run = scripted
+        result = probe.run()
+        assert result.status is probe_module.Status.SKIP
+        assert config_path.read_bytes() == original, "inspection rewrote the config and the skip kept the rewrite"
+        assert probe._backup_path is None, "the backup outlived the skip"
+
     @posix_only
     def test_a_retargeted_config_symlink_is_pointed_back_where_it_was(self, probe_module, tmp_path) -> None:
         """Given the config is a symlink and the client repoints it at a different file, when the
