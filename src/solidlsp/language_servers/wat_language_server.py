@@ -9,7 +9,7 @@ class WatLanguageServer(SolidLanguageServer):
     Experimental WebAssembly text-format support using wasm-language-tools.
 
     Requires an explicit ``ls_path`` or ``ls_base_cmd`` pointing to ``wat_server``.
-    Only ``.wat`` files are supported, not binary WebAssembly or WAST scripts.
+    Only ``.wat`` files are supported, not binary WebAssembly or ``.wast`` scripts.
     """
 
     def __init__(self, config: LanguageServerConfig, repository_root_path: str, solidlsp_settings: SolidLSPSettings):
