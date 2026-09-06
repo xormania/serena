@@ -1944,6 +1944,88 @@ class SolidLanguageServer(ABC):
         # the default implementation does not change the name
         return symbol["name"]
 
+    def _convert_document_symbols(
+        self,
+        symbols: list[DocumentSymbol] | list[SymbolInformation],
+        relative_file_path: str,
+        body_factory: SymbolBodyFactory,
+        parent: ls_types.UnifiedSymbolInformation | None = None,
+    ) -> list[ls_types.UnifiedSymbolInformation]:
+        """
+        Converts symbols to the unified representation with parent-child relationships and overload indices.
+
+        :param symbols: the symbols with a common parent
+        :param relative_file_path: the path of the file containing the symbols, relative to the repository root
+        :param body_factory: the factory shared by all symbols in the document
+        :param parent: the common parent, or None for root symbols
+        :return: the converted symbols
+        """
+
+        def convert_to_unified_symbol(original_symbol_dict: RawDocumentSymbol) -> ls_types.UnifiedSymbolInformation:
+            """
+            Converts the given symbol dictionary to the unified representation, ensuring
+            that all required fields are present (except 'children' which is handled separately).
+
+            :param original_symbol_dict: the item to augment
+            :return: the augmented item (new object)
+            """
+            # noinspection PyInvalidCast
+            item = cast(ls_types.UnifiedSymbolInformation, dict(original_symbol_dict))
+            absolute_path = os.path.join(self.repository_root_path, relative_file_path)
+
+            # handle missing location and path entries
+            if "location" not in item:
+                uri = pathlib.Path(absolute_path).as_uri()
+                assert "range" in item
+                tree_location = ls_types.Location(
+                    uri=uri,
+                    range=item["range"],
+                    absolutePath=absolute_path,
+                    relativePath=relative_file_path,
+                )
+                item["location"] = tree_location
+            location = item["location"]
+            if "absolutePath" not in location:
+                location["absolutePath"] = absolute_path
+            if "relativePath" not in location:
+                location["relativePath"] = relative_file_path
+
+            item["body"] = self.create_symbol_body(item, factory=body_factory)
+
+            # handle missing selectionRange
+            if "selectionRange" not in item:
+                if "range" in item:
+                    item["selectionRange"] = item["range"]
+                else:
+                    item["selectionRange"] = item["location"]["range"]
+
+            return item
+
+        # apply name normalization and count occurrences of each symbol name
+        total_name_counts: dict[str, int] = defaultdict(lambda: 0)
+        for symbol in symbols:
+            name = self._normalize_symbol_name(symbol, relative_file_path=relative_file_path)
+            symbol["name"] = name
+            total_name_counts[name] += 1
+
+        # convert symbols to the unified representation and
+        #  * add overload indices where necessary
+        #  * ensure that the "parent" field is set correctly
+        name_counts: dict[str, int] = defaultdict(lambda: 0)
+        unified_symbols = []
+        for symbol in symbols:
+            usymbol = convert_to_unified_symbol(symbol)
+            if total_name_counts[usymbol["name"]] > 1:
+                usymbol["overload_idx"] = name_counts[usymbol["name"]]
+            name_counts[usymbol["name"]] += 1
+            usymbol["parent"] = parent
+            if "children" in usymbol:
+                usymbol["children"] = self._convert_document_symbols(usymbol["children"], relative_file_path, body_factory, usymbol)  # type: ignore
+            else:
+                usymbol["children"] = []
+            unified_symbols.append(usymbol)
+        return unified_symbols
+
     def request_document_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer | None = None) -> DocumentSymbols:
         """
         Retrieves the collection of symbols in the given file.
@@ -1990,82 +2072,7 @@ class SolidLanguageServer(ABC):
             assert isinstance(root_symbols, list), f"Unexpected response from Language Server: {root_symbols}"
             log.debug("Received %d root symbols for %s from the language server", len(root_symbols), relative_file_path)
 
-            body_factory = SymbolBodyFactory(file_data)
-
-            def convert_to_unified_symbol(original_symbol_dict: RawDocumentSymbol) -> ls_types.UnifiedSymbolInformation:
-                """
-                Converts the given symbol dictionary to the unified representation, ensuring
-                that all required fields are present (except 'children' which is handled separately).
-
-                :param original_symbol_dict: the item to augment
-                :return: the augmented item (new object)
-                """
-                # noinspection PyInvalidCast
-                item = cast(ls_types.UnifiedSymbolInformation, dict(original_symbol_dict))
-                absolute_path = os.path.join(self.repository_root_path, relative_file_path)
-
-                # handle missing location and path entries
-                if "location" not in item:
-                    uri = pathlib.Path(absolute_path).as_uri()
-                    assert "range" in item
-                    tree_location = ls_types.Location(
-                        uri=uri,
-                        range=item["range"],
-                        absolutePath=absolute_path,
-                        relativePath=relative_file_path,
-                    )
-                    item["location"] = tree_location
-                location = item["location"]
-                if "absolutePath" not in location:
-                    location["absolutePath"] = absolute_path
-                if "relativePath" not in location:
-                    location["relativePath"] = relative_file_path
-
-                item["body"] = self.create_symbol_body(item, factory=body_factory)
-
-                # handle missing selectionRange
-                if "selectionRange" not in item:
-                    if "range" in item:
-                        item["selectionRange"] = item["range"]
-                    else:
-                        item["selectionRange"] = item["location"]["range"]
-
-                return item
-
-            def convert_symbols_with_common_parent(
-                symbols: list[DocumentSymbol] | list[SymbolInformation],
-                parent: ls_types.UnifiedSymbolInformation | None,
-            ) -> list[ls_types.UnifiedSymbolInformation]:
-                """
-                Converts the given symbols into UnifiedSymbolInformation with proper parent-child relationships,
-                adding overload indices for symbols with the same name under the same parent.
-                """
-                # apply name normalization and count occurrences of each symbol name
-                total_name_counts: dict[str, int] = defaultdict(lambda: 0)
-                for symbol in symbols:
-                    name = self._normalize_symbol_name(symbol, relative_file_path=relative_file_path)
-                    symbol["name"] = name
-                    total_name_counts[name] += 1
-
-                # convert symbols to the unified representation and
-                #  * add overload indices where necessary
-                #  * ensure that the "parent" field is set correctly
-                name_counts: dict[str, int] = defaultdict(lambda: 0)
-                unified_symbols = []
-                for symbol in symbols:
-                    usymbol = convert_to_unified_symbol(symbol)
-                    if total_name_counts[usymbol["name"]] > 1:
-                        usymbol["overload_idx"] = name_counts[usymbol["name"]]
-                    name_counts[usymbol["name"]] += 1
-                    usymbol["parent"] = parent
-                    if "children" in usymbol:
-                        usymbol["children"] = convert_symbols_with_common_parent(usymbol["children"], usymbol)  # type: ignore
-                    else:
-                        usymbol["children"] = []
-                    unified_symbols.append(usymbol)
-                return unified_symbols
-
-            unified_root_symbols = convert_symbols_with_common_parent(root_symbols, None)
+            unified_root_symbols = self._convert_document_symbols(root_symbols, relative_file_path, SymbolBodyFactory(file_data))
             document_symbols = DocumentSymbols(unified_root_symbols)
 
             # update cache
