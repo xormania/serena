@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Profiles a symbol lookup end to end: starts a SerenaAgent on this repository, runs
-FindSymbolTool once, and writes profiler output — ``tool_call.pstat`` for cProfile (view
+"""Profiles a symbol lookup after initializing a SerenaAgent on this repository.
+Runs FindSymbolTool once and writes profiler output — ``tool_call.pstat`` for cProfile (view
 with snakeviz), or a pyinstrument report; switch the ``profiler`` variable in this file.
 """
 

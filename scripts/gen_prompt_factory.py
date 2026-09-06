@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Autogenerates the `prompt_factory.py` module
+Autogenerates ``src/serena/generated/generated_prompt_factory.py``.
 """
 
 import argparse
