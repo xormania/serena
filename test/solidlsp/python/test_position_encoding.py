@@ -1,3 +1,4 @@
+import os
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -6,6 +7,7 @@ import pytest
 from solidlsp import SolidLanguageServer
 from solidlsp.ls_config import LanguageServerId
 from solidlsp.ls_exceptions import InvalidTextLocationError
+from solidlsp.ls_utils import PathUtils
 from solidlsp.lsp_protocol_handler.lsp_types import Position
 from test.conftest import start_ls_context
 from test.solidlsp.conftest import find_document_symbol
@@ -69,9 +71,10 @@ def test_rename_after_unicode(
         for change in workspace_edit.get("documentChanges") or []:
             if "textDocument" in change:
                 changes[change["textDocument"]["uri"]] = change["edits"]
-        for relative_path in ("fixture.py", "consumer.py"):
-            uri = (encoding_project / relative_path).as_uri()
-            language_server.apply_text_edits_to_file(relative_path, changes[uri])
+        edits_by_path = {os.path.relpath(PathUtils.uri_to_path(uri), encoding_project): edits for uri, edits in changes.items()}
+        assert set(edits_by_path) == {"fixture.py", "consumer.py"}
+        for relative_path, edits in edits_by_path.items():
+            language_server.apply_text_edits_to_file(relative_path, edits)
         assert declaration.contents == f'marker = "{prefix}"; renamed = 1\nresult = renamed\n'
         assert consumer.contents == "from fixture import renamed\nresult = renamed\n"
 
