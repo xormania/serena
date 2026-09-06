@@ -5,6 +5,7 @@ import pytest
 
 from solidlsp import SolidLanguageServer
 from solidlsp.ls_config import LanguageServerId
+from solidlsp.ls_exceptions import InvalidTextLocationError
 from solidlsp.lsp_protocol_handler.lsp_types import Position
 from test.conftest import start_ls_context
 from test.solidlsp.conftest import find_document_symbol
@@ -32,11 +33,13 @@ def encoding_language_server(encoding_project: Path) -> Iterator[SolidLanguageSe
 
 def test_symbol_body_after_unicode(encoding_language_server: SolidLanguageServer) -> None:
     symbol = find_document_symbol(encoding_language_server, "fixture.py", "target")
+    assert "body" in symbol
     assert symbol["body"].get_text() == "target"
 
     defining_symbol = encoding_language_server.request_defining_symbol("consumer.py", 1, 9)
     assert defining_symbol is not None
     assert defining_symbol["name"] == "target"
+    assert "body" in defining_symbol
     assert defining_symbol["body"].get_text() == "target"
 
 
@@ -52,6 +55,7 @@ def test_rename_after_unicode(
         # use the server's declaration position or an unambiguous ASCII reference
         if rename_from == "declaration":
             symbol = find_document_symbol(language_server, "fixture.py", "target")
+            assert "selectionRange" in symbol
             position = symbol["selectionRange"]["start"]
             relative_path = "fixture.py"
         else:
@@ -75,6 +79,7 @@ def test_rename_after_unicode(
         defining_symbol = language_server.request_defining_symbol("consumer.py", 1, 9)
         assert defining_symbol is not None
         assert defining_symbol["name"] == "renamed"
+        assert "body" in defining_symbol
         assert defining_symbol["body"].get_text() == "renamed"
 
 
@@ -83,11 +88,13 @@ def test_incremental_edits_after_unicode(encoding_language_server: SolidLanguage
     with language_server.open_file("fixture.py") as file_buffer:
         # insert at the declaration position supplied by the server
         symbol = find_document_symbol(language_server, "fixture.py", "target")
+        assert "selectionRange" in symbol
         start = symbol["selectionRange"]["start"]
         cursor = language_server.insert_text_at_position("fixture.py", start["line"], start["character"], "new_")
         assert file_buffer.contents == f'marker = "{prefix}"; new_target = 1\nresult = target\n'
         assert cursor == Position(line=start["line"], character=start["character"] + 4)
         inserted_symbol = find_document_symbol(language_server, "fixture.py", "new_target")
+        assert "body" in inserted_symbol
         assert inserted_symbol["body"].get_text() == "new_target"
 
         # delete the inserted prefix and verify the reference resolves again
@@ -97,6 +104,35 @@ def test_incremental_edits_after_unicode(encoding_language_server: SolidLanguage
         defining_symbol = language_server.request_defining_symbol("fixture.py", 1, 9)
         assert defining_symbol is not None
         assert defining_symbol["name"] == "target"
+        assert "body" in defining_symbol
+        assert defining_symbol["body"].get_text() == "target"
+
+
+@pytest.mark.parametrize("prefix", ["😀"])
+@pytest.mark.parametrize("operation", ["insert", "delete_start", "delete_end"])
+def test_invalid_encoded_column_preserves_document(encoding_language_server: SolidLanguageServer, operation: str) -> None:
+    language_server = encoding_language_server
+    with language_server.open_file("fixture.py") as file_buffer:
+        original = file_buffer.contents
+        original_version = file_buffer.version
+        inside_emoji = Position(line=0, character=11)
+        with pytest.raises(InvalidTextLocationError):
+            if operation == "insert":
+                language_server.insert_text_at_position("fixture.py", 0, 11, "bad")
+            elif operation == "delete_start":
+                language_server.delete_text_between_positions("fixture.py", inside_emoji, Position(line=0, character=12))
+            else:
+                language_server.delete_text_between_positions("fixture.py", Position(line=0, character=10), inside_emoji)
+        assert file_buffer.contents == original
+        assert file_buffer.version == original_version
+
+        # a rejected edit must leave the document usable for subsequent edits and server queries
+        language_server.insert_text_at_position("fixture.py", 0, 0, "# unchanged declaration\n")
+        assert file_buffer.contents == "# unchanged declaration\n" + original
+        defining_symbol = language_server.request_defining_symbol("fixture.py", 2, 9)
+        assert defining_symbol is not None
+        assert defining_symbol["name"] == "target"
+        assert "body" in defining_symbol
         assert defining_symbol["body"].get_text() == "target"
 
 

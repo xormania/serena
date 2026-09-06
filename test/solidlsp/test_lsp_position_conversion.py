@@ -69,7 +69,7 @@ class _InitializingServer(LanguageServerInterface):
         pass
 
     def _send_payload(self, payload: dict) -> None:
-        self._pending_requests[payload["id"]].on_result({"capabilities": self.capabilities})
+        self._receive_payload({"jsonrpc": "2.0", "id": payload["id"], "result": {"capabilities": self.capabilities}})
 
 
 @pytest.mark.parametrize("encoding", list(PositionEncodingKind))

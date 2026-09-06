@@ -44,6 +44,7 @@ class TestFixModuleSelectionRange:
         server = _bare_fsharp_server()
         symbol = _module_symbol("A𐐀Tools", line=0, start_char=0, end_char=6)
         fixed = server._fix_module_selection_range(symbol, "module A𐐀Tools\n")
+        assert "selectionRange" in fixed
         assert fixed["selectionRange"] == {
             "start": {"line": 0, "character": 7},
             "end": {"line": 0, "character": 15},
