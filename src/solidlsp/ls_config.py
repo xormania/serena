@@ -202,6 +202,10 @@ class LanguageServerId(str, Enum):
     Set WOLFRAM_PATH environment variable or configure ls_path in ls_specific_settings.
     """
     # Experimental or deprecated Language Servers
+    WAT = "wat"
+    """WebAssembly text-format language server using wasm-language-tools (wat_server).
+    Supports .wat files; requires an explicit ls_path or ls_base_cmd in ls_specific_settings.
+    """
     TYPESCRIPT_VTS = "typescript_vts"
     """Use the typescript language server through the natively bundled vscode extension via https://github.com/yioneko/vtsls"""
     PYTHON_JEDI = "python_jedi"
@@ -327,6 +331,7 @@ class LanguageServerId(str, Enum):
         """
         return self in {
             self.ANSIBLE,
+            self.WAT,
             self.TYPESCRIPT_VTS,
             self.PYTHON_JEDI,
             self.PYTHON_TY,
@@ -608,6 +613,8 @@ class LanguageServerId(str, Enum):
                 return FilenameMatcher(".nf")
             case self.WOLFRAM:
                 return FilenameMatcher(".wl", ".wls")
+            case self.WAT:
+                return FilenameMatcher(".wat")
             case self.HTML:
                 return FilenameMatcher(".html", ".htm")
             case self.SCSS:
@@ -919,6 +926,10 @@ class LanguageServerId(str, Enum):
                 from solidlsp.language_servers.wolfram_language_server import WolframLanguageServer
 
                 return WolframLanguageServer
+            case self.WAT:
+                from solidlsp.language_servers.wat_language_server import WatLanguageServer
+
+                return WatLanguageServer
             case self.HTML:
                 from solidlsp.language_servers.vscode_html_language_server import VsCodeHtmlLanguageServer
 
