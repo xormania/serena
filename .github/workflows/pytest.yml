@@ -69,7 +69,7 @@ jobs:
     # group) add a case branch below + the batch name to the matrix list.
     env:
       MARKERS_JVM: "java or csharp or fsharp or kotlin or scala or groovy or clojure or bsl or nextflow"
-      MARKERS_NATIVE: "cpp or rust or go or zig or pascal or swift"  # swift is macOS-only (skips elsewhere via the guard)
+      MARKERS_NATIVE: "cpp or rust or go or zig or pascal or swift or wat"  # swift is macOS-only (skips elsewhere via the guard)
       # other-langs: grab-bag + scripting languages + haskell + qml. Haskell (GHC/HLS) and qml (qmlls) are
       # installed only on Linux -- too slow/expensive to build on the macOS runner (Haskell), or not worth
       # the cost of a cross-OS Qt pull (qmlls) -- and skip on Windows+macOS via the central conftest guard.
@@ -107,6 +107,9 @@ jobs:
         if: matrix.batch == 'native'
         with:
           go-version: ">=1.17.0"
+      - name: Set up Rust for WAT language-server builds
+        if: matrix.batch == 'native'
+        uses: dtolnay/rust-toolchain@1.97.1
       - name: Set up Node.js
         if: matrix.batch == 'other-langs' || matrix.batch == 'catch-all'
         uses: actions/setup-node@v7

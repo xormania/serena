@@ -204,7 +204,7 @@ class LanguageServerId(str, Enum):
     # Experimental or deprecated Language Servers
     WAT = "wat"
     """WebAssembly text-format language server using wasm-language-tools (wat_server).
-    Supports .wat files; requires an explicit ls_path or ls_base_cmd in ls_specific_settings.
+    Supports .wat files; requires Cargo to build the pinned server, or an existing server via ls_path or ls_base_cmd.
     """
     TYPESCRIPT_VTS = "typescript_vts"
     """Use the typescript language server through the natively bundled vscode extension via https://github.com/yioneko/vtsls"""
