@@ -8,10 +8,9 @@ the custom-agent guide in the documentation walks through the setup.
 
 from serena.agno_cli import SerenaAgnoArgumentParser
 
-# consume --help BEFORE the optional agno imports: the extras may not be installed, and with
-# them installed the app would otherwise build and serve instead of printing usage. Guarded
-# on __main__ because serve() re-imports this module by name (``agno_agent:app``), and the
-# server's argv is not ours to parse.
+# handle --help before optional agno imports so help works without the extras
+# guard on __main__ because serve() reimports this module by name (``agno_agent:app``),
+# and the server's argv is not ours to parse
 if __name__ == "__main__":
     SerenaAgnoArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
 
