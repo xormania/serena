@@ -24,7 +24,7 @@ class WatLanguageServer(SolidLanguageServer):
 
     class DependencyProvider(LanguageServerDependencyProviderSinglePath):
         # the published 0.11.0 release predates the server's UTF-16 position fix
-        _SERVER_REVISION = "6b9888088b2e569fe8fde1588cac7b989246c5c2"
+        _SERVER_REVISION = "c0f3b6fcdd9b09017c4f329574352cb9764f720e"
 
         def _get_or_install_core_dependency(self) -> str:
             # reuse the installation for this exact server revision

@@ -187,8 +187,9 @@ Some languages require additional installations or setup steps, as noted.
   [`wat_server`](https://github.com/g-plane/wasm-language-tools); requires Rust/Cargo for the first installation,
   or an existing server configured through `ls_specific_settings.wat.ls_path`.)
 
-  Serena builds and caches [revision `6b988808`](https://github.com/g-plane/wasm-language-tools/commit/6b9888088b2e569fe8fde1588cac7b989246c5c2)
-  with its Cargo lockfile. This revision includes the server's position fix, which is absent from release 0.11.0.
+  Serena builds and caches [revision `c0f3b6fc`](https://github.com/g-plane/wasm-language-tools/commit/c0f3b6fcdd9b09017c4f329574352cb9764f720e)
+  with its Cargo lockfile. This revision includes the server's position fix and dependency security updates,
+  which are absent from release 0.11.0.
   Supports `.wat` symbol bodies, definitions, references and rename, including navigation through numeric indices.
   References and rename stay within one document; imports do not link separate files. Numeric indices are not rename targets.
   Binary `.wasm` files and `.wast` scripts are not supported.
