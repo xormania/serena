@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-"""Prints the full tool registry — every tool's name and description, as exposed to
-clients.
-"""
+"""Prints the names and descriptions of default-enabled tools."""
 
 import argparse
 

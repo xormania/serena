@@ -6,6 +6,7 @@ through the artifact's observable surface — file mode, first line, docstring, 
 
 import ast
 import os
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -38,26 +39,26 @@ class TestScriptConventions:
 
     @posix_only
     def test_is_executable(self, script: Path) -> None:
-        """Given any script, its executable bit is set, so ./scripts/... works directly."""
+        """Given any script, its file mode permits direct execution on POSIX."""
         assert os.access(script, os.X_OK), f"{script.name} is not executable"
 
 
 class TestScriptSmoke:
-    """Every script actually starts — no exclusions: even the served agno app answers
-    --help before its optional imports. Scripts are the least-executed code in the
-    repository, so their natural failure mode is an import silently broken by a refactor;
-    --help is the cheapest execution that proves imports resolve and the argument wiring
-    works.
+    """Every script answers --help, including Agno without its optional imports.
+
+    This exercises imports reached before help exits, not full application startup
+    or the absence of side effects.
     """
 
     @pytest.mark.parametrize("script", _ALL_SCRIPTS, ids=lambda p: str(p.relative_to(_SCRIPTS_DIR)))
     def test_help_exits_zero_and_prints_help(self, script: Path) -> None:
-        """Given any script that is not a served app, when it is invoked with --help,
-        then it exits 0 and prints usage text — exit code alone would also pass a script
-        that ignores its arguments and silently does its real work instead.
+        """Given any script, --help exits 0 and prints a usage header, not merely
+        normal output that happens to mention the word "usage".
         """
         result = subprocess.run(
             [sys.executable, str(script), "--help"], capture_output=True, text=True, timeout=120, check=False, cwd=_REPO_ROOT
         )
         assert result.returncode == 0, f"{script.name} --help exited {result.returncode}:\n{result.stderr[-800:]}"
-        assert "usage" in (result.stdout + result.stderr).lower(), f"{script.name} --help exited 0 without printing help"
+        assert any(re.search(r"^usage:[ \t]+\S", output, re.IGNORECASE | re.MULTILINE) for output in (result.stdout, result.stderr)), (
+            f"{script.name} --help exited 0 without printing a usage header"
+        )
