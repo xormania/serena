@@ -141,3 +141,13 @@ def test_initialize_rejects_unknown_position_encoding() -> None:
     server = _InitializingServer({"positionEncoding": "unknown"})
     with pytest.raises(SolidLSPException, match="Unsupported language server position encoding"):
         server.send_request("initialize", {"capabilities": {"general": {"positionEncodings": ["unknown"]}}})
+
+
+def test_initialize_rejects_non_object_result() -> None:
+    class MalformedInitializeServer(_InitializingServer):
+        def _send_payload(self, payload: dict) -> None:
+            self._receive_payload({"jsonrpc": "2.0", "id": payload["id"], "result": []})
+
+    server = MalformedInitializeServer({})
+    with pytest.raises(SolidLSPException, match="Invalid language server initialize result"):
+        server.send_request("initialize", {"capabilities": {}})

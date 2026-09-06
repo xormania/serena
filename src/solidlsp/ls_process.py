@@ -388,7 +388,8 @@ class LanguageServerInterface(ABC):
 
         # capture initialization here, including adapters that bypass LanguageServerRequest.initialize
         if method == "initialize":
-            assert isinstance(result.payload, dict)
+            if not isinstance(result.payload, dict):
+                raise SolidLSPException("Invalid language server initialize result: expected an object")
             encoding = result.payload["capabilities"].get("positionEncoding", "utf-16")
             offered = (params or {}).get("capabilities", {}).get("general", {}).get("positionEncodings", [])
             if encoding != "utf-16" and encoding not in offered:

@@ -126,6 +126,17 @@ def parse_symbols(text: str) -> list[lsp.DocumentSymbol]:
     return symbols
 
 
+def _parse_client_symbols(text: str) -> list[lsp.DocumentSymbol]:
+    """Parse symbols with ranges in the negotiated position encoding."""
+    symbols = parse_symbols(text)
+    lines = text.split("\n")
+    codec = server.workspace.position_codec
+    for symbol in symbols:
+        symbol.range = codec.range_to_client_units(lines, symbol.range)
+        symbol.selection_range = codec.range_to_client_units(lines, symbol.selection_range)
+    return symbols
+
+
 def _get_workspace_roots() -> list[str]:
     """Get workspace root paths from the server's workspace object.
 
@@ -315,7 +326,7 @@ def document_symbol(params: lsp.DocumentSymbolParams) -> list[lsp.DocumentSymbol
     """Return document symbols for the given document."""
     try:
         doc = server.workspace.get_text_document(params.text_document.uri)
-        return parse_symbols(doc.source)
+        return _parse_client_symbols(doc.source)
     except Exception as e:
         logger.error(f"Error: {e}")
         return []
@@ -326,7 +337,8 @@ def hover(params: lsp.HoverParams) -> lsp.Hover | None:
     """Return hover information for the symbol at the given position."""
     try:
         doc = server.workspace.get_text_document(params.text_document.uri)
-        symbol_name = _find_symbol_at_position(doc.source, params.position.line, params.position.character)
+        position = server.workspace.position_codec.position_from_client_units(doc.source.split("\n"), params.position)
+        symbol_name = _find_symbol_at_position(doc.source, position.line, position.character)
         if not symbol_name:
             return None
 
@@ -352,11 +364,8 @@ def references(params: lsp.ReferenceParams) -> list[lsp.Location]:
     """Find all references to the symbol at the given position across the workspace."""
     try:
         doc = server.workspace.get_text_document(params.text_document.uri)
-        symbol_name = _find_symbol_at_position(
-            doc.source,
-            params.position.line,
-            params.position.character,
-        )
+        position = server.workspace.position_codec.position_from_client_units(doc.source.split("\n"), params.position)
+        symbol_name = _find_symbol_at_position(doc.source, position.line, position.character)
         if not symbol_name:
             return []
 
@@ -369,20 +378,24 @@ def references(params: lsp.ReferenceParams) -> list[lsp.Location]:
         for uri, _path, source in _get_all_mrc_files():
             if is_alias:
                 call_pattern = _build_call_pattern(symbol_name)
+                lines = source.split("\n")
                 for m in call_pattern.finditer(source):
                     ref_line, ref_col = _get_line_col(source, m.start())
                     results.append(
                         lsp.Location(
                             uri=uri,
-                            range=lsp.Range(
-                                lsp.Position(ref_line, ref_col),
-                                lsp.Position(ref_line, ref_col + len(m.group(0))),
+                            range=server.workspace.position_codec.range_to_client_units(
+                                lines,
+                                lsp.Range(
+                                    lsp.Position(ref_line, ref_col),
+                                    lsp.Position(ref_line, ref_col + len(m.group(0))),
+                                ),
                             ),
                         )
                     )
             else:
                 # For non-alias symbols, find the definition
-                for sym in parse_symbols(source):
+                for sym in _parse_client_symbols(source):
                     if sym.name == symbol_name:
                         results.append(lsp.Location(uri=uri, range=sym.range))
 
@@ -397,17 +410,14 @@ def definition(params: lsp.DefinitionParams) -> list[lsp.Location]:
     """Go to definition of the symbol at the given position."""
     try:
         doc = server.workspace.get_text_document(params.text_document.uri)
-        symbol_name = _find_symbol_at_position(
-            doc.source,
-            params.position.line,
-            params.position.character,
-        )
+        position = server.workspace.position_codec.position_from_client_units(doc.source.split("\n"), params.position)
+        symbol_name = _find_symbol_at_position(doc.source, position.line, position.character)
         if not symbol_name:
             return []
 
         results: list[lsp.Location] = []
         for uri, _path, source in _get_all_mrc_files():
-            for sym in parse_symbols(source):
+            for sym in _parse_client_symbols(source):
                 if sym.name == symbol_name:
                     results.append(lsp.Location(uri=uri, range=sym.selection_range))
         return results
@@ -422,7 +432,7 @@ def workspace_symbol(params: lsp.WorkspaceSymbolParams) -> list[lsp.SymbolInform
     query = params.query.lower()
     results = []
     for uri, _path, source in _get_all_mrc_files():
-        for sym in parse_symbols(source):
+        for sym in _parse_client_symbols(source):
             if query in sym.name.lower():
                 results.append(
                     lsp.SymbolInformation(
