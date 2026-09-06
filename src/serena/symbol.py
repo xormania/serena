@@ -955,11 +955,14 @@ class LanguageServerSymbolRetriever:
 
         :param relative_file_path: the relative path to the file in which the symbol usage occurs.
         :param line: the 0-based line number of the symbol usage.
-        :param column: the 0-based column number of the symbol usage.
+        :param column: the 0-based Python code-point column of the symbol usage.
         :param include_body: whether to include the body of the defining symbol in the result.
         :return: the defining symbol, or None if no definition could be resolved.
         """
         lang_server = self.get_language_server(relative_file_path)
+        # convert the Python coordinates obtained from text matching at the language-server boundary
+        with lang_server.open_file(relative_file_path, open_in_ls=False) as file_buffer:
+            column = file_buffer.get_position_converter().to_lsp_column(line, column)
         defining_symbol = lang_server.request_defining_symbol(
             relative_file_path=relative_file_path,
             line=line,

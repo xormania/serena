@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import threading
+from collections.abc import Hashable
 from pathlib import Path
 
 from overrides import override
@@ -19,6 +20,7 @@ from solidlsp.ls import DocumentSymbols, LSPFileBuffer, SolidLanguageServer
 from solidlsp.ls_config import LanguageServerConfig, LanguageServerId
 from solidlsp.ls_exceptions import SolidLSPException
 from solidlsp.lsp_protocol_handler.server import ProcessLaunchInfo
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
 
@@ -99,6 +101,9 @@ class FSharpLanguageServer(SolidLanguageServer):
             return symbol
 
         name_start, name_end = match.span(1)
+        positions = LSPPositionConverter(lines, self.server.position_encoding)
+        name_start = positions.to_lsp_column(start_line, name_start)
+        name_end = positions.to_lsp_column(start_line, name_end)
         if sel_range["start"]["character"] == name_start:
             return symbol  # already correct (e.g. a future FsAutoComplete release)
 
@@ -110,14 +115,19 @@ class FSharpLanguageServer(SolidLanguageServer):
         return corrected_symbol
 
     @override
-    def request_document_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer | None = None) -> DocumentSymbols:
+    def _document_symbols_cache_fingerprint(self) -> Hashable | None:
+        build_document_symbols_impl_version = 2
+        return build_document_symbols_impl_version
+
+    @override
+    def _build_document_symbols_from_raw_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer) -> DocumentSymbols:
         # Override to fix FsAutoComplete's incorrect selectionRange for module declarations (#925):
         # it points at the `module` keyword instead of the module name, so hover-by-selectionRange
         # returns the keyword's docs instead of the module's own.
-        document_symbols = super().request_document_symbols(relative_file_path, file_buffer=file_buffer)
+        # IMPORTANT: Update _document_symbols_cache_fingerprint() when changing this method.
+        document_symbols = super()._build_document_symbols_from_raw_symbols(relative_file_path, file_buffer=file_buffer)
 
-        with self.open_file(relative_file_path) as file_data:
-            file_content = file_data.contents
+        file_content = file_buffer.contents
 
         def fix_symbol_and_children(symbol: ls_types.UnifiedSymbolInformation) -> ls_types.UnifiedSymbolInformation:
             fixed = self._fix_module_selection_range(symbol, file_content)

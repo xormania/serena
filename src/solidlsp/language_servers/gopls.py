@@ -12,6 +12,7 @@ from solidlsp import ls_types
 from solidlsp.ls import DocumentSymbols, LSPFileBuffer, RawDocumentSymbol, SolidLanguageServer, SymbolBodyFactory
 from solidlsp.ls_config import LanguageServerConfig
 from solidlsp.lsp_protocol_handler.server import ProcessLaunchInfo
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
 
@@ -170,8 +171,8 @@ class Gopls(SolidLanguageServer):
     @override
     def _document_symbols_cache_fingerprint(self) -> Hashable:
         normalize_symbol_name_version = 1
-        request_document_symbols_impl_version = 2
-        return normalize_symbol_name_version, request_document_symbols_impl_version
+        build_document_symbols_impl_version = 3
+        return normalize_symbol_name_version, build_document_symbols_impl_version
 
     @override
     def _raw_document_symbols_cache_fingerprint(self) -> Hashable:
@@ -208,13 +209,14 @@ class Gopls(SolidLanguageServer):
         return symbol["name"].rsplit(".", 1)[-1]
 
     @override
-    def request_document_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer | None = None) -> DocumentSymbols:
+    def _build_document_symbols_from_raw_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer) -> DocumentSymbols:
         # Override to extend single `type`/`var`/`const` declaration ranges to include the leading
         # keyword. gopls excludes the keyword from such ranges (unlike `func` declarations), which
         # causes replace_symbol_body to drop the keyword from the symbol body and replacement range;
         # a natural keyword-inclusive round-trip edit would then corrupt the file (e.g. `type Foo`
         # becomes `type type Foo`). See _extend_go_symbol_range_to_include_leading_keyword.
-        document_symbols = super().request_document_symbols(relative_file_path, file_buffer=file_buffer)
+        # IMPORTANT: Update _document_symbols_cache_fingerprint() when changing this method.
+        document_symbols = super()._build_document_symbols_from_raw_symbols(relative_file_path, file_buffer=file_buffer)
         if not document_symbols.root_symbols:
             return document_symbols
 
@@ -269,14 +271,15 @@ class Gopls(SolidLanguageServer):
         start_char = range_info["start"]["character"]
         if start_line >= len(file_lines):
             return symbol
-        prefix = file_lines[start_line][:start_char]
+        positions = LSPPositionConverter(file_lines, self.server.position_encoding)
+        prefix = file_lines[start_line][: positions.to_python_column(start_line, start_char)]
         match = self._LEADING_DECL_KEYWORD_RE.fullmatch(prefix)
         if match is None:
             return symbol
 
         # extend the range start back to the keyword (excluding indentation), updating both the
         # symbol range and its location range so the replacement range covers the keyword
-        new_start = ls_types.Position(line=start_line, character=len(match.group("indent")))
+        new_start = ls_types.Position(line=start_line, character=positions.to_lsp_column(start_line, len(match.group("indent"))))
         extended = symbol.copy()
         extended["range"] = ls_types.Range(start=new_start, end=range_info["end"])
         location = extended.get("location")

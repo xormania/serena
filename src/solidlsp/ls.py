@@ -55,6 +55,7 @@ from solidlsp.lsp_protocol_handler.server import (
     ProcessLaunchInfo,
     StringDict,
 )
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.cache import load_cache, save_cache
 
@@ -220,11 +221,15 @@ class LSPFileBuffer:
         """Splits the contents of the file into lines."""
         return self.contents.split("\n")
 
+    def get_position_converter(self) -> LSPPositionConverter:
+        """Create a position converter for the current file contents and server encoding."""
+        return LSPPositionConverter(TextUtils.split_lines(self.contents, with_ends=True), self.language_server.server.position_encoding)
+
 
 class SymbolBody(ToStringMixin):
     """
     Representation of the body of a symbol, which allows the extraction of the symbol's text
-    from the lines of the file it is defined in.
+    from the lines of the file it is defined in, including their original line terminators.
 
     Instances that share the same lines buffer are memory-efficient,
     using only 4 integers and a reference to the lines buffer from which the text can be extracted,
@@ -264,7 +269,7 @@ class SymbolBody(ToStringMixin):
                 )
 
         # extract relevant lines
-        symbol_body = "\n".join(self._lines[self._start_line : end_line + 1])
+        symbol_body = "".join(self._lines[self._start_line : end_line + 1])
 
         # remove leading content from the first line
         symbol_body = symbol_body[self._start_col :]
@@ -286,7 +291,8 @@ class SymbolBodyFactory:
     """
 
     def __init__(self, file_buffer: LSPFileBuffer):
-        self._lines = file_buffer.split_lines()
+        self._positions = file_buffer.get_position_converter()
+        self._lines = self._positions.lines
 
     def create_symbol_body(self, symbol: UnifiedSymbolInformation) -> SymbolBody:
         existing_body = symbol.get("body", None)
@@ -298,6 +304,11 @@ class SymbolBodyFactory:
         end_line = symbol["location"]["range"]["end"]["line"]
         start_col = symbol["location"]["range"]["start"]["character"]
         end_col = symbol["location"]["range"]["end"]["character"]
+        # convert only real lines; SymbolBody handles whole-line EOF ranges and invalid endpoints
+        if 0 <= start_line < len(self._lines):
+            start_col = self._positions.to_python_column(start_line, start_col)
+        if 0 <= end_line < len(self._lines):
+            end_col = self._positions.to_python_column(end_line, end_col)
         return SymbolBody(self._lines, start_line, start_col, end_line, end_col)
 
 
@@ -356,7 +367,7 @@ class SolidLanguageServer(ABC):
     """
     RAW_DOCUMENT_SYMBOL_CACHE_FILENAME = "raw_document_symbols.pkl"
     RAW_DOCUMENT_SYMBOL_CACHE_FILENAME_LEGACY_FALLBACK = "document_symbols_cache_v23-06-25.pkl"
-    DOCUMENT_SYMBOL_CACHE_VERSION = 4
+    DOCUMENT_SYMBOL_CACHE_VERSION = 5
     """
     defines the version of the high-level document symbol format.
     This should be incremented whenever there is a change in the way document symbols are stored.
@@ -1362,8 +1373,9 @@ class SolidLanguageServer(ABC):
 
         :param relative_file_path: The relative path of the file to open.
         :param line: The line number at which text should be inserted.
-        :param column: The column number at which text should be inserted.
+        :param column: The column in the server's negotiated position encoding at which text should be inserted.
         :param text_to_be_inserted: The text to insert.
+        :return: the position after the inserted text, in the server's negotiated position encoding
         """
         if not self.server_started:
             log.error("insert_text_at_position called before Language Server started")
@@ -1375,10 +1387,11 @@ class SolidLanguageServer(ABC):
         assert uri in self.open_file_buffers
 
         file_buffer = self.open_file_buffers[uri]
-        file_buffer.version += 1
-
-        new_contents, new_l, new_c = TextUtils.insert_text_at_position(file_buffer.contents, line, column, text_to_be_inserted)
+        positions = file_buffer.get_position_converter()
+        python_column = positions.to_python_column(line, column)
+        new_contents, new_l, new_c = TextUtils.insert_text_at_position(file_buffer.contents, line, python_column, text_to_be_inserted)
         file_buffer.contents = new_contents
+        file_buffer.version += 1
         self.server.notify.did_change_text_document(
             {  # ty: ignore[invalid-argument-type]  # dict built from LSPConstants keys; shape matches the TypedDict
                 LSPConstants.TEXT_DOCUMENT: {
@@ -1396,7 +1409,7 @@ class SolidLanguageServer(ABC):
                 ],
             }
         )
-        return ls_types.Position(line=new_l, character=new_c)
+        return ls_types.Position(line=new_l, character=file_buffer.get_position_converter().to_lsp_column(new_l, new_c))
 
     def delete_text_between_positions(
         self,
@@ -1406,6 +1419,8 @@ class SolidLanguageServer(ABC):
     ) -> str:
         """
         Delete text between the given start and end positions in the given file and return the deleted text.
+
+        Both positions use the server's negotiated position encoding.
         """
         if not self.server_started:
             log.error("delete_text_between_positions called before Language Server started")
@@ -1417,11 +1432,16 @@ class SolidLanguageServer(ABC):
         assert uri in self.open_file_buffers
 
         file_buffer = self.open_file_buffers[uri]
-        file_buffer.version += 1
+        positions = file_buffer.get_position_converter()
         new_contents, deleted_text = TextUtils.delete_text_between_positions(
-            file_buffer.contents, start_line=start["line"], start_col=start["character"], end_line=end["line"], end_col=end["character"]
+            file_buffer.contents,
+            start_line=start["line"],
+            start_col=positions.to_python_column(start["line"], start["character"]),
+            end_line=end["line"],
+            end_col=positions.to_python_column(end["line"], end["character"]),
         )
         file_buffer.contents = new_contents
+        file_buffer.version += 1
         self.server.notify.did_change_text_document(
             {  # ty: ignore[invalid-argument-type]  # dict built from LSPConstants keys; shape matches the TypedDict
                 LSPConstants.TEXT_DOCUMENT: {
@@ -1842,24 +1862,15 @@ class SolidLanguageServer(ABC):
 
             return [json.loads(json_repr) for json_repr in set(json.dumps(item, sort_keys=True) for item in completions_list)]
 
-    def _request_document_symbols(
+    def _get_raw_document_symbols(
         self, relative_file_path: str, file_data: LSPFileBuffer | None
     ) -> list[SymbolInformation] | list[DocumentSymbol] | None:
         """
-        Sends a [documentSymbol](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_documentSymbol)
-        request to the language server to find symbols in the given file - or returns a cached result if available.
-        The returned symbols are considered "raw document symbols" (in contrast to processed symbols returned by `request_document_symbols`).
+        Gets the raw document symbols for the given file, either from the cache or by querying the language server.
 
-        NOTE: This method can be overridden in subclasses to post-process the raw results.
-              When doing so after the initial implementation, be sure to update the init parameter `cache_version_raw_document_symbols`
-              to a different version (add 1) to ensure that all caches are invalidated appropriately.
-              IMPORTANT: Since rebuilding the raw document symbol cache from the language server results
-              is potentially expensive, prefer overriding the `request_document_symbols` method
-              if the post-processing can also be done on the processed/high-level symbols.
-
-        :param relative_file_path: the relative path of the file that has the symbols.
+        :param relative_file_path: the relative path of the file for which to retrieve the raw document symbols.
         :param file_data: the file data buffer, if already opened. If None, the file will be opened in this method.
-        :return: the list of root symbols in the file.
+        :return: the list of root symbols in the file
         """
 
         def get_cached_raw_document_symbols(cache_key: str, fd: LSPFileBuffer) -> list[SymbolInformation] | list[DocumentSymbol] | None:
@@ -1879,7 +1890,7 @@ class SolidLanguageServer(ABC):
             log.debug("perf: raw_document_symbols_cache STALE path=%s", relative_file_path)
             return None
 
-        def get_raw_document_symbols(fd: LSPFileBuffer) -> list[SymbolInformation] | list[DocumentSymbol] | None:
+        with self._open_file_context(relative_file_path, file_buffer=file_data, open_in_ls=False) as fd:
             # check for cached result
             cache_key = relative_file_path
             response = get_cached_raw_document_symbols(cache_key, fd)
@@ -1887,8 +1898,7 @@ class SolidLanguageServer(ABC):
                 return response
 
             # no cached result, query language server
-            log.debug(f"Requesting document symbols for {relative_file_path} from the Language Server")
-            response = self.server.send.document_symbol({"textDocument": {"uri": self._resolve_file_uri(relative_file_path)}})
+            response = self._request_raw_document_symbols(relative_file_path, file_data=fd)
 
             # Only cache non-empty results. An empty or None response can occur when the language server
             # has not yet finished indexing or building the project (e.g. Lean 4 before `lake build`),
@@ -1899,8 +1909,30 @@ class SolidLanguageServer(ABC):
 
             return response
 
-        with self._open_file_context(relative_file_path, file_buffer=file_data) as fd:
-            return get_raw_document_symbols(fd)
+    def _request_raw_document_symbols(
+        self, relative_file_path: str, file_data: LSPFileBuffer | None
+    ) -> list[SymbolInformation] | list[DocumentSymbol] | None:
+        """
+        Sends a [documentSymbol](https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_documentSymbol)
+        request to the language server to find symbols in the given file.
+        The returned symbols are considered "raw document symbols" (in contrast to processed symbols returned by `request_document_symbols`).
+
+        NOTE: This method can be overridden in subclasses to post-process the raw results.
+              When doing so after the initial implementation, be sure to update the init parameter `cache_version_raw_document_symbols`
+              to a different version (add 1) to ensure that all caches are invalidated appropriately.
+              IMPORTANT: Since rebuilding the raw document symbol cache from the language server results
+              is potentially expensive, prefer overriding the `_build_document_symbols_from_raw_symbols` method
+              if the post-processing can also be done on the processed/high-level symbols.
+              For symbol name normalization, override `_normalize_symbol_name` instead.
+
+        :param relative_file_path: the relative path of the file that has the symbols.
+        :param file_data: the file data buffer, if already opened. If None, the file will be opened in this method.
+        :return: the list of root symbols in the file.
+        """
+        with self._open_file_context(relative_file_path, file_buffer=file_data):
+            log.debug(f"Requesting document symbols for {relative_file_path} from the Language Server")
+            response = self.server.send.document_symbol({"textDocument": {"uri": self._resolve_file_uri(relative_file_path)}})
+            return response
 
     def _normalize_symbol_name(self, symbol: RawDocumentSymbol, relative_file_path: str) -> str:
         """
@@ -1924,14 +1956,91 @@ class SolidLanguageServer(ABC):
         # the default implementation does not change the name
         return symbol["name"]
 
+    def _convert_document_symbols(
+        self,
+        symbols: list[DocumentSymbol] | list[SymbolInformation],
+        relative_file_path: str,
+        body_factory: SymbolBodyFactory,
+        parent: ls_types.UnifiedSymbolInformation | None = None,
+    ) -> list[ls_types.UnifiedSymbolInformation]:
+        """
+        Converts symbols to the unified representation with parent-child relationships and overload indices.
+
+        :param symbols: the symbols with a common parent
+        :param relative_file_path: the path of the file containing the symbols, relative to the repository root
+        :param body_factory: the factory shared by all symbols in the document
+        :param parent: the common parent, or None for root symbols
+        :return: the converted symbols
+        """
+
+        def convert_to_unified_symbol(original_symbol_dict: RawDocumentSymbol) -> ls_types.UnifiedSymbolInformation:
+            """
+            Converts the given symbol dictionary to the unified representation, ensuring
+            that all required fields are present (except 'children' which is handled separately).
+
+            :param original_symbol_dict: the item to augment
+            :return: the augmented item (new object)
+            """
+            # noinspection PyInvalidCast
+            item = cast(ls_types.UnifiedSymbolInformation, dict(original_symbol_dict))
+            absolute_path = os.path.join(self.repository_root_path, relative_file_path)
+
+            # handle missing location and path entries
+            if "location" not in item:
+                uri = pathlib.Path(absolute_path).as_uri()
+                assert "range" in item
+                tree_location = ls_types.Location(
+                    uri=uri,
+                    range=item["range"],
+                    absolutePath=absolute_path,
+                    relativePath=relative_file_path,
+                )
+                item["location"] = tree_location
+            location = item["location"]
+            if "absolutePath" not in location:
+                location["absolutePath"] = absolute_path
+            if "relativePath" not in location:
+                location["relativePath"] = relative_file_path
+
+            item["body"] = self.create_symbol_body(item, factory=body_factory)
+
+            # handle missing selectionRange
+            if "selectionRange" not in item:
+                if "range" in item:
+                    item["selectionRange"] = item["range"]
+                else:
+                    item["selectionRange"] = item["location"]["range"]
+
+            return item
+
+        # apply name normalization and count occurrences of each symbol name
+        total_name_counts: dict[str, int] = defaultdict(lambda: 0)
+        for symbol in symbols:
+            name = self._normalize_symbol_name(symbol, relative_file_path=relative_file_path)
+            symbol["name"] = name
+            total_name_counts[name] += 1
+
+        # convert symbols to the unified representation and
+        #  * add overload indices where necessary
+        #  * ensure that the "parent" field is set correctly
+        name_counts: dict[str, int] = defaultdict(lambda: 0)
+        unified_symbols = []
+        for symbol in symbols:
+            usymbol = convert_to_unified_symbol(symbol)
+            if total_name_counts[usymbol["name"]] > 1:
+                usymbol["overload_idx"] = name_counts[usymbol["name"]]
+            name_counts[usymbol["name"]] += 1
+            usymbol["parent"] = parent
+            if "children" in usymbol:
+                usymbol["children"] = self._convert_document_symbols(usymbol["children"], relative_file_path, body_factory, usymbol)  # type: ignore
+            else:
+                usymbol["children"] = []
+            unified_symbols.append(usymbol)
+        return unified_symbols
+
     def request_document_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer | None = None) -> DocumentSymbols:
         """
         Retrieves the collection of symbols in the given file.
-
-        NOTE: This method can be overridden in subclasses to post-process the results.
-              When doing so after the initial LS implementation, be sure to also override `_document_symbols_cache_fingerprint`
-              to ensure that the caches are invalidated appropriately.
-              DO NOT override this method to modify symbol names; override `_normalize_symbol_name` instead.
 
         :param relative_file_path: The relative path of the file that has the symbols
         :param file_buffer: an optional file buffer if the file is already opened.
@@ -1956,97 +2065,8 @@ class SolidLanguageServer(ABC):
 
                 log.debug("Cached document symbol content for %s has changed (old hash=%s)", relative_file_path, file_hash)
 
-            # no cached result: request the root symbols from the language server
-            root_symbols = self._request_document_symbols(relative_file_path, file_data)
-
-            if root_symbols is None:
-                log.warning(
-                    f"Received None response from the Language Server for document symbols in {relative_file_path}. "
-                    f"This means the language server can't understand this file (possibly due to syntax errors). It may also be due to a bug or misconfiguration of the LS. "
-                    f"Returning empty list",
-                )
-                return DocumentSymbols([])
-
-            assert isinstance(root_symbols, list), f"Unexpected response from Language Server: {root_symbols}"
-            log.debug("Received %d root symbols for %s from the language server", len(root_symbols), relative_file_path)
-
-            body_factory = SymbolBodyFactory(file_data)
-
-            def convert_to_unified_symbol(original_symbol_dict: RawDocumentSymbol) -> ls_types.UnifiedSymbolInformation:
-                """
-                Converts the given symbol dictionary to the unified representation, ensuring
-                that all required fields are present (except 'children' which is handled separately).
-
-                :param original_symbol_dict: the item to augment
-                :return: the augmented item (new object)
-                """
-                # noinspection PyInvalidCast
-                item = cast(ls_types.UnifiedSymbolInformation, dict(original_symbol_dict))
-                absolute_path = os.path.join(self.repository_root_path, relative_file_path)
-
-                # handle missing location and path entries
-                if "location" not in item:
-                    uri = pathlib.Path(absolute_path).as_uri()
-                    assert "range" in item
-                    tree_location = ls_types.Location(
-                        uri=uri,
-                        range=item["range"],
-                        absolutePath=absolute_path,
-                        relativePath=relative_file_path,
-                    )
-                    item["location"] = tree_location
-                location = item["location"]
-                if "absolutePath" not in location:
-                    location["absolutePath"] = absolute_path
-                if "relativePath" not in location:
-                    location["relativePath"] = relative_file_path
-
-                item["body"] = self.create_symbol_body(item, factory=body_factory)
-
-                # handle missing selectionRange
-                if "selectionRange" not in item:
-                    if "range" in item:
-                        item["selectionRange"] = item["range"]
-                    else:
-                        item["selectionRange"] = item["location"]["range"]
-
-                return item
-
-            def convert_symbols_with_common_parent(
-                symbols: list[DocumentSymbol] | list[SymbolInformation],
-                parent: ls_types.UnifiedSymbolInformation | None,
-            ) -> list[ls_types.UnifiedSymbolInformation]:
-                """
-                Converts the given symbols into UnifiedSymbolInformation with proper parent-child relationships,
-                adding overload indices for symbols with the same name under the same parent.
-                """
-                # apply name normalization and count occurrences of each symbol name
-                total_name_counts: dict[str, int] = defaultdict(lambda: 0)
-                for symbol in symbols:
-                    name = self._normalize_symbol_name(symbol, relative_file_path=relative_file_path)
-                    symbol["name"] = name
-                    total_name_counts[name] += 1
-
-                # convert symbols to the unified representation and
-                #  * add overload indices where necessary
-                #  * ensure that the "parent" field is set correctly
-                name_counts: dict[str, int] = defaultdict(lambda: 0)
-                unified_symbols = []
-                for symbol in symbols:
-                    usymbol = convert_to_unified_symbol(symbol)
-                    if total_name_counts[usymbol["name"]] > 1:
-                        usymbol["overload_idx"] = name_counts[usymbol["name"]]
-                    name_counts[usymbol["name"]] += 1
-                    usymbol["parent"] = parent
-                    if "children" in usymbol:
-                        usymbol["children"] = convert_symbols_with_common_parent(usymbol["children"], usymbol)  # type: ignore
-                    else:
-                        usymbol["children"] = []
-                    unified_symbols.append(usymbol)
-                return unified_symbols
-
-            unified_root_symbols = convert_symbols_with_common_parent(root_symbols, None)
-            document_symbols = DocumentSymbols(unified_root_symbols)
+            # no cached result: get the raw root symbols from the language server
+            document_symbols = self._build_document_symbols_from_raw_symbols(relative_file_path, file_buffer=file_data)
 
             # update cache
             content_hash = file_data.content_hash
@@ -2055,6 +2075,35 @@ class SolidLanguageServer(ABC):
             self._document_symbols_cache_is_modified = True
 
             return document_symbols
+
+    def _build_document_symbols_from_raw_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer) -> DocumentSymbols:
+        """
+        Requests the raw symbols from the language server and builds the collection of (high-level) symbols from them.
+
+        NOTE: This method can be overridden in subclasses to post-process the results.
+              When doing so after the initial LS implementation, be sure to also override `_document_symbols_cache_fingerprint`
+              to ensure that the caches are invalidated appropriately.
+              DO NOT override this method to modify symbol names; override `_normalize_symbol_name` instead.
+
+        :param relative_file_path: the relative path of the file
+        :param file_buffer: file buffer of the file
+        :return: the collection of symbols in the file.
+        """
+        root_symbols = self._get_raw_document_symbols(relative_file_path, file_data=file_buffer)
+
+        if root_symbols is None:
+            log.warning(
+                f"Received None response from the Language Server for document symbols in {relative_file_path}. "
+                f"This means the language server can't understand this file (possibly due to syntax errors). It may also be due to a bug or misconfiguration of the LS. "
+                f"Returning empty list",
+            )
+            return DocumentSymbols([])
+
+        assert isinstance(root_symbols, list), f"Unexpected response from Language Server: {root_symbols}"
+        log.debug("Received %d root symbols for %s from the language server", len(root_symbols), relative_file_path)
+
+        unified_root_symbols = self._convert_document_symbols(root_symbols, relative_file_path, SymbolBodyFactory(file_buffer))
+        return DocumentSymbols(unified_root_symbols)
 
     def request_full_symbol_tree(self, within_relative_path: str | None = None) -> list[ls_types.UnifiedSymbolInformation]:
         """
@@ -2198,14 +2247,13 @@ class SolidLanguageServer(ABC):
                 full_result.extend(process_directory(root))
             return full_result
 
-    @staticmethod
-    def _get_range_from_file_content(file_content: str) -> ls_types.Range:
+    def _get_range_from_file_content(self, file_content: str) -> ls_types.Range:
         """
         Get the range for the given file.
         """
-        lines = file_content.split("\n")
-        end_line = len(lines)
-        end_column = len(lines[-1])
+        lines = TextUtils.split_lines(file_content)
+        end_line = len(lines) - 1
+        end_column = LSPPositionConverter(lines, self.server.position_encoding).to_lsp_column(end_line, len(lines[-1]))
         return ls_types.Range(start=ls_types.Position(line=0, character=0), end=ls_types.Position(line=end_line, character=end_column))
 
     def request_dir_overview(self, relative_dir_path: str) -> dict[str, list[UnifiedSymbolInformation]]:

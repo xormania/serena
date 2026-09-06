@@ -1,29 +1,32 @@
 """Unit tests for SymbolBody / SymbolBodyFactory that need no running language server."""
 
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import Mock
+
 import pytest
 
-from solidlsp.ls import SymbolBodyFactory
+from solidlsp.ls import LSPFileBuffer, SolidLanguageServer, SymbolBodyFactory
 from solidlsp.ls_exceptions import InvalidTextLocationError
+from solidlsp.ls_process import LanguageServerInterface
+from solidlsp.ls_types import UnifiedSymbolInformation
+from solidlsp.lsp_protocol_handler.lsp_types import PositionEncodingKind, SymbolKind
 
 
-class _StubBuffer:
-    """Minimal stand-in for LSPFileBuffer: the factory only reads split_lines()."""
-
-    def __init__(self, lines: list[str]) -> None:
-        self._lines = lines
-
-    def split_lines(self) -> list[str]:
-        return self._lines
-
-
-def _symbol(start_line: int, start_col: int, end_line: int, end_col: int) -> dict:
+def _symbol(start_line: int, start_col: int, end_line: int, end_col: int) -> UnifiedSymbolInformation:
     return {
+        "name": "target",
+        "kind": SymbolKind.Variable,
+        "children": [],
         "location": {
+            "uri": "file:///memory.py",
+            "absolutePath": "/memory.py",
+            "relativePath": "memory.py",
             "range": {
                 "start": {"line": start_line, "character": start_col},
                 "end": {"line": end_line, "character": end_col},
-            }
-        }
+            },
+        },
     }
 
 
@@ -32,14 +35,39 @@ LINES = ["class Foo:", "    var x = 1", "    var y = 2"]
 FULL = "\n".join(LINES)
 
 
-def _factory() -> SymbolBodyFactory:
-    return SymbolBodyFactory(_StubBuffer(list(LINES)))
+def _factory(text: str = FULL) -> SymbolBodyFactory:
+    server = Mock(spec=SolidLanguageServer, server=Mock(spec=LanguageServerInterface, position_encoding=PositionEncodingKind.UTF16))
+    with TemporaryDirectory() as directory:
+        path = Path(directory) / "memory.py"
+        path.touch()
+        buffer = LSPFileBuffer(path, path.as_uri(), "utf-8", 0, "python", 0, server, open_in_ls=False)
+        buffer.contents = text
+        return SymbolBodyFactory(buffer)
 
 
 def test_get_text_in_bounds_range() -> None:
     """A range ending at the last real position returns the whole symbol (control)."""
     body = _factory().create_symbol_body(_symbol(0, 0, 2, len(LINES[2])))
     assert body.get_text() == FULL
+
+
+@pytest.mark.parametrize("prefix", ["", "é", "😀𐐀"])
+def test_symbol_body_uses_protocol_columns_without_changing_range(prefix: str) -> None:
+    line = prefix + "target suffix"
+    start = len(prefix.encode("utf-16-le")) // 2
+    symbol = _symbol(0, start, 0, start + len("target"))
+    factory = _factory(line)
+    assert factory.create_symbol_body(symbol).get_text() == "target"
+    assert "location" in symbol
+    assert symbol["location"]["range"]["start"]["character"] == start
+
+
+@pytest.mark.parametrize("newline", ["\n", "\r\n", "\r"])
+def test_symbol_body_preserves_original_line_terminators(newline: str) -> None:
+    text = f'def target():{newline}    return "😀"'
+    factory = _factory(text)
+    symbol = _symbol(0, 0, 1, len('    return "😀"'.encode("utf-16-le")) // 2)
+    assert factory.create_symbol_body(symbol).get_text() == text
 
 
 def test_get_text_end_line_past_eof_does_not_raise() -> None:

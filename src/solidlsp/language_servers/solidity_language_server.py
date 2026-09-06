@@ -352,11 +352,7 @@ class SolidityLanguageServer(SolidLanguageServer):
 
         absolute_path = pathlib.Path(self.repository_root_path, relative_file_path)
         contents = absolute_path.read_text(encoding=self._encoding)
-        lines = contents.split("\n")
-        end_position = {
-            "line": len(lines) - 1,
-            "character": len(lines[-1]),
-        }
+        end_position = self._get_range_from_file_content(contents)["end"]
 
         # any validation that finishes after this point may satisfy the fallback wait below
         self._validation_completed.clear()

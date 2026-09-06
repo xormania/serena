@@ -11,6 +11,8 @@ import os
 import sys
 import threading
 
+from overrides import override
+
 from solidlsp.ls import (
     SolidLanguageServer,
 )
@@ -43,6 +45,11 @@ class MslLanguageServer(SolidLanguageServer):
             solidlsp_settings=solidlsp_settings,
         )
         self.server_ready = threading.Event()
+
+    @override
+    def _raw_document_symbols_cache_fingerprint(self) -> int:
+        # invalidate ranges emitted as Python columns before protocol conversion
+        return 1
 
     def _create_base_initialize_params(self) -> dict:
         """Returns the initialize params for the mSL Language Server."""

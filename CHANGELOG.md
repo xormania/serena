@@ -33,6 +33,8 @@ Status of the `main` branch. Changes prior to the next official version change w
     Serena's own tools to close the gap (#1852)
 
 * Language Servers:
+  - Fix: symbol bodies, lookups and edits could use incorrect columns after supplementary Unicode characters, such as emoji;
+    full-file ranges could also end one line past the file
   - Add FreeBSD mapping to platform detection
   - Remove unnecessary platform checks from the following language servers, expanding the set of
     supported platforms accordingly: Elixir Tools, Intelephense, Perl, TypeScript, VTS
@@ -67,6 +69,16 @@ Status of the `main` branch. Changes prior to the next official version change w
     silently returned an empty result instead of surfacing the crash. The crash is now detected
     independently via the `window/logMessage` notification tsserver already sends, and the
     affected wait now raises instead of reporting success (#1814)
+  - Fix: two Serena instances activating the same project concurrently launched their Kotlin LSP
+    processes against the same on-disk index storage location, so the second instance's requests
+    were repeatedly cancelled by the first instance's server. A Kotlin LSP process now claims that
+    storage directory via a lock; a single instance (including across restarts) still gets the
+    same directory, and a second concurrent instance gets a directory of its own instead of
+    contending for the first one's (#1966)
+  - Fix: document symbol caching did not account for language-server-specific post-processing of
+    symbols, which was applied outside the caches; the processing of language servers that post-process
+    symbols (e.g. Go, Nix, Fortran, F#, Vue) was therefore repeated on every request or, if it mutated
+    symbols in place, re-applied to already processed cached results
 
 CLI:
   - Fix `project index-file` command not using only the relevant language server to index the given file (#1965)

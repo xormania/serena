@@ -4,6 +4,7 @@ Fortran Language Server implementation using fortls.
 
 import logging
 import re
+from collections.abc import Hashable
 
 from overrides import override
 
@@ -17,6 +18,7 @@ from solidlsp.ls import (
     SolidLanguageServer,
 )
 from solidlsp.ls_config import LanguageServerConfig
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 
 log = logging.getLogger(__name__)
@@ -122,9 +124,10 @@ class FortranLanguageServer(SolidLanguageServer):
 
         if match:
             # Create corrected selectionRange
+            positions = LSPPositionConverter(lines, self.server.position_encoding)
             new_sel_range = {
-                "start": {"line": start_line, "character": identifier_start},
-                "end": {"line": start_line, "character": identifier_start + len(identifier_name)},
+                "start": {"line": start_line, "character": positions.to_lsp_column(start_line, identifier_start)},
+                "end": {"line": start_line, "character": positions.to_lsp_column(start_line, identifier_start + len(identifier_name))},
             }
 
             # Create modified symbol with corrected selectionRange
@@ -139,8 +142,15 @@ class FortranLanguageServer(SolidLanguageServer):
         return symbol
 
     @override
-    def request_document_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer | None = None) -> DocumentSymbols:
+    def _document_symbols_cache_fingerprint(self) -> Hashable | None:
+        build_document_symbols_version = 2
+        return build_document_symbols_version
+
+    @override
+    def _build_document_symbols_from_raw_symbols(self, relative_file_path: str, file_buffer: LSPFileBuffer) -> DocumentSymbols:
         # Override to fix fortls's incorrect selectionRange bug.
+        #
+        # IMPORTANT: Update _document_symbols_cache_fingerprint() when changing this method.
         #
         # fortls returns selectionRange pointing to line start (character 0) instead of the
         # identifier name position. This breaks MCP server features that rely on exact positions.
@@ -152,11 +162,10 @@ class FortranLanguageServer(SolidLanguageServer):
         # 4. Returns corrected symbols
 
         # Get symbols from fortls (with incorrect selectionRange)
-        document_symbols = super().request_document_symbols(relative_file_path, file_buffer=file_buffer)
+        document_symbols = super()._build_document_symbols_from_raw_symbols(relative_file_path, file_buffer=file_buffer)
 
         # Get file content for parsing
-        with self.open_file(relative_file_path) as file_data:
-            file_content = file_data.contents
+        file_content = file_buffer.contents
 
         # Fix selectionRange recursively for all symbols
         def fix_symbol_and_children(symbol: ls_types.UnifiedSymbolInformation) -> ls_types.UnifiedSymbolInformation:
