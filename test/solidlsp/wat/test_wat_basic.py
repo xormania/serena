@@ -112,6 +112,7 @@ def test_serena_tools_preserve_source_on_disk(tmp_path: Path, prefix: str) -> No
     source = f"(module\n  {prefix}{body}\n  (func $caller (result i32) call $add)\n)\n"
     path = tmp_path / "main.wat"
     path.write_text(source, encoding="utf-8")
+    original_bytes = path.read_bytes()
     (tmp_path / ".serena").mkdir()
     (tmp_path / ".serena/project.yml").write_text("project_name: wat-tools\nlanguage_servers: [wat]\n", encoding="utf-8")
     config = SerenaConfig(log_level=logging.ERROR).with_headless_mode_overrides()
@@ -124,7 +125,7 @@ def test_serena_tools_preserve_source_on_disk(tmp_path: Path, prefix: str) -> No
         assert len(found) == 1
         assert found[0]["body"] == body
         agent.get_tool(RenameSymbolTool).apply(name_path="$add", relative_path="main.wat", new_name="$sum")
-        assert path.read_bytes() == source.replace("$add", "$sum").encode("utf-8")
+        assert path.read_bytes() == original_bytes.replace(b"$add", b"$sum")
         with find.symbol_dict_grouper.disabled_context():
             renamed = json.loads(find.apply(name_path_pattern="$sum", relative_path="main.wat", include_body=True))
         assert len(renamed) == 1
