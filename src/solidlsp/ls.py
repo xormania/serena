@@ -55,6 +55,7 @@ from solidlsp.lsp_protocol_handler.server import (
     ProcessLaunchInfo,
     StringDict,
 )
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.cache import load_cache, save_cache
 
@@ -220,11 +221,15 @@ class LSPFileBuffer:
         """Splits the contents of the file into lines."""
         return self.contents.split("\n")
 
+    def get_position_converter(self) -> LSPPositionConverter:
+        """Create a position converter for the current file contents and server encoding."""
+        return LSPPositionConverter(TextUtils.split_lines(self.contents, with_ends=True), self.language_server.server.position_encoding)
+
 
 class SymbolBody(ToStringMixin):
     """
     Representation of the body of a symbol, which allows the extraction of the symbol's text
-    from the lines of the file it is defined in.
+    from the lines of the file it is defined in, including their original line terminators.
 
     Instances that share the same lines buffer are memory-efficient,
     using only 4 integers and a reference to the lines buffer from which the text can be extracted,
@@ -264,7 +269,7 @@ class SymbolBody(ToStringMixin):
                 )
 
         # extract relevant lines
-        symbol_body = "\n".join(self._lines[self._start_line : end_line + 1])
+        symbol_body = "".join(self._lines[self._start_line : end_line + 1])
 
         # remove leading content from the first line
         symbol_body = symbol_body[self._start_col :]
@@ -286,7 +291,8 @@ class SymbolBodyFactory:
     """
 
     def __init__(self, file_buffer: LSPFileBuffer):
-        self._lines = file_buffer.split_lines()
+        self._positions = file_buffer.get_position_converter()
+        self._lines = self._positions.lines
 
     def create_symbol_body(self, symbol: UnifiedSymbolInformation) -> SymbolBody:
         existing_body = symbol.get("body", None)
@@ -298,6 +304,11 @@ class SymbolBodyFactory:
         end_line = symbol["location"]["range"]["end"]["line"]
         start_col = symbol["location"]["range"]["start"]["character"]
         end_col = symbol["location"]["range"]["end"]["character"]
+        # convert only real lines; SymbolBody handles whole-line EOF ranges and invalid endpoints
+        if 0 <= start_line < len(self._lines):
+            start_col = self._positions.to_python_column(start_line, start_col)
+        if 0 <= end_line < len(self._lines):
+            end_col = self._positions.to_python_column(end_line, end_col)
         return SymbolBody(self._lines, start_line, start_col, end_line, end_col)
 
 
@@ -356,7 +367,7 @@ class SolidLanguageServer(ABC):
     """
     RAW_DOCUMENT_SYMBOL_CACHE_FILENAME = "raw_document_symbols.pkl"
     RAW_DOCUMENT_SYMBOL_CACHE_FILENAME_LEGACY_FALLBACK = "document_symbols_cache_v23-06-25.pkl"
-    DOCUMENT_SYMBOL_CACHE_VERSION = 4
+    DOCUMENT_SYMBOL_CACHE_VERSION = 5
     """
     defines the version of the high-level document symbol format.
     This should be incremented whenever there is a change in the way document symbols are stored.
@@ -1362,8 +1373,9 @@ class SolidLanguageServer(ABC):
 
         :param relative_file_path: The relative path of the file to open.
         :param line: The line number at which text should be inserted.
-        :param column: The column number at which text should be inserted.
+        :param column: The column in the server's negotiated position encoding at which text should be inserted.
         :param text_to_be_inserted: The text to insert.
+        :return: the position after the inserted text, in the server's negotiated position encoding
         """
         if not self.server_started:
             log.error("insert_text_at_position called before Language Server started")
@@ -1375,10 +1387,11 @@ class SolidLanguageServer(ABC):
         assert uri in self.open_file_buffers
 
         file_buffer = self.open_file_buffers[uri]
-        file_buffer.version += 1
-
-        new_contents, new_l, new_c = TextUtils.insert_text_at_position(file_buffer.contents, line, column, text_to_be_inserted)
+        positions = file_buffer.get_position_converter()
+        python_column = positions.to_python_column(line, column)
+        new_contents, new_l, new_c = TextUtils.insert_text_at_position(file_buffer.contents, line, python_column, text_to_be_inserted)
         file_buffer.contents = new_contents
+        file_buffer.version += 1
         self.server.notify.did_change_text_document(
             {  # ty: ignore[invalid-argument-type]  # dict built from LSPConstants keys; shape matches the TypedDict
                 LSPConstants.TEXT_DOCUMENT: {
@@ -1396,7 +1409,7 @@ class SolidLanguageServer(ABC):
                 ],
             }
         )
-        return ls_types.Position(line=new_l, character=new_c)
+        return ls_types.Position(line=new_l, character=file_buffer.get_position_converter().to_lsp_column(new_l, new_c))
 
     def delete_text_between_positions(
         self,
@@ -1406,6 +1419,8 @@ class SolidLanguageServer(ABC):
     ) -> str:
         """
         Delete text between the given start and end positions in the given file and return the deleted text.
+
+        Both positions use the server's negotiated position encoding.
         """
         if not self.server_started:
             log.error("delete_text_between_positions called before Language Server started")
@@ -1417,11 +1432,16 @@ class SolidLanguageServer(ABC):
         assert uri in self.open_file_buffers
 
         file_buffer = self.open_file_buffers[uri]
-        file_buffer.version += 1
+        positions = file_buffer.get_position_converter()
         new_contents, deleted_text = TextUtils.delete_text_between_positions(
-            file_buffer.contents, start_line=start["line"], start_col=start["character"], end_line=end["line"], end_col=end["character"]
+            file_buffer.contents,
+            start_line=start["line"],
+            start_col=positions.to_python_column(start["line"], start["character"]),
+            end_line=end["line"],
+            end_col=positions.to_python_column(end["line"], end["character"]),
         )
         file_buffer.contents = new_contents
+        file_buffer.version += 1
         self.server.notify.did_change_text_document(
             {  # ty: ignore[invalid-argument-type]  # dict built from LSPConstants keys; shape matches the TypedDict
                 LSPConstants.TEXT_DOCUMENT: {
@@ -2198,14 +2218,13 @@ class SolidLanguageServer(ABC):
                 full_result.extend(process_directory(root))
             return full_result
 
-    @staticmethod
-    def _get_range_from_file_content(file_content: str) -> ls_types.Range:
+    def _get_range_from_file_content(self, file_content: str) -> ls_types.Range:
         """
         Get the range for the given file.
         """
-        lines = file_content.split("\n")
-        end_line = len(lines)
-        end_column = len(lines[-1])
+        lines = TextUtils.split_lines(file_content)
+        end_line = len(lines) - 1
+        end_column = LSPPositionConverter(lines, self.server.position_encoding).to_lsp_column(end_line, len(lines[-1]))
         return ls_types.Range(start=ls_types.Position(line=0, character=0), end=ls_types.Position(line=end_line, character=end_column))
 
     def request_dir_overview(self, relative_dir_path: str) -> dict[str, list[UnifiedSymbolInformation]]:

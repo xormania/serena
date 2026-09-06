@@ -17,6 +17,7 @@ from solidlsp.ls import (
     SolidLanguageServer,
 )
 from solidlsp.ls_config import LanguageServerConfig
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 
 log = logging.getLogger(__name__)
@@ -122,9 +123,10 @@ class FortranLanguageServer(SolidLanguageServer):
 
         if match:
             # Create corrected selectionRange
+            positions = LSPPositionConverter(lines, self.server.position_encoding)
             new_sel_range = {
-                "start": {"line": start_line, "character": identifier_start},
-                "end": {"line": start_line, "character": identifier_start + len(identifier_name)},
+                "start": {"line": start_line, "character": positions.to_lsp_column(start_line, identifier_start)},
+                "end": {"line": start_line, "character": positions.to_lsp_column(start_line, identifier_start + len(identifier_name))},
             }
 
             # Create modified symbol with corrected selectionRange

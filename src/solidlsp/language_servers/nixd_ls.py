@@ -20,6 +20,7 @@ from solidlsp import ls_types
 from solidlsp.dependency_provider import LanguageServerDependencyProvider, LanguageServerDependencyProviderSinglePath
 from solidlsp.ls import DocumentSymbols, LSPFileBuffer, SolidLanguageServer
 from solidlsp.ls_config import LanguageServerConfig
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
 
@@ -162,11 +163,16 @@ class NixLanguageServer(SolidLanguageServer):
             return symbol
 
         line = lines[end_line]
+        positions = LSPPositionConverter(lines, self.server.position_encoding)
+        end_index = positions.to_python_column(end_line, end_char)
 
         # Check if there's a semicolon immediately after the current range end
-        if end_char < len(line) and line[end_char] == ";":
+        if end_index < len(line) and line[end_index] == ";":
             # Extend range to include the semicolon
-            new_range = {"start": range_info["start"], "end": {"line": end_line, "character": end_char + 1}}
+            new_range = {
+                "start": range_info["start"],
+                "end": {"line": end_line, "character": positions.to_lsp_column(end_line, end_index + 1)},
+            }
 
             # Create modified symbol with extended range
             extended_symbol = symbol.copy()

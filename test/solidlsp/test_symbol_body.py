@@ -4,16 +4,18 @@ import pytest
 
 from solidlsp.ls import SymbolBodyFactory
 from solidlsp.ls_exceptions import InvalidTextLocationError
+from solidlsp.ls_utils import TextUtils
+from solidlsp.position_encoding import LSPPositionConverter
 
 
 class _StubBuffer:
-    """Minimal stand-in for LSPFileBuffer: the factory only reads split_lines()."""
+    """In-memory file snapshot for symbol body extraction."""
 
     def __init__(self, lines: list[str]) -> None:
         self._lines = lines
 
-    def split_lines(self) -> list[str]:
-        return self._lines
+    def get_position_converter(self) -> LSPPositionConverter:
+        return LSPPositionConverter(TextUtils.split_lines("\n".join(self._lines), with_ends=True))
 
 
 def _symbol(start_line: int, start_col: int, end_line: int, end_col: int) -> dict:
@@ -40,6 +42,24 @@ def test_get_text_in_bounds_range() -> None:
     """A range ending at the last real position returns the whole symbol (control)."""
     body = _factory().create_symbol_body(_symbol(0, 0, 2, len(LINES[2])))
     assert body.get_text() == FULL
+
+
+@pytest.mark.parametrize("prefix", ["", "é", "😀𐐀"])
+def test_symbol_body_uses_protocol_columns_without_changing_range(prefix: str) -> None:
+    line = prefix + "target suffix"
+    start = len(prefix.encode("utf-16-le")) // 2
+    symbol = _symbol(0, start, 0, start + len("target"))
+    factory = SymbolBodyFactory(_StubBuffer([line]))
+    assert factory.create_symbol_body(symbol).get_text() == "target"
+    assert symbol["location"]["range"]["start"]["character"] == start
+
+
+@pytest.mark.parametrize("newline", ["\n", "\r\n", "\r"])
+def test_symbol_body_preserves_original_line_terminators(newline: str) -> None:
+    text = f'def target():{newline}    return "😀"'
+    factory = SymbolBodyFactory(_StubBuffer([text]))
+    symbol = _symbol(0, 0, 1, len('    return "😀"'.encode("utf-16-le")) // 2)
+    assert factory.create_symbol_body(symbol).get_text() == text
 
 
 def test_get_text_end_line_past_eof_does_not_raise() -> None:

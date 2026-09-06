@@ -16,7 +16,7 @@ from solidlsp.ls_config import LanguageServerId
 from solidlsp.ls_exceptions import SolidLSPException
 from solidlsp.ls_request import LanguageServerRequest
 from solidlsp.lsp_protocol_handler.lsp_requests import LspNotification
-from solidlsp.lsp_protocol_handler.lsp_types import ErrorCodes, LSPErrorCodes
+from solidlsp.lsp_protocol_handler.lsp_types import ErrorCodes, LSPErrorCodes, PositionEncodingKind
 from solidlsp.lsp_protocol_handler.server import (
     ENCODING,
     LSPError,
@@ -134,6 +134,7 @@ class LanguageServerInterface(ABC):
         """
         self.ls_id = ls_id
         self._determine_log_level = determine_log_level
+        self._position_encoding = PositionEncodingKind.UTF16
         self.send = LanguageServerRequest(self)
         """
         an object that can be used to send requests to the server 
@@ -355,6 +356,11 @@ class LanguageServerInterface(ABC):
         log.debug("Completed: %s", request)
         return result
 
+    @property
+    def position_encoding(self) -> PositionEncodingKind:
+        """The server's negotiated position encoding, defaulting to UTF-16."""
+        return self._position_encoding
+
     def send_request(self, method: str, params: dict | None = None) -> PayloadLike:
         """
         Send request to the server, register the request id, and wait for the response.
@@ -366,11 +372,7 @@ class LanguageServerInterface(ABC):
         retried, regardless of the error, so as to not retry requests behind the server's back.
         """
         result = self._send_request_once(method, params)
-        if not result.is_error():
-            log.debug("Returning result:\n%s", result.payload)
-            return result.payload
-
-        if method in self._content_modified_retry_methods:
+        if result.is_error() and method in self._content_modified_retry_methods:
             for attempt in range(2, _CONTENT_MODIFIED_MAX_ATTEMPTS + 1):
                 is_content_modified = isinstance(result.error, LSPError) and result.error.code == LSPErrorCodes.ContentModified
                 if not is_content_modified:
@@ -379,10 +381,25 @@ class LanguageServerInterface(ABC):
                 time.sleep(_CONTENT_MODIFIED_RETRY_DELAY)
                 result = self._send_request_once(method, params)
                 if not result.is_error():
-                    log.debug("Returning result:\n%s", result.payload)
-                    return result.payload
+                    break
 
-        raise SolidLSPException(f"Error processing request {method} with params:\n{params}", cause=result.error) from result.error
+        if result.is_error():
+            raise SolidLSPException(f"Error processing request {method} with params:\n{params}", cause=result.error) from result.error
+
+        # capture initialization here, including adapters that bypass LanguageServerRequest.initialize
+        if method == "initialize":
+            assert isinstance(result.payload, dict)
+            encoding = result.payload["capabilities"].get("positionEncoding", "utf-16")
+            offered = (params or {}).get("capabilities", {}).get("general", {}).get("positionEncodings", [])
+            if encoding != "utf-16" and encoding not in offered:
+                raise SolidLSPException(f"Language server selected an unadvertised position encoding: {encoding!r}")
+            try:
+                self._position_encoding = PositionEncodingKind(encoding)
+            except ValueError as exc:
+                raise SolidLSPException(f"Unsupported language server position encoding: {encoding!r}") from exc
+
+        log.debug("Returning result:\n%s", result.payload)
+        return result.payload
 
     @abstractmethod
     def _send_payload(self, payload: StringDict) -> None:

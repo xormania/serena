@@ -12,6 +12,7 @@ from solidlsp import ls_types
 from solidlsp.ls import DocumentSymbols, LSPFileBuffer, RawDocumentSymbol, SolidLanguageServer, SymbolBodyFactory
 from solidlsp.ls_config import LanguageServerConfig
 from solidlsp.lsp_protocol_handler.server import ProcessLaunchInfo
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
 
@@ -269,14 +270,15 @@ class Gopls(SolidLanguageServer):
         start_char = range_info["start"]["character"]
         if start_line >= len(file_lines):
             return symbol
-        prefix = file_lines[start_line][:start_char]
+        positions = LSPPositionConverter(file_lines, self.server.position_encoding)
+        prefix = file_lines[start_line][: positions.to_python_column(start_line, start_char)]
         match = self._LEADING_DECL_KEYWORD_RE.fullmatch(prefix)
         if match is None:
             return symbol
 
         # extend the range start back to the keyword (excluding indentation), updating both the
         # symbol range and its location range so the replacement range covers the keyword
-        new_start = ls_types.Position(line=start_line, character=len(match.group("indent")))
+        new_start = ls_types.Position(line=start_line, character=positions.to_lsp_column(start_line, len(match.group("indent"))))
         extended = symbol.copy()
         extended["range"] = ls_types.Range(start=new_start, end=range_info["end"])
         location = extended.get("location")

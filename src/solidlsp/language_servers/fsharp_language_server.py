@@ -19,6 +19,7 @@ from solidlsp.ls import DocumentSymbols, LSPFileBuffer, SolidLanguageServer
 from solidlsp.ls_config import LanguageServerConfig, LanguageServerId
 from solidlsp.ls_exceptions import SolidLSPException
 from solidlsp.lsp_protocol_handler.server import ProcessLaunchInfo
+from solidlsp.position_encoding import LSPPositionConverter
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
 
@@ -99,6 +100,9 @@ class FSharpLanguageServer(SolidLanguageServer):
             return symbol
 
         name_start, name_end = match.span(1)
+        positions = LSPPositionConverter(lines, self.server.position_encoding)
+        name_start = positions.to_lsp_column(start_line, name_start)
+        name_end = positions.to_lsp_column(start_line, name_end)
         if sel_range["start"]["character"] == name_start:
             return symbol  # already correct (e.g. a future FsAutoComplete release)
 

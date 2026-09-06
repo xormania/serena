@@ -9,17 +9,22 @@ currently unreliable"), so a live-LS test can never run here or on CI.
 """
 
 from contextlib import contextmanager
+from unittest.mock import Mock
 
 from solidlsp import ls_types
 from solidlsp.language_servers.fsharp_language_server import FSharpLanguageServer
 from solidlsp.ls import DocumentSymbols, SolidLanguageServer
+from solidlsp.ls_process import LanguageServerInterface
+from solidlsp.lsp_protocol_handler.lsp_types import PositionEncodingKind
 
 
 def _bare_fsharp_server() -> FSharpLanguageServer:
     """Instance without running __init__ (no dotnet tool install, no process); same technique
     as test_typescript_timeout_policy.py's _bare_ts_server / test_rename_didopen.py.
     """
-    return object.__new__(FSharpLanguageServer)
+    server = object.__new__(FSharpLanguageServer)
+    server.server = Mock(spec=LanguageServerInterface, position_encoding=PositionEncodingKind.UTF16)
+    return server
 
 
 def _module_symbol(name: str, line: int, start_char: int, end_char: int) -> ls_types.UnifiedSymbolInformation:
@@ -35,6 +40,15 @@ def _module_symbol(name: str, line: int, start_char: int, end_char: int) -> ls_t
 
 
 class TestFixModuleSelectionRange:
+    def test_module_name_with_supplementary_character(self) -> None:
+        server = _bare_fsharp_server()
+        symbol = _module_symbol("A𐐀Tools", line=0, start_char=0, end_char=6)
+        fixed = server._fix_module_selection_range(symbol, "module A𐐀Tools\n")
+        assert fixed["selectionRange"] == {
+            "start": {"line": 0, "character": 7},
+            "end": {"line": 0, "character": 15},
+        }
+
     def test_top_level_module_declaration(self) -> None:
         # "module Calculator" -- FsAutoComplete reports selectionRange over "module" (0-6)
         server = _bare_fsharp_server()
