@@ -1,4 +1,3 @@
-import argparse
 import logging
 import os
 import threading
@@ -15,6 +14,7 @@ from dotenv import load_dotenv
 from sensai.util.logging import LogTime
 
 from serena.agent import SerenaAgent, Tool
+from serena.agno_cli import SerenaAgnoArgumentParser
 from serena.config.context_mode import SerenaAgentContext
 from serena.constants import REPO_ROOT
 from serena.util.exception import show_fatal_exception_safe
@@ -70,23 +70,7 @@ class SerenaAgnoAgentProvider:
 
             load_dotenv()
 
-            parser = argparse.ArgumentParser(description="Serena coding assistant")
-
-            # Create a mutually exclusive group
-            group = parser.add_mutually_exclusive_group()
-
-            # Add arguments to the group, both pointing to the same destination
-            group.add_argument(
-                "--project-file",
-                required=False,
-                help="Path to the project (or project.yml file).",
-            )
-            group.add_argument(
-                "--project",
-                required=False,
-                help="Path to the project (or project.yml file).",
-            )
-            args = parser.parse_args()
+            args = SerenaAgnoArgumentParser().parse_args()
 
             args_project_file = args.project or args.project_file
 

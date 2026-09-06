@@ -6,6 +6,8 @@ Status of the `main` branch. Changes prior to the next official version change w
   - Fix: MCP `initialize` now reports Serena's version instead of the installed mcp SDK version (#1889)
   - Fix: Parallel agents auto-registering projects could overwrite each other's changes to the global
     project list in `serena_config.yml`
+  - Every script under `scripts/` now documents itself: a module docstring, `--help`, a shebang
+    and the executable bit — enforced by a conventions test
   - Fix: `TextUtils.insert_text_at_position` returned a wrong position when the inserted text merged
     with an adjacent character into a single newline sequence (e.g. a `\n` inserted directly after an
     existing `\r`); the position is now determined from the resulting text

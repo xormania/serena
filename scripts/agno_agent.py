@@ -1,3 +1,19 @@
+#!/usr/bin/env python3
+"""Serena as a toolkit inside another agent framework: builds an Agno AgentOS app around
+Serena's tools and serves it. The model is chosen by editing this file (examples inline);
+the custom-agent guide in the documentation walks through the setup.
+
+    uv run python scripts/agno_agent.py
+"""
+
+from serena.agno_cli import SerenaAgnoArgumentParser
+
+# handle --help before optional agno imports so help works without the extras
+# guard on __main__ because serve() reimports this module by name (``agno_agent:app``),
+# and the server's argv is not ours to parse
+if __name__ == "__main__":
+    SerenaAgnoArgumentParser(description=(__doc__ or "").split("\n\n")[0]).parse_args()
+
 from agno.models.anthropic.claude import Claude
 from agno.models.google.gemini import Gemini
 from agno.os import AgentOS
