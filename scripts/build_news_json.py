@@ -44,7 +44,7 @@ def build_news_json() -> None:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0])
+    parser = argparse.ArgumentParser(description=(__doc__ or "").split("\n\n")[0], allow_abbrev=False)
     parser.add_argument("--deploy", action="store_true", help="scp the built news.json to the Hades web root (requires HADES_USER)")
     args = parser.parse_args()
 

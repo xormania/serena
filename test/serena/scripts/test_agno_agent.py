@@ -154,14 +154,15 @@ def test_server_reimport_reuses_agent_with_foreign_arguments(agno_environment: _
     agent_factory = Mock(return_value=application_agent)
     monkeypatch.setattr(agno_environment.provider, "SerenaAgent", agent_factory)
     monkeypatch.setattr(sys, "argv", [str(_SCRIPT)])
-    initial = runpy.run_path(str(_SCRIPT), run_name="__main__")
+    runpy.run_path(str(_SCRIPT), run_name="__main__")
+    (initial_agent,) = agno_environment.agent_os.call_args.kwargs["agents"]
     agno_environment.agent_os.reset_mock()
     monkeypatch.setattr(sys, "argv", ["uvicorn", "agno_agent:app", "--port", "9876"])
 
     result = runpy.run_path(str(_SCRIPT), run_name="agno_agent")
 
     assert result["app"] is agno_environment.agent_os.return_value.get_app.return_value
-    assert result["serena_agent"] is initial["serena_agent"]
-    assert agno_environment.agent_os.call_args.kwargs["agents"] == [initial["serena_agent"]]
+    (reimported_agent,) = agno_environment.agent_os.call_args.kwargs["agents"]
+    assert reimported_agent is initial_agent
     agent_factory.assert_called_once()
     agno_environment.agent_os.return_value.serve.assert_not_called()
