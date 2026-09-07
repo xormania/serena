@@ -182,6 +182,20 @@ Some languages require additional installations or setup steps, as noted.
   for the same files)
 * **Vue**
   (3.x with TypeScript; requires Node.js v18+ and npm; supports .vue Single File Components with monorepo detection)
+* **WAT (WebAssembly text format)**
+  (experimental; set `language_servers: [wat]` in `.serena/project.yml`; uses
+  [`wat_server`](https://github.com/g-plane/wasm-language-tools); requires Rust/Cargo for the first installation,
+  or an existing server configured through `ls_specific_settings.wat.ls_path`.)
+
+  Serena builds and caches [revision `c0f3b6fc`](https://github.com/g-plane/wasm-language-tools/commit/c0f3b6fcdd9b09017c4f329574352cb9764f720e)
+  with its Cargo lockfile. This revision includes the server's position fix and dependency security updates,
+  which are absent from release 0.11.0.
+  Supports `.wat` symbol bodies, definitions, references and rename, including navigation through numeric indices.
+  References and rename stay within one document; imports do not link separate files. Numeric indices are not rename targets.
+  Binary `.wasm` files and `.wast` scripts are not supported.
+
+  Current SolidLSP position handling can misalign symbol bodies and edits when a supplementary Unicode character
+  (above U+FFFF) precedes the affected position on the same line. This shared limitation also affects this adapter.
 * **Wolfram Language**
   (requires Wolfram Mathematica 13.0+ or Wolfram Engine 12.1+; uses the official [WolframResearch LSPServer](https://github.com/WolframResearch/LSPServer) paclet; supports .wl and .wls files; references are within-file only)
 * **YAML**
