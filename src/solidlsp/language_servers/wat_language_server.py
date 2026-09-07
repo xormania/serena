@@ -1,5 +1,7 @@
+import logging
 import os
 import shutil
+import subprocess
 from pathlib import Path
 
 from solidlsp.dependency_provider import LanguageServerDependencyProviderSinglePath
@@ -7,6 +9,8 @@ from solidlsp.ls import SolidLanguageServer
 from solidlsp.ls_config import LanguageServerConfig
 from solidlsp.settings import SolidLSPSettings
 from solidlsp.util.subprocess_util import subprocess_run
+
+log = logging.getLogger(__name__)
 
 
 class WatLanguageServer(SolidLanguageServer):
@@ -23,7 +27,8 @@ class WatLanguageServer(SolidLanguageServer):
         super().__init__(config, repository_root_path, None, "wat", solidlsp_settings)
 
     class DependencyProvider(LanguageServerDependencyProviderSinglePath):
-        # the published 0.11.0 release predates the server's UTF-16 position fix
+        # v0.11.0 lacks position fix 6b988808; this revision also includes
+        # patched crossbeam-epoch and anyhow dependencies.
         _SERVER_REVISION = "c0f3b6fcdd9b09017c4f329574352cb9764f720e"
 
         def _get_or_install_core_dependency(self) -> str:
@@ -41,23 +46,30 @@ class WatLanguageServer(SolidLanguageServer):
                     "or configure ls_specific_settings.wat.ls_path with a prebuilt wat_server."
                 )
             install_dir.mkdir(parents=True, exist_ok=True)
-            subprocess_run(
-                [
-                    cargo,
-                    "install",
-                    "--git",
-                    "https://github.com/g-plane/wasm-language-tools",
-                    "--rev",
-                    self._SERVER_REVISION,
-                    "--locked",
-                    "--root",
-                    str(install_dir),
-                    "wat_server",
-                ],
-                cwd=str(install_dir),
-                check=True,
-                timeout=600,
-            )
+            log.info("Building wat_server at revision %s with Cargo; first installation may take several minutes.", self._SERVER_REVISION)
+            try:
+                subprocess_run(
+                    [
+                        cargo,
+                        "install",
+                        "--git",
+                        "https://github.com/g-plane/wasm-language-tools",
+                        "--rev",
+                        self._SERVER_REVISION,
+                        "--locked",
+                        "--root",
+                        str(install_dir),
+                        "wat_server",
+                    ],
+                    cwd=str(install_dir),
+                    check=True,
+                    timeout=600,
+                )
+            except subprocess.TimeoutExpired as exc:
+                raise RuntimeError(
+                    "Building wat_server timed out. Run the Cargo install command manually, "
+                    "then configure ls_specific_settings.wat.ls_path with the built executable."
+                ) from exc
             if not executable.is_file():
                 raise FileNotFoundError(f"wat_server installation did not produce {executable}")
             return str(executable)

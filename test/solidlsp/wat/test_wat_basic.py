@@ -1,4 +1,4 @@
-"""Behavior tests using the pinned wat_server, without a shared encoding patch."""
+"""Behavior tests for the WAT language-server integration."""
 
 import json
 import logging
